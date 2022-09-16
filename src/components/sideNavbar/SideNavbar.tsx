@@ -1,16 +1,11 @@
-import { Navbar, NavItem } from "./SideNavbar.style";
+import { Navbar, NavItem, NavLink, SubMenu } from "./SideNavbar.style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTable } from "@fortawesome/free-solid-svg-icons";
-
-// interface InnerItemProps {
-
-// }
+import { faTable, faMapLocationDot, faFolderOpen, faFileLines, faCaretRight, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 interface ItemProps {
   title: string;
   url: string;
-  src: string;
-  alt: string;
 }
 
 interface SideNavbarProps {
@@ -18,20 +13,48 @@ interface SideNavbarProps {
 }
 
 export const SideNavbar = (props: SideNavbarProps) => {
-  // const { items } = props;
+  const { items } = props;
+  const hasSubMenu = items.length > 0 ? true : false;
+
+  const [collapse, setCollapse] = useState(true);
+  
   return (
     <Navbar>
-      <NavItem href="" target="_blank" rel="noopener noreferrer" focusMenu={true}>
-        <FontAwesomeIcon icon={faTable} />
-        Position histories
+      <NavItem>
+        <NavLink href="" focusMenu={true} hasSubMenu={hasSubMenu}>
+          {hasSubMenu ? 
+            collapse ? 
+              <FontAwesomeIcon icon={faCaretRight} onClick={() => setCollapse(!collapse)}/> 
+              : <FontAwesomeIcon icon={faCaretDown} onClick={() => setCollapse(!collapse)}/> 
+              : <></>
+              }
+          <FontAwesomeIcon icon={faFolderOpen} />
+          Projects
+        </NavLink>
+        {hasSubMenu && 
+          <SubMenu collapse={collapse} length={items.length}>
+            {items.map((item) =>
+              <li>
+                <NavLink href={item.url} focusMenu={false} hasSubMenu={false}>
+                  <FontAwesomeIcon icon={faFileLines} />
+                  {item.title}
+                </NavLink>
+              </li>
+            )}
+          </SubMenu>
+        }
       </NavItem>
-      <NavItem href="" target="_blank" rel="noopener noreferrer" focusMenu={false}>
-        <FontAwesomeIcon icon={faTable} />
-        Position histories
+      <NavItem>
+        <NavLink href="#" focusMenu={false} hasSubMenu={false}>
+          <FontAwesomeIcon icon={faMapLocationDot} />
+          Realtime Location
+        </NavLink>
       </NavItem>
-      <NavItem href="" target="_blank" rel="noopener noreferrer" focusMenu={false}>
-        <FontAwesomeIcon icon={faTable} />
-        Position histories
+      <NavItem>
+        <NavLink href="#" focusMenu={false} hasSubMenu={false}>
+          <FontAwesomeIcon icon={faTable} />
+          Location History
+        </NavLink>
       </NavItem>
     </Navbar>
   );
