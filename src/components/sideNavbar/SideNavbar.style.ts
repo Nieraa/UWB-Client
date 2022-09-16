@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import { maxLayout, minLayout } from "../../utils/breakpoint";
 import '../../theme/Theme.css';
+import { Link } from "react-router-dom";
 
 export const Navbar = styled.ul`
   width: 300px;
@@ -18,12 +19,12 @@ export const Navbar = styled.ul`
 export const NavItem = styled.li`
 `;
 
-export const NavLink = styled.a<{ focusMenu: boolean, hasSubMenu: boolean }>`
+export const NavLink = styled(Link)<{ focusMenu: boolean, hasSubMenu: boolean }>`
   color: var(--black);
   background-color: ${(props) => (props.focusMenu ? "#EEEEEE" : "#FFFFFF")};
   text-decoration: none;
   height: 18px;
-  padding: ${(props) => (props.hasSubMenu ? "16px 9px" : "16px 30px")};
+  padding: ${(props) => (props.hasSubMenu ? "16px 30px 16px 3px" : "16px 30px")};
   display: flex;
   align-items: center;
   font-weight: 400;
@@ -44,9 +45,8 @@ export const NavLink = styled.a<{ focusMenu: boolean, hasSubMenu: boolean }>`
     hasSubMenu &&
       css`
         svg:first-child {
-          margin-right: 9px;
-          width: 12px;
-          height: 12px;
+          margin-right: 0;
+          width: 27px;
           color: var(--primary);
         }
       `}
