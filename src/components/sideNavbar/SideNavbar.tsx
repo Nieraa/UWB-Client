@@ -1,8 +1,8 @@
-import { Navbar, NavItem, NavLink, SubMenu } from "./SideNavbar.style";
+import { Navbar, NavItem, NavLink, SubMenu, SubMenuLink } from "./SideNavbar.style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTable, faMapLocationDot, faFolderOpen, faFileLines, faCaretRight, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { faTable, faMapLocationDot, faFolderOpen, faFileLines, faCaretRight, faCaretDown, faPlus, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { Params, useLocation, useParams } from "react-router-dom";
 
 interface ItemProps {
   id: string;
@@ -15,10 +15,11 @@ interface SideNavbarProps {
 
 export const SideNavbar = (props: SideNavbarProps) => {
   const { items } = props;
-  const hasSubMenu = items.length > 0 ? true : false;
-  const params = useParams();
+  const hasSubMenu: boolean = items.length > 0 ? true : false;
+  const params: Readonly<Params<string>> = useParams();
+  const location = useLocation();
 
-  console.log(params);
+  const hasProjectId: boolean = params.projectId ? true : false;
 
   const [collapse, setCollapse] = useState(true);
 
@@ -28,43 +29,59 @@ export const SideNavbar = (props: SideNavbarProps) => {
     e.stopPropagation();
   }
 
+  function handleAdd(e: { preventDefault: () => void; stopPropagation: () => void; }) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
   return (
     <Navbar>
       <NavItem>
-        <NavLink to="/" focusMenu={true} hasSubMenu={hasSubMenu}>
-          {hasSubMenu ?
+        <NavLink to="/" focusMenu={location.pathname === '/'} hasSubMenu={hasSubMenu} hasProjectId={hasProjectId}>
+          {hasSubMenu &&
             <FontAwesomeIcon
               icon={collapse ? faCaretRight : faCaretDown}
               onClick={handleCollapse}
             />
-            : <></>
           }
           <FontAwesomeIcon icon={faFolderOpen} />
           Projects
+          {!hasProjectId &&
+            <FontAwesomeIcon
+              icon={faPlus}
+              onClick={handleAdd}
+            />
+          }
         </NavLink>
         {hasSubMenu &&
           <SubMenu collapse={collapse} length={items.length}>
             {items.map((item) =>
               <li key={item.id}>
-                <NavLink to={`/${item.id}/planner`} focusMenu={false} hasSubMenu={false}>
+                <SubMenuLink to={`/${item.id}/planner`} focusMenu={hasProjectId && params.projectId === item.id ? true : false} onClick={() => hasProjectId && params.projectId !== item.id && setCollapse(true)}>
                   <FontAwesomeIcon icon={faFileLines} />
                   {item.title}
-                </NavLink>
+                </SubMenuLink>
               </li>
             )}
           </SubMenu>
         }
       </NavItem>
-      {params.projectId && 
+      {hasProjectId &&
         <>
           <NavItem>
-            <NavLink to={`/${params.projectId}/realtime`} focusMenu={false} hasSubMenu={false}>
+            <NavLink to={`/${params.projectId}/planner`} focusMenu={location.pathname !== '/' && location.pathname.slice(3) === 'planner'} hasSubMenu={false} hasProjectId={true}>
+              <FontAwesomeIcon icon={faPenToSquare} />
+              Planner
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to={`/${params.projectId}/realtime`} focusMenu={location.pathname !== '/' && location.pathname.slice(3) === 'realtime'} hasSubMenu={false} hasProjectId={true}>
               <FontAwesomeIcon icon={faMapLocationDot} />
               Realtime Location
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to={`/${params.projectId}/history`} focusMenu={false} hasSubMenu={false}>
+            <NavLink to={`/${params.projectId}/history`} focusMenu={location.pathname !== '/' && location.pathname.slice(3) === 'history'} hasSubMenu={false} hasProjectId={true}>
               <FontAwesomeIcon icon={faTable} />
               Location History
             </NavLink>

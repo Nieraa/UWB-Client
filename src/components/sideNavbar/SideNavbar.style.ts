@@ -19,9 +19,9 @@ export const Navbar = styled.ul`
 export const NavItem = styled.li`
 `;
 
-export const NavLink = styled(Link)<{ focusMenu: boolean, hasSubMenu: boolean }>`
-  color: var(--black);
-  background-color: ${(props) => (props.focusMenu ? "#EEEEEE" : "#FFFFFF")};
+export const NavLink = styled(Link) <{ focusMenu: boolean, hasSubMenu: boolean, hasProjectId: boolean }>`
+  color: ${(props) => (props.focusMenu ? "var(--blue)" : "var(--black)")};
+  background-color: ${(props) => (props.focusMenu ? "var(--grey50)" : "var(--white)")};
   text-decoration: none;
   height: 18px;
   padding: ${(props) => (props.hasSubMenu ? "16px 30px 16px 3px" : "16px 30px")};
@@ -43,13 +43,45 @@ export const NavLink = styled(Link)<{ focusMenu: boolean, hasSubMenu: boolean }>
 
   ${({ hasSubMenu }) =>
     hasSubMenu &&
-      css`
+    css`
         svg:first-child {
           margin-right: 0;
           width: 27px;
-          color: var(--primary);
         }
       `}
+  
+  ${({ hasProjectId }) =>
+    !hasProjectId &&
+    css`
+        svg:last-child {
+          margin-left: auto;
+          margin-right: 0;
+          width: 13px;
+        }
+      `}
+`;
+
+export const SubMenuLink = styled(Link) <{ focusMenu: boolean }>`
+  color: ${(props) => (props.focusMenu ? "var(--blue)" : "var(--black)")};
+  background-color: ${(props) => (props.focusMenu ? "var(--grey50)" : "var(--white)")};
+  text-decoration: none;
+  height: 18px;
+  padding: 16px 16px 16px 45px;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  line-height: 24px;
+
+  &:hover {
+    background-color: var(--grey50);
+    transition: all 0.2s;
+  }
+
+  svg {
+    margin-right: 16px;
+    width: 24px;
+    color: var(--primary);
+  }
 `;
 
 export const SubMenu = styled.ul<{ collapse: boolean, length: number }>`
@@ -61,12 +93,8 @@ export const SubMenu = styled.ul<{ collapse: boolean, length: number }>`
   border-bottom: 1px solid var(--grey100);
   overflow-y: auto;
 
-  ${NavLink} {
-    padding-left: 45px;
-  }
-
   ::-webkit-scrollbar {
-    width: 20px;
+    width: 15px;
   }
 
   ::-webkit-scrollbar-track {
@@ -75,8 +103,8 @@ export const SubMenu = styled.ul<{ collapse: boolean, length: number }>`
 
   ::-webkit-scrollbar-thumb {
     background-color: var(--grey200);
-    border-radius: 20px;
-    border: 6px solid transparent;
+    border-radius: 15px;
+    border: 4px solid transparent;
     background-clip: content-box;
   }
 
