@@ -18,7 +18,7 @@ function Realtime() {
     <div>
       <AppBar />
       <SideNavbar items={items} />
-      <Main />
+      <Main items={items}/>
     </div>
   );
 }

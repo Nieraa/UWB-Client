@@ -1,7 +1,28 @@
-import { MainArea } from "./Main.style";
+import { Params, useParams } from "react-router-dom";
+import { MainArea, ProjectName } from "./Main.style";
 
-export const Main = () => {
+interface ItemProps {
+  id: string;
+  title: string;
+}
+
+interface MainProps {
+  items: ItemProps[];
+}
+
+export const Main = (props: MainProps) => {
+  const { items } = props;
+  const params: Readonly<Params<string>> = useParams();
+
+  const hasProjectId: boolean = params.projectId ? true : false;
+
   return (
-    <MainArea />
+    <MainArea>
+      {hasProjectId && 
+        <ProjectName>
+          {items[Number(params.projectId) - 1].title}
+        </ProjectName>
+      }
+    </MainArea>
   );
 };

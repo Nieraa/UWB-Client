@@ -10,3 +10,15 @@ export const MainArea = styled.div`
   right: 0;
   background-color: var(--grey);
 `;
+
+export const ProjectName = styled.div`
+  width: 100%;
+  height: 28px;
+  padding: 16px;
+  font-size: 21px;
+  font-weight: bold;
+  line-height: 28px;
+  text-align: center;
+  background-color: var(--primary-light);
+  color: var(--primary);
+`;
