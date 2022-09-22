@@ -22,3 +22,9 @@ export const ProjectName = styled.div`
   background-color: var(--primary-light);
   color: var(--primary);
 `;
+
+export const Planner = styled.div`
+  width: 100%;
+  height: calc(100% - 60px);
+  background-color: var(--grey);
+`;

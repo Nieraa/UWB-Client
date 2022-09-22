@@ -1,5 +1,5 @@
 import { Params, useParams } from "react-router-dom";
-import { MainArea, ProjectName } from "./Main.style";
+import { MainArea, Planner, ProjectName } from "./Main.style";
 
 interface ItemProps {
   id: string;
@@ -19,9 +19,12 @@ export const Main = (props: MainProps) => {
   return (
     <MainArea>
       {hasProjectId && 
-        <ProjectName>
-          {items[Number(params.projectId) - 1].title}
-        </ProjectName>
+        <>
+          <ProjectName>
+            {items[Number(params.projectId) - 1].title}
+          </ProjectName>
+          <Planner />
+        </>
       }
     </MainArea>
   );
