@@ -69,6 +69,7 @@ export const SubMenuLink = styled(Link) <{ focusMenu: boolean }>`
   padding: 16px 16px 16px 45px;
   display: flex;
   align-items: center;
+  font-size: var(--text);
   font-weight: 400;
   line-height: 24px;
 
@@ -91,6 +92,8 @@ export const SubMenu = styled.ul<{ collapse: boolean, length: number }>`
   margin: 0;
   padding: 0;
   border-bottom: 1px solid var(--grey100);
+  font-size: var(--text);
+  font-weight: 400;
   overflow-y: auto;
 
   ::-webkit-scrollbar {

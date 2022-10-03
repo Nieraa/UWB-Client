@@ -21,7 +21,7 @@ export const LogoWrapper = styled.a`
   }
   color: var(--primary);
   text-decoration: none;
-  font-size: 24px;
+  font-size: var(--heading-text);
   font-weight: bolder;
   display: flex;
   align-items: center;

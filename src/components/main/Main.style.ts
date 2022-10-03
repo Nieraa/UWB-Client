@@ -15,11 +15,11 @@ export const ProjectName = styled.div`
   width: 100%;
   height: 28px;
   padding: 16px;
-  font-size: 21px;
+  font-size: var(--subheading-text);
   font-weight: bold;
   line-height: 28px;
   text-align: center;
-  background-color: var(--primary-light);
+  background-color: var(--light-primary);
   color: var(--primary);
 `;
 

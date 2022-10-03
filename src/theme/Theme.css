@@ -9,6 +9,11 @@
     --grey400: #333333;
     --grey500: #222222;
     --blue: #0073BF;
+    --light-green: #66BB6A;
+    --light-red: #BB6666;
     --primary: #002E4F;
-    --primary-light: #D9F0FF;
+    --light-primary: #D9F0FF;
+    --heading-text: 24px;
+    --subheading-text: 21px;
+    --text: 16px;
 };
