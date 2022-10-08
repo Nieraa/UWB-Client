@@ -7,6 +7,8 @@ import { Element, Text } from './Tag.style';
 interface TagProps {
   id: string,
   name: string,
+  ssid: string,
+  color: string,
   x: number,
   y: number,
 }
@@ -35,7 +37,7 @@ export const Tag = (props: TagProps) => {
 
   return (
     <Draggable
-      defaultPosition={{ x: tag.x, y: tag.y }}
+      defaultPosition={{ x: tag.x, y: -tag.y }}
       positionOffset={{x: "50%", y: "calc(50vh - 120px)"}}
       // onStart={(e) => console.log(e)}
       // onDrag={eventHandler}
@@ -48,7 +50,7 @@ export const Tag = (props: TagProps) => {
           {tag.name}<br />
           {`(${x}, ${y})`}
         </Text>
-        <Element>
+        <Element tagColor={tag.color}>
           <FontAwesomeIcon icon={faPlus} />
         </Element>
       </div>
