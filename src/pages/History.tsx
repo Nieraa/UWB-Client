@@ -18,7 +18,7 @@ function History() {
     <div>
       <AppBar />
       <SideNavbar items={items} />
-      <Main items={items}/>
+      <Main items={items} pathname={"history"}/>
     </div>
   );
 }

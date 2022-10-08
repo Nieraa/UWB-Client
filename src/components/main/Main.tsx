@@ -1,5 +1,6 @@
-import { Params, useParams } from "react-router-dom";
+import { Params, useLocation, useParams } from "react-router-dom";
 import { Canvas } from "../canvas/Canvas";
+import { ProjectList } from "../projectList/ProjectList";
 import { MainArea, ProjectName } from "./Main.style";
 
 interface ItemProps {
@@ -9,21 +10,33 @@ interface ItemProps {
 
 interface MainProps {
   items: ItemProps[];
+  pathname: string;
 }
 
 export const Main = (props: MainProps) => {
-  const { items } = props;
+  const { items, pathname } = props;
   const params: Readonly<Params<string>> = useParams();
-  const hasProjectId: boolean = params.projectId ? true : false;
-
+  
   return (
     <MainArea>
-      {hasProjectId &&
+      {pathname === 'projects' ?
+        <ProjectList items={items}/>
+        :
         <>
           <ProjectName>
             {items[Number(params.projectId) - 1].title}
           </ProjectName>
-          <Canvas />
+          {pathname === 'planner' ?
+            <Canvas />
+            :
+            pathname === 'realtime' ?
+              <></>
+              :
+              pathname === 'history' ?
+                <></>
+                :
+                <></>
+          }
         </>
       }
     </MainArea>

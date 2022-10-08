@@ -18,7 +18,7 @@ function Projects() {
     <div>
       <AppBar />
       <SideNavbar items={items} />
-      <Main items={items}/>
+      <Main items={items} pathname={"projects"}/>
     </div>
   );
 }
