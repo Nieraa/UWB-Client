@@ -1,11 +1,8 @@
+import { Card, CardActionArea, CardContent, CardMedia, Divider, Grid } from "@mui/material";
 import {
-  Column,
-  MapArea,
-  Project,
   ProjectLink,
   ProjectName,
   ProjectWrapper,
-  Row
 } from "./ProjectList.style";
 
 interface ItemProps {
@@ -20,45 +17,33 @@ interface ProjectListProps {
 
 export const ProjectList = (props: ProjectListProps) => {
   const { items } = props;
-
-  const reshape = (arr: any, rows: number, cols: number) => {
-    const result = new Array(rows);
-    for (let row = 0; row < rows; row++) {
-      result[row] = new Array(cols);
-    }
-    for (let row = 0; row < rows; row++) {
-      for (let col = 0; col < cols; col++) {
-        result[row][col] = arr[row * cols + col];
-      }
-    }
-    return result;
-  };
-
-  const table = reshape(items, Math.ceil(items.length / 4), 4);
-
-  console.log(JSON.stringify(table));
-
+  
   return (
     <ProjectWrapper>
-      {table.map((row) =>
-        <Row>
-          {row.map((col: any) =>
-            col ?
-              <Column>
-                <ProjectLink to={`/${col.id}/planner`}>
-                  <Project>
-                    <MapArea></MapArea>
-                    <ProjectName>
-                      {col.title}
-                    </ProjectName>
-                  </Project>
+      <Grid container spacing={3} px={5}>
+        {items.map((item) =>
+          <Grid item xs={6} lg={4} xl={3}>
+            <Card>
+              <CardActionArea>
+                <ProjectLink to={`/${item.id}/planner`}>
+                <CardMedia
+                  component="img"
+                  height="160"
+                  image="https://c4.wallpaperflare.com/wallpaper/974/565/254/windows-11-windows-10-minimalism-hd-wallpaper-preview.jpg"
+                  alt={item.title + " plan"}
+                />
+                <Divider />
+                <CardContent>
+                  <ProjectName>
+                    {item.title}
+                  </ProjectName>
+                </CardContent>
                 </ProjectLink>
-              </Column>
-              :
-              <Column />
-          )}
-        </Row>
-      )}
-    </ProjectWrapper>
+              </CardActionArea>
+            </Card>
+          </Grid>
+        )}
+      </Grid>
+    </ProjectWrapper >
   );
 };
