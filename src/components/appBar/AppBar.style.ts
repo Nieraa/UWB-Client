@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import { maxLayout, minLayout } from "../../utils/breakpoint";
 import '../../theme/Theme.css';
+import { Link } from "react-router-dom";
 
 export const TopNavbar = styled.div`
   width: 100vw;
@@ -15,7 +16,7 @@ export const NavBrand = styled.div`
   align-items: center;
 `;
 
-export const LogoWrapper = styled.a`
+export const LogoWrapper = styled(Link)`
   img {
     margin-right: 22px;
   }
