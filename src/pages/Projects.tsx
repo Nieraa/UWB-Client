@@ -3,7 +3,7 @@ import { AppBar } from '../components/appBar/AppBar';
 import { Main } from '../components/main/Main';
 
 function Projects() {
-  const items = [
+  const items: any[] = [
     { id: "1", title: "Project 1" },
     { id: "2", title: "Project 2" },
     { id: "3", title: "Project 3" },
