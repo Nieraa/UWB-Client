@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import Draggable, { DraggableCore } from 'react-draggable';
 import { Element, Text } from './Tag.style';
 
-interface TagProps {
+interface Tag {
   id: string,
   name: string,
   ssid: string,
@@ -13,10 +13,16 @@ interface TagProps {
   y: number,
 }
 
+interface TagProps {
+  tag: Tag,
+  disabled: boolean,
+  scale: number,
+}
+
 export const Tag = (props: TagProps) => {
-  const tag = props;
-  const [x, setX] = useState(tag.x)
-  const [y, setY] = useState(tag.y)
+  const { tag, disabled, scale } = props;
+  const [x, setX] = useState<number>(tag.x)
+  const [y, setY] = useState<number>(tag.y)
 
   function getTextWidth(text: string, font: string) {
     const canvas = document.createElement('canvas');
@@ -39,11 +45,12 @@ export const Tag = (props: TagProps) => {
     <Draggable
       defaultPosition={{ x: tag.x, y: -tag.y }}
       positionOffset={{x: "50%", y: "calc(50vh - 120px)"}}
-      // onStart={(e) => console.log(e)}
-      // onDrag={eventHandler}
-      onDrag={(e, data) => { setX(data.x); setY(data.y) }}
-      // onStop={(event) => console.log(event)}
-      scale={1}
+      onDrag={(e, data) => { 
+        setX(Number(data.x.toFixed(3))); 
+        setY(Number(data.y.toFixed(3)));
+      }}
+      disabled={disabled}
+      scale={scale}
     >
       <div>
         <Text textWidth={getTextWidth(tag.name, "regular 16pt Prompt")}>

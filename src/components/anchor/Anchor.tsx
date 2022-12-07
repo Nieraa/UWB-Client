@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import Draggable, { DraggableCore } from 'react-draggable';
 import { Element, Text } from './Anchor.style';
 
-interface AnchorProps {
+interface Anchor {
   id: string,
   name: string,
   ssid: string,
@@ -13,8 +13,14 @@ interface AnchorProps {
   y: number,
 }
 
+interface AnchorProps {
+  anchor: Anchor,
+  disabled: boolean,
+  scale: number,
+}
+
 export const Anchor = (props: AnchorProps) => {
-  const anchor = props;
+  const { anchor, disabled, scale } = props;
   const [x, setX] = useState(anchor.x)
   const [y, setY] = useState(anchor.y)
 
@@ -40,11 +46,9 @@ export const Anchor = (props: AnchorProps) => {
     <Draggable
       defaultPosition={{ x: anchor.x, y: -anchor.y }}
       positionOffset={{x: "calc(50% - 20px)", y: "calc(50vh - 80px)"}}
-      // onStart={(e) => console.log(e)}
-      // onDrag={eventHandler}
       onDrag={(e, data) => { setX(data.x); setY(data.y) }}
-      // onStop={(event) => console.log(event)}
-      scale={1}
+      disabled={disabled}
+      scale={scale}
     >
       <div>
         <Text textWidth={getTextWidth(anchor.name, "regular 16pt Prompt")}>

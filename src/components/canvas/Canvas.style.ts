@@ -4,6 +4,7 @@ import '../../theme/Theme.css';
 export const AddElementButton = styled.button`
   width: 50px;
   height: 50px;
+  z-index: 100;
   color: var(--white);
   line-height: 50px;
   font-size: var(--subheading-text);
