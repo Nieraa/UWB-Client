@@ -1,8 +1,11 @@
 import { SideNavbar } from '../components/sideNavbar/SideNavbar';
 import { AppBar } from '../components/appBar/AppBar';
 import { Main } from '../components/main/Main';
+import { useState } from 'react';
 
 function Realtime() {
+  const [open, setOpen] = useState(false);
+
   const items = [
     { id: "1", title: "Project 1" },
     { id: "2", title: "Project 2" },
@@ -17,8 +20,8 @@ function Realtime() {
   return (
     <div>
       <AppBar />
-      <SideNavbar items={items} />
-      <Main items={items} pathname={"realtime"}/>
+      <SideNavbar items={items} setOpen={setOpen}/>
+      <Main items={items} pathname={"realtime"} setOpen={setOpen}/>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { Navbar, NavItem, NavLink, SubMenu, SubMenuLink } from "./SideNavbar.style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTable, faMapLocationDot, faFolderOpen, faFileLines, faCaretRight, faCaretDown, faPlus, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { Params, useLocation, useParams } from "react-router-dom";
 
 interface ItemProps {
@@ -11,10 +11,12 @@ interface ItemProps {
 
 interface SideNavbarProps {
   items: ItemProps[];
+  setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 export const SideNavbar = (props: SideNavbarProps) => {
-  const { items } = props;
+  const { items, setOpen } = props;
+
   const hasSubMenu: boolean = items.length > 0 ? true : false;
   const params: Readonly<Params<string>> = useParams();
   const location = useLocation();
@@ -32,6 +34,7 @@ export const SideNavbar = (props: SideNavbarProps) => {
   function handleAdd(e: { preventDefault: () => void; stopPropagation: () => void; }) {
     e.preventDefault();
     e.stopPropagation();
+    setOpen(true);
   }
 
   return (
