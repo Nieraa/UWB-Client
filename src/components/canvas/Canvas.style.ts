@@ -22,3 +22,18 @@ export const AddElementButton = styled.button`
     transition: 0.2s;
   }
 `;
+
+export const ColorWrapper = styled.div`
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+`;
+
+export const ColorBoxButton = styled.button<{ addColor: string }>`
+  height: 56px;
+  width: 100px;
+  border: 1px solid var(--grey300);
+  border-radius: 5px;
+  background-color: ${(props) => (props.addColor)};
+  margin-left: 5px;
+`;

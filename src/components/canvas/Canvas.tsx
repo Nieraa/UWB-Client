@@ -2,22 +2,29 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Anchor } from '../anchor/Anchor';
 import { Tag } from '../tag/Tag';
-import { AddElementButton } from './Canvas.style';
+import { AddElementButton, ColorBoxButton, ColorWrapper } from './Canvas.style';
 import {
   TransformComponent,
   TransformWrapper,
 } from "@pronestor/react-zoom-pan-pinch";
 import { useState } from 'react';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, MenuItem, MenuList, Popover, styled, TextField } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, FormControl, InputLabel, MenuItem, MenuList, Popover, Select, styled, TextField } from '@mui/material';
 import { grey } from '@mui/material/colors';
+import { SketchPicker } from 'react-color';
+import { color } from '@mui/system';
 
 export const Canvas = () => {
   const [pannable, setPannable] = useState<boolean>(false);
   const [cursor, setCursor] = useState<string>("default");
   const [scale, setScale] = useState<number>(1);
   const [openDialog, setOpenDialog] = useState(false);
+  const [addType, setAddType] = useState("");
+  const [addColor, setAddColor] = useState("#fff");
+  const [colors, setColors] = useState(["#667DBB", "#BB6666"]);
+  const [group, setGroup] = useState(colors.length + 1);
 
-  const handleClickOpenDialog = () => {
+  const handleClickOpenDialog = (type: string) => {
+    setAddType(type);
     setOpenDialog(true);
   };
 
@@ -95,6 +102,17 @@ export const Canvas = () => {
     },
   ]
 
+  const handleChangeColor = (color: { hex: string }) => {
+    setAddColor(color.hex);
+    const index = colors.findIndex((element) => element.toLowerCase() === color.hex);
+    if (index === -1) {
+      setGroup(colors.length + 1);
+    }
+    else {
+      setGroup(index + 1);
+    }
+  };
+
   onkeydown = function (ke) {
     if (ke.key === " ") {
       setPannable(true)
@@ -120,17 +138,38 @@ export const Canvas = () => {
     }
   }
 
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorElMenu, setAnchorElMenu] = useState(null);
+  const [anchorElColorPicker, setAnchorElColorPicker] = useState(null);
 
-  const handleClick = (event: any) => {
-    setAnchorEl(event.currentTarget);
+  const handleClickMenu = (event: any) => {
+    setAnchorElMenu(event.currentTarget);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
+  const openMenu = Boolean(anchorElMenu);
+
+  const handleCloseMenu = () => {
+    setAnchorElMenu(null);
   };
 
-  const open = Boolean(anchorEl);
+  const handleClickColorPicker = (event: any) => {
+    setAnchorElColorPicker(event.currentTarget);
+  };
+
+  const openColorPicker = Boolean(anchorElColorPicker);
+
+  const handleCloseColorPicker = () => {
+    setAnchorElColorPicker(null);
+  };
+
+  const handleChangeGroup = (event: any) => {
+    setGroup(event.target.value);
+    if (event.target.value <= colors.length) {
+      setAddColor(colors[event.target.value - 1]);
+    }
+    else {
+      setAddColor("#fff")
+    }
+  };
 
   const CancelButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText(grey[400]),
@@ -142,13 +181,13 @@ export const Canvas = () => {
 
   return (
     <div>
-      <AddElementButton onClick={handleClick}>
+      <AddElementButton onClick={handleClickMenu}>
         <FontAwesomeIcon icon={faPlus} />
       </AddElementButton>
       <Popover
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
+        open={openMenu}
+        anchorEl={anchorElMenu}
+        onClose={handleCloseMenu}
         anchorOrigin={{
           vertical: 'top',
           horizontal: 'left',
@@ -159,22 +198,59 @@ export const Canvas = () => {
         }}
       >
         <MenuList>
-          <MenuItem onClick={() => {handleClickOpenDialog(); handleClose()}}>Add anchor</MenuItem>
-          <MenuItem onClick={() => {handleClickOpenDialog(); handleClose()}}>Add tag</MenuItem>
+          <MenuItem onClick={() => { handleClickOpenDialog("Anchor"); handleCloseMenu() }}>Add anchor</MenuItem>
+          <MenuItem onClick={() => { handleClickOpenDialog("Tag"); handleCloseMenu() }}>Add tag</MenuItem>
         </MenuList>
       </Popover>
       <Dialog open={openDialog} onClose={handleCloseDialog} fullWidth>
-        <DialogTitle>Add anchor</DialogTitle>
+        <DialogTitle>Add {addType}</DialogTitle>
         <DialogContent dividers>
           <TextField
             autoFocus
             margin="dense"
-            id="project-name"
-            label="Project name"
+            id={addType.toLowerCase() + "-name"}
+            label={addType + " name"}
             fullWidth
             variant="outlined"
             defaultValue="Untitled"
           />
+          <ColorWrapper>
+            <FormControl style={{ marginRight: 15, minWidth: 100 }}>
+              <InputLabel id="select-group-label">Group</InputLabel>
+              <Select
+                labelId="select-group-label"
+                id="select-group"
+                value={group}
+                label="Group"
+                onChange={handleChangeGroup}
+              >
+                {colors.map((color, index) =>
+                  <MenuItem value={index + 1}>{index + 1}</MenuItem>
+                )}
+                <MenuItem value={colors.length + 1}>{colors.length + 1}</MenuItem>
+              </Select>
+            </FormControl>
+            <span>Color:</span><ColorBoxButton onClick={handleClickColorPicker} addColor={group <= colors.length ? colors[group-1] : addColor} />
+          </ColorWrapper>
+          <Popover
+            open={openColorPicker}
+            anchorEl={anchorElColorPicker}
+            onClose={handleCloseColorPicker}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
+          >
+            <SketchPicker
+              color={addColor}
+              presetColors={colors}
+              onChange={handleChangeColor}
+            />
+          </Popover>
         </DialogContent>
         <DialogActions>
           <CancelButton variant="contained" onClick={handleCloseDialog}>Cancel</CancelButton>
