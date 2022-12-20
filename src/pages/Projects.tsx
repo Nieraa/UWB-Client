@@ -1,22 +1,37 @@
 import { SideNavbar } from '../components/sideNavbar/SideNavbar';
 import { AppBar } from '../components/appBar/AppBar';
 import { Main } from '../components/main/Main';
-import { useState } from 'react';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, styled, TextField } from '@mui/material';
+import {
+  useEffect,
+  useState
+} from 'react';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  styled,
+  TextField
+} from '@mui/material';
 import { grey } from '@mui/material/colors';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
+import axios from '../axios';
 
 function Projects() {
-  const items: any[] = [
-    { id: "1", title: "Project 1" },
-    { id: "2", title: "Project 2" },
-    { id: "3", title: "Project 3" },
-    { id: "4", title: "Project 4" },
-    { id: "5", title: "Project 5" },
-    { id: "6", title: "Project 6" },
-    { id: "7", title: "Project 7" },
-    { id: "8", title: "Project 8" },
-  ]
+  const [projects, setProjects] = useState([]);
+
+
+  useEffect(() => {
+    axios
+      .get(`/projects`)
+      .then((response) => {
+        setProjects(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const [open, setOpen] = useState(false);
 
@@ -35,13 +50,24 @@ function Projects() {
   const UploadButton = styled(Button)(({ theme }) => ({
     marginTop: "10px",
   }));
-  
+
   return (
     <div>
       <AppBar />
-      <SideNavbar items={items} setOpen={setOpen}/>
-      <Main items={items} pathname={"projects"} setOpen={setOpen}/>
-      <Dialog open={open} onClose={handleClose} fullWidth>
+      <SideNavbar
+        projects={projects}
+        setOpen={setOpen}
+      />
+      <Main
+        projects={projects}
+        pathname={"projects"}
+        setOpen={setOpen}
+      />
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        fullWidth
+      >
         <DialogTitle>Create Project</DialogTitle>
         <DialogContent dividers>
           <TextField
@@ -53,13 +79,27 @@ function Projects() {
             variant="outlined"
             defaultValue="Untitled"
           />
-          <UploadButton variant="outlined" startIcon={<FileUploadIcon />} fullWidth>
+          <UploadButton
+            variant="outlined"
+            startIcon={<FileUploadIcon />}
+            fullWidth
+          >
             Upload room plan
           </UploadButton>
         </DialogContent>
         <DialogActions>
-          <CancelButton variant="contained" onClick={handleClose}>Cancel</CancelButton>
-          <Button variant="contained" onClick={handleClose}>Create</Button>
+          <CancelButton
+            variant="contained"
+            onClick={handleClose}
+          >
+            Cancel
+          </CancelButton>
+          <Button
+            variant="contained"
+            onClick={handleClose}
+          >
+            Create
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

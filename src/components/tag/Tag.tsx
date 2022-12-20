@@ -1,7 +1,7 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useRef, useState } from 'react';
-import Draggable, { DraggableCore } from 'react-draggable';
+import { useState } from 'react';
+import Draggable from 'react-draggable';
 import { Element, Text } from './Tag.style';
 
 interface Tag {
@@ -44,9 +44,9 @@ export const Tag = (props: TagProps) => {
   return (
     <Draggable
       defaultPosition={{ x: tag.x, y: -tag.y }}
-      positionOffset={{x: "50%", y: "calc(50vh - 120px)"}}
-      onDrag={(e, data) => { 
-        setX(Number(data.x.toFixed(3))); 
+      positionOffset={{ x: "50%", y: "calc(50vh - 120px)" }}
+      onDrag={(e, data) => {
+        setX(Number(data.x.toFixed(3)));
         setY(Number(data.y.toFixed(3)));
       }}
       disabled={disabled}

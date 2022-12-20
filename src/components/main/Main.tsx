@@ -1,27 +1,31 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, styled, TextField } from "@mui/material";
-import FileUploadIcon from '@mui/icons-material/FileUpload';
 import { Params, useParams } from "react-router-dom";
 import { Canvas } from "../canvas/Canvas";
 import { ProjectList } from "../projectList/ProjectList";
-import { AddElementButton, MainArea, ProjectName } from "./Main.style";
+import {
+  AddElementButton,
+  MainArea,
+  ProjectName
+} from "./Main.style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { Dispatch, SetStateAction, useState } from "react";
-import { grey } from '@mui/material/colors';
+import {
+  Dispatch,
+  SetStateAction
+} from "react";
 
-interface ItemProps {
+interface ProjectProps {
   id: string;
   title: string;
 }
 
 interface MainProps {
-  items: ItemProps[];
+  projects: ProjectProps[];
   pathname: string;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 export const Main = (props: MainProps) => {
-  const { items, pathname, setOpen } = props;
+  const { projects, pathname, setOpen } = props;
   const params: Readonly<Params<string>> = useParams();
 
   const handleClickOpen = () => {
@@ -32,7 +36,7 @@ export const Main = (props: MainProps) => {
     <MainArea>
       {pathname === 'projects' ?
         <>
-          <ProjectList items={items} />
+          <ProjectList projects={projects} />
           <AddElementButton onClick={handleClickOpen}>
             <FontAwesomeIcon icon={faPlus} />
           </AddElementButton>
@@ -40,7 +44,7 @@ export const Main = (props: MainProps) => {
         :
         <>
           <ProjectName>
-            {items[Number(params.projectId) - 1].title}
+            {projects[Number(params.projectId) - 1].title}
           </ProjectName>
           {pathname === 'planner' ?
             <Canvas />

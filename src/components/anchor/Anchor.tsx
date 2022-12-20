@@ -1,7 +1,7 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useRef, useState } from 'react';
-import Draggable, { DraggableCore } from 'react-draggable';
+import { useState } from 'react';
+import Draggable from 'react-draggable';
 import { Element, Text } from './Anchor.style';
 
 interface Anchor {

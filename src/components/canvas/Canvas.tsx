@@ -2,16 +2,34 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Anchor } from '../anchor/Anchor';
 import { Tag } from '../tag/Tag';
-import { AddElementButton, ColorBoxButton, ColorWrapper } from './Canvas.style';
+import {
+  AddElementButton,
+  ColorBoxButton,
+  ColorWrapper
+} from './Canvas.style';
 import {
   TransformComponent,
   TransformWrapper,
 } from "@pronestor/react-zoom-pan-pinch";
 import { useState } from 'react';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, FormControl, InputLabel, MenuItem, MenuList, Popover, Select, styled, TextField } from '@mui/material';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Divider,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  MenuList,
+  Popover,
+  Select,
+  styled,
+  TextField
+} from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { SketchPicker } from 'react-color';
-import { color } from '@mui/system';
 
 export const Canvas = () => {
   const [pannable, setPannable] = useState<boolean>(false);
@@ -202,7 +220,11 @@ export const Canvas = () => {
           <MenuItem onClick={() => { handleClickOpenDialog("Tag"); handleCloseMenu() }}>Add tag</MenuItem>
         </MenuList>
       </Popover>
-      <Dialog open={openDialog} onClose={handleCloseDialog} fullWidth>
+      <Dialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        fullWidth
+      >
         <DialogTitle>Add {addType}</DialogTitle>
         <DialogContent dividers>
           <TextField
@@ -230,7 +252,11 @@ export const Canvas = () => {
                 <MenuItem value={colors.length + 1}>{colors.length + 1}</MenuItem>
               </Select>
             </FormControl>
-            <span>Color:</span><ColorBoxButton onClick={handleClickColorPicker} addColor={group <= colors.length ? colors[group-1] : addColor} />
+            <span>Color:</span>
+            <ColorBoxButton
+              onClick={handleClickColorPicker}
+              addColor={group <= colors.length ? colors[group - 1] : addColor}
+            />
           </ColorWrapper>
           <Popover
             open={openColorPicker}
@@ -253,8 +279,17 @@ export const Canvas = () => {
           </Popover>
         </DialogContent>
         <DialogActions>
-          <CancelButton variant="contained" onClick={handleCloseDialog}>Cancel</CancelButton>
-          <Button variant="contained" onClick={handleCloseDialog}>Create</Button>
+          <CancelButton
+            variant="contained"
+            onClick={handleCloseDialog}
+          >
+            Cancel
+          </CancelButton>
+          <Button
+            variant="contained"
+            onClick={handleCloseDialog}>
+            Create
+          </Button>
         </DialogActions>
       </Dialog>
       <TransformWrapper
@@ -271,11 +306,21 @@ export const Canvas = () => {
             // backgroundImage: "url(https://wallpaperaccess.com/full/84248.png)"
           }}>
             {anchors.map((anchor) =>
-              <Anchor key={anchor.id} anchor={anchor} disabled={pannable} scale={scale} />
+              <Anchor
+                key={anchor.id}
+                anchor={anchor}
+                disabled={pannable}
+                scale={scale}
+              />
             )}
 
             {tags.map((tag) =>
-              <Tag key={tag.id} tag={tag} disabled={pannable} scale={scale} />
+              <Tag
+                key={tag.id}
+                tag={tag}
+                disabled={pannable}
+                scale={scale}
+              />
             )}
           </div>
         </TransformComponent>

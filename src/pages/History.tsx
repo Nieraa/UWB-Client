@@ -6,7 +6,7 @@ import { useState } from 'react';
 function History() {
   const [open, setOpen] = useState(false);
 
-  const items = [
+  const projects = [
     { id: "1", title: "Project 1" },
     { id: "2", title: "Project 2" },
     { id: "3", title: "Project 3" },
@@ -20,8 +20,15 @@ function History() {
   return (
     <div>
       <AppBar />
-      <SideNavbar items={items} setOpen={setOpen}/>
-      <Main items={items} pathname={"history"} setOpen={setOpen}/>
+      <SideNavbar
+        projects={projects}
+        setOpen={setOpen}
+      />
+      <Main
+        projects={projects}
+        pathname={"history"}
+        setOpen={setOpen}
+      />
     </div>
   );
 }
