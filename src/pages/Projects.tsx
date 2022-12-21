@@ -19,6 +19,8 @@ import FileUploadIcon from '@mui/icons-material/FileUpload';
 import { useFormik } from "formik";
 import * as yup from "yup";
 import axios from '../axios';
+import { PassAndUpdateProjects } from '../types';
+import { useNavigate } from 'react-router-dom';
 
 const validationSchema = yup.object({
   projectName: yup
@@ -27,8 +29,9 @@ const validationSchema = yup.object({
   imgUrl: yup.string()
 });
 
-function Projects() {
-  const [projects, setProjects] = useState([]);
+function Projects(props: PassAndUpdateProjects) {
+  const { projects, setProjects } = props;
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -43,9 +46,14 @@ function Projects() {
       };
       axios
         .post("/projects", projectData)
-        .then((response) => {
-          if (response) {
-            console.log(response);
+        .then((resPost) => {
+          if (resPost) {
+            axios
+              .get("/projects")
+              .then((resGet) => {
+                setProjects(resGet.data)
+                navigate(`/${resPost.data.id}/planner`);
+              })
           }
         })
         .catch((error) => {
@@ -53,17 +61,6 @@ function Projects() {
         })
     }
   })
-
-  useEffect(() => {
-    axios
-      .get(`/projects`)
-      .then((response) => {
-        setProjects(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   const [open, setOpen] = useState(false);
 

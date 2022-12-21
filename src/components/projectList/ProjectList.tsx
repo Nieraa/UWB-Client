@@ -34,6 +34,7 @@ export const ProjectList = (props: ProjectListProps) => {
             xs={6}
             lg={4}
             xl={3}
+            key={project.id}
           >
             <Card>
               <CardActionArea>

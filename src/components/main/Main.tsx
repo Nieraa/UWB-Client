@@ -1,4 +1,4 @@
-import { Params, useParams } from "react-router-dom";
+import { Params, useLocation, useParams } from "react-router-dom";
 import { Canvas } from "../canvas/Canvas";
 import { ProjectList } from "../projectList/ProjectList";
 import {
@@ -10,9 +10,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import {
   Dispatch,
-  SetStateAction
+  SetStateAction,
+  useEffect
 } from "react";
 import { Project } from "../../types";
+import axios from "../../axios";
 
 interface MainProps {
   projects: Project[];
@@ -28,6 +30,20 @@ export const Main = (props: MainProps) => {
     setOpen(true);
   };
 
+  const location = useLocation();
+
+  useEffect(() => {
+    axios
+      .get(`/projects`)
+      .then((response) => {
+        // setProjects(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+      console.log(location);
+  }, [location]);
+
   return (
     <MainArea>
       {pathname === 'projects' ?
@@ -40,7 +56,7 @@ export const Main = (props: MainProps) => {
         :
         <>
           <ProjectName>
-            {projects[Number(params.projectId) - 1].projectName}
+            {projects[projects.findIndex((element) => element.id === params.projectId)].projectName}
           </ProjectName>
           {pathname === 'planner' ?
             <Canvas />
