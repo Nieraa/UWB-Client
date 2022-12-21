@@ -12,14 +12,10 @@ import {
   Dispatch,
   SetStateAction
 } from "react";
-
-interface ProjectProps {
-  id: string;
-  title: string;
-}
+import { Project } from "../../types";
 
 interface MainProps {
-  projects: ProjectProps[];
+  projects: Project[];
   pathname: string;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
@@ -44,7 +40,7 @@ export const Main = (props: MainProps) => {
         :
         <>
           <ProjectName>
-            {projects[Number(params.projectId) - 1].title}
+            {projects[Number(params.projectId) - 1].projectName}
           </ProjectName>
           {pathname === 'planner' ?
             <Canvas />

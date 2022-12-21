@@ -26,14 +26,10 @@ import {
   useLocation,
   useParams
 } from "react-router-dom";
-
-interface ProjectProps {
-  id: string;
-  title: string;
-}
+import { Project } from "../../types";
 
 interface SideNavbarProps {
-  projects: ProjectProps[];
+  projects: Project[];
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -97,7 +93,7 @@ export const SideNavbar = (props: SideNavbarProps) => {
                   onClick={() => hasProjectId && params.projectId !== project.id && setCollapse(true)}
                 >
                   <FontAwesomeIcon icon={faFileLines} />
-                  {project.title}
+                  {project.projectName}
                 </SubMenuLink>
               </li>
             )}

@@ -25,7 +25,7 @@ export const Tag = (props: TagProps) => {
   const [y, setY] = useState<number>(tag.y)
 
   function getTextWidth(text: string, font: string) {
-    const canvas = document.createElement('canvas');
+    const canvas: HTMLCanvasElement = document.createElement('canvas');
     const context = canvas.getContext('2d');
 
     if (context) {

@@ -4,17 +4,17 @@ import { Main } from '../components/main/Main';
 import { useState } from 'react';
 
 function History() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
 
   const projects = [
-    { id: "1", title: "Project 1" },
-    { id: "2", title: "Project 2" },
-    { id: "3", title: "Project 3" },
-    { id: "4", title: "Project 4" },
-    { id: "5", title: "Project 5" },
-    { id: "6", title: "Project 6" },
-    { id: "7", title: "Project 7" },
-    { id: "8", title: "Project 8" },
+    { id: "1", projectName: "Project 1" },
+    { id: "2", projectName: "Project 2" },
+    { id: "3", projectName: "Project 3" },
+    { id: "4", projectName: "Project 4" },
+    { id: "5", projectName: "Project 5" },
+    { id: "6", projectName: "Project 6" },
+    { id: "7", projectName: "Project 7" },
+    { id: "8", projectName: "Project 8" },
   ]
 
   return (

@@ -6,19 +6,16 @@ import {
   Divider,
   Grid
 } from "@mui/material";
+import { Project } from "../../types";
 import {
   ProjectLink,
   ProjectName,
   ProjectWrapper,
 } from "./ProjectList.style";
 
-interface ProjectProps {
-  id: string;
-  title: string;
-}
 
 interface ProjectListProps {
-  projects: ProjectProps[];
+  projects: Project[];
 }
 
 
@@ -45,12 +42,12 @@ export const ProjectList = (props: ProjectListProps) => {
                     component="img"
                     height="160"
                     image="https://c4.wallpaperflare.com/wallpaper/974/565/254/windows-11-windows-10-minimalism-hd-wallpaper-preview.jpg"
-                    alt={project.title + " plan"}
+                    alt={project.projectName + " plan"}
                   />
                   <Divider />
                   <CardContent>
                     <ProjectName>
-                      {project.title}
+                      {project.projectName}
                     </ProjectName>
                   </CardContent>
                 </ProjectLink>
