@@ -6,22 +6,15 @@ import Projects from './pages/Projects';
 import Planner from './pages/Planner';
 import Realtime from './pages/Realtime';
 import History from './pages/History';
-import axios from "./axios";
 import { useEffect, useState } from "react";
 import { Project } from "./types";
+import { getProjects } from "./services/ProjectsService";
 
 function App() {
   const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
-    axios
-      .get(`/projects`)
-      .then((response) => {
-        setProjects(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    getProjects(setProjects);
   }, []);
 
   return (
