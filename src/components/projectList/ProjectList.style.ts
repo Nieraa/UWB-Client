@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export const ProjectWrapper = styled.div`
   width: 100%;
   height: 100%;
-  padding: 15px 0px;
+  overflow-y: auto;
 `;
 
 export const ProjectLink = styled(Link)`

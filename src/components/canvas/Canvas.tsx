@@ -11,14 +11,13 @@ import {
   TransformComponent,
   TransformWrapper,
 } from "@pronestor/react-zoom-pan-pinch";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
-  Divider,
   FormControl,
   InputLabel,
   MenuItem,
@@ -30,8 +29,33 @@ import {
 } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { SketchPicker } from 'react-color';
+import axios from '../../axios';
+import { AnchorType, Project, TagType } from '../../types';
+import * as yup from "yup";
 
-export const Canvas = () => {
+const validationSchema = yup.object({
+  name: yup
+    .string()
+    .required("Please enter anchor name"),
+  ipAddress: yup
+    .string()
+    .required("Please enter ip address"),
+  x: yup
+    .number()
+    .required(),
+  y: yup
+    .number()
+    .required(),
+});
+
+interface CanvasProps {
+  project: Project;
+}
+
+export const Canvas = (props: CanvasProps) => {
+  const { project } = props;
+  const [anchors, setAnchors] = useState<AnchorType[]>([]);
+  const [tags, setTags] = useState<TagType[]>([]);
   const [pannable, setPannable] = useState<boolean>(false);
   const [cursor, setCursor] = useState<string>("default");
   const [scale, setScale] = useState<number>(1);
@@ -41,6 +65,28 @@ export const Canvas = () => {
   const [colors, setColors] = useState(["#667DBB", "#BB6666"]);
   const [group, setGroup] = useState(colors.length + 1);
 
+  useEffect(() => {
+    axios
+      .get(`/projects/${project.id}/anchors`)
+      .then((response) => {
+        setAnchors(response.data);
+        console.log(response.data);
+      })
+      .catch((err) => {
+
+      })
+
+    axios
+      .get(`/projects/${project.id}/tags`)
+      .then((response) => {
+        setTags(response.data);
+        console.log(response.data);
+      })
+      .catch((err) => {
+
+      })
+  }, [])
+
   const handleClickOpenDialog = (type: string) => {
     setAddType(type);
     setOpenDialog(true);
@@ -49,76 +95,6 @@ export const Canvas = () => {
   const handleCloseDialog = () => {
     setOpenDialog(false);
   };
-
-  const anchors = [
-    {
-      id: "1",
-      name: "Anchor 1",
-      ssid: "2",
-      color: "#667DBB",
-      x: 0,
-      y: 0
-    },
-    {
-      id: "2",
-      name: "Anchor 2",
-      ssid: "1",
-      color: "#BB6666",
-      x: 150,
-      y: 350
-    },
-    {
-      id: "3",
-      name: "Anchor 3",
-      ssid: "2",
-      color: "#667DBB",
-      x: -150,
-      y: 350
-    },
-    {
-      id: "4",
-      name: "Anchor 4",
-      ssid: "1",
-      color: "#BB6666",
-      x: -150,
-      y: -350
-    },
-    {
-      id: "5",
-      name: "Anchor 5",
-      ssid: "1",
-      color: "#BB6666",
-      x: 150,
-      y: -350
-    },
-  ]
-
-  const tags = [
-    {
-      id: "1",
-      name: "Tag 1",
-      ssid: "1",
-      color: "#BB6666",
-      x: -80,
-      y: -140
-    },
-    {
-      id: "2",
-      name: "Tag 2",
-      ssid: "1",
-      color: "#BB6666",
-      x: 95,
-      y: 45
-    },
-    {
-      id: "3",
-      name: "Tag 3",
-      ssid: "2",
-      color: "#667DBB",
-      x: -65,
-      y: 160
-    },
-  ]
 
   const handleChangeColor = (color: { hex: string }) => {
     setAddColor(color.hex);
@@ -305,6 +281,18 @@ export const Canvas = () => {
             cursor: cursor,
             // backgroundImage: "url(https://wallpaperaccess.com/full/84248.png)"
           }}>
+            <img
+              width={project.l * 100}
+              height={project.w * 100}
+              style={{
+                position: "absolute",
+                top: `calc(50vh - 60px - ${project.w * 50}px)`,
+                left: `calc(50vw - 150px - ${project.l * 50}px)`,
+                zIndex: 0,
+              }} 
+              src={project.imgUrl} 
+              alt="" />
+
             {anchors.map((anchor) =>
               <Anchor
                 key={anchor.id}

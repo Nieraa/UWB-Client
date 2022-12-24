@@ -28,6 +28,7 @@ export const ProjectList = (props: ProjectListProps) => {
         container
         spacing={3}
         px={5}
+        py={3}
       >
         {projects.map((project) =>
           <Grid item
@@ -42,7 +43,7 @@ export const ProjectList = (props: ProjectListProps) => {
                   <CardMedia
                     component="img"
                     height="160"
-                    image="https://c4.wallpaperflare.com/wallpaper/974/565/254/windows-11-windows-10-minimalism-hd-wallpaper-preview.jpg"
+                    image={project.imgUrl}
                     alt={project.projectName + " plan"}
                   />
                   <Divider />

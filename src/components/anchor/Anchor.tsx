@@ -2,19 +2,11 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import Draggable from 'react-draggable';
+import { AnchorType } from '../../types';
 import { Element, Text } from './Anchor.style';
 
-interface Anchor {
-  id: string,
-  name: string,
-  ssid: string,
-  color: string,
-  x: number,
-  y: number,
-}
-
 interface AnchorProps {
-  anchor: Anchor,
+  anchor: AnchorType,
   disabled: boolean,
   scale: number,
 }
@@ -53,9 +45,9 @@ export const Anchor = (props: AnchorProps) => {
       <div>
         <Text textWidth={getTextWidth(anchor.name, "regular 16pt Prompt")}>
           {anchor.name}<br />
-          {`(${x}, ${y})`}
+          {`(${x/100}, ${-y/100})`}
         </Text>
-        <Element anchorColor={anchor.color}>
+        <Element anchorColor={anchor.networkColor}>
           <FontAwesomeIcon icon={faPlus} />
         </Element>
       </div>

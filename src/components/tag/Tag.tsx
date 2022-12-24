@@ -2,19 +2,11 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import Draggable from 'react-draggable';
+import { TagType } from '../../types';
 import { Element, Text } from './Tag.style';
 
-interface Tag {
-  id: string,
-  name: string,
-  ssid: string,
-  color: string,
-  x: number,
-  y: number,
-}
-
 interface TagProps {
-  tag: Tag,
+  tag: TagType,
   disabled: boolean,
   scale: number,
 }
@@ -57,7 +49,7 @@ export const Tag = (props: TagProps) => {
           {tag.name}<br />
           {`(${x}, ${y})`}
         </Text>
-        <Element tagColor={tag.color}>
+        <Element tagColor={tag.networkColor}>
           <FontAwesomeIcon icon={faPlus} />
         </Element>
       </div>

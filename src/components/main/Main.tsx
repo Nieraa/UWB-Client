@@ -1,4 +1,4 @@
-import { Params, useLocation, useParams } from "react-router-dom";
+import { Params, useParams } from "react-router-dom";
 import { Canvas } from "../canvas/Canvas";
 import { ProjectList } from "../projectList/ProjectList";
 import {
@@ -11,10 +11,8 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import {
   Dispatch,
   SetStateAction,
-  useEffect
 } from "react";
 import { Project } from "../../types";
-import axios from "../../axios";
 
 interface MainProps {
   projects: Project[];
@@ -25,24 +23,19 @@ interface MainProps {
 export const Main = (props: MainProps) => {
   const { projects, pathname, setOpen } = props;
   const params: Readonly<Params<string>> = useParams();
+  const project: Project = projects.length === 0 ? 
+  {
+    id: params.projectId ? params.projectId : "",
+    projectName: "",
+    imgUrl: "",
+    l: 0,
+    w: 0,
+  }: 
+  projects[projects.findIndex((element) => element.id === params.projectId)];
 
   const handleClickOpen = () => {
     setOpen(true);
   };
-
-  const location = useLocation();
-
-  useEffect(() => {
-    axios
-      .get(`/projects`)
-      .then((response) => {
-        // setProjects(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-      console.log(location);
-  }, [location]);
 
   return (
     <MainArea>
@@ -56,10 +49,11 @@ export const Main = (props: MainProps) => {
         :
         <>
           <ProjectName>
-            {projects[projects.findIndex((element) => element.id === params.projectId)].projectName}
+            {projects.length === 0 ? "" : project.projectName}
           </ProjectName>
           {pathname === 'planner' ?
-            <Canvas />
+            <Canvas
+              project={project}/>
             :
             pathname === 'realtime' ?
               <></>
