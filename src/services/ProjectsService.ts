@@ -1,17 +1,18 @@
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction } from "react-router-dom";
 import axios from "../axios";
 import { Hardware, Project } from "../types";
 
 export function getProjects(
   setProjects: (projects: Project[]) => void,
   createId?: string,
+  navigate?: NavigateFunction
 ): void {
   axios
     .get("/projects")
     .then((response) => {
       setProjects(response.data);
-      if (createId) {
-        const navigate = useNavigate();
+      if (createId && navigate) {
+        console.log(createId);
         navigate(`/${createId}/planner`);
       }
     })
@@ -27,11 +28,12 @@ export function createProject(
     w: number,
   },
   setProjects: (projects: Project[]) => void,
+  navigate: NavigateFunction
 ): void {
   axios
     .post("/projects", projectData)
     .then((response) => {
-      getProjects(setProjects, response.data.id);
+      getProjects(setProjects, response.data.id, navigate);
     })
     .catch(() => {
       alert("Create failed");
@@ -70,7 +72,7 @@ export function createHardware(
     x: number,
     y: number,
     networkSsid: string,
-    networkColor: string,
+    networkColor: string
   },
   hasNewColor: boolean,
   setColors: (colors: string[]) => void,
@@ -114,7 +116,7 @@ export function getColors(
 
 export function getNetworkSsids(
   projectId: string,
-  setNetworkSsids: (networkSsids: string[]) => void,
+  setNetworkSsids: (networkSsids: string[]) => void
 ): void {
   axios
     .get(`/projects/${projectId}/networkSsids`)

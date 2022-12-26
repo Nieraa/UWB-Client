@@ -20,6 +20,7 @@ import * as yup from "yup";
 import Compress from "react-image-file-resizer";
 import { Project } from "../../types";
 import { createProject } from "../../services/ProjectsService";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 const validationSchema = yup.object({
   projectName: yup
@@ -45,7 +46,8 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
   const [image, _setImage] = useState<any>("");
   const [imageName, setImageName] = useState<string>("No file chosen");
   const [imageValidation, setImageValidation] = useState<boolean>(false);
-  
+  const navigate: NavigateFunction = useNavigate();
+
   const inputFileRef = createRef();
 
   const formik = useFormik({
@@ -63,7 +65,7 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
         w: Number(values.w),
       };
       if (image) {
-        createProject(projectData, setProjects);
+        createProject(projectData, setProjects, navigate);
       }
       else {
         setImageValidation(true);
