@@ -48,7 +48,11 @@ export const ProjectList = (props: ProjectListProps) => {
                   <Divider />
                   <CardContent>
                     <ProjectName>
-                      {project.projectName}
+                      {project.projectName.length > 18 ?
+                        project.projectName.slice(0, 18) + "..."
+                        :
+                        project.projectName
+                      }
                     </ProjectName>
                   </CardContent>
                 </ProjectLink>
