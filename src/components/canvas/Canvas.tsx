@@ -1,52 +1,21 @@
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { AddElementButton } from './Canvas.style';
 import { Anchor } from '../anchor/Anchor';
 import { Tag } from '../tag/Tag';
+import { HardwareCreateForm } from '../hardwareCreateFrom/HardwareCreateFrom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import {
-  AddElementButton,
-  ColorBoxButton,
-  ColorWrapper
-} from './Canvas.style';
-import {
-  TransformComponent,
-  TransformWrapper,
-} from "@pronestor/react-zoom-pan-pinch";
-import { useEffect, useState } from 'react';
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  FormControl,
-  InputLabel,
   MenuItem,
   MenuList,
-  Popover,
-  Select,
-  styled,
-  TextField
+  Popover
 } from '@mui/material';
-import { grey } from '@mui/material/colors';
-import { SketchPicker } from 'react-color';
-import axios from '../../axios';
-import { AnchorType, Project, TagType } from '../../types';
-import * as yup from "yup";
-
-const validationSchema = yup.object({
-  name: yup
-    .string()
-    .required("Please enter anchor name"),
-  ipAddress: yup
-    .string()
-    .required("Please enter ip address"),
-  x: yup
-    .number()
-    .required(),
-  y: yup
-    .number()
-    .required(),
-});
+import {
+  TransformComponent,
+  TransformWrapper
+} from "@pronestor/react-zoom-pan-pinch";
+import { useEffect, useState } from 'react';
+import { getColors, getHardwares, getNetworkSsids } from '../../services/ProjectsService';
+import { Hardware, Project } from '../../types';
 
 interface CanvasProps {
   project: Project;
@@ -54,58 +23,27 @@ interface CanvasProps {
 
 export const Canvas = (props: CanvasProps) => {
   const { project } = props;
-  const [anchors, setAnchors] = useState<AnchorType[]>([]);
-  const [tags, setTags] = useState<TagType[]>([]);
+  
+  const [addType, setAddType] = useState("");
+  const [anchors, setAnchors] = useState<Hardware[]>([]);
+  const [tags, setTags] = useState<Hardware[]>([]);
+  const [colors, setColors] = useState<string[]>([]);
+  const [group, setGroup] = useState(1);
+  const [networkSsids, setNetworkSsids] = useState<string[]>([]);
   const [pannable, setPannable] = useState<boolean>(false);
   const [cursor, setCursor] = useState<string>("default");
   const [scale, setScale] = useState<number>(1);
   const [openDialog, setOpenDialog] = useState(false);
-  const [addType, setAddType] = useState("");
-  const [addColor, setAddColor] = useState("#fff");
-  const [colors, setColors] = useState(["#667DBB", "#BB6666"]);
-  const [group, setGroup] = useState(colors.length + 1);
+  const [anchorElMenu, setAnchorElMenu] = useState(null);
+
+  const openMenu = Boolean(anchorElMenu);
 
   useEffect(() => {
-    axios
-      .get(`/projects/${project.id}/anchors`)
-      .then((response) => {
-        setAnchors(response.data);
-        console.log(response.data);
-      })
-      .catch((err) => {
-
-      })
-
-    axios
-      .get(`/projects/${project.id}/tags`)
-      .then((response) => {
-        setTags(response.data);
-        console.log(response.data);
-      })
-      .catch((err) => {
-
-      })
+    getHardwares(project.id, "anchor", setAnchors, false);
+    getHardwares(project.id, "tag", setTags, false);
+    getColors(project.id, setColors, setGroup);
+    getNetworkSsids(project.id, setNetworkSsids);
   }, [])
-
-  const handleClickOpenDialog = (type: string) => {
-    setAddType(type);
-    setOpenDialog(true);
-  };
-
-  const handleCloseDialog = () => {
-    setOpenDialog(false);
-  };
-
-  const handleChangeColor = (color: { hex: string }) => {
-    setAddColor(color.hex);
-    const index = colors.findIndex((element) => element.toLowerCase() === color.hex);
-    if (index === -1) {
-      setGroup(colors.length + 1);
-    }
-    else {
-      setGroup(index + 1);
-    }
-  };
 
   onkeydown = function (ke) {
     if (ke.key === " ") {
@@ -132,50 +70,22 @@ export const Canvas = (props: CanvasProps) => {
     }
   }
 
-  const [anchorElMenu, setAnchorElMenu] = useState(null);
-  const [anchorElColorPicker, setAnchorElColorPicker] = useState(null);
-
-  const handleClickMenu = (event: any) => {
+  const handleOpenMenu = (event: any): void => {
     setAnchorElMenu(event.currentTarget);
   };
 
-  const openMenu = Boolean(anchorElMenu);
-
-  const handleCloseMenu = () => {
+  const handleCloseMenu = (): void => {
     setAnchorElMenu(null);
   };
 
-  const handleClickColorPicker = (event: any) => {
-    setAnchorElColorPicker(event.currentTarget);
+  const handleOpenDialog = (type: string): void => {
+    setAddType(type);
+    setOpenDialog(true);
   };
-
-  const openColorPicker = Boolean(anchorElColorPicker);
-
-  const handleCloseColorPicker = () => {
-    setAnchorElColorPicker(null);
-  };
-
-  const handleChangeGroup = (event: any) => {
-    setGroup(event.target.value);
-    if (event.target.value <= colors.length) {
-      setAddColor(colors[event.target.value - 1]);
-    }
-    else {
-      setAddColor("#fff")
-    }
-  };
-
-  const CancelButton = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText(grey[400]),
-    backgroundColor: grey[300],
-    '&:hover': {
-      backgroundColor: grey[400],
-    },
-  }));
 
   return (
     <div>
-      <AddElementButton onClick={handleClickMenu}>
+      <AddElementButton onClick={handleOpenMenu}>
         <FontAwesomeIcon icon={faPlus} />
       </AddElementButton>
       <Popover
@@ -192,82 +102,23 @@ export const Canvas = (props: CanvasProps) => {
         }}
       >
         <MenuList>
-          <MenuItem onClick={() => { handleClickOpenDialog("Anchor"); handleCloseMenu() }}>Add anchor</MenuItem>
-          <MenuItem onClick={() => { handleClickOpenDialog("Tag"); handleCloseMenu() }}>Add tag</MenuItem>
+          <MenuItem onClick={() => { handleOpenDialog("Anchor"); handleCloseMenu() }}>Add anchor</MenuItem>
+          <MenuItem onClick={() => { handleOpenDialog("Tag"); handleCloseMenu() }}>Add tag</MenuItem>
         </MenuList>
       </Popover>
-      <Dialog
-        open={openDialog}
-        onClose={handleCloseDialog}
-        fullWidth
-      >
-        <DialogTitle>Add {addType}</DialogTitle>
-        <DialogContent dividers>
-          <TextField
-            autoFocus
-            margin="dense"
-            id={addType.toLowerCase() + "-name"}
-            label={addType + " name"}
-            fullWidth
-            variant="outlined"
-            defaultValue="Untitled"
-          />
-          <ColorWrapper>
-            <FormControl style={{ marginRight: 15, minWidth: 100 }}>
-              <InputLabel id="select-group-label">Group</InputLabel>
-              <Select
-                labelId="select-group-label"
-                id="select-group"
-                value={group}
-                label="Group"
-                onChange={handleChangeGroup}
-              >
-                {colors.map((color, index) =>
-                  <MenuItem value={index + 1}>{index + 1}</MenuItem>
-                )}
-                <MenuItem value={colors.length + 1}>{colors.length + 1}</MenuItem>
-              </Select>
-            </FormControl>
-            <span>Color:</span>
-            <ColorBoxButton
-              onClick={handleClickColorPicker}
-              addColor={group <= colors.length ? colors[group - 1] : addColor}
-            />
-          </ColorWrapper>
-          <Popover
-            open={openColorPicker}
-            anchorEl={anchorElColorPicker}
-            onClose={handleCloseColorPicker}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'left',
-            }}
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'left',
-            }}
-          >
-            <SketchPicker
-              color={addColor}
-              presetColors={colors}
-              onChange={handleChangeColor}
-            />
-          </Popover>
-        </DialogContent>
-        <DialogActions>
-          <CancelButton
-            variant="contained"
-            onClick={handleCloseDialog}
-          >
-            Cancel
-          </CancelButton>
-          <Button
-            variant="contained"
-            onClick={handleCloseDialog}>
-            Create
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <HardwareCreateForm
+        projectId={project.id}
+        addType={addType}
+        colors={colors}
+        group={group}
+        openDialog={openDialog}
+        setAnchors={setAnchors}
+        setTags={setTags}
+        setColors={setColors}
+        setGroup={setGroup}
+        setNetworkSsids={setNetworkSsids}
+        setOpenDialog={setOpenDialog}
+      />
       <TransformWrapper
         initialScale={scale}
         panning={{ disabled: !pannable }}
@@ -279,7 +130,6 @@ export const Canvas = (props: CanvasProps) => {
             width: "calc(100vw - 300px)",
             height: "calc(100vh - 120px)",
             cursor: cursor,
-            // backgroundImage: "url(https://wallpaperaccess.com/full/84248.png)"
           }}>
             <img
               width={project.l * 100}
@@ -289,8 +139,8 @@ export const Canvas = (props: CanvasProps) => {
                 top: `calc(50vh - 60px - ${project.w * 50}px)`,
                 left: `calc(50vw - 150px - ${project.l * 50}px)`,
                 zIndex: 0,
-              }} 
-              src={project.imgUrl} 
+              }}
+              src={project.imgUrl}
               alt="" />
 
             {anchors.map((anchor) =>

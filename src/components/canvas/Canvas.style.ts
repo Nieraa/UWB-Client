@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import '../../theme/Theme.css';
 
 export const AddElementButton = styled.button`
@@ -31,9 +31,8 @@ export const ColorWrapper = styled.div`
 
 export const ColorBoxButton = styled.button<{ addColor: string }>`
   height: 56px;
-  width: 100px;
+  width: 120px;
   border: 1px solid var(--grey300);
   border-radius: 5px;
   background-color: ${(props) => (props.addColor)};
-  margin-left: 5px;
 `;
