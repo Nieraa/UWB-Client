@@ -111,6 +111,7 @@ export const Canvas = (props: CanvasProps) => {
         addType={addType}
         colors={colors}
         group={group}
+        networkSsids={networkSsids}
         openDialog={openDialog}
         setAnchors={setAnchors}
         setTags={setTags}

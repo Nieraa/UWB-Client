@@ -43,6 +43,7 @@ interface HardwareCreateFormProps {
   addType: string,
   colors: string[],
   group: number,
+  networkSsids: string[],
   openDialog: boolean,
   setAnchors: (anchors: Hardware[]) => void,
   setTags: (tags: Hardware[]) => void,
@@ -54,11 +55,12 @@ interface HardwareCreateFormProps {
 }
 
 export function HardwareCreateForm(props: HardwareCreateFormProps) {
-  const { 
+  const {
     projectId,
     addType,
     colors,
     group,
+    networkSsids,
     openDialog,
     setAnchors,
     setTags,
@@ -67,12 +69,13 @@ export function HardwareCreateForm(props: HardwareCreateFormProps) {
     setNetworkSsids,
     setOpenDialog,
   } = props;
-  
+
   const [anchorElColorPicker, setAnchorElColorPicker] = useState(null);
   const [addColor, setAddColor] = useState("#ffffff");
-  
+  const [networkSsid, setNetworkSsid] = useState<string>("");
+
   const openColorPicker = Boolean(anchorElColorPicker);
-  
+
   const formik = useFormik({
     initialValues: {
       name: "Untitled",
@@ -118,25 +121,26 @@ export function HardwareCreateForm(props: HardwareCreateFormProps) {
           handleCloseDialog
         );
       }
-    }
+    },
   })
 
-  const handleCloseDialog = () => {
+  const handleCloseDialog = (): void => {
     setOpenDialog(false);
     formik.resetForm();
     setGroup(colors.length + 1);
     setAddColor("#FFFFFF");
+    formik.values.networkSsid = "";
   };
 
-  const handleOpenColorPicker = (event: any) => {
+  const handleOpenColorPicker = (event: any): void => {
     setAnchorElColorPicker(event.currentTarget);
   };
 
-  const handleCloseColorPicker = () => {
+  const handleCloseColorPicker = (): void => {
     setAnchorElColorPicker(null);
   };
 
-  const handleChangeColor = (color: { hex: string }) => {
+  const handleChangeColor = (color: { hex: string }): void => {
     setAddColor(color.hex);
     const index = colors.findIndex((element) => element.toLowerCase() === color.hex);
     if (index === -1) {
@@ -144,16 +148,19 @@ export function HardwareCreateForm(props: HardwareCreateFormProps) {
     }
     else {
       setGroup(index + 1);
+      formik.values.networkSsid = networkSsids[index];
     }
   };
 
-  const handleChangeGroup = (event: any) => {
+  const handleChangeGroup = (event: any): void => {
     setGroup(event.target.value);
     if (event.target.value <= colors.length) {
       setAddColor(colors[event.target.value - 1]);
+      formik.values.networkSsid = networkSsids[event.target.value - 1];
     }
     else {
-      setAddColor("#ffffff")
+      setAddColor("#ffffff");
+      formik.values.networkSsid = "";
     }
   };
 
@@ -251,7 +258,17 @@ export function HardwareCreateForm(props: HardwareCreateFormProps) {
                 name="networkSsid"
                 variant="outlined"
                 value={formik.values.networkSsid}
-                onChange={formik.handleChange}
+                onChange={(e) => {
+                  formik.handleChange(e);
+                  const index = networkSsids.findIndex((element) => element === e.target.value);
+                  if (index === -1) {
+                    setGroup(networkSsids.length + 1);
+                  }
+                  else {
+                    setGroup(index + 1);
+                    setAddColor(colors[index]);
+                  }
+                }}
                 error={Boolean(formik.errors.networkSsid)}
                 helperText={formik.errors.networkSsid}
                 autoFocus
