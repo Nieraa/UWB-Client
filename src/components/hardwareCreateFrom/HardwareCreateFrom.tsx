@@ -72,7 +72,6 @@ export function HardwareCreateForm(props: HardwareCreateFormProps) {
 
   const [anchorElColorPicker, setAnchorElColorPicker] = useState(null);
   const [addColor, setAddColor] = useState("#ffffff");
-  const [networkSsid, setNetworkSsid] = useState<string>("");
 
   const openColorPicker = Boolean(anchorElColorPicker);
 
