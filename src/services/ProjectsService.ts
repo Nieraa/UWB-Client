@@ -65,7 +65,6 @@ export function createHardware(
   hardwareType: string,
   setHardwares: (hardware: Hardware[]) => void,
   hardwareData: {
-    projectId: string,
     name: string,
     ipAddress: string,
     x: number,

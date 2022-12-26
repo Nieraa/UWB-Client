@@ -84,7 +84,6 @@ export function HardwareCreateForm(props: HardwareCreateFormProps) {
     validationSchema,
     onSubmit: (values) => {
       const hardwareData = {
-        projectId: projectId,
         name: values.name,
         ipAddress: values.ipAddress,
         x: Number(values.x),
