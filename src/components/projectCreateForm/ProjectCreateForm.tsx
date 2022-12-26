@@ -1,26 +1,25 @@
 import {
   CancelButton,
-  ImageErrorHelperText,
+  ImageErrorHelperText
 } from "./ProjectCreateForm.style";
 import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  FormHelperText,
   Grid,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+  FormHelperText,
   Input,
   TextField
 } from "@mui/material";
 import FileUploadIcon from '@mui/icons-material/FileUpload';
-import { useNavigate } from "react-router-dom";
+import { createRef, useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import axios from "../../axios";
-import { Project } from "../../types";
-import { createRef, useState } from "react";
 import Compress from "react-image-file-resizer";
+import { Project } from "../../types";
+import { createProject } from "../../services/ProjectsService";
 
 const validationSchema = yup.object({
   projectName: yup
@@ -42,15 +41,12 @@ interface ProjectCreateFormProps {
 
 function ProjectCreateForm(props: ProjectCreateFormProps) {
   const { setProjects, open, setOpen } = props;
-  const [image, _setImage] = useState("");
-  const [imageName, setImageName] = useState("No file chosen");
-  const [imageValidation, setImageValidation] = useState(false);
+  
+  const [image, _setImage] = useState<any>("");
+  const [imageName, setImageName] = useState<string>("No file chosen");
+  const [imageValidation, setImageValidation] = useState<boolean>(false);
+  
   const inputFileRef = createRef();
-  const navigate = useNavigate();
-
-  const setImage = (newImage: any) => {
-    _setImage(newImage);
-  };
 
   const formik = useFormik({
     initialValues: {
@@ -66,25 +62,8 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
         l: Number(values.l),
         w: Number(values.w),
       };
-      console.log(projectData);
       if (image) {
-        axios
-          .post("/projects", projectData)
-          .then((resPost) => {
-            if (resPost) {
-              axios
-                .get("/projects")
-                .then((resGet) => {
-                  setProjects(resGet.data)
-                  navigate(`/${resPost.data.id}/planner`);
-                })
-                .catch((errGet) => {
-                })
-            }
-          })
-          .catch((errPost) => {
-            alert("Create failed")
-          })
+        createProject(projectData, setProjects);
       }
       else {
         setImageValidation(true);
@@ -92,14 +71,15 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
     }
   })
 
-  const handleClose = () => {
-    setOpen(false);
-    formik.resetForm();
-    setImage("");
-    setImageName("No file chosen");
+  const handleClick = (): void => {
+    setImage(image);
   };
 
-  const handleOnChange = (event: any) => {
+  const setImage = (newImage: any): void => {
+    _setImage(newImage);
+  };
+
+  const handleOnChange = (event: any): void => {
     const newImage = event.target?.files?.[0];
     setImageName(newImage.name);
     setImageValidation(false);
@@ -107,8 +87,8 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
     try {
       Compress.imageFileResizer(
         newImage, // the file from input
-        240, // maxwidth
-        240, // maxheight
+        2000, // maxwidth
+        2000, // maxheight
         "JPEG", // compress format WEBP, JPEG, PNG
         90, // quality
         0, // rotation
@@ -125,8 +105,11 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
     }
   };
 
-  const handleClick = () => {
-    setImage(image);
+  const handleClose = (): void => {
+    setOpen(false);
+    formik.resetForm();
+    setImage("");
+    setImageName("No file chosen");
   };
 
   return (
