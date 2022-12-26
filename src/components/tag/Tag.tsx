@@ -1,33 +1,33 @@
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
-import Draggable from 'react-draggable';
-import { TagType } from '../../types';
 import { Element, Text } from './Tag.style';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import Draggable from 'react-draggable';
+import { useState } from 'react';
+import { Hardware } from '../../types';
 
 interface TagProps {
-  tag: TagType,
+  tag: Hardware,
   disabled: boolean,
   scale: number,
 }
 
 export const Tag = (props: TagProps) => {
   const { tag, disabled, scale } = props;
-  const [x, setX] = useState<number>(tag.x)
-  const [y, setY] = useState<number>(tag.y)
+  
+  const [x, setX] = useState<number>(tag.x * 100);
+  const [y, setY] = useState<number>(tag.y * 100);
 
-  function getTextWidth(text: string, font: string) {
+  function getTextWidth(text: string, font: string): number {
     const canvas: HTMLCanvasElement = document.createElement('canvas');
     const context = canvas.getContext('2d');
 
     if (context) {
       context.font = font || getComputedStyle(document.body).font;
-      // console.log(text, context.measureText(text).width / 0.5779);
-      if (context.measureText(text).width > context.measureText(`(${x}, ${y})`).width) {
+      if (context.measureText(text).width > context.measureText(`(${x / 100}, ${y / 100})`).width) {
         return context.measureText(text).width / 0.5779
       }
       else {
-        return context.measureText(`(${x}, ${y})`).width / 0.5779
+        return context.measureText(`(${x / 100}, ${y / 100})`).width / 0.5779
       }
     }
     return 0;
@@ -35,11 +35,11 @@ export const Tag = (props: TagProps) => {
 
   return (
     <Draggable
-      defaultPosition={{ x: tag.x, y: -tag.y }}
-      positionOffset={{ x: "50%", y: "calc(50vh - 120px)" }}
+      defaultPosition={{ x: tag.x * 100, y: -tag.y * 100 }}
+      positionOffset={{ x: "calc(50vw - 170px)", y: "calc(50vh - 80px)" }}
       onDrag={(e, data) => {
-        setX(Number(data.x.toFixed(3)));
-        setY(Number(data.y.toFixed(3)));
+        setX(Math.round(data.x));
+        setY(Math.round(-data.y));
       }}
       disabled={disabled}
       scale={scale}
@@ -47,7 +47,7 @@ export const Tag = (props: TagProps) => {
       <div>
         <Text textWidth={getTextWidth(tag.name, "regular 16pt Prompt")}>
           {tag.name}<br />
-          {`(${x}, ${y})`}
+          {`(${x / 100}, ${y / 100})`}
         </Text>
         <Element tagColor={tag.networkColor}>
           <FontAwesomeIcon icon={faPlus} />

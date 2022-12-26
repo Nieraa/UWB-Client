@@ -1,51 +1,53 @@
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
-import Draggable from 'react-draggable';
-import { AnchorType } from '../../types';
 import { Element, Text } from './Anchor.style';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import Draggable from 'react-draggable';
+import { useState } from 'react';
+import { Hardware } from '../../types';
 
 interface AnchorProps {
-  anchor: AnchorType,
+  anchor: Hardware,
   disabled: boolean,
   scale: number,
 }
 
 export const Anchor = (props: AnchorProps) => {
   const { anchor, disabled, scale } = props;
-  const [x, setX] = useState(anchor.x)
-  const [y, setY] = useState(anchor.y)
+  const [x, setX] = useState<number>(anchor.x * 100)
+  const [y, setY] = useState<number>(anchor.y * 100)
 
 
-  function getTextWidth(text: string, font: string) {
-    const canvas = document.createElement('canvas');
+  function getTextWidth(text: string, font: string): number {
+    const canvas: HTMLCanvasElement = document.createElement('canvas');
     const context = canvas.getContext('2d');
 
     if (context) {
       context.font = font || getComputedStyle(document.body).font;
-      if (context.measureText(text).width > context.measureText(`(${x}, ${y})`).width) {
+      if (context.measureText(text).width > context.measureText(`(${x / 100}, ${y / 100})`).width) {
         return context.measureText(text).width / 0.5779
       }
       else {
-        return context.measureText(`(${x}, ${y})`).width / 0.5779
+        return context.measureText(`(${x / 100}, ${y / 100})`).width / 0.5779
       }
-      // console.log(text, context.measureText(text).width / 0.5779);
     }
     return 0;
   }
 
   return (
     <Draggable
-      defaultPosition={{ x: anchor.x, y: -anchor.y }}
-      positionOffset={{x: "calc(50% - 20px)", y: "calc(50vh - 80px)"}}
-      onDrag={(e, data) => { setX(data.x); setY(data.y) }}
+      defaultPosition={{ x: anchor.x * 100, y: -anchor.y * 100 }}
+      positionOffset={{ x: "calc(50vw - 170px)", y: "calc(50vh - 80px)" }}
+      onDrag={(e, data) => {
+        setX(Math.round(data.x));
+        setY(Math.round(-data.y))
+      }}
       disabled={disabled}
       scale={scale}
     >
       <div>
         <Text textWidth={getTextWidth(anchor.name, "regular 16pt Prompt")}>
           {anchor.name}<br />
-          {`(${x/100}, ${-y/100})`}
+          {`(${x / 100}, ${y / 100})`}
         </Text>
         <Element anchorColor={anchor.networkColor}>
           <FontAwesomeIcon icon={faPlus} />
