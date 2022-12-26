@@ -11,17 +11,7 @@ export interface PassAndUpdateProjects {
   setProjects: (projects: Project[]) => void;
 }
 
-export interface AnchorType {
-  id: string,
-  name: string,
-  ipAddress: string,
-  x: number,
-  y: number,
-  networkSsid: string,
-  networkColor: string,
-}
-
-export interface TagType {
+export interface Hardware {
   id: string,
   name: string,
   ipAddress: string,
