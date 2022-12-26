@@ -31,7 +31,8 @@ export const ProjectList = (props: ProjectListProps) => {
       >
         {projects.map((project) =>
           <Grid item
-            xs={6}
+            xs={12}
+            md={6}
             lg={4}
             xl={3}
             key={project.id}
