@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import '../../theme/Theme.css';
 
 export const Element = styled.div<{ anchorColor: string }>`

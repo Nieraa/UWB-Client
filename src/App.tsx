@@ -1,14 +1,14 @@
-import {
-  Routes,
-  Route,
-} from "react-router-dom";
 import Projects from './pages/Projects';
 import Planner from './pages/Planner';
 import Realtime from './pages/Realtime';
 import History from './pages/History';
+import {
+  Routes,
+  Route
+} from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Project } from "./types";
 import { getProjects } from "./services/ProjectsService";
+import { Project } from "./types";
 
 function App() {
   const [projects, setProjects] = useState<Project[]>([]);

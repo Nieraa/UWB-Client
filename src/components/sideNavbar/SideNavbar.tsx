@@ -17,15 +17,15 @@ import {
   faPenToSquare
 } from "@fortawesome/free-solid-svg-icons";
 import {
-  Dispatch,
-  SetStateAction,
-  useState
-} from "react";
-import {
   Params,
   useLocation,
   useParams
 } from "react-router-dom";
+import {
+  Dispatch,
+  SetStateAction,
+  useState
+} from "react";
 import { Project } from "../../types";
 
 interface SideNavbarProps {
@@ -36,21 +36,29 @@ interface SideNavbarProps {
 export const SideNavbar = (props: SideNavbarProps) => {
   const { projects, setOpen } = props;
 
-  const hasSubMenu: boolean = projects.length > 0 ? true : false;
+  const [collapse, setCollapse] = useState<boolean>(true);
+
   const params: Readonly<Params<string>> = useParams();
   const location = useLocation();
 
   const hasProjectId: boolean = params.projectId ? true : false;
+  const hasSubMenu: boolean = projects.length > 0 ? true : false;
 
-  const [collapse, setCollapse] = useState(true);
-
-  function handleCollapse(e: { preventDefault: () => void; stopPropagation: () => void; }) {
+  function handleCollapse(
+    e: {
+      preventDefault: () => void;
+      stopPropagation: () => void;
+    }): void {
     setCollapse(!collapse);
     e.preventDefault();
     e.stopPropagation();
   }
 
-  function handleAdd(e: { preventDefault: () => void; stopPropagation: () => void; }) {
+  function handleAdd(
+    e: {
+      preventDefault: () => void;
+      stopPropagation: () => void;
+    }): void {
     e.preventDefault();
     e.stopPropagation();
     setOpen(true);

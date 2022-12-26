@@ -1,7 +1,6 @@
-import styled, { css } from "styled-components";
-import { maxLayout, minLayout } from "../../utils/breakpoint";
-import '../../theme/Theme.css';
+import styled from "styled-components";
 import { Link } from "react-router-dom";
+import '../../theme/Theme.css';
 
 export const TopNavbar = styled.div`
   width: 100vw;
@@ -9,11 +8,6 @@ export const TopNavbar = styled.div`
   position: fixed;
   padding: 12px 19px;
   background-color: var(--white);
-`;
-
-export const NavBrand = styled.div`
-  display: flex;
-  align-items: center;
 `;
 
 export const LogoWrapper = styled(Link)`
@@ -24,6 +18,11 @@ export const LogoWrapper = styled(Link)`
   text-decoration: none;
   font-size: var(--heading-text);
   font-weight: bolder;
+  display: flex;
+  align-items: center;
+`;
+
+export const NavBrand = styled.div`
   display: flex;
   align-items: center;
 `;

@@ -1,5 +1,4 @@
-import styled, { css } from "styled-components";
-import { maxLayout, minLayout } from "../../utils/breakpoint";
+import styled from "styled-components";
 import '../../theme/Theme.css';
 
 export const MainArea = styled.div`
@@ -21,12 +20,6 @@ export const ProjectName = styled.div`
   text-align: center;
   background-color: var(--light-primary);
   color: var(--primary);
-`;
-
-export const Planner = styled.div`
-  width: 100%;
-  height: calc(100% - 60px);
-  background-color: var(--grey);
 `;
 
 export const AddElementButton = styled.button`

@@ -1,10 +1,9 @@
-import { Params, useParams } from "react-router-dom";
 import { Canvas } from "../canvas/Canvas";
 import { ProjectList } from "../projectList/ProjectList";
 import {
-  AddElementButton,
   MainArea,
-  ProjectName
+  ProjectName,
+  AddElementButton
 } from "./Main.style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -12,6 +11,7 @@ import {
   Dispatch,
   SetStateAction,
 } from "react";
+import { Params, useParams } from "react-router-dom";
 import { Project } from "../../types";
 
 interface MainProps {
@@ -22,6 +22,7 @@ interface MainProps {
 
 export const Main = (props: MainProps) => {
   const { projects, pathname, setOpen } = props;
+  
   const params: Readonly<Params<string>> = useParams();
   const project: Project = projects.length === 0 ? 
   {
@@ -33,7 +34,7 @@ export const Main = (props: MainProps) => {
   }: 
   projects[projects.findIndex((element) => element.id === params.projectId)];
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (): void => {
     setOpen(true);
   };
 

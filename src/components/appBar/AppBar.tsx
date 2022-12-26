@@ -1,7 +1,7 @@
 import {
+  TopNavbar,
   LogoWrapper,
-  NavBrand,
-  TopNavbar
+  NavBrand
 } from "./AppBar.style";
 
 export const AppBar = () => {

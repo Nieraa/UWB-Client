@@ -1,10 +1,6 @@
 import styled from "styled-components";
+import { Button, FormHelperText } from "@mui/material";
 import '../../theme/Theme.css';
-import { Button, FormHelperText } from "@mui/material"
-
-export const UploadButton = styled(Button)`
-  margin-top: 10px !important;
-`;
 
 export const CancelButton = styled(Button)`
   background-color: var(--grey200) !important;

@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components";
-import { maxLayout, minLayout } from "../../utils/breakpoint";
-import '../../theme/Theme.css';
 import { Link } from "react-router-dom";
+import '../../theme/Theme.css';
 
 export const Navbar = styled.ul`
   width: 300px;

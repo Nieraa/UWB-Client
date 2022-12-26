@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import '../../theme/Theme.css';
 import { Link } from "react-router-dom";
+import '../../theme/Theme.css';
 
 export const ProjectWrapper = styled.div`
   width: 100%;

@@ -1,13 +1,13 @@
-import { SideNavbar } from '../components/sideNavbar/SideNavbar';
 import { AppBar } from '../components/appBar/AppBar';
+import { SideNavbar } from '../components/sideNavbar/SideNavbar';
 import { Main } from '../components/main/Main';
+import ProjectCreateForm from '../components/projectCreateForm/ProjectCreateForm';
 import { useState } from 'react';
 import { PassAndUpdateProjects } from '../types';
-import ProjectCreateForm from '../components/projectCreateForm/ProjectCreateForm';
 
 function Projects(props: PassAndUpdateProjects) {
   const { projects, setProjects } = props;
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
 
   return (
     <div>

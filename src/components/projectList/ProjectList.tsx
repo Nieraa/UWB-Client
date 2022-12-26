@@ -1,23 +1,22 @@
 import {
+  Grid,
   Card,
   CardActionArea,
   CardContent,
   CardMedia,
-  Divider,
-  Grid
+  Divider
 } from "@mui/material";
 import { Project } from "../../types";
 import {
-  ProjectLink,
-  ProjectName,
   ProjectWrapper,
+  ProjectLink,
+  ProjectName
 } from "./ProjectList.style";
 
 
 interface ProjectListProps {
   projects: Project[];
 }
-
 
 export const ProjectList = (props: ProjectListProps) => {
   const { projects } = props;
