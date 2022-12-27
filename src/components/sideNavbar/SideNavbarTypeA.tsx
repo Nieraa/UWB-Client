@@ -3,7 +3,8 @@ import {
   NavItem,
   NavLink,
   SubMenu,
-  SubMenuLink
+  SubMenuLink,
+  HardwareList
 } from "./SideNavbar.style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -21,19 +22,15 @@ import {
   useLocation,
   useParams
 } from "react-router-dom";
-import {
-  Dispatch,
-  SetStateAction,
-  useState
-} from "react";
+import { useState } from "react";
 import { Project } from "../../types";
 
-interface SideNavbarProps {
+interface SideNavbarTypeAProps {
   projects: Project[];
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  setOpen: (open: boolean) => void;
 }
 
-export const SideNavbar = (props: SideNavbarProps) => {
+export const SideNavbarTypeA = (props: SideNavbarTypeAProps) => {
   const { projects, setOpen } = props;
 
   const [collapse, setCollapse] = useState<boolean>(true);
