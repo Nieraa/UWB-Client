@@ -5,7 +5,8 @@ import {
   SubMenu,
   SubMenuLink,
   HardwareListToggle,
-  HardwareList
+  HardwareList,
+  HardwareSubMenu
 } from "./SideNavbar.style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -51,7 +52,9 @@ export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
   const location = useLocation();
 
   const hasProjectId: boolean = params.projectId ? true : false;
-  const hasSubMenu: boolean = projects.length > 0 ? true : false;
+  const hasProjectsSubMenu: boolean = projects.length > 0 ? true : false;
+  const hasAnchorsSubMenu: boolean = anchors.length > 0 ? true : false;
+  const hasTagsSubMenu: boolean = tags.length > 0 ? true : false;
 
   function handleCollapse(
     e: {
@@ -81,10 +84,10 @@ export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
         <NavLink
           to="/"
           focusMenu={location.pathname === '/'}
-          hasSubMenu={hasSubMenu}
+          hasSubMenu={hasProjectsSubMenu}
           hasProjectId={hasProjectId}
         >
-          {hasSubMenu &&
+          {hasProjectsSubMenu &&
             <FontAwesomeIcon
               icon={collapseProjects ? faCaretRight : faCaretDown}
               onClick={(e) => handleCollapse(e, collapseProjects, setCollapseProjects)}
@@ -99,7 +102,7 @@ export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
             />
           }
         </NavLink>
-        {hasSubMenu &&
+        {hasProjectsSubMenu &&
           <SubMenu
             collapse={collapseProjects}
             length={projects.length}
@@ -123,12 +126,12 @@ export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
           </SubMenu>
         }
       </NavItem>
-      {hasProjectId &&
+      {params.projectId &&
         <>
           <NavItem>
             <NavLink
               to={`/${params.projectId}/planner`}
-              focusMenu={location.pathname !== '/' && location.pathname.slice(3) === 'planner'}
+              focusMenu={location.pathname !== '/' && location.pathname.slice(params.projectId.length + 2) === 'planner'}
               hasSubMenu={false}
               hasProjectId={true}
             >
@@ -139,7 +142,7 @@ export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
           <NavItem>
             <NavLink
               to={`/${params.projectId}/realtime`}
-              focusMenu={location.pathname !== '/' && location.pathname.slice(3) === 'realtime'}
+              focusMenu={location.pathname !== '/' && location.pathname.slice(params.projectId.length + 2) === 'realtime'}
               hasSubMenu={false}
               hasProjectId={true}
             >
@@ -150,7 +153,7 @@ export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
           <NavItem>
             <NavLink
               to={`/${params.projectId}/history`}
-              focusMenu={location.pathname !== '/' && location.pathname.slice(3) === 'history'}
+              focusMenu={location.pathname !== '/' && location.pathname.slice(params.projectId.length + 2) === 'history'}
               hasSubMenu={false}
               hasProjectId={true}
             >
@@ -160,86 +163,80 @@ export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
           </NavItem>
         </>
       }
-      {hasProjectId &&
-        <>
-          <NavItem>
-            <HardwareListToggle
-              hasSubMenu={hasSubMenu}
-            >
-              {hasSubMenu &&
-                <FontAwesomeIcon
-                  icon={collapseAnchors ? faCaretRight : faCaretDown}
-                  onClick={(e) => handleCollapse(e, collapseAnchors, setCollapseAnchors)}
-                />
-              }
-              Anchors
-              <FontAwesomeIcon
-                icon={faPlus}
-                onClick={(e) => {
-                  handleAdd(e);
-                  setAddType("Anchor")
-                }}
-              />
-            </HardwareListToggle>
-            {hasSubMenu &&
-              <SubMenu
-                collapse={collapseAnchors}
-                length={anchors.length}
-              >
-                {anchors.map((anchor) =>
-                  <li key={anchor.id}>
-                    <HardwareList>
-                      <FontAwesomeIcon icon={faFileLines} />
-                      {anchor.name.length > 18 ?
-                        anchor.name.slice(0, 18) + "..."
-                        :
-                        anchor.name
-                      }
-                    </HardwareList>
-                  </li>
-                )}
-              </SubMenu>
-            }
-          </NavItem>
-          <NavItem>
-            <HardwareListToggle hasSubMenu={hasSubMenu}>
-              {hasSubMenu &&
-                <FontAwesomeIcon
-                  icon={collapseTags ? faCaretRight : faCaretDown}
-                  onClick={(e) => handleCollapse(e, collapseTags, setCollapseTags)}
-                />
-              }
-              Tags
-              <FontAwesomeIcon
-                icon={faPlus}
-                onClick={(e) => {
-                  handleAdd(e);
-                  setAddType("Tag")
-                }}
-              />
-            </HardwareListToggle>
-            {hasSubMenu &&
-              <SubMenu
-                collapse={collapseTags}
-                length={tags.length}
-              >
-                {tags.map((tag) =>
-                  <li key={tag.id}>
-                    <HardwareList>
-                      <FontAwesomeIcon icon={faFileLines} />
-                      {tag.name.length > 18 ?
-                        tag.name.slice(0, 18) + "..."
-                        :
-                        tag.name
-                      }
-                    </HardwareList>
-                  </li>
-                )}
-              </SubMenu>
-            }
-          </NavItem>
-        </>
-      }
+      <NavItem>
+        <HardwareListToggle hasSubMenu={hasAnchorsSubMenu}>
+          {hasAnchorsSubMenu &&
+            <FontAwesomeIcon
+              icon={collapseAnchors ? faCaretRight : faCaretDown}
+              onClick={(e) => handleCollapse(e, collapseAnchors, setCollapseAnchors)}
+            />
+          }
+          Anchors
+          <FontAwesomeIcon
+            icon={faPlus}
+            onClick={(e) => {
+              handleAdd(e);
+              setAddType("Anchor")
+            }}
+          />
+        </HardwareListToggle>
+        {hasAnchorsSubMenu &&
+          <HardwareSubMenu
+            collapse={collapseAnchors}
+            length={anchors.length}
+          >
+            {anchors.map((anchor) =>
+              <li key={anchor.id}>
+                <HardwareList>
+                  <FontAwesomeIcon icon={faFileLines} />
+                  {anchor.name.length > 18 ?
+                    anchor.name.slice(0, 18) + "..."
+                    :
+                    anchor.name
+                  }
+                </HardwareList>
+              </li>
+            )}
+          </HardwareSubMenu>
+        }
+      </NavItem>
+      <NavItem>
+        <HardwareListToggle hasSubMenu={hasTagsSubMenu}>
+          {hasTagsSubMenu &&
+            <FontAwesomeIcon
+              icon={collapseTags ? faCaretRight : faCaretDown}
+              onClick={(e) => handleCollapse(e, collapseTags, setCollapseTags)}
+            />
+          }
+          Tags
+          <FontAwesomeIcon
+            icon={faPlus}
+            onClick={(e) => {
+              handleAdd(e);
+              setAddType("Tag")
+            }}
+          />
+        </HardwareListToggle>
+        {hasTagsSubMenu &&
+          <HardwareSubMenu
+            collapse={collapseTags}
+            length={tags.length}
+          >
+            {tags.map((tag) =>
+              <li key={tag.id}>
+                <HardwareList>
+                  <FontAwesomeIcon icon={faFileLines} />
+                  {tag.name.length > 18 ?
+                    tag.name.slice(0, 18) + "..."
+                    :
+                    tag.name
+                  }
+                </HardwareList>
+              </li>
+            )}
+          </HardwareSubMenu>
+        }
+      </NavItem>
     </Navbar>
   );
 };

@@ -143,6 +143,7 @@ export const HardwareListToggle = styled.div<{ hasSubMenu: boolean }>`
   align-items: center;
   font-weight: 400;
   line-height: 24px;
+  border-top: 1px solid var(--grey100);
 
   &:hover {
     background-color: var(--grey50);
@@ -191,5 +192,35 @@ export const HardwareList = styled.li`
     margin-right: 16px;
     width: 24px;
     color: var(--primary);
+  }
+`;
+
+export const HardwareSubMenu = styled.ul<{ collapse: boolean, length: number }>`
+  display: ${(props) => (props.collapse ? "none" : "block")};
+  list-style: none;
+  height: ${(props) => (props.length > 6 ? "300px" : "auto")};
+  margin: 0;
+  padding: 0;
+  font-size: var(--text);
+  font-weight: 400;
+  overflow-y: auto;
+
+  ::-webkit-scrollbar {
+    width: 15px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--grey200);
+    border-radius: 15px;
+    border: 4px solid transparent;
+    background-clip: content-box;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--grey300);
   }
 `;
