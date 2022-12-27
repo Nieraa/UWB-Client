@@ -148,6 +148,7 @@ export function HardwareCreateForm(props: HardwareCreateFormProps) {
     else {
       setGroup(index + 1);
       formik.values.networkSsid = networkSsids[index];
+      formik.errors.networkSsid = "";
     }
   };
 
@@ -156,6 +157,7 @@ export function HardwareCreateForm(props: HardwareCreateFormProps) {
     if (event.target.value <= colors.length) {
       setAddColor(colors[event.target.value - 1]);
       formik.values.networkSsid = networkSsids[event.target.value - 1];
+      formik.errors.networkSsid = "";
     }
     else {
       setAddColor("#ffffff");
