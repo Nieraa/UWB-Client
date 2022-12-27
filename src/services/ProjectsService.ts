@@ -12,7 +12,6 @@ export function getProjects(
     .then((response) => {
       setProjects(response.data);
       if (createId && navigate) {
-        console.log(createId);
         navigate(`/${createId}/planner`);
       }
     })
