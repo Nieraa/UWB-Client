@@ -1,6 +1,6 @@
 import { AppBar } from '../components/appBar/AppBar';
-import { SideNavbar } from '../components/sideNavbar/SideNavbar';
-import { Main } from '../components/main/Main';
+import { SideNavbarTypeA } from '../components/sideNavbar/SideNavbarTypeA';
+import { MainTypeA } from '../components/main/MainTypeA';
 import ProjectCreateForm from '../components/projectCreateForm/ProjectCreateForm';
 import { useState } from 'react';
 import { PassAndUpdateProjects } from '../types';
@@ -12,13 +12,12 @@ function Projects(props: PassAndUpdateProjects) {
   return (
     <div>
       <AppBar />
-      <SideNavbar
+      <SideNavbarTypeA
         projects={projects}
         setOpen={setOpen}
       />
-      <Main
+      <MainTypeA
         projects={projects}
-        pathname={"projects"}
         setOpen={setOpen}
       />
       <ProjectCreateForm setProjects={setProjects} open={open} setOpen={setOpen} />

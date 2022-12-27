@@ -131,7 +131,7 @@ export function HardwareCreateForm(props: HardwareCreateFormProps) {
     formik.values.networkSsid = "";
   };
 
-  const handleOpenColorPicker = (event: any): void => {
+  const handleClickOpenColorPicker = (event: any): void => {
     setAnchorElColorPicker(event.currentTarget);
   };
 
@@ -281,7 +281,7 @@ export function HardwareCreateForm(props: HardwareCreateFormProps) {
                 </Grid>
                 <Grid item>
                   <ColorBoxButton
-                    onClick={handleOpenColorPicker}
+                    onClick={handleClickOpenColorPicker}
                     type="button"
                     addColor={group <= colors.length ? colors[group - 1] : addColor}
                   />
