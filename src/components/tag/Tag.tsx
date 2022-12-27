@@ -2,7 +2,7 @@ import { Element, Text } from './Tag.style';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Draggable from 'react-draggable';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Hardware } from '../../types';
 
 interface TagProps {
@@ -13,9 +13,11 @@ interface TagProps {
 
 export const Tag = (props: TagProps) => {
   const { tag, disabled, scale } = props;
-  
+
   const [x, setX] = useState<number>(tag.x * 100);
   const [y, setY] = useState<number>(tag.y * 100);
+
+  const nodeRef = useRef(null);
 
   function getTextWidth(text: string, font: string): number {
     const canvas: HTMLCanvasElement = document.createElement('canvas');
@@ -35,6 +37,7 @@ export const Tag = (props: TagProps) => {
 
   return (
     <Draggable
+      nodeRef={nodeRef}
       defaultPosition={{ x: tag.x * 100, y: -tag.y * 100 }}
       positionOffset={{ x: "calc(50vw - 170px)", y: "calc(50vh - 80px)" }}
       onDrag={(e, data) => {
@@ -44,7 +47,7 @@ export const Tag = (props: TagProps) => {
       disabled={disabled}
       scale={scale}
     >
-      <div>
+      <div ref={nodeRef}>
         <Text textWidth={getTextWidth(tag.name, "regular 16pt Prompt")}>
           {tag.name}<br />
           {`(${x / 100}, ${y / 100})`}

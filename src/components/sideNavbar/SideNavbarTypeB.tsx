@@ -5,8 +5,8 @@ import {
   SubMenu,
   SubMenuLink,
   HardwareListToggle,
+  HardwareSubMenu,
   HardwareList,
-  HardwareSubMenu
 } from "./SideNavbar.style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -83,9 +83,9 @@ export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
       <NavItem>
         <NavLink
           to="/"
-          focusMenu={location.pathname === '/'}
-          hasSubMenu={hasProjectsSubMenu}
-          hasProjectId={hasProjectId}
+          $focusMenu={location.pathname === '/'}
+          $hasSubMenu={hasProjectsSubMenu}
+          $hasProjectId={hasProjectId}
         >
           {hasProjectsSubMenu &&
             <FontAwesomeIcon
@@ -111,7 +111,7 @@ export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
               <li key={project.id}>
                 <SubMenuLink
                   to={`/${project.id}/planner`}
-                  focusMenu={hasProjectId && params.projectId === project.id ? true : false}
+                  $focusMenu={hasProjectId && params.projectId === project.id ? true : false}
                   onClick={() => hasProjectId && params.projectId !== project.id && setCollapseProjects(true)}
                 >
                   <FontAwesomeIcon icon={faFileLines} />
@@ -131,9 +131,9 @@ export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
           <NavItem>
             <NavLink
               to={`/${params.projectId}/planner`}
-              focusMenu={location.pathname !== '/' && location.pathname.slice(params.projectId.length + 2) === 'planner'}
-              hasSubMenu={false}
-              hasProjectId={true}
+              $focusMenu={location.pathname !== '/' && location.pathname.slice(params.projectId.length + 2) === 'planner'}
+              $hasSubMenu={false}
+              $hasProjectId={true}
             >
               <FontAwesomeIcon icon={faPenToSquare} />
               Planner
@@ -142,9 +142,9 @@ export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
           <NavItem>
             <NavLink
               to={`/${params.projectId}/realtime`}
-              focusMenu={location.pathname !== '/' && location.pathname.slice(params.projectId.length + 2) === 'realtime'}
-              hasSubMenu={false}
-              hasProjectId={true}
+              $focusMenu={location.pathname !== '/' && location.pathname.slice(params.projectId.length + 2) === 'realtime'}
+              $hasSubMenu={false}
+              $hasProjectId={true}
             >
               <FontAwesomeIcon icon={faMapLocationDot} />
               Realtime Location
@@ -153,9 +153,9 @@ export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
           <NavItem>
             <NavLink
               to={`/${params.projectId}/history`}
-              focusMenu={location.pathname !== '/' && location.pathname.slice(params.projectId.length + 2) === 'history'}
-              hasSubMenu={false}
-              hasProjectId={true}
+              $focusMenu={location.pathname !== '/' && location.pathname.slice(params.projectId.length + 2) === 'history'}
+              $hasSubMenu={false}
+              $hasProjectId={true}
             >
               <FontAwesomeIcon icon={faTable} />
               Location History

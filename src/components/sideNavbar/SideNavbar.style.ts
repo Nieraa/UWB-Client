@@ -36,12 +36,12 @@ export const Navbar = styled.ul`
 export const NavItem = styled.li`
 `;
 
-export const NavLink = styled(Link) <{ focusMenu: boolean, hasSubMenu: boolean, hasProjectId: boolean }>`
-  color: ${(props) => (props.focusMenu ? "var(--blue)" : "var(--black)")};
-  background-color: ${(props) => (props.focusMenu ? "var(--grey50)" : "var(--white)")};
+export const NavLink = styled(Link) <{ $focusMenu: boolean, $hasSubMenu: boolean, $hasProjectId: boolean }>`
+  color: ${(props) => (props.$focusMenu ? "var(--blue)" : "var(--black)")};
+  background-color: ${(props) => (props.$focusMenu ? "var(--grey50)" : "var(--white)")};
   text-decoration: none;
   height: 18px;
-  padding: ${(props) => (props.hasSubMenu ? "16px 30px 16px 3px" : "16px 30px")};
+  padding: ${(props) => (props.$hasSubMenu ? "16px 30px 16px 3px" : "16px 30px")};
   display: flex;
   align-items: center;
   font-weight: 400;
@@ -58,8 +58,8 @@ export const NavLink = styled(Link) <{ focusMenu: boolean, hasSubMenu: boolean, 
     color: var(--primary);
   }
 
-  ${({ hasSubMenu }) =>
-    hasSubMenu &&
+  ${({ $hasSubMenu }) =>
+    $hasSubMenu &&
     css`
         svg:first-child {
           margin-right: 0;
@@ -67,8 +67,8 @@ export const NavLink = styled(Link) <{ focusMenu: boolean, hasSubMenu: boolean, 
         }
       `}
   
-  ${({ hasProjectId }) =>
-    !hasProjectId &&
+  ${({ $hasProjectId }) =>
+    !$hasProjectId &&
     css`
         svg:last-child {
           margin-left: auto;
@@ -78,9 +78,9 @@ export const NavLink = styled(Link) <{ focusMenu: boolean, hasSubMenu: boolean, 
       `}
 `;
 
-export const SubMenuLink = styled(Link) <{ focusMenu: boolean }>`
-  color: ${(props) => (props.focusMenu ? "var(--blue)" : "var(--black)")};
-  background-color: ${(props) => (props.focusMenu ? "var(--grey50)" : "var(--white)")};
+export const SubMenuLink = styled(Link) <{ $focusMenu: boolean }>`
+  color: ${(props) => (props.$focusMenu ? "var(--blue)" : "var(--black)")};
+  background-color: ${(props) => (props.$focusMenu ? "var(--grey50)" : "var(--white)")};
   text-decoration: none;
   height: 18px;
   padding: 16px 16px 16px 45px;
@@ -172,7 +172,7 @@ export const HardwareListToggle = styled.div<{ hasSubMenu: boolean }>`
   }
 `;
 
-export const HardwareList = styled.li`
+export const HardwareList = styled.div`
   color: var(--black);
   background-color: var(--white);
   height: 18px;

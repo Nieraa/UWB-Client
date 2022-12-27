@@ -246,9 +246,9 @@ export function HardwareCreateForm(props: HardwareCreateFormProps) {
                   onChange={handleChangeGroup}
                 >
                   {colors.map((color, index) =>
-                    <MenuItem value={index + 1}>{index + 1}</MenuItem>
+                    <MenuItem key={index} value={index + 1}>{index + 1}</MenuItem>
                   )}
-                  <MenuItem value={colors.length + 1}>{colors.length + 1}</MenuItem>
+                  <MenuItem key={colors.length} value={colors.length + 1}>{colors.length + 1}</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
