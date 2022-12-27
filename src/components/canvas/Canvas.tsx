@@ -51,6 +51,7 @@ export const Canvas = (props: CanvasProps) => {
       panning={{ disabled: !pannable }}
       doubleClick={{ disabled: true }}
       onZoom={(e) => setScale(e.state.scale)}
+      limitToBounds={false}
       centerOnInit
     >
       <TransformComponent>
