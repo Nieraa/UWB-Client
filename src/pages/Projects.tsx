@@ -4,7 +4,7 @@ import { MainTypeA } from '../components/main/MainTypeA';
 import ProjectCreateForm from '../components/projectCreateForm/ProjectCreateForm';
 import { useState } from 'react';
 import { PassAndUpdateProjects } from '../types';
-import ProjectDeleteDialog from '../components/projectDeleteDialog/ProjectDeleteDialog';
+import DeleteDialogTypeA from '../components/deleteDialog/DeleteDialogTypeA';
 
 function Projects(props: PassAndUpdateProjects) {
   const { projects, setProjects } = props;
@@ -32,16 +32,16 @@ function Projects(props: PassAndUpdateProjects) {
         setDeleteProjectName={setDeleteProjectName}
       />
       <ProjectCreateForm
-      setProjects={setProjects}
-      openCreate={openCreate}
-      setOpenCreate={setOpenCreate}
+        setProjects={setProjects}
+        openCreate={openCreate}
+        setOpenCreate={setOpenCreate}
       />
-      <ProjectDeleteDialog
-      projectId={deleteProjectId}
-      projectName={deleteProjectName}
-      setProjects={setProjects}
-      openDelete={openDelete}
-      setOpenDelete={setOpenDelete}
+      <DeleteDialogTypeA
+        projectId={deleteProjectId}
+        projectName={deleteProjectName}
+        setProjects={setProjects}
+        openDelete={openDelete}
+        setOpenDelete={setOpenDelete}
       />
     </div>
   );

@@ -114,6 +114,36 @@ export function createHardware(
     });
 }
 
+export function deleteHardware(
+  projectId: string,
+  hardwareId: string,
+  hardwareType: string,
+  setHardwares: (hardware: Hardware[]) => void,
+  setOpenDelete: (openDelete: boolean) => void,
+  hasNewColor: boolean,
+  setColors?: (colors: string[]) => void,
+  setGroup?: (group: number) => void,
+  setNetworkSsids?: (networkSsids: string[]) => void
+): void {
+  axios
+    .delete(`/projects/${projectId}/${hardwareType}s/${hardwareId}`)
+    .then(() => {
+      getHardwares(
+        projectId,
+        hardwareType,
+        setHardwares,
+        hasNewColor,
+        setColors,
+        setGroup,
+        setNetworkSsids
+      );
+      setOpenDelete(false);
+    })
+    .catch(() => {
+      alert("Delete failed");
+    })
+}
+
 export function getColors(
   projectId: string,
   setColors: (colors: string[]) => void,

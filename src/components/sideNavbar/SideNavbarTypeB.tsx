@@ -17,7 +17,9 @@ import {
   faCaretRight,
   faCaretDown,
   faPlus,
-  faPenToSquare
+  faPenToSquare,
+  faPen,
+  faTrashCan
 } from "@fortawesome/free-solid-svg-icons";
 import {
   Params,
@@ -32,7 +34,12 @@ interface SideNavbarTypeBProps {
   setAddType: (addType: string) => void;
   anchors: Hardware[];
   tags: Hardware[];
+  setHardwareId: (hardwareId: string) => void;
+  setHardwareType: (hardwareType: string) => void;
+  setHardwareName: (hardwareName: string) => void;
+  setHasColorDelete: (hasColorDelete: boolean) => void;
   setOpenDialog: (openDialog: boolean) => void;
+  setOpenDelete: (openDelete: boolean) => void;
 }
 
 export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
@@ -41,7 +48,12 @@ export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
     setAddType,
     anchors,
     tags,
+    setHardwareId,
+    setHardwareType,
+    setHardwareName,
+    setHasColorDelete,
     setOpenDialog,
+    setOpenDelete
   } = props;
 
   const [collapseProjects, setCollapseProjects] = useState<boolean>(true);
@@ -76,6 +88,42 @@ export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
     e.preventDefault();
     e.stopPropagation();
     setOpenDialog(true);
+  }
+
+  function handleDelete(
+    e: {
+      preventDefault: () => void;
+      stopPropagation: () => void;
+    },
+    hardwareId: string,
+    hardwareType: string,
+    hardwareName: string,
+    color: string,
+  ): void {
+    e.preventDefault();
+    e.stopPropagation();
+    setHardwareId(hardwareId);
+    setHardwareType(hardwareType);
+    setHardwareName(hardwareName);
+    if (hardwareType === "anchor") {
+      const colorCount: number = anchors.filter(anchor => anchor.networkColor === color).length;
+      if (colorCount === 1) {
+        setHasColorDelete(true);
+      }
+      else {
+        setHasColorDelete(false);
+      }
+    }
+    else if (hardwareType === "tag") {
+      const colorCount: number = tags.filter(tag => tag.networkColor === color).length;
+      if (colorCount === 1) {
+        setHasColorDelete(true);
+      }
+      else {
+        setHasColorDelete(false);
+      }
+    }
+    setOpenDelete(true);
   }
 
   return (
@@ -194,6 +242,21 @@ export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
                     :
                     anchor.name
                   }
+                  <FontAwesomeIcon
+                    icon={faPen}
+                  />
+                  <FontAwesomeIcon
+                    icon={faTrashCan}
+                    onClick={(e) => {
+                      handleDelete(
+                        e,
+                        anchor.id,
+                        "anchor",
+                        anchor.name,
+                        anchor.networkColor
+                      );
+                    }}
+                  />
                 </HardwareList>
               </li>
             )}
@@ -231,6 +294,21 @@ export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
                     :
                     tag.name
                   }
+                  <FontAwesomeIcon
+                    icon={faPen}
+                  />
+                  <FontAwesomeIcon
+                    icon={faTrashCan}
+                    onClick={(e) => {
+                      handleDelete(
+                        e,
+                        tag.id,
+                        "tag",
+                        tag.name,
+                        tag.networkColor
+                      );
+                    }}
+                  />
                 </HardwareList>
               </li>
             )}

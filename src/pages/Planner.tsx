@@ -6,6 +6,7 @@ import { Hardware, PassAndUpdateProjects, Project } from '../types';
 import { HardwareCreateForm } from '../components/hardwareCreateFrom/HardwareCreateFrom';
 import { Params, useParams } from 'react-router-dom';
 import { getHardwares, getColors, getNetworkSsids } from '../services/ProjectsService';
+import DeleteDialogTypeB from '../components/deleteDialog/DeleteDialogTypeB';
 
 function Planner(props: PassAndUpdateProjects) {
   const { projects } = props;
@@ -16,17 +17,22 @@ function Planner(props: PassAndUpdateProjects) {
   const [group, setGroup] = useState(1);
   const [networkSsids, setNetworkSsids] = useState<string[]>([]);
   const [openDialog, setOpenDialog] = useState(false);
+  const [hardwareId, setHardwareId] = useState("");
+  const [hardwareType, setHardwareType] = useState("");
+  const [hardwareName, setHardwareName] = useState("");
+  const [openDelete, setOpenDelete] = useState<boolean>(false);
+  const [hasColorDelete, setHasColorDelete] = useState<boolean>(false);
 
   const params: Readonly<Params<string>> = useParams();
-  const project: Project = projects.length === 0 ? 
-  {
-    id: params.projectId ? params.projectId : "",
-    projectName: "",
-    imgUrl: "",
-    l: 0,
-    w: 0,
-  }: 
-  projects[projects.findIndex((element) => element.id === params.projectId)];
+  const project: Project = projects.length === 0 ?
+    {
+      id: params.projectId ? params.projectId : "",
+      projectName: "",
+      imgUrl: "",
+      l: 0,
+      w: 0,
+    } :
+    projects[projects.findIndex((element) => element.id === params.projectId)];
 
   useEffect(() => {
     getHardwares(project.id, "anchor", setAnchors, false);
@@ -43,7 +49,12 @@ function Planner(props: PassAndUpdateProjects) {
         setAddType={setAddType}
         anchors={anchors}
         tags={tags}
+        setHardwareId={setHardwareId}
+        setHardwareType={setHardwareType}
+        setHardwareName={setHardwareName}
+        setHasColorDelete={setHasColorDelete}
         setOpenDialog={setOpenDialog}
+        setOpenDelete={setOpenDelete}
       />
       <MainTypeB
         projects={projects}
@@ -66,6 +77,19 @@ function Planner(props: PassAndUpdateProjects) {
         setGroup={setGroup}
         setNetworkSsids={setNetworkSsids}
         setOpenDialog={setOpenDialog}
+      />
+      <DeleteDialogTypeB
+        projectId={project.id}
+        hardwareId={hardwareId}
+        hardwareType={hardwareType}
+        hardwareName={hardwareName}
+        openDelete={openDelete}
+        setHardwares={hardwareType === "anchor" ? setAnchors : setTags}
+        hasColorDelete={hasColorDelete}
+        setColors={setColors}
+        setGroup={setGroup}
+        setNetworkSsids={setNetworkSsids}
+        setOpenDelete={setOpenDelete}
       />
     </div>
   );

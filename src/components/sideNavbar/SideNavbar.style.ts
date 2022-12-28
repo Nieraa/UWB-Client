@@ -202,6 +202,15 @@ export const HardwareList = styled.div`
     width: 24px;
     color: var(--primary);
   }
+
+  svg:nth-child(2) {
+    margin-left: auto;
+    margin-right: 10px;
+  }
+
+  svg:last-child {
+    margin-right: 0px;
+  }
 `;
 
 export const HardwareSubMenu = styled.ul<{ collapse: boolean, length: number }>`

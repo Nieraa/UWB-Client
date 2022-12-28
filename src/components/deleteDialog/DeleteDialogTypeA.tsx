@@ -4,8 +4,8 @@ import {
   Detail,
   CancelButton,
   IconWrapper,
-  ProjectName
-} from "./ProjectDeleteDialog.style";
+  Name
+} from "./DeleteDialog.style";
 import {
   Dialog,
   DialogContent,
@@ -17,16 +17,22 @@ import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { deleteProject } from "../../services/ProjectsService";
 import { Project } from "../../types";
 
-interface ProjectDeleteDialogProps {
+interface DeleteDialogTypeAProps {
   projectId: string;
   projectName: string;
-  setProjects: (projects: Project[]) => void;
   openDelete: boolean;
+  setProjects: (projects: Project[]) => void;
   setOpenDelete: (openDelete: boolean) => void;
 }
 
-function ProjectDeleteDialog(props: ProjectDeleteDialogProps) {
-  const { projectId, projectName, setProjects, openDelete, setOpenDelete } = props;
+function DeleteDialogTypeA(props: DeleteDialogTypeAProps) {
+  const {
+    projectId,
+    projectName,
+    setProjects,
+    openDelete,
+    setOpenDelete
+  } = props;
 
   const handleClose = (): void => {
     setOpenDelete(false);
@@ -48,7 +54,7 @@ function ProjectDeleteDialog(props: ProjectDeleteDialogProps) {
           </IconWrapper>
           <Title>Are you sure?</Title>
           <Detail>Do you really want to delete&nbsp;
-            <ProjectName>"{projectName}"</ProjectName>?
+            <Name>"{projectName}"</Name>?
             This process cannot be undone.</Detail>
         </ContentWrapper>
       </DialogContent>
@@ -71,4 +77,4 @@ function ProjectDeleteDialog(props: ProjectDeleteDialogProps) {
   );
 }
 
-export default ProjectDeleteDialog;
+export default DeleteDialogTypeA;

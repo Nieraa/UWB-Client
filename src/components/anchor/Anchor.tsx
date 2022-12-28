@@ -43,7 +43,7 @@ export const Anchor = (props: AnchorProps) => {
       positionOffset={{ x: "calc(50vw - 170px)", y: "calc(50vh - 80px)" }}
       onDrag={(e, data) => {
         setX(Math.round(data.x));
-        setY(Math.round(-data.y))
+        setY(Math.round(-data.y));
       }}
       disabled={disabled}
       scale={scale}

@@ -17,7 +17,7 @@ export const Detail = styled.div`
   font-size: var(--text);
 `;
 
-export const ProjectName = styled.span`
+export const Name = styled.span`
   color: var(--primary);
   font-weight: 700;
 `;
