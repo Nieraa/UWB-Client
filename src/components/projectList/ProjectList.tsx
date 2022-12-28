@@ -1,3 +1,5 @@
+import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Grid,
   Card,
@@ -10,16 +12,40 @@ import { Project } from "../../types";
 import {
   ProjectWrapper,
   ProjectLink,
-  ProjectName
+  ProjectName,
+  ProjectNameWrapper
 } from "./ProjectList.style";
 
 
 interface ProjectListProps {
   projects: Project[];
+  setOpenDelete: (openDelete: boolean) => void;
+  setDeleteProjectId: (deleteProjectId: string) => void;
+  setDeleteProjectName: (deleteProjectName: string) => void
 }
 
 export const ProjectList = (props: ProjectListProps) => {
-  const { projects } = props;
+  const {
+    projects,
+    setOpenDelete,
+    setDeleteProjectId,
+    setDeleteProjectName
+  } = props;
+
+
+  function handleDelete(
+    e: {
+      preventDefault: () => void;
+      stopPropagation: () => void;
+    },
+    projectId: string
+  ): void {
+    e.preventDefault();
+    e.stopPropagation();
+    setDeleteProjectId(projectId);
+    setDeleteProjectName(projects[projects.findIndex(element => element.id === projectId)].projectName);
+    setOpenDelete(true);
+  }
 
   return (
     <ProjectWrapper>
@@ -48,13 +74,24 @@ export const ProjectList = (props: ProjectListProps) => {
                   />
                   <Divider />
                   <CardContent>
-                    <ProjectName>
-                      {project.projectName.length > 18 ?
-                        project.projectName.slice(0, 18) + "..."
-                        :
-                        project.projectName
-                      }
-                    </ProjectName>
+                    <ProjectNameWrapper>
+                      <ProjectName>
+                        {project.projectName.length > 18 ?
+                          project.projectName.slice(0, 18) + "..."
+                          :
+                          project.projectName
+                        }
+                      </ProjectName>
+                      <FontAwesomeIcon
+                        icon={faPen}
+                      />
+                      <FontAwesomeIcon
+                        icon={faTrashCan}
+                        onClick={(e) => {
+                          handleDelete(e, project.id);
+                        }}
+                      />
+                    </ProjectNameWrapper>
                   </CardContent>
                 </ProjectLink>
               </CardActionArea>

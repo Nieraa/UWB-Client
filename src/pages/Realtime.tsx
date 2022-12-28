@@ -15,10 +15,10 @@ function Realtime(props: PassAndUpdateProjects) {
         projects={projects}
         setOpen={setOpen}
       />
-      <MainTypeA
+      {/* <MainTypeA
         projects={projects}
         setOpen={setOpen}
-      />
+      /> */}
     </div>
   );
 }

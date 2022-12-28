@@ -9,19 +9,33 @@ import { Project } from "../../types";
 
 interface MainTypeAProps {
   projects: Project[];
-  setOpen: (open: boolean) => void;
+  setOpenCreate: (openCreate: boolean) => void;
+  setOpenDelete: (openDelete: boolean) => void;
+  setDeleteProjectId: (deleteProjectId: string) => void;
+  setDeleteProjectName: (deleteProjectName: string) => void;
 }
 
 export const MainTypeA = (props: MainTypeAProps) => {
-  const { projects, setOpen } = props;
+  const {
+    projects,
+    setOpenCreate,
+    setOpenDelete,
+    setDeleteProjectId,
+    setDeleteProjectName
+  } = props;
 
   const handleClickOpen = (): void => {
-    setOpen(true);
+    setOpenCreate(true);
   };
 
   return (
     <MainArea>
-      <ProjectList projects={projects} />
+      <ProjectList
+        projects={projects}
+        setOpenDelete={setOpenDelete}
+        setDeleteProjectId={setDeleteProjectId}
+        setDeleteProjectName={setDeleteProjectName}
+      />
       <AddElementButton onClick={handleClickOpen}>
         <FontAwesomeIcon icon={faPlus} />
       </AddElementButton>

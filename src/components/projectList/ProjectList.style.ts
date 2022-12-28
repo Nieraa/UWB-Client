@@ -31,7 +31,28 @@ export const ProjectLink = styled(Link)`
   text-decoration: none;
 `;
 
-export const ProjectName = styled.div`
+export const ProjectName = styled.span`
   font-size: var(--text);
   color: var(--black);
+`;
+
+export const ProjectNameWrapper = styled.div`
+  color: var(--black);
+  font-size: var(--text);
+  text-decoration: none;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  line-height: 24px;
+
+  svg {
+    color: var(--primary);
+    width: 13px;
+  }
+  
+  svg:nth-last-child(2) {
+    margin-left: auto;
+    margin-right: 20px;
+  }
 `;
