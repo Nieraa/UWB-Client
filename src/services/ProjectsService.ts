@@ -39,6 +39,22 @@ export function createProject(
     })
 }
 
+export function deleteProject(
+  projectId: string,
+  setProjects: (projects: Project[]) => void,
+  setOpenDelete: (openDelete: boolean) => void
+): void {
+  axios
+    .delete(`/projects/${projectId}`)
+    .then(() => {
+      getProjects(setProjects);
+      setOpenDelete(false);
+    })
+    .catch(() => {
+      alert("Delete failed");
+    })
+}
+
 export function getHardwares(
   projectId: string,
   hardwareType: string,
@@ -91,7 +107,7 @@ export function createHardware(
         setGroup,
         setNetworkSsids
       );
-      handleCloseDialog()
+      handleCloseDialog();
     })
     .catch(() => {
       alert("Create failed");
