@@ -26,16 +26,16 @@ const validationSchema = yup.object({
     .required("Please enter name"),
   ipAddress: yup
     .string()
-    .required("Please enter ip address"),
+    .required("Please enter IP address"),
   x: yup
-    .number()
-    .required(),
+    .number().typeError("X must be number")
+    .required("Please enter X"),
   y: yup
-    .number()
-    .required(),
+    .number().typeError("Y must be number")
+    .required("Please enter Y"),
   networkSsid: yup
     .string()
-    .required(),
+    .required("Please enter network ssid"),
 });
 
 interface HardwareCreateFormProps {
@@ -192,7 +192,7 @@ export function HardwareCreateForm(props: HardwareCreateFormProps) {
               <TextField
                 margin="dense"
                 id="x"
-                label="x (m)"
+                label="X (m)"
                 name="x"
                 variant="outlined"
                 value={formik.values.x}
@@ -207,7 +207,7 @@ export function HardwareCreateForm(props: HardwareCreateFormProps) {
               <TextField
                 margin="dense"
                 id="y"
-                label="y (m)"
+                label="Y (m)"
                 name="y"
                 variant="outlined"
                 value={formik.values.y}

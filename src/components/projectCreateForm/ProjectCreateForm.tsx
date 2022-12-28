@@ -27,22 +27,22 @@ const validationSchema = yup.object({
     .string()
     .required("Please enter project name"),
   l: yup
-    .number()
+    .number().typeError("Length must be number")
     .required("Please enter length"),
   w: yup
-    .number()
+    .number().typeError("Width must be number")
     .required("Please enter width"),
 });
 
 interface ProjectCreateFormProps {
   setProjects: (projects: Project[]) => void;
-  open: boolean;
-  setOpen: (open: boolean) => void;
+  openCreate: boolean;
+  setOpenCreate: (openCreate: boolean) => void;
 }
 
 function ProjectCreateForm(props: ProjectCreateFormProps) {
-  const { setProjects, open, setOpen } = props;
-  
+  const { setProjects, openCreate, setOpenCreate } = props;
+
   const [image, _setImage] = useState<any>("");
   const [imageName, setImageName] = useState<string>("No file chosen");
   const [imageValidation, setImageValidation] = useState<boolean>(false);
@@ -108,7 +108,7 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
   };
 
   const handleClose = (): void => {
-    setOpen(false);
+    setOpenCreate(false);
     formik.resetForm();
     setImage("");
     setImageName("No file chosen");
@@ -116,7 +116,7 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
 
   return (
     <Dialog
-      open={open}
+      open={openCreate}
       onClose={handleClose}
       fullWidth
     >
