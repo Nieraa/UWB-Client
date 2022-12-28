@@ -28,9 +28,11 @@ const validationSchema = yup.object({
     .required("Please enter project name"),
   l: yup
     .number().typeError("Length must be number")
+    .min(0, "Length must be positive")
     .required("Please enter length"),
   w: yup
     .number().typeError("Width must be number")
+    .min(0, "Length must be positive")
     .required("Please enter width"),
 });
 
