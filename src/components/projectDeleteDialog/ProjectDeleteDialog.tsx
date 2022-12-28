@@ -1,14 +1,21 @@
-import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  ContentWrapper,
+  Title,
+  Detail,
+  CancelButton,
+  IconWrapper,
+  ProjectName
+} from "./ProjectDeleteDialog.style";
 import {
   Dialog,
   DialogContent,
   DialogActions,
   Button,
 } from "@mui/material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { deleteProject } from "../../services/ProjectsService";
 import { Project } from "../../types";
-import { ContentWrapper, Title, Detail, CancelButton, IconWrapper, ProjectName } from "./ProjectDeleteDialog.style";
 
 interface ProjectDeleteDialogProps {
   projectId: string;

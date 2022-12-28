@@ -1,5 +1,4 @@
 import { Canvas } from "../canvas/Canvas";
-import { ProjectList } from "../projectList/ProjectList";
 import {
   MainArea,
   ProjectName,

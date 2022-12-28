@@ -1,5 +1,9 @@
-import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  ProjectWrapper,
+  ProjectLink,
+  ProjectName,
+  ProjectNameWrapper
+} from "./ProjectList.style";
 import {
   Grid,
   Card,
@@ -8,13 +12,9 @@ import {
   CardMedia,
   Divider
 } from "@mui/material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { Project } from "../../types";
-import {
-  ProjectWrapper,
-  ProjectLink,
-  ProjectName,
-  ProjectNameWrapper
-} from "./ProjectList.style";
 
 
 interface ProjectListProps {
