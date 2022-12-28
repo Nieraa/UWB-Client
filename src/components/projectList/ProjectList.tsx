@@ -38,12 +38,13 @@ export const ProjectList = (props: ProjectListProps) => {
       preventDefault: () => void;
       stopPropagation: () => void;
     },
-    projectId: string
+    projectId: string,
+    projectName: string
   ): void {
     e.preventDefault();
     e.stopPropagation();
     setDeleteProjectId(projectId);
-    setDeleteProjectName(projects[projects.findIndex(element => element.id === projectId)].projectName);
+    setDeleteProjectName(projectName);
     setOpenDelete(true);
   }
 
@@ -88,7 +89,7 @@ export const ProjectList = (props: ProjectListProps) => {
                       <FontAwesomeIcon
                         icon={faTrashCan}
                         onClick={(e) => {
-                          handleDelete(e, project.id);
+                          handleDelete(e, project.id, project.projectName);
                         }}
                       />
                     </ProjectNameWrapper>

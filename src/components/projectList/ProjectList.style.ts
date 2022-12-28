@@ -48,11 +48,11 @@ export const ProjectNameWrapper = styled.div`
 
   svg {
     color: var(--primary);
-    width: 13px;
+    width: 24px;
   }
   
   svg:nth-last-child(2) {
     margin-left: auto;
-    margin-right: 20px;
+    margin-right: 10px;
   }
 `;

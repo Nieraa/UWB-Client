@@ -11,10 +11,10 @@ function History(props: PassAndUpdateProjects) {
   return (
     <div>
       <AppBar />
-      <SideNavbarTypeA
+      {/* <SideNavbarTypeA
         projects={projects}
         setOpen={setOpen}
-      />
+      /> */}
       {/* <MainTypeA
         projects={projects}
         setOpen={setOpen}

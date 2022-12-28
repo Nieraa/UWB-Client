@@ -14,7 +14,9 @@ import {
   faCaretRight,
   faCaretDown,
   faPlus,
-  faPenToSquare
+  faPenToSquare,
+  faPen,
+  faTrashCan
 } from "@fortawesome/free-solid-svg-icons";
 import {
   Params,
@@ -27,10 +29,19 @@ import { Project } from "../../types";
 interface SideNavbarTypeAProps {
   projects: Project[];
   setOpen: (open: boolean) => void;
+  setOpenDelete: (openDelete: boolean) => void;
+  setDeleteProjectId: (deleteProjectId: string) => void;
+  setDeleteProjectName: (deleteProjectName: string) => void
 }
 
 export const SideNavbarTypeA = (props: SideNavbarTypeAProps) => {
-  const { projects, setOpen } = props;
+  const {
+    projects,
+    setOpen,
+    setOpenDelete,
+    setDeleteProjectId,
+    setDeleteProjectName
+  } = props;
 
   const [collapse, setCollapse] = useState<boolean>(true);
 
@@ -58,6 +69,21 @@ export const SideNavbarTypeA = (props: SideNavbarTypeAProps) => {
     e.preventDefault();
     e.stopPropagation();
     setOpen(true);
+  }
+
+  function handleDelete(
+    e: {
+      preventDefault: () => void;
+      stopPropagation: () => void;
+    },
+    projectId: string,
+    projectName: string
+  ): void {
+    e.preventDefault();
+    e.stopPropagation();
+    setDeleteProjectId(projectId);
+    setDeleteProjectName(projectName);
+    setOpenDelete(true);
   }
 
   return (
@@ -97,11 +123,20 @@ export const SideNavbarTypeA = (props: SideNavbarTypeAProps) => {
                   onClick={() => hasProjectId && params.projectId !== project.id && setCollapse(true)}
                 >
                   <FontAwesomeIcon icon={faFileLines} />
-                  {project.projectName.length > 18 ?
-                    project.projectName.slice(0, 18) + "..."
+                  {project.projectName.length > 14 ?
+                    project.projectName.slice(0, 14) + "..."
                     :
                     project.projectName
                   }
+                  <FontAwesomeIcon
+                    icon={faPen}
+                  />
+                  <FontAwesomeIcon
+                    icon={faTrashCan}
+                    onClick={(e) => {
+                      handleDelete(e, project.id, project.projectName);
+                    }}
+                  />
                 </SubMenuLink>
               </li>
             )}

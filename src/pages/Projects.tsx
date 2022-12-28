@@ -20,6 +20,9 @@ function Projects(props: PassAndUpdateProjects) {
       <SideNavbarTypeA
         projects={projects}
         setOpen={setOpenCreate}
+        setOpenDelete={setOpenDelete}
+        setDeleteProjectId={setDeleteProjectId}
+        setDeleteProjectName={setDeleteProjectName}
       />
       <MainTypeA
         projects={projects}
