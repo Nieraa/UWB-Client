@@ -9,7 +9,9 @@ import { Project } from "../../types";
 
 interface MainTypeAProps {
   projects: Project[];
+  setProject: (project: Project) => void;
   setOpenCreate: (openCreate: boolean) => void;
+  setOpenUpdate: (openUpdate: boolean) => void;
   setOpenDelete: (openDelete: boolean) => void;
   setDeleteProjectId: (deleteProjectId: string) => void;
   setDeleteProjectName: (deleteProjectName: string) => void;
@@ -18,7 +20,9 @@ interface MainTypeAProps {
 export const MainTypeA = (props: MainTypeAProps) => {
   const {
     projects,
+    setProject,
     setOpenCreate,
+    setOpenUpdate,
     setOpenDelete,
     setDeleteProjectId,
     setDeleteProjectName
@@ -32,6 +36,8 @@ export const MainTypeA = (props: MainTypeAProps) => {
     <MainArea>
       <ProjectList
         projects={projects}
+        setProject={setProject}
+        setOpenUpdate={setOpenUpdate}
         setOpenDelete={setOpenDelete}
         setDeleteProjectId={setDeleteProjectId}
         setDeleteProjectName={setDeleteProjectName}

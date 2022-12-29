@@ -2,14 +2,23 @@ import { AppBar } from '../components/appBar/AppBar';
 import { SideNavbarTypeA } from '../components/sideNavbar/SideNavbarTypeA';
 import { MainTypeA } from '../components/main/MainTypeA';
 import ProjectCreateForm from '../components/projectCreateForm/ProjectCreateForm';
-import { useState } from 'react';
-import { PassAndUpdateProjects } from '../types';
+import { useEffect, useState } from 'react';
+import { PassAndUpdateProjects, Project } from '../types';
 import DeleteDialogTypeA from '../components/deleteDialog/DeleteDialogTypeA';
+import ProjectUpdateForm from '../components/projectUpdateForm/ProjectUpdateForm';
 
 function Projects(props: PassAndUpdateProjects) {
   const { projects, setProjects } = props;
 
+  const [project, setProject] = useState<Project>({
+    id: "",
+    projectName: "",
+    imgUrl: "",
+    l: 0,
+    w: 0,
+  });
   const [openCreate, setOpenCreate] = useState<boolean>(false);
+  const [openUpdate, setOpenUpdate] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
   const [deleteProjectId, setDeleteProjectId] = useState<string>("");
   const [deleteProjectName, setDeleteProjectName] = useState<string>("");
@@ -19,14 +28,18 @@ function Projects(props: PassAndUpdateProjects) {
       <AppBar />
       <SideNavbarTypeA
         projects={projects}
-        setOpen={setOpenCreate}
+        setProject={setProject}
+        setOpenCreate={setOpenCreate}
+        setOpenUpdate={setOpenUpdate}
         setOpenDelete={setOpenDelete}
         setDeleteProjectId={setDeleteProjectId}
         setDeleteProjectName={setDeleteProjectName}
       />
       <MainTypeA
         projects={projects}
+        setProject={setProject}
         setOpenCreate={setOpenCreate}
+        setOpenUpdate={setOpenUpdate}
         setOpenDelete={setOpenDelete}
         setDeleteProjectId={setDeleteProjectId}
         setDeleteProjectName={setDeleteProjectName}
@@ -35,6 +48,12 @@ function Projects(props: PassAndUpdateProjects) {
         setProjects={setProjects}
         openCreate={openCreate}
         setOpenCreate={setOpenCreate}
+      />
+      <ProjectUpdateForm
+        project={project}
+        setProjects={setProjects}
+        openUpdate={openUpdate}
+        setOpenUpdate={setOpenUpdate}
       />
       <DeleteDialogTypeA
         projectId={deleteProjectId}

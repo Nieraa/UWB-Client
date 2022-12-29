@@ -28,7 +28,9 @@ import { Project } from "../../types";
 
 interface SideNavbarTypeAProps {
   projects: Project[];
-  setOpen: (open: boolean) => void;
+  setProject: (project: Project) => void;
+  setOpenCreate: (openCreate: boolean) => void;
+  setOpenUpdate: (openUpdate: boolean) => void;
   setOpenDelete: (openDelete: boolean) => void;
   setDeleteProjectId: (deleteProjectId: string) => void;
   setDeleteProjectName: (deleteProjectName: string) => void
@@ -37,7 +39,9 @@ interface SideNavbarTypeAProps {
 export const SideNavbarTypeA = (props: SideNavbarTypeAProps) => {
   const {
     projects,
-    setOpen,
+    setProject,
+    setOpenCreate,
+    setOpenUpdate,
     setOpenDelete,
     setDeleteProjectId,
     setDeleteProjectName
@@ -68,7 +72,20 @@ export const SideNavbarTypeA = (props: SideNavbarTypeAProps) => {
     }): void {
     e.preventDefault();
     e.stopPropagation();
-    setOpen(true);
+    setOpenCreate(true);
+  }
+
+  function handleUpdate(
+    e: {
+      preventDefault: () => void;
+      stopPropagation: () => void;
+    },
+    project: Project
+  ) {
+    e.preventDefault();
+    e.stopPropagation();
+    setProject(project);
+    setOpenUpdate(true);
   }
 
   function handleDelete(
@@ -130,6 +147,9 @@ export const SideNavbarTypeA = (props: SideNavbarTypeAProps) => {
                   }
                   <FontAwesomeIcon
                     icon={faPen}
+                    onClick={(e) => {
+                      handleUpdate(e, project);
+                    }}
                   />
                   <FontAwesomeIcon
                     icon={faTrashCan}

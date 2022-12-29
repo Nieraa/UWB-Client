@@ -39,6 +39,28 @@ export function createProject(
     })
 }
 
+export function updateProject(
+  projectId: string,
+  projectData: {
+    projectName: string,
+    imgUrl: string,
+    l: number,
+    w: number,
+  },
+  setProjects: (projects: Project[]) => void,
+  handleClose: () => void
+): void {
+  axios
+    .patch(`/projects/${projectId}`, projectData)
+    .then(() => {
+      getProjects(setProjects);
+      handleClose();
+    })
+    .catch(() => {
+      alert("Update failed");
+    })
+}
+
 export function deleteProject(
   projectId: string,
   setProjects: (projects: Project[]) => void,

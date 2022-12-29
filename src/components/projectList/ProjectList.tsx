@@ -19,6 +19,8 @@ import { Project } from "../../types";
 
 interface ProjectListProps {
   projects: Project[];
+  setProject: (project: Project) => void;
+  setOpenUpdate: (openUpdate: boolean) => void;
   setOpenDelete: (openDelete: boolean) => void;
   setDeleteProjectId: (deleteProjectId: string) => void;
   setDeleteProjectName: (deleteProjectName: string) => void
@@ -27,6 +29,8 @@ interface ProjectListProps {
 export const ProjectList = (props: ProjectListProps) => {
   const {
     projects,
+    setProject,
+    setOpenUpdate,
     setOpenDelete,
     setDeleteProjectId,
     setDeleteProjectName
@@ -46,6 +50,19 @@ export const ProjectList = (props: ProjectListProps) => {
     setDeleteProjectId(projectId);
     setDeleteProjectName(projectName);
     setOpenDelete(true);
+  }
+
+  function handleUpdate(
+    e: {
+      preventDefault: () => void;
+      stopPropagation: () => void;
+    },
+    project: Project
+  ) {
+    e.preventDefault();
+    e.stopPropagation();
+    setProject(project);
+    setOpenUpdate(true);
   }
 
   return (
@@ -85,6 +102,9 @@ export const ProjectList = (props: ProjectListProps) => {
                       </ProjectName>
                       <FontAwesomeIcon
                         icon={faPen}
+                        onClick={(e) => {
+                          handleUpdate(e, project);
+                        }}
                       />
                       <FontAwesomeIcon
                         icon={faTrashCan}
