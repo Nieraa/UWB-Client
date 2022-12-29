@@ -37,13 +37,13 @@ import {
   
   interface ProjectUpdateFormProps {
     project: Project;
-    setProjects: (projects: Project[]) => void;
     openUpdate: boolean;
+    setProjects: (projects: Project[]) => void;
     setOpenUpdate: (openUpdate: boolean) => void;
   }
   
   function ProjectUpdateForm(props: ProjectUpdateFormProps) {
-    const { project, setProjects, openUpdate, setOpenUpdate } = props;
+    const { project, openUpdate, setProjects, setOpenUpdate } = props;
   
     const [image, _setImage] = useState<any>(project.imgUrl);
     const [imageName, setImageName] = useState<string>("");

@@ -60,14 +60,22 @@ function DeleteDialogTypeA(props: DeleteDialogTypeAProps) {
         <ContentWrapper>
           <IconWrapper>
             <FontAwesomeIcon
-              style={{ color: "var(--error)", fontSize: "70px", paddingTop: "20px" }}
+              style={{
+                color: "var(--error)",
+                fontSize: "70px",
+                paddingTop: "20px"
+              }}
               icon={faTrashCan}
             />
           </IconWrapper>
-          <Title>Are you sure?</Title>
-          <Detail>Do you really want to delete&nbsp;
-            <Name>"{hardwareName}"</Name>?
-            This process cannot be undone.</Detail>
+          <Title>
+            Are you sure?
+          </Title>
+          <Detail>
+            Do you really want to delete&nbsp;
+            <Name>"{hardwareName}"</Name>
+            ? This process cannot be undone.
+          </Detail>
         </ContentWrapper>
       </DialogContent>
       <DialogActions>

@@ -20,8 +20,6 @@ function Projects(props: PassAndUpdateProjects) {
   const [openCreate, setOpenCreate] = useState<boolean>(false);
   const [openUpdate, setOpenUpdate] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
-  const [deleteProjectId, setDeleteProjectId] = useState<string>("");
-  const [deleteProjectName, setDeleteProjectName] = useState<string>("");
 
   return (
     <div>
@@ -32,8 +30,6 @@ function Projects(props: PassAndUpdateProjects) {
         setOpenCreate={setOpenCreate}
         setOpenUpdate={setOpenUpdate}
         setOpenDelete={setOpenDelete}
-        setDeleteProjectId={setDeleteProjectId}
-        setDeleteProjectName={setDeleteProjectName}
       />
       <MainTypeA
         projects={projects}
@@ -41,8 +37,6 @@ function Projects(props: PassAndUpdateProjects) {
         setOpenCreate={setOpenCreate}
         setOpenUpdate={setOpenUpdate}
         setOpenDelete={setOpenDelete}
-        setDeleteProjectId={setDeleteProjectId}
-        setDeleteProjectName={setDeleteProjectName}
       />
       <ProjectCreateForm
         setProjects={setProjects}
@@ -51,13 +45,12 @@ function Projects(props: PassAndUpdateProjects) {
       />
       <ProjectUpdateForm
         project={project}
-        setProjects={setProjects}
         openUpdate={openUpdate}
+        setProjects={setProjects}
         setOpenUpdate={setOpenUpdate}
       />
       <DeleteDialogTypeA
-        projectId={deleteProjectId}
-        projectName={deleteProjectName}
+        project={project}
         setProjects={setProjects}
         openDelete={openDelete}
         setOpenDelete={setOpenDelete}

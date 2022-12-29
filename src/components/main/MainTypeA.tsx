@@ -13,8 +13,6 @@ interface MainTypeAProps {
   setOpenCreate: (openCreate: boolean) => void;
   setOpenUpdate: (openUpdate: boolean) => void;
   setOpenDelete: (openDelete: boolean) => void;
-  setDeleteProjectId: (deleteProjectId: string) => void;
-  setDeleteProjectName: (deleteProjectName: string) => void;
 }
 
 export const MainTypeA = (props: MainTypeAProps) => {
@@ -23,9 +21,7 @@ export const MainTypeA = (props: MainTypeAProps) => {
     setProject,
     setOpenCreate,
     setOpenUpdate,
-    setOpenDelete,
-    setDeleteProjectId,
-    setDeleteProjectName
+    setOpenDelete
   } = props;
 
   const handleClickOpen = (): void => {
@@ -39,8 +35,6 @@ export const MainTypeA = (props: MainTypeAProps) => {
         setProject={setProject}
         setOpenUpdate={setOpenUpdate}
         setOpenDelete={setOpenDelete}
-        setDeleteProjectId={setDeleteProjectId}
-        setDeleteProjectName={setDeleteProjectName}
       />
       <AddElementButton onClick={handleClickOpen}>
         <FontAwesomeIcon icon={faPlus} />

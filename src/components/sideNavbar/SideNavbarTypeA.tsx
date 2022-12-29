@@ -32,8 +32,6 @@ interface SideNavbarTypeAProps {
   setOpenCreate: (openCreate: boolean) => void;
   setOpenUpdate: (openUpdate: boolean) => void;
   setOpenDelete: (openDelete: boolean) => void;
-  setDeleteProjectId: (deleteProjectId: string) => void;
-  setDeleteProjectName: (deleteProjectName: string) => void
 }
 
 export const SideNavbarTypeA = (props: SideNavbarTypeAProps) => {
@@ -42,9 +40,7 @@ export const SideNavbarTypeA = (props: SideNavbarTypeAProps) => {
     setProject,
     setOpenCreate,
     setOpenUpdate,
-    setOpenDelete,
-    setDeleteProjectId,
-    setDeleteProjectName
+    setOpenDelete
   } = props;
 
   const [collapse, setCollapse] = useState<boolean>(true);
@@ -93,13 +89,11 @@ export const SideNavbarTypeA = (props: SideNavbarTypeAProps) => {
       preventDefault: () => void;
       stopPropagation: () => void;
     },
-    projectId: string,
-    projectName: string
+    project: Project
   ): void {
     e.preventDefault();
     e.stopPropagation();
-    setDeleteProjectId(projectId);
-    setDeleteProjectName(projectName);
+    setProject(project)
     setOpenDelete(true);
   }
 
@@ -154,7 +148,7 @@ export const SideNavbarTypeA = (props: SideNavbarTypeAProps) => {
                   <FontAwesomeIcon
                     icon={faTrashCan}
                     onClick={(e) => {
-                      handleDelete(e, project.id, project.projectName);
+                      handleDelete(e, project);
                     }}
                   />
                 </SubMenuLink>

@@ -320,7 +320,8 @@ export function HardwareCreateForm(props: HardwareCreateFormProps) {
           </CancelButton>
           <Button
             variant="contained"
-            type="submit">
+            type="submit"
+            >
             Create
           </Button>
         </DialogActions>

@@ -22,8 +22,6 @@ interface ProjectListProps {
   setProject: (project: Project) => void;
   setOpenUpdate: (openUpdate: boolean) => void;
   setOpenDelete: (openDelete: boolean) => void;
-  setDeleteProjectId: (deleteProjectId: string) => void;
-  setDeleteProjectName: (deleteProjectName: string) => void
 }
 
 export const ProjectList = (props: ProjectListProps) => {
@@ -31,9 +29,7 @@ export const ProjectList = (props: ProjectListProps) => {
     projects,
     setProject,
     setOpenUpdate,
-    setOpenDelete,
-    setDeleteProjectId,
-    setDeleteProjectName
+    setOpenDelete
   } = props;
 
 
@@ -42,13 +38,11 @@ export const ProjectList = (props: ProjectListProps) => {
       preventDefault: () => void;
       stopPropagation: () => void;
     },
-    projectId: string,
-    projectName: string
+    project: Project
   ): void {
     e.preventDefault();
     e.stopPropagation();
-    setDeleteProjectId(projectId);
-    setDeleteProjectName(projectName);
+    setProject(project)
     setOpenDelete(true);
   }
 
@@ -109,7 +103,7 @@ export const ProjectList = (props: ProjectListProps) => {
                       <FontAwesomeIcon
                         icon={faTrashCan}
                         onClick={(e) => {
-                          handleDelete(e, project.id, project.projectName);
+                          handleDelete(e, project);
                         }}
                       />
                     </ProjectNameWrapper>
