@@ -3,7 +3,7 @@ import { SideNavbarTypeB } from '../components/sideNavbar/SideNavbarTypeB';
 import { MainTypeB } from '../components/main/MainTypeB';
 import { useEffect, useState } from 'react';
 import { Hardware, PassAndUpdateProjects, Project } from '../types';
-import { HardwareCreateForm } from '../components/hardwareCreateFrom/HardwareCreateFrom';
+import { HardwareCreateForm } from '../components/hardwareCreateForm/HardwareCreateForm';
 import { Params, useParams } from 'react-router-dom';
 import { getHardwares, getColors, getNetworkSsids } from '../services/ProjectsService';
 import DeleteDialogTypeB from '../components/deleteDialog/DeleteDialogTypeB';
