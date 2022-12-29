@@ -2,7 +2,7 @@ import { AppBar } from '../components/appBar/AppBar';
 import { SideNavbarTypeA } from '../components/sideNavbar/SideNavbarTypeA';
 import { MainTypeA } from '../components/main/MainTypeA';
 import ProjectCreateForm from '../components/projectCreateForm/ProjectCreateForm';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { PassAndUpdateProjects, Project } from '../types';
 import DeleteDialogTypeA from '../components/deleteDialog/DeleteDialogTypeA';
 import ProjectUpdateForm from '../components/projectUpdateForm/ProjectUpdateForm';
