@@ -1,4 +1,4 @@
-import { ColorBoxButton, CancelButton } from "./HardwareCreateFrom.style";
+import { ColorBoxButton, CancelButton } from "./HardwareCreateForm.style";
 import {
   Grid,
   Dialog,
