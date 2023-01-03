@@ -95,8 +95,8 @@ import {
       try {
         Compress.imageFileResizer(
           newImage, // the file from input
-          1000, // maxwidth
-          1000, // maxheight
+          800, // maxwidth
+          800, // maxheight
           "JPEG", // compress format WEBP, JPEG, PNG
           70, // quality
           0, // rotation

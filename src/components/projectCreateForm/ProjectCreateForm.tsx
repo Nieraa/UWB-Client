@@ -91,10 +91,10 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
     try {
       Compress.imageFileResizer(
         newImage, // the file from input
-        2000, // maxwidth
-        2000, // maxheight
+        800, // maxwidth
+        800, // maxheight
         "JPEG", // compress format WEBP, JPEG, PNG
-        90, // quality
+        70, // quality
         0, // rotation
         (uri) => {
           setImage(uri);
