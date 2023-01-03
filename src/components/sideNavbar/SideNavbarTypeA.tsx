@@ -178,7 +178,7 @@ export const SideNavbarTypeA = (props: SideNavbarTypeAProps) => {
               $hasProjectId={true}
             >
               <FontAwesomeIcon icon={faMapLocationDot} />
-              Realtime Location
+              Realtime Tracking
             </NavLink>
           </NavItem>
           <NavItem>
@@ -189,7 +189,7 @@ export const SideNavbarTypeA = (props: SideNavbarTypeAProps) => {
               $hasProjectId={true}
             >
               <FontAwesomeIcon icon={faTable} />
-              Location History
+              Location Log
             </NavLink>
           </NavItem>
         </>
