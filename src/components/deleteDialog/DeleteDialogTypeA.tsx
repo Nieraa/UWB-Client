@@ -32,7 +32,7 @@ function DeleteDialogTypeA(props: DeleteDialogTypeAProps) {
     setOpenDelete
   } = props;
 
-  const handleClose = (): void => {
+  function handleClose(): void {
     setOpenDelete(false);
   };
 

@@ -1,9 +1,9 @@
-import { AppBar } from '../components/appBar/AppBar';
-import { SideNavbarTypeB } from '../components/sideNavbar/SideNavbarTypeB';
+import AppBar from '../components/appBar/AppBar';
+import SideNavbarTypeB from '../components/sideNavbar/SideNavbarTypeB';
 import { MainTypeB } from '../components/main/MainTypeB';
 import { useEffect, useState } from 'react';
 import { Node, PassAndUpdateProjects, Project } from '../types';
-import { NodeCreateForm } from '../components/nodeCreateForm/NodeCreateForm';
+import NodeCreateForm from '../components/nodeCreateForm/NodeCreateForm';
 import { Params, useParams } from 'react-router-dom';
 import { getNodes, getColors, getNetworkSsids } from '../services/ProjectsService';
 import DeleteDialogTypeB from '../components/deleteDialog/DeleteDialogTypeB';

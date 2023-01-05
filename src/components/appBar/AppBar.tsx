@@ -4,7 +4,7 @@ import {
   NavBrand
 } from "./AppBar.style";
 
-export const AppBar = () => {
+function AppBar() {
   return (
     <TopNavbar>
       <NavBrand>
@@ -20,3 +20,5 @@ export const AppBar = () => {
     </TopNavbar>
   );
 };
+
+export default AppBar;

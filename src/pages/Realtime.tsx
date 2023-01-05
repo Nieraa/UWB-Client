@@ -1,5 +1,5 @@
-import { AppBar } from '../components/appBar/AppBar';
-// import { SideNavbarTypeA } from '../components/sideNavbar/SideNavbarTypeA';
+import AppBar from '../components/appBar/AppBar';
+// import { SideNavbarTypeC } from '../components/sideNavbar/SideNavbarTypeC';
 // import { MainTypeA } from '../components/main/MainTypeA';
 // import { useState } from 'react';
 import { PassAndUpdateProjects } from '../types';

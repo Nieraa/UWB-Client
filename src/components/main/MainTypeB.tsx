@@ -1,4 +1,4 @@
-import { Canvas } from "../canvas/Canvas";
+import Canvas from "../canvas/Canvas";
 import {
   MainArea,
   ProjectName,
@@ -39,15 +39,15 @@ export const MainTypeB = (props: MainTypeBProps) => {
     projects[projects.findIndex((element) => element.id === params.projectId)];
 
 
-  const handleClickOpenMenu = (event: any): void => {
+  function handleClickOpenMenu(event: any): void {
     setAnchorElMenu(event.currentTarget);
   };
 
-  const handleCloseMenu = (): void => {
+  function handleCloseMenu(): void {
     setAnchorElMenu(null);
   };
 
-  const handleClickOpenDialog = (type: string): void => {
+  function handleClickOpenDialog(type: string): void {
     setAddType(type);
     setOpenDialog(true);
   };

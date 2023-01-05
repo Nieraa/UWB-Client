@@ -75,15 +75,15 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
     }
   })
 
-  const handleClick = (): void => {
+  function handleClick(): void {
     setImage(image);
   };
 
-  const setImage = (newImage: any): void => {
+  function setImage(newImage: any): void {
     _setImage(newImage);
   };
 
-  const handleOnChange = (event: any): void => {
+  function handleOnChange(event: any): void {
     const newImage = event.target?.files?.[0];
     setImageName(newImage.name);
     setImageValidation(false);
@@ -109,7 +109,7 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
     }
   };
 
-  const handleClose = (): void => {
+  function handleClose(): void {
     setOpenCreate(false);
     setImageValidation(false);
     formik.resetForm();

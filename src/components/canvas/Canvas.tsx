@@ -1,4 +1,4 @@
-import { Anchor } from '../anchor/Anchor';
+import Anchor from '../anchor/Anchor';
 import { Tag } from '../tag/Tag';
 import {
   TransformComponent,
@@ -13,7 +13,7 @@ interface CanvasProps {
   tags: Node[];
 }
 
-export const Canvas = (props: CanvasProps) => {
+function Canvas(props: CanvasProps) {
   const { project, anchors, tags } = props;
 
   const [pannable, setPannable] = useState<boolean>(false);
@@ -94,3 +94,5 @@ export const Canvas = (props: CanvasProps) => {
     </TransformWrapper>
   );
 };
+
+export default Canvas;

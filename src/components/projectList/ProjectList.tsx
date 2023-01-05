@@ -24,7 +24,7 @@ interface ProjectListProps {
   setOpenDelete: (openDelete: boolean) => void;
 }
 
-export const ProjectList = (props: ProjectListProps) => {
+function ProjectList(props: ProjectListProps) {
   const {
     projects,
     setProject,
@@ -117,3 +117,5 @@ export const ProjectList = (props: ProjectListProps) => {
     </ProjectWrapper >
   );
 };
+
+export default ProjectList;

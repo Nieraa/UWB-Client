@@ -1,4 +1,4 @@
-import { AppBar } from '../components/appBar/AppBar';
+import AppBar from '../components/appBar/AppBar';
 // import { SideNavbarTypeA } from '../components/sideNavbar/SideNavbarTypeA';
 // import { MainTypeA } from '../components/main/MainTypeA';
 // import { useState } from 'react';

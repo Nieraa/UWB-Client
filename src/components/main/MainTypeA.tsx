@@ -1,4 +1,4 @@
-import { ProjectList } from "../projectList/ProjectList";
+import ProjectList from "../projectList/ProjectList";
 import {
   MainArea,
   AddElementButton
@@ -15,7 +15,7 @@ interface MainTypeAProps {
   setOpenDelete: (openDelete: boolean) => void;
 }
 
-export const MainTypeA = (props: MainTypeAProps) => {
+function MainTypeA(props: MainTypeAProps) {
   const {
     projects,
     setProject,
@@ -24,7 +24,7 @@ export const MainTypeA = (props: MainTypeAProps) => {
     setOpenDelete
   } = props;
 
-  const handleClickOpen = (): void => {
+  function handleClickOpen(): void {
     setOpenCreate(true);
   };
 
@@ -42,3 +42,5 @@ export const MainTypeA = (props: MainTypeAProps) => {
     </MainArea>
   );
 };
+
+export default MainTypeA;

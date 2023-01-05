@@ -57,7 +57,7 @@ interface NodeCreateFormProps {
 
 }
 
-export function NodeCreateForm(props: NodeCreateFormProps) {
+function NodeCreateForm(props: NodeCreateFormProps) {
   const {
     projectId,
     addType,
@@ -129,7 +129,7 @@ export function NodeCreateForm(props: NodeCreateFormProps) {
     },
   })
 
-  const handleCloseDialog = (): void => {
+  function handleCloseDialog(): void {
     setOpenDialog(false);
     formik.resetForm();
     setGroup(colors.length + 1);
@@ -137,15 +137,15 @@ export function NodeCreateForm(props: NodeCreateFormProps) {
     formik.values.networkSsid = "";
   };
 
-  const handleClickOpenColorPicker = (event: any): void => {
+  function handleClickOpenColorPicker(event: any): void {
     setAnchorElColorPicker(event.currentTarget);
   };
 
-  const handleCloseColorPicker = (): void => {
+  function handleCloseColorPicker(): void {
     setAnchorElColorPicker(null);
   };
 
-  const handleChangeColor = (color: { hex: string }): void => {
+  function handleChangeColor(color: { hex: string }): void {
     setAddColor(color.hex);
     const index = colors.findIndex((element) => element.toLowerCase() === color.hex);
     if (index === -1) {
@@ -158,7 +158,7 @@ export function NodeCreateForm(props: NodeCreateFormProps) {
     }
   };
 
-  const handleChangeGroup = (event: any): void => {
+  function handleChangeGroup(event: any): void {
     setGroup(event.target.value);
     if (event.target.value <= colors.length) {
       setAddColor(colors[event.target.value - 1]);
@@ -350,3 +350,5 @@ export function NodeCreateForm(props: NodeCreateFormProps) {
     </Dialog>
   );
 };
+
+export default NodeCreateForm;

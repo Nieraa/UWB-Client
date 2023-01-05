@@ -11,7 +11,7 @@ interface AnchorProps {
   scale: number,
 }
 
-export const Anchor = (props: AnchorProps) => {
+function Anchor(props: AnchorProps) {
   const { anchor, disabled, scale } = props;
 
   const [x, setX] = useState<number>(anchor.x * 100);
@@ -61,3 +61,5 @@ export const Anchor = (props: AnchorProps) => {
     </Draggable>
   );
 };
+
+export default Anchor;

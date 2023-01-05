@@ -34,7 +34,7 @@ interface SideNavbarTypeAProps {
   setOpenDelete: (openDelete: boolean) => void;
 }
 
-export const SideNavbarTypeA = (props: SideNavbarTypeAProps) => {
+function SideNavbarTypeA(props: SideNavbarTypeAProps) {
   const {
     projects,
     setProject,
@@ -197,3 +197,5 @@ export const SideNavbarTypeA = (props: SideNavbarTypeAProps) => {
     </Navbar>
   );
 };
+
+export default SideNavbarTypeA;

@@ -42,7 +42,7 @@ interface SideNavbarTypeBProps {
   setOpenDelete: (openDelete: boolean) => void;
 }
 
-export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
+function SideNavbarTypeB(props: SideNavbarTypeBProps) {
   const {
     projects,
     setAddType,
@@ -316,3 +316,5 @@ export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
     </Navbar>
   );
 };
+
+export default SideNavbarTypeB;
