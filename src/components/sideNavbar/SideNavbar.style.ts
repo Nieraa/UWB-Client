@@ -203,7 +203,7 @@ export const HardwareList = styled.div`
     color: var(--primary);
   }
 
-  svg:nth-child(2) {
+  svg:first-child {
     margin-left: auto;
     margin-right: 10px;
   }

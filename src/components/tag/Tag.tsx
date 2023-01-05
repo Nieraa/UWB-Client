@@ -16,6 +16,7 @@ export const Tag = (props: TagProps) => {
 
   const [x, setX] = useState<number>(tag.x * 100);
   const [y, setY] = useState<number>(tag.y * 100);
+  const [z, setZ] = useState<number>(tag.z * 100);
 
   const nodeRef = useRef(null);
 
@@ -25,11 +26,11 @@ export const Tag = (props: TagProps) => {
 
     if (context) {
       context.font = font || getComputedStyle(document.body).font;
-      if (context.measureText(text).width > context.measureText(`(${x / 100}, ${y / 100})`).width) {
+      if (context.measureText(text).width > context.measureText(`(${x / 100}, ${y / 100}, ${z / 100})`).width) {
         return context.measureText(text).width / 0.5779
       }
       else {
-        return context.measureText(`(${x / 100}, ${y / 100})`).width / 0.5779
+        return context.measureText(`(${x / 100}, ${y / 100}, ${z / 100})`).width / 0.5779
       }
     }
     return 0;
@@ -50,7 +51,7 @@ export const Tag = (props: TagProps) => {
       <div ref={nodeRef}>
         <Text textWidth={getTextWidth(tag.name, "regular 16pt Prompt")}>
           {tag.name}<br />
-          {`(${x / 100}, ${y / 100})`}
+          {`(${x / 100}, ${y / 100}, ${z / 100})`}
         </Text>
         <Element tagColor={tag.networkColor}>
           <FontAwesomeIcon icon={faPlus} />

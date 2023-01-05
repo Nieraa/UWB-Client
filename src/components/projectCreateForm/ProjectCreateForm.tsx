@@ -111,6 +111,7 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
 
   const handleClose = (): void => {
     setOpenCreate(false);
+    setImageValidation(false);
     formik.resetForm();
     setImage("");
     setImageName("No file chosen");

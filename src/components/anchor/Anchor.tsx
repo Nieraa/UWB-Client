@@ -14,8 +14,9 @@ interface AnchorProps {
 export const Anchor = (props: AnchorProps) => {
   const { anchor, disabled, scale } = props;
 
-  const [x, setX] = useState<number>(anchor.x * 100)
-  const [y, setY] = useState<number>(anchor.y * 100)
+  const [x, setX] = useState<number>(anchor.x * 100);
+  const [y, setY] = useState<number>(anchor.y * 100);
+  const [z, setZ] = useState<number>(anchor.z * 100);
 
   const nodeRef = useRef(null);
 
@@ -26,11 +27,11 @@ export const Anchor = (props: AnchorProps) => {
 
     if (context) {
       context.font = font || getComputedStyle(document.body).font;
-      if (context.measureText(text).width > context.measureText(`(${x / 100}, ${y / 100})`).width) {
+      if (context.measureText(text).width > context.measureText(`(${x / 100}, ${y / 100}, ${z / 100})`).width) {
         return context.measureText(text).width / 0.5779
       }
       else {
-        return context.measureText(`(${x / 100}, ${y / 100})`).width / 0.5779
+        return context.measureText(`(${x / 100}, ${y / 100}, ${z / 100})`).width / 0.5779
       }
     }
     return 0;
@@ -51,7 +52,7 @@ export const Anchor = (props: AnchorProps) => {
       <div ref={nodeRef}>
         <Text textWidth={getTextWidth(anchor.name, "regular 16pt Prompt")}>
           {anchor.name}<br />
-          {`(${x / 100}, ${y / 100})`}
+          {`(${x / 100}, ${y / 100}, ${z / 100})`}
         </Text>
         <Element anchorColor={anchor.networkColor}>
           <FontAwesomeIcon icon={faPlus} />

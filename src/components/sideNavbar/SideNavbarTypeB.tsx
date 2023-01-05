@@ -195,7 +195,7 @@ export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
               $hasProjectId={true}
             >
               <FontAwesomeIcon icon={faMapLocationDot} />
-              Realtime Tracking
+              Real-time Tracking
             </NavLink>
           </NavItem>
           <NavItem>
@@ -236,7 +236,6 @@ export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
             {anchors.map((anchor) =>
               <li key={anchor.id}>
                 <HardwareList>
-                  <FontAwesomeIcon icon={faFileLines} />
                   {anchor.name.length > 18 ?
                     anchor.name.slice(0, 18) + "..."
                     :
@@ -288,7 +287,6 @@ export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
             {tags.map((tag) =>
               <li key={tag.id}>
                 <HardwareList>
-                  <FontAwesomeIcon icon={faFileLines} />
                   {tag.name.length > 18 ?
                     tag.name.slice(0, 18) + "..."
                     :

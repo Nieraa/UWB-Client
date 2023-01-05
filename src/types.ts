@@ -17,6 +17,7 @@ export interface Hardware {
   ipAddress: string,
   x: number,
   y: number,
+  z: number,
   networkSsid: string,
   networkColor: string,
 }

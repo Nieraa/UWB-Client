@@ -33,6 +33,9 @@ const validationSchema = yup.object({
   y: yup
     .number().typeError("Y must be number")
     .required("Please enter Y"),
+    z: yup
+    .number().typeError("Z must be number")
+    .required("Please enter Z"),
   networkSsid: yup
     .string()
     .required("Please enter network ssid"),
@@ -81,18 +84,22 @@ export function HardwareCreateForm(props: HardwareCreateFormProps) {
       ipAddress: "",
       x: 0,
       y: 0,
+      z: 0,
       networkSsid: "",
     },
     validationSchema,
+    // enableReinitialize: true,
     onSubmit: (values) => {
       const hardwareData = {
         name: values.name,
         ipAddress: values.ipAddress,
         x: Number(values.x),
         y: Number(values.y),
+        z: Number(values.z),
         networkSsid: values.networkSsid,
         networkColor: addColor,
       };
+      console.log(hardwareData);
       const hasNewColor: boolean = !colors.includes(addColor);
       if (addType.toLowerCase() === "anchor") {
         createHardware(
@@ -188,7 +195,7 @@ export function HardwareCreateForm(props: HardwareCreateFormProps) {
             autoFocus
           />
           <Grid container spacing={2}>
-            <Grid item xs={3}>
+            <Grid item xs={2}>
               <TextField
                 margin="dense"
                 id="x"
@@ -203,7 +210,7 @@ export function HardwareCreateForm(props: HardwareCreateFormProps) {
                 fullWidth
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={2}>
               <TextField
                 margin="dense"
                 id="y"
@@ -214,6 +221,21 @@ export function HardwareCreateForm(props: HardwareCreateFormProps) {
                 onChange={formik.handleChange}
                 error={Boolean(formik.errors.y)}
                 helperText={formik.errors.y}
+                autoFocus
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <TextField
+                margin="dense"
+                id="z"
+                label="Z (m)"
+                name="z"
+                variant="outlined"
+                value={formik.values.z}
+                onChange={formik.handleChange}
+                error={Boolean(formik.errors.z)}
+                helperText={formik.errors.z}
                 autoFocus
                 fullWidth
               />
@@ -322,7 +344,7 @@ export function HardwareCreateForm(props: HardwareCreateFormProps) {
             variant="contained"
             type="submit"
             >
-            Create
+            Add
           </Button>
         </DialogActions>
       </form>
