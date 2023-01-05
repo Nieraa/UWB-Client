@@ -99,7 +99,6 @@ export function NodeCreateForm(props: NodeCreateFormProps) {
         networkSsid: values.networkSsid,
         networkColor: addColor,
       };
-      console.log(nodeData);
       const hasNewColor: boolean = !colors.includes(addColor);
       if (addType.toLowerCase() === "anchor") {
         createNode(
