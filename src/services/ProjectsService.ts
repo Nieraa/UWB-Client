@@ -1,6 +1,6 @@
 import { NavigateFunction } from "react-router-dom";
 import axios from "../axios";
-import { Hardware, Project } from "../types";
+import { Node, Project } from "../types";
 
 export function getProjects(
   setProjects: (projects: Project[]) => void,
@@ -77,19 +77,19 @@ export function deleteProject(
     })
 }
 
-export function getHardwares(
+export function getNodes(
   projectId: string,
-  hardwareType: string,
-  setHardwares: (hardware: Hardware[]) => void,
+  nodeType: string,
+  setNodes: (node: Node[]) => void,
   hasNewColor: boolean,
   setColors?: (colors: string[]) => void,
   setGroup?: (group: number) => void,
   setNetworkSsids?: (networkSsids: string[]) => void
 ): void {
   axios
-    .get(`/projects/${projectId}/${hardwareType}s`)
+    .get(`/projects/${projectId}/${nodeType}s`)
     .then((response) => {
-      setHardwares(response.data);
+      setNodes(response.data);
       if (hasNewColor && setColors && setGroup && setNetworkSsids) {
         getColors(projectId, setColors, setGroup);
         getNetworkSsids(projectId, setNetworkSsids);
@@ -99,11 +99,11 @@ export function getHardwares(
     });
 }
 
-export function createHardware(
+export function createNode(
   projectId: string,
-  hardwareType: string,
-  setHardwares: (hardware: Hardware[]) => void,
-  hardwareData: {
+  nodeType: string,
+  setNodes: (node: Node[]) => void,
+  nodeData: {
     name: string,
     ipAddress: string,
     x: number,
@@ -118,12 +118,12 @@ export function createHardware(
   handleCloseDialog: () => void
 ): void {
   axios
-    .post(`/projects/${projectId}/${hardwareType}s`, hardwareData)
+    .post(`/projects/${projectId}/${nodeType}s`, nodeData)
     .then(() => {
-      getHardwares(
+      getNodes(
         projectId,
-        hardwareType,
-        setHardwares,
+        nodeType,
+        setNodes,
         hasNewColor,
         setColors,
         setGroup,
@@ -136,11 +136,11 @@ export function createHardware(
     });
 }
 
-export function deleteHardware(
+export function deleteNode(
   projectId: string,
-  hardwareId: string,
-  hardwareType: string,
-  setHardwares: (hardware: Hardware[]) => void,
+  nodeId: string,
+  nodeType: string,
+  setNodes: (node: Node[]) => void,
   setOpenDelete: (openDelete: boolean) => void,
   hasNewColor: boolean,
   setColors?: (colors: string[]) => void,
@@ -148,12 +148,12 @@ export function deleteHardware(
   setNetworkSsids?: (networkSsids: string[]) => void
 ): void {
   axios
-    .delete(`/projects/${projectId}/${hardwareType}s/${hardwareId}`)
+    .delete(`/projects/${projectId}/${nodeType}s/${nodeId}`)
     .then(() => {
-      getHardwares(
+      getNodes(
         projectId,
-        hardwareType,
-        setHardwares,
+        nodeType,
+        setNodes,
         hasNewColor,
         setColors,
         setGroup,

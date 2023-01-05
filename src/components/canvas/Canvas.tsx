@@ -5,12 +5,12 @@ import {
   TransformWrapper
 } from "@pronestor/react-zoom-pan-pinch";
 import { useState } from 'react';
-import { Hardware, Project } from '../../types';
+import { Node, Project } from '../../types';
 
 interface CanvasProps {
   project: Project;
-  anchors: Hardware[];
-  tags: Hardware[];
+  anchors: Node[];
+  tags: Node[];
 }
 
 export const Canvas = (props: CanvasProps) => {

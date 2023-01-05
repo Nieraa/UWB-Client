@@ -142,7 +142,7 @@ export const SubMenu = styled.ul<{ collapse: boolean, length: number }>`
   }
 `;
 
-export const HardwareListToggle = styled.div<{ hasSubMenu: boolean }>`
+export const NodeListToggle = styled.div<{ hasSubMenu: boolean }>`
   color: var(--black);
   background-color: var(--white);
   text-decoration: none;
@@ -181,7 +181,7 @@ export const HardwareListToggle = styled.div<{ hasSubMenu: boolean }>`
   }
 `;
 
-export const HardwareList = styled.div`
+export const NodeList = styled.div`
   color: var(--black);
   background-color: var(--white);
   height: 18px;
@@ -213,7 +213,7 @@ export const HardwareList = styled.div`
   }
 `;
 
-export const HardwareSubMenu = styled.ul<{ collapse: boolean, length: number }>`
+export const NodeSubMenu = styled.ul<{ collapse: boolean, length: number }>`
   display: ${(props) => (props.collapse ? "none" : "block")};
   list-style: none;
   height: ${(props) => (props.length > 6 ? "300px" : "auto")};

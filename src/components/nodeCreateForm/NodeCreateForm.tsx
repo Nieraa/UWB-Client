@@ -1,4 +1,4 @@
-import { ColorBoxButton, CancelButton } from "./HardwareCreateForm.style";
+import { ColorBoxButton, CancelButton } from "./NodeCreateForm.style";
 import {
   Grid,
   Dialog,
@@ -17,8 +17,8 @@ import { SketchPicker } from "react-color";
 import { useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { createHardware } from "../../services/ProjectsService";
-import { Hardware } from "../../types";
+import { createNode } from "../../services/ProjectsService";
+import { Node } from "../../types";
 
 const validationSchema = yup.object({
   name: yup
@@ -41,15 +41,15 @@ const validationSchema = yup.object({
     .required("Please enter network ssid"),
 });
 
-interface HardwareCreateFormProps {
+interface NodeCreateFormProps {
   projectId: string,
   addType: string,
   colors: string[],
   group: number,
   networkSsids: string[],
   openDialog: boolean,
-  setAnchors: (anchors: Hardware[]) => void,
-  setTags: (tags: Hardware[]) => void,
+  setAnchors: (anchors: Node[]) => void,
+  setTags: (tags: Node[]) => void,
   setColors: (colors: string[]) => void,
   setGroup: (group: number) => void,
   setNetworkSsids: (networkSsids: string[]) => void,
@@ -57,7 +57,7 @@ interface HardwareCreateFormProps {
 
 }
 
-export function HardwareCreateForm(props: HardwareCreateFormProps) {
+export function NodeCreateForm(props: NodeCreateFormProps) {
   const {
     projectId,
     addType,
@@ -90,7 +90,7 @@ export function HardwareCreateForm(props: HardwareCreateFormProps) {
     validationSchema,
     // enableReinitialize: true,
     onSubmit: (values) => {
-      const hardwareData = {
+      const nodeData = {
         name: values.name,
         ipAddress: values.ipAddress,
         x: Number(values.x),
@@ -99,14 +99,14 @@ export function HardwareCreateForm(props: HardwareCreateFormProps) {
         networkSsid: values.networkSsid,
         networkColor: addColor,
       };
-      console.log(hardwareData);
+      console.log(nodeData);
       const hasNewColor: boolean = !colors.includes(addColor);
       if (addType.toLowerCase() === "anchor") {
-        createHardware(
+        createNode(
           projectId,
           addType.toLowerCase(),
           setAnchors,
-          hardwareData,
+          nodeData,
           hasNewColor,
           setColors,
           setGroup,
@@ -115,11 +115,11 @@ export function HardwareCreateForm(props: HardwareCreateFormProps) {
         );
       }
       else if (addType.toLowerCase() === "tag") {
-        createHardware(
+        createNode(
           projectId,
           addType.toLowerCase(),
           setTags,
-          hardwareData,
+          nodeData,
           hasNewColor,
           setColors,
           setGroup,

@@ -4,9 +4,9 @@ import {
   NavLink,
   SubMenu,
   SubMenuLink,
-  HardwareListToggle,
-  HardwareSubMenu,
-  HardwareList,
+  NodeListToggle,
+  NodeSubMenu,
+  NodeList,
 } from "./SideNavbar.style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -27,16 +27,16 @@ import {
   useParams
 } from "react-router-dom";
 import { useState } from "react";
-import { Hardware, Project } from "../../types";
+import { Node, Project } from "../../types";
 
 interface SideNavbarTypeBProps {
   projects: Project[];
   setAddType: (addType: string) => void;
-  anchors: Hardware[];
-  tags: Hardware[];
-  setHardwareId: (hardwareId: string) => void;
-  setHardwareType: (hardwareType: string) => void;
-  setHardwareName: (hardwareName: string) => void;
+  anchors: Node[];
+  tags: Node[];
+  setNodeId: (nodeId: string) => void;
+  setNodeType: (nodeType: string) => void;
+  setNodeName: (nodeName: string) => void;
   setHasColorDelete: (hasColorDelete: boolean) => void;
   setOpenDialog: (openDialog: boolean) => void;
   setOpenDelete: (openDelete: boolean) => void;
@@ -48,9 +48,9 @@ export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
     setAddType,
     anchors,
     tags,
-    setHardwareId,
-    setHardwareType,
-    setHardwareName,
+    setNodeId,
+    setNodeType,
+    setNodeName,
     setHasColorDelete,
     setOpenDialog,
     setOpenDelete
@@ -95,17 +95,17 @@ export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
       preventDefault: () => void;
       stopPropagation: () => void;
     },
-    hardwareId: string,
-    hardwareType: string,
-    hardwareName: string,
+    nodeId: string,
+    nodeType: string,
+    nodeName: string,
     color: string,
   ): void {
     e.preventDefault();
     e.stopPropagation();
-    setHardwareId(hardwareId);
-    setHardwareType(hardwareType);
-    setHardwareName(hardwareName);
-    if (hardwareType === "anchor") {
+    setNodeId(nodeId);
+    setNodeType(nodeType);
+    setNodeName(nodeName);
+    if (nodeType === "anchor") {
       const colorCount: number = anchors.filter(anchor => anchor.networkColor === color).length;
       if (colorCount === 1) {
         setHasColorDelete(true);
@@ -114,7 +114,7 @@ export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
         setHasColorDelete(false);
       }
     }
-    else if (hardwareType === "tag") {
+    else if (nodeType === "tag") {
       const colorCount: number = tags.filter(tag => tag.networkColor === color).length;
       if (colorCount === 1) {
         setHasColorDelete(true);
@@ -212,7 +212,7 @@ export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
         </>
       }
       <NavItem>
-        <HardwareListToggle hasSubMenu={hasAnchorsSubMenu}>
+        <NodeListToggle hasSubMenu={hasAnchorsSubMenu}>
           {hasAnchorsSubMenu &&
             <FontAwesomeIcon
               icon={collapseAnchors ? faCaretRight : faCaretDown}
@@ -227,15 +227,15 @@ export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
               setAddType("Anchor")
             }}
           />
-        </HardwareListToggle>
+        </NodeListToggle>
         {hasAnchorsSubMenu &&
-          <HardwareSubMenu
+          <NodeSubMenu
             collapse={collapseAnchors}
             length={anchors.length}
           >
             {anchors.map((anchor) =>
               <li key={anchor.id}>
-                <HardwareList>
+                <NodeList>
                   {anchor.name.length > 18 ?
                     anchor.name.slice(0, 18) + "..."
                     :
@@ -256,14 +256,14 @@ export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
                       );
                     }}
                   />
-                </HardwareList>
+                </NodeList>
               </li>
             )}
-          </HardwareSubMenu>
+          </NodeSubMenu>
         }
       </NavItem>
       <NavItem>
-        <HardwareListToggle hasSubMenu={hasTagsSubMenu}>
+        <NodeListToggle hasSubMenu={hasTagsSubMenu}>
           {hasTagsSubMenu &&
             <FontAwesomeIcon
               icon={collapseTags ? faCaretRight : faCaretDown}
@@ -278,15 +278,15 @@ export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
               setAddType("Tag")
             }}
           />
-        </HardwareListToggle>
+        </NodeListToggle>
         {hasTagsSubMenu &&
-          <HardwareSubMenu
+          <NodeSubMenu
             collapse={collapseTags}
             length={tags.length}
           >
             {tags.map((tag) =>
               <li key={tag.id}>
-                <HardwareList>
+                <NodeList>
                   {tag.name.length > 18 ?
                     tag.name.slice(0, 18) + "..."
                     :
@@ -307,10 +307,10 @@ export const SideNavbarTypeB = (props: SideNavbarTypeBProps) => {
                       );
                     }}
                   />
-                </HardwareList>
+                </NodeList>
               </li>
             )}
-          </HardwareSubMenu>
+          </NodeSubMenu>
         }
       </NavItem>
     </Navbar>

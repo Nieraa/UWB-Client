@@ -11,7 +11,7 @@ export interface PassAndUpdateProjects {
   setProjects: (projects: Project[]) => void;
 }
 
-export interface Hardware {
+export interface Node {
   id: string,
   name: string,
   ipAddress: string,

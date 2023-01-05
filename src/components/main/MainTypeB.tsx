@@ -7,15 +7,15 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Params, useParams } from "react-router-dom";
-import { Hardware, Project } from "../../types";
+import { Node, Project } from "../../types";
 import { MenuItem, MenuList, Popover } from "@mui/material";
 import { useState } from "react";
 
 interface MainTypeBProps {
   projects: Project[];
   pathname: string;
-  anchors: Hardware[];
-  tags: Hardware[];
+  anchors: Node[];
+  tags: Node[];
   setAddType: (addType: string) => void;
   setOpenDialog: (openDialog: boolean) => void;
 }

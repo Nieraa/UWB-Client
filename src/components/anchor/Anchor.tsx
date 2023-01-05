@@ -3,10 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Draggable from 'react-draggable';
 import { useRef, useState } from 'react';
-import { Hardware } from '../../types';
+import { Node } from '../../types';
 
 interface AnchorProps {
-  anchor: Hardware,
+  anchor: Node,
   disabled: boolean,
   scale: number,
 }

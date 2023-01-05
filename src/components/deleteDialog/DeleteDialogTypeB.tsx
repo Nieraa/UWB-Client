@@ -14,16 +14,16 @@ import {
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { deleteHardware } from "../../services/ProjectsService";
-import { Hardware } from "../../types";
+import { deleteNode } from "../../services/ProjectsService";
+import { Node } from "../../types";
 
 interface DeleteDialogTypeAProps {
   projectId: string;
-  hardwareId: string;
-  hardwareType: string;
-  hardwareName: string;
+  nodeId: string;
+  nodeType: string;
+  nodeName: string;
   openDelete: boolean;
-  setHardwares: (projects: Hardware[]) => void;
+  setNodes: (projects: Node[]) => void;
   hasColorDelete: boolean;
   setColors?: (colors: string[]) => void;
   setGroup?: (group: number) => void;
@@ -34,11 +34,11 @@ interface DeleteDialogTypeAProps {
 function DeleteDialogTypeA(props: DeleteDialogTypeAProps) {
   const {
     projectId,
-    hardwareId,
-    hardwareType,
-    hardwareName,
+    nodeId,
+    nodeType,
+    nodeName,
     openDelete,
-    setHardwares,
+    setNodes,
     hasColorDelete,
     setColors,
     setGroup,
@@ -73,7 +73,7 @@ function DeleteDialogTypeA(props: DeleteDialogTypeAProps) {
           </Title>
           <Detail>
             Do you really want to delete&nbsp;
-            <Name>"{hardwareName}"</Name>
+            <Name>"{nodeName}"</Name>
             ? This process cannot be undone.
           </Detail>
         </ContentWrapper>
@@ -90,11 +90,11 @@ function DeleteDialogTypeA(props: DeleteDialogTypeAProps) {
           variant="contained"
           onClick={() => {
             if (hasColorDelete && setColors && setGroup && setNetworkSsids) {
-              deleteHardware(
+              deleteNode(
                 projectId,
-                hardwareId,
-                hardwareType,
-                setHardwares,
+                nodeId,
+                nodeType,
+                setNodes,
                 setOpenDelete,
                 hasColorDelete,
                 setColors,
@@ -103,11 +103,11 @@ function DeleteDialogTypeA(props: DeleteDialogTypeAProps) {
               )
             }
             else {
-              deleteHardware(
+              deleteNode(
                 projectId,
-                hardwareId,
-                hardwareType,
-                setHardwares,
+                nodeId,
+                nodeType,
+                setNodes,
                 setOpenDelete,
                 hasColorDelete
               )
