@@ -1,12 +1,12 @@
 import { AppBar } from '../components/appBar/AppBar';
-import { SideNavbarTypeA } from '../components/sideNavbar/SideNavbarTypeA';
-import { MainTypeA } from '../components/main/MainTypeA';
-import { useState } from 'react';
+// import { SideNavbarTypeA } from '../components/sideNavbar/SideNavbarTypeA';
+// import { MainTypeA } from '../components/main/MainTypeA';
+// import { useState } from 'react';
 import { PassAndUpdateProjects } from '../types';
 
 function History(props: PassAndUpdateProjects) {
-  const { projects, setProjects } = props;
-  const [open, setOpen] = useState<boolean>(false);
+  // const { projects, setProjects } = props;
+  // const [open, setOpen] = useState<boolean>(false);
 
   return (
     <div>
