@@ -4,7 +4,8 @@ import Realtime from './pages/Realtime';
 import History from './pages/History';
 import {
   Routes,
-  Route
+  Route,
+  Navigate
 } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getProjects } from "./services/ProjectsService";
@@ -19,21 +20,23 @@ function App() {
 
   return (
     <Routes>
+      <Route path="/" element={<Navigate to="/projects" />}>
+      </Route>
       <Route
-        path="/"
-        element={<Projects projects={projects} setProjects={setProjects}/>}
+          path="/projects"
+          element={<Projects projects={projects} setProjects={setProjects} />}
+        />
+      <Route
+        path="/projects/:projectId/planner"
+        element={<Planner projects={projects} setProjects={setProjects} />}
       />
       <Route
-        path="/:projectId/planner"
-        element={<Planner projects={projects} setProjects={setProjects}/>}
+        path="/projects/:projectId/realtime"
+        element={<Realtime projects={projects} setProjects={setProjects} />}
       />
       <Route
-        path="/:projectId/realtime"
-        element={<Realtime projects={projects} setProjects={setProjects}/>}
-      />
-      <Route
-        path="/:projectId/history"
-        element={<History projects={projects} setProjects={setProjects}/>}
+        path="/projects/:projectId/history"
+        element={<History projects={projects} setProjects={setProjects} />}
       />
     </Routes>
   );
