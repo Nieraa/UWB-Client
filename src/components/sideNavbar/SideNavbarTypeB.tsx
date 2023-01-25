@@ -21,52 +21,40 @@ import {
   faPen,
   faTrashCan
 } from "@fortawesome/free-solid-svg-icons";
-import {
-  Params,
-  useLocation,
-  useParams
-} from "react-router-dom";
 import { useState } from "react";
-import { Node, Project } from "../../types";
+import { useLocation } from "react-router-dom";
+import { Project, Node } from "../../types";
 
 interface SideNavbarTypeBProps {
+  projectId: string;
+  roomPlanId: string;
   projects: Project[];
-  setAddType: (addType: string) => void;
   anchors: Node[];
-  tags: Node[];
-  setNodeId: (nodeId: string) => void;
-  setNodeType: (nodeType: string) => void;
-  setNodeName: (nodeName: string) => void;
-  setHasColorDelete: (hasColorDelete: boolean) => void;
-  setOpenDialog: (openDialog: boolean) => void;
+  setCurrentAnchor: (anchor: Node) => void;
+  setOpenCreate: (openCreate: boolean) => void;
+  setOpenUpdate: (openUpdate: boolean) => void;
   setOpenDelete: (openDelete: boolean) => void;
 }
 
 function SideNavbarTypeB(props: SideNavbarTypeBProps) {
   const {
+    projectId,
+    roomPlanId,
     projects,
-    setAddType,
     anchors,
-    tags,
-    setNodeId,
-    setNodeType,
-    setNodeName,
-    setHasColorDelete,
-    setOpenDialog,
+    setCurrentAnchor,
+    setOpenCreate,
+    setOpenUpdate,
     setOpenDelete
   } = props;
 
   const [collapseProjects, setCollapseProjects] = useState<boolean>(true);
   const [collapseAnchors, setCollapseAnchors] = useState<boolean>(true);
-  const [collapseTags, setCollapseTags] = useState<boolean>(true);
 
-  const params: Readonly<Params<string>> = useParams();
   const location = useLocation();
 
-  const hasProjectId: boolean = params.projectId ? true : false;
-  const hasProjectsSubMenu: boolean = projects.length > 0 ? true : false;
-  const hasAnchorsSubMenu: boolean = anchors.length > 0 ? true : false;
-  const hasTagsSubMenu: boolean = tags.length > 0 ? true : false;
+  const hasProjectsSubMenu: boolean = projects.length !== 0 ? true : false;
+  const hasAnchorsSubMenu: boolean = anchors.length !== 0 ? true : false;
 
   function handleCollapse(
     e: {
@@ -74,7 +62,8 @@ function SideNavbarTypeB(props: SideNavbarTypeBProps) {
       stopPropagation: () => void;
     },
     collapse: boolean,
-    setCollapse: (collapse: boolean) => void): void {
+    setCollapse: (collapse: boolean) => void
+  ): void {
     setCollapse(!collapse);
     e.preventDefault();
     e.stopPropagation();
@@ -87,7 +76,20 @@ function SideNavbarTypeB(props: SideNavbarTypeBProps) {
     }): void {
     e.preventDefault();
     e.stopPropagation();
-    setOpenDialog(true);
+    setOpenCreate(true);
+  }
+
+  function handleUpdate(
+    e: {
+      preventDefault: () => void;
+      stopPropagation: () => void;
+    },
+    anchor: Node
+  ) {
+    e.preventDefault();
+    e.stopPropagation();
+    setCurrentAnchor(anchor);
+    setOpenUpdate(true);
   }
 
   function handleDelete(
@@ -95,34 +97,11 @@ function SideNavbarTypeB(props: SideNavbarTypeBProps) {
       preventDefault: () => void;
       stopPropagation: () => void;
     },
-    nodeId: string,
-    nodeType: string,
-    nodeName: string,
-    color: string,
+    anchor: Node
   ): void {
     e.preventDefault();
     e.stopPropagation();
-    setNodeId(nodeId);
-    setNodeType(nodeType);
-    setNodeName(nodeName);
-    if (nodeType === "anchor") {
-      const colorCount: number = anchors.filter(anchor => anchor.networkColor === color).length;
-      if (colorCount === 1) {
-        setHasColorDelete(true);
-      }
-      else {
-        setHasColorDelete(false);
-      }
-    }
-    else if (nodeType === "tag") {
-      const colorCount: number = tags.filter(tag => tag.networkColor === color).length;
-      if (colorCount === 1) {
-        setHasColorDelete(true);
-      }
-      else {
-        setHasColorDelete(false);
-      }
-    }
+    setCurrentAnchor(anchor);
     setOpenDelete(true);
   }
 
@@ -130,10 +109,9 @@ function SideNavbarTypeB(props: SideNavbarTypeBProps) {
     <Navbar>
       <NavItem>
         <NavLink
-          to="/"
-          $focusMenu={location.pathname === '/'}
+          to="/projects"
+          $focusMenu={projectId === ""}
           $hasSubMenu={hasProjectsSubMenu}
-          $hasProjectId={hasProjectId}
         >
           {hasProjectsSubMenu &&
             <FontAwesomeIcon
@@ -143,12 +121,6 @@ function SideNavbarTypeB(props: SideNavbarTypeBProps) {
           }
           <FontAwesomeIcon icon={faFolderOpen} />
           Projects
-          {!hasProjectId &&
-            <FontAwesomeIcon
-              icon={faPlus}
-              onClick={handleAdd}
-            />
-          }
         </NavLink>
         {hasProjectsSubMenu &&
           <SubMenu
@@ -158,15 +130,17 @@ function SideNavbarTypeB(props: SideNavbarTypeBProps) {
             {projects.map((project) =>
               <li key={project.id}>
                 <SubMenuLink
-                  to={`/${project.id}/planner`}
-                  $focusMenu={hasProjectId && params.projectId === project.id ? true : false}
-                  onClick={() => hasProjectId && params.projectId !== project.id && setCollapseProjects(true)}
+                  to={`/projects/${project.id}/room-plans`}
+                  $focusMenu={project.id === projectId}
+                  onClick={() => {
+                    setCollapseProjects(true);
+                  }}
                 >
                   <FontAwesomeIcon icon={faFileLines} />
-                  {project.projectName.length > 18 ?
-                    project.projectName.slice(0, 18) + "..."
+                  {project.name.length > 14 ?
+                    project.name.slice(0, 14) + "..."
                     :
-                    project.projectName
+                    project.name
                   }
                 </SubMenuLink>
               </li>
@@ -174,43 +148,37 @@ function SideNavbarTypeB(props: SideNavbarTypeBProps) {
           </SubMenu>
         }
       </NavItem>
-      {params.projectId &&
-        <>
-          <NavItem>
-            <NavLink
-              to={`/${params.projectId}/planner`}
-              $focusMenu={location.pathname !== '/' && location.pathname.slice(params.projectId.length + 2) === 'planner'}
-              $hasSubMenu={false}
-              $hasProjectId={true}
-            >
-              <FontAwesomeIcon icon={faPenToSquare} />
-              Planner
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              to={`/${params.projectId}/realtime`}
-              $focusMenu={location.pathname !== '/' && location.pathname.slice(params.projectId.length + 2) === 'realtime'}
-              $hasSubMenu={false}
-              $hasProjectId={true}
-            >
-              <FontAwesomeIcon icon={faMapLocationDot} />
-              Real-time Tracking
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              to={`/${params.projectId}/history`}
-              $focusMenu={location.pathname !== '/' && location.pathname.slice(params.projectId.length + 2) === 'history'}
-              $hasSubMenu={false}
-              $hasProjectId={true}
-            >
-              <FontAwesomeIcon icon={faTable} />
-              Location Log
-            </NavLink>
-          </NavItem>
-        </>
-      }
+
+      <NavItem>
+        <NavLink
+          to={`/projects/${projectId}/room-plans/${roomPlanId}/planner`}
+          $focusMenu={location.pathname.slice(projectId.length + 43) === 'planner'}
+          $hasSubMenu={false}
+        >
+          <FontAwesomeIcon icon={faPenToSquare} />
+          Planner
+        </NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink
+          to={`/projects/${projectId}/room-plans/${roomPlanId}/realtime`}
+          $focusMenu={location.pathname.slice(projectId.length + 43) === 'realtime'}
+          $hasSubMenu={false}
+        >
+          <FontAwesomeIcon icon={faMapLocationDot} />
+          Real-time Tracking
+        </NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink
+          to={`/projects/${projectId}/room-plans/${roomPlanId}/history`}
+          $focusMenu={location.pathname.slice(projectId.length + 43) === 'history'}
+          $hasSubMenu={false}
+        >
+          <FontAwesomeIcon icon={faTable} />
+          Location Log
+        </NavLink>
+      </NavItem>
       <NavItem>
         <NodeListToggle hasSubMenu={hasAnchorsSubMenu}>
           {hasAnchorsSubMenu &&
@@ -222,10 +190,7 @@ function SideNavbarTypeB(props: SideNavbarTypeBProps) {
           Anchors
           <FontAwesomeIcon
             icon={faPlus}
-            onClick={(e) => {
-              handleAdd(e);
-              setAddType("Anchor")
-            }}
+            onClick={handleAdd}
           />
         </NodeListToggle>
         {hasAnchorsSubMenu &&
@@ -236,24 +201,21 @@ function SideNavbarTypeB(props: SideNavbarTypeBProps) {
             {anchors.map((anchor) =>
               <li key={anchor.id}>
                 <NodeList>
-                  {anchor.name.length > 18 ?
-                    anchor.name.slice(0, 18) + "..."
+                  {anchor.name.length > 14 ?
+                    anchor.name.slice(0, 14) + "..."
                     :
                     anchor.name
                   }
                   <FontAwesomeIcon
                     icon={faPen}
+                    onClick={(e) => {
+                      handleUpdate(e,anchor);
+                    }}
                   />
                   <FontAwesomeIcon
                     icon={faTrashCan}
                     onClick={(e) => {
-                      handleDelete(
-                        e,
-                        anchor.id,
-                        "anchor",
-                        anchor.name,
-                        anchor.networkColor
-                      );
+                      handleDelete(e,anchor);
                     }}
                   />
                 </NodeList>
@@ -262,59 +224,8 @@ function SideNavbarTypeB(props: SideNavbarTypeBProps) {
           </NodeSubMenu>
         }
       </NavItem>
-      <NavItem>
-        <NodeListToggle hasSubMenu={hasTagsSubMenu}>
-          {hasTagsSubMenu &&
-            <FontAwesomeIcon
-              icon={collapseTags ? faCaretRight : faCaretDown}
-              onClick={(e) => handleCollapse(e, collapseTags, setCollapseTags)}
-            />
-          }
-          Tags
-          <FontAwesomeIcon
-            icon={faPlus}
-            onClick={(e) => {
-              handleAdd(e);
-              setAddType("Tag")
-            }}
-          />
-        </NodeListToggle>
-        {hasTagsSubMenu &&
-          <NodeSubMenu
-            collapse={collapseTags}
-            length={tags.length}
-          >
-            {tags.map((tag) =>
-              <li key={tag.id}>
-                <NodeList>
-                  {tag.name.length > 18 ?
-                    tag.name.slice(0, 18) + "..."
-                    :
-                    tag.name
-                  }
-                  <FontAwesomeIcon
-                    icon={faPen}
-                  />
-                  <FontAwesomeIcon
-                    icon={faTrashCan}
-                    onClick={(e) => {
-                      handleDelete(
-                        e,
-                        tag.id,
-                        "tag",
-                        tag.name,
-                        tag.networkColor
-                      );
-                    }}
-                  />
-                </NodeList>
-              </li>
-            )}
-          </NodeSubMenu>
-        }
-      </NavItem>
-    </Navbar>
+    </Navbar >
   );
-};
+}
 
 export default SideNavbarTypeB;

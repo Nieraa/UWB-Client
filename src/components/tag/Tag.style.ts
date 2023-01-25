@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import '../../theme/Theme.css';
 
-export const Element = styled.div<{ tagColor: string }>`
+export const Element = styled.div`
   width: 40px;
   height: 40px;
   color: var(--white);
@@ -10,7 +10,7 @@ export const Element = styled.div<{ tagColor: string }>`
   text-align: center;
   position: absolute;
   border-radius: 20%;
-  background-color: ${(props) => (props.tagColor)};
+  background-color: var(--light-green);
 `;
 
 export const Text = styled.span<{ textWidth: number }>`

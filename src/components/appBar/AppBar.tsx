@@ -19,6 +19,6 @@ function AppBar() {
       </NavBrand>
     </TopNavbar>
   );
-};
+}
 
 export default AppBar;

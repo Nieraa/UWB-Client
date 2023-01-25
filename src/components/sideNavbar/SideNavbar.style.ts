@@ -9,7 +9,6 @@ export const Navbar = styled.ul`
   top: 60px;
   margin: 0;
   padding: 0;
-  border-top: 1px solid var(--grey100);
   border-bottom: 1px solid var(--grey100);
   background-color: white;
   overflow-x: hidden;
@@ -36,7 +35,7 @@ export const Navbar = styled.ul`
 export const NavItem = styled.li`
 `;
 
-export const NavLink = styled(Link) <{ $focusMenu: boolean, $hasSubMenu: boolean, $hasProjectId: boolean }>`
+export const NavLink = styled(Link) <{ $focusMenu: boolean, $hasSubMenu: boolean }>`
   color: ${(props) => (props.$focusMenu ? "var(--blue)" : "var(--black)")};
   background-color: ${(props) => (props.$focusMenu ? "var(--grey50)" : "var(--white)")};
   text-decoration: none;
@@ -66,16 +65,6 @@ export const NavLink = styled(Link) <{ $focusMenu: boolean, $hasSubMenu: boolean
           width: 27px;
         }
       `}
-  
-  ${({ $hasProjectId }) =>
-    !$hasProjectId &&
-    css`
-        svg:last-child {
-          margin-left: auto;
-          margin-right: 0;
-          width: 13px;
-        }
-      `}
 `;
 
 export const SubMenuLink = styled(Link) <{ $focusMenu: boolean }>`
@@ -96,7 +85,6 @@ export const SubMenuLink = styled(Link) <{ $focusMenu: boolean }>`
   }
 
   svg {
-    margin-right: 16px;
     width: 24px;
     color: var(--primary);
   }
@@ -108,6 +96,10 @@ export const SubMenuLink = styled(Link) <{ $focusMenu: boolean }>`
 
   svg:last-child {
     margin-right: 0px;
+  }
+
+  svg:first-child {
+    margin-right: 16px;
   }
 `;
 

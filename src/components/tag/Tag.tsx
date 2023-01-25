@@ -6,13 +6,21 @@ import { useRef, useState } from 'react';
 import { Node } from '../../types';
 
 interface TagProps {
+  xOrigin: number,
+  yOrigin: number,
   tag: Node,
   disabled: boolean,
   scale: number,
 }
 
 export const Tag = (props: TagProps) => {
-  const { tag, disabled, scale } = props;
+  const { 
+    xOrigin,
+    yOrigin,
+    tag, 
+    disabled, 
+    scale 
+  } = props;
 
   const [x, setX] = useState<number>(tag.x * 100);
   const [y, setY] = useState<number>(tag.y * 100);
@@ -40,7 +48,7 @@ export const Tag = (props: TagProps) => {
     <Draggable
       nodeRef={nodeRef}
       defaultPosition={{ x: tag.x * 100, y: -tag.y * 100 }}
-      positionOffset={{ x: "calc(50vw - 170px)", y: "calc(50vh - 80px)" }}
+      positionOffset={{ x: `calc(50vw - 170px + ${xOrigin * 100}px)`, y: `calc(50vh - 80px - ${yOrigin * 100}px)` }}
       onDrag={(e, data) => {
         setX(Math.round(data.x));
         setY(Math.round(-data.y));
@@ -53,7 +61,7 @@ export const Tag = (props: TagProps) => {
           {tag.name}<br />
           {`(${x / 100}, ${y / 100}, ${z / 100})`}
         </Text>
-        <Element tagColor={tag.networkColor}>
+        <Element>
           <FontAwesomeIcon icon={faPlus} />
         </Element>
       </div>

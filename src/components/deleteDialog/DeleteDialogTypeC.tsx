@@ -14,21 +14,25 @@ import {
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { Project } from "../../types";
-import { deleteProject } from "../../services/ProjectsService";
+import { Node } from "../../types";
+import { deleteAnchor } from "../../services/AnchorsService";
 
-interface DeleteDialogTypeAProps {
-  currentProject: Project;
+interface DeleteDialogTypeCProps {
+  projectId: string;
+  roomPlanId: string;
+  currentAnchor: Node;
   openDelete: boolean;
-  setProjects: (projects: Project[]) => void;
+  setAnchors: (anchors: Node[]) => void;
   setOpenDelete: (openDelete: boolean) => void;
 }
 
-function DeleteDialogTypeA(props: DeleteDialogTypeAProps) {
+function DeleteDialogTypeC(props: DeleteDialogTypeCProps) {
   const {
-    currentProject,
+    projectId,
+    roomPlanId,
+    currentAnchor,
     openDelete,
-    setProjects,
+    setAnchors,
     setOpenDelete
   } = props;
 
@@ -59,7 +63,7 @@ function DeleteDialogTypeA(props: DeleteDialogTypeAProps) {
           </Title>
           <Detail>
             Do you really want to delete&nbsp;
-            <Name>"{currentProject.name}"</Name>
+            <Name>"{currentAnchor.name}"</Name>
             ? This process cannot be undone.
           </Detail>
         </ContentWrapper>
@@ -75,9 +79,11 @@ function DeleteDialogTypeA(props: DeleteDialogTypeAProps) {
           color="error"
           variant="contained"
           onClick={() =>
-            deleteProject(
-              currentProject.id,
-              setProjects,
+            deleteAnchor(
+              projectId,
+              roomPlanId,
+              currentAnchor.id,
+              setAnchors,
               setOpenDelete
             )
           }
@@ -89,4 +95,4 @@ function DeleteDialogTypeA(props: DeleteDialogTypeAProps) {
   );
 }
 
-export default DeleteDialogTypeA;
+export default DeleteDialogTypeC;

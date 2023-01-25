@@ -23,7 +23,7 @@ export const maxLayout = {
   xxl: `screen and (max-width: ${size.xxl - 0.02}px)`,
   xxxl: `screen and (max-width: ${size.xxxl - 0.02}px)`,
   xxxxl: `screen and (max-width: ${size.xxxxl - 0.02}px)`,
-};
+}
 
 // Show when width < selected size
 export const minLayout = {
@@ -37,4 +37,4 @@ export const minLayout = {
   xxl: `screen and (min-width: ${size.xxl}px)`,
   xxxl: `screen and (min-width: ${size.xxxl}px)`,
   xxxxl: `screen and (min-width: ${size.xxxxl}px)`,
-};
+}

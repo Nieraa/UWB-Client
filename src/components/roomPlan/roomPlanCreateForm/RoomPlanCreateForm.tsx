@@ -1,49 +1,47 @@
 import {
   CancelButton,
-  ImageErrorHelperText
-} from "./ProjectCreateForm.style";
+  ImageErrorHelperText,
+} from "./RoomPlanCreateForm.style";
 import {
-  Grid,
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
   Button,
-  FormHelperText,
+  TextField,
+  Grid,
   Input,
-  TextField
+  FormHelperText
 } from "@mui/material";
 import FileUploadIcon from '@mui/icons-material/FileUpload';
-import { createRef, useState } from "react";
+import {
+  useState,
+  createRef
+} from "react";
+import {
+  NavigateFunction,
+  useNavigate
+} from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Compress from "react-image-file-resizer";
-import { Project } from "../../types";
-import { createProject } from "../../services/ProjectsService";
-import { NavigateFunction, useNavigate } from "react-router-dom";
+import { RoomPlan } from "../../../types";
+import { createRoomPlan } from "../../../services/RoomPlansService";
 
-const validationSchema = yup.object({
-  projectName: yup
-    .string()
-    .required("Please enter project name"),
-  l: yup
-    .number().typeError("Length must be number")
-    .min(0, "Length must be positive")
-    .required("Please enter length"),
-  w: yup
-    .number().typeError("Width must be number")
-    .min(0, "Length must be positive")
-    .required("Please enter width"),
-});
-
-interface ProjectCreateFormProps {
-  setProjects: (projects: Project[]) => void;
+interface RoomPlanCreateFormProps {
+  projectId: string;
   openCreate: boolean;
+  setRoomPlans: (roomPlans: RoomPlan[]) => void;
   setOpenCreate: (openCreate: boolean) => void;
 }
 
-function ProjectCreateForm(props: ProjectCreateFormProps) {
-  const { setProjects, openCreate, setOpenCreate } = props;
+function RoomPlanCreateForm(props: RoomPlanCreateFormProps) {
+  const {
+    projectId,
+    openCreate,
+    setRoomPlans,
+    setOpenCreate
+  } = props;
 
   const [image, _setImage] = useState<any>("");
   const [imageName, setImageName] = useState<string>("No file chosen");
@@ -52,36 +50,62 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
 
   const inputFileRef = createRef();
 
+  const validationSchema = yup.object({
+    name: yup
+      .string()
+      .required("Please enter room plan name"),
+    xRatio: yup
+      .number().typeError("X Ratio must be number")
+      .min(0, "X Ratio must be positive")
+      .required("Please enter X Ratio"),
+    yRatio: yup
+      .number().typeError("Y Ratio must be number")
+      .min(0, "Y Ratio must be positive")
+      .required("Please enter Y Ratio"),
+    xOrigin: yup
+      .number().typeError("X Origin must be number")
+      .min(0, "X Origin must be positive")
+      .required("Please enter X Origin"),
+    yOrigin: yup
+      .number().typeError("Y Origin must be number")
+      .min(0, "Y Origin must be positive")
+      .required("Please enter Y Origin")
+  });
+
   const formik = useFormik({
     initialValues: {
-      projectName: "Untitled",
-      l: 0,
-      w: 0,
+      name: "Untitled",
+      xRatio: 0,
+      yRatio: 0,
+      xOrigin: 0,
+      yOrigin: 0
     },
     validationSchema,
     onSubmit: (values) => {
-      const projectData = {
-        projectName: values.projectName,
-        imgUrl: image,
-        l: Number(values.l),
-        w: Number(values.w),
+      const roomPlanData = {
+        name: values.name,
+        image: image,
+        xRatio: Number(values.xRatio),
+        yRatio: Number(values.yRatio),
+        xOrigin: Number(values.xOrigin),
+        yOrigin: Number(values.yOrigin)
       };
       if (image) {
-        createProject(projectData, setProjects, navigate);
+        createRoomPlan(projectId, roomPlanData, setRoomPlans, navigate);
       }
       else {
         setImageValidation(true);
       }
     }
-  })
+  });
 
   function handleClick(): void {
     setImage(image);
-  };
+  }
 
   function setImage(newImage: any): void {
     _setImage(newImage);
-  };
+  }
 
   function handleOnChange(event: any): void {
     const newImage = event.target?.files?.[0];
@@ -107,7 +131,7 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
     }
     catch (err) {
     }
-  };
+  }
 
   function handleClose(): void {
     setOpenCreate(false);
@@ -115,7 +139,7 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
     formik.resetForm();
     setImage("");
     setImageName("No file chosen");
-  };
+  }
 
   return (
     <Dialog
@@ -123,19 +147,19 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
       onClose={handleClose}
       fullWidth
     >
-      <DialogTitle>Create Project</DialogTitle>
+      <DialogTitle>Create Room plan</DialogTitle>
       <form onSubmit={formik.handleSubmit}>
         <DialogContent dividers>
           <TextField
             margin="dense"
-            id="project-name"
-            label="Project name"
-            name="projectName"
+            id="room-plan-name"
+            label="Room Plan name"
+            name="name"
             variant="outlined"
-            value={formik.values.projectName}
+            value={formik.values.name}
             onChange={formik.handleChange}
-            error={Boolean(formik.errors.projectName)}
-            helperText={formik.errors.projectName}
+            error={Boolean(formik.errors.name)}
+            helperText={formik.errors.name}
             fullWidth
             autoFocus
           />
@@ -143,14 +167,14 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
             <Grid item xs={6}>
               <TextField
                 margin="dense"
-                id="length"
-                label="Length: x (m)"
-                name="l"
+                id="x-ratio"
+                label="X Ratio (m)"
+                name="xRatio"
                 variant="outlined"
-                value={formik.values.l}
+                value={formik.values.xRatio}
                 onChange={formik.handleChange}
-                error={Boolean(formik.errors.l)}
-                helperText={formik.errors.l}
+                error={Boolean(formik.errors.xRatio)}
+                helperText={formik.errors.xRatio}
                 autoFocus
                 fullWidth
               />
@@ -158,14 +182,46 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
             <Grid item xs={6}>
               <TextField
                 margin="dense"
-                id="width"
-                label="Width: y (m)"
-                name="w"
+                id="y-ratio"
+                label="Y Ratio (m)"
+                name="yRatio"
                 variant="outlined"
-                value={formik.values.w}
+                value={formik.values.yRatio}
                 onChange={formik.handleChange}
-                error={Boolean(formik.errors.w)}
-                helperText={formik.errors.w}
+                error={Boolean(formik.errors.yRatio)}
+                helperText={formik.errors.yRatio}
+                autoFocus
+                fullWidth
+              />
+            </Grid>
+          </Grid>
+          <Grid container spacing={2}>
+            <Grid item xs={6}>
+              <TextField
+                margin="dense"
+                id="x-origin"
+                label="X Origin (m)"
+                name="xOrigin"
+                variant="outlined"
+                value={formik.values.xOrigin}
+                onChange={formik.handleChange}
+                error={Boolean(formik.errors.xOrigin)}
+                helperText={formik.errors.xOrigin}
+                autoFocus
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                margin="dense"
+                id="y-origin"
+                label="Y Origin (m)"
+                name="yOrigin"
+                variant="outlined"
+                value={formik.values.yOrigin}
+                onChange={formik.handleChange}
+                error={Boolean(formik.errors.yOrigin)}
+                helperText={formik.errors.yOrigin}
                 autoFocus
                 fullWidth
               />
@@ -186,8 +242,8 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
               variant="outlined"
               component="span"
               startIcon={<FileUploadIcon />}
-              fullWidth
               onClick={handleClick}
+              fullWidth
             >
               Upload room plan
             </Button>
@@ -227,4 +283,4 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
   );
 }
 
-export default ProjectCreateForm;
+export default RoomPlanCreateForm;

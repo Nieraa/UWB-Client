@@ -1,100 +1,63 @@
-import Canvas from "../canvas/Canvas";
 import {
   MainArea,
-  ProjectName,
-  AddElementButton
+  AddElementButton,
+  BreadcrumbsArea,
+  BreadcrumbLink,
+  BreadcrumbText
 } from "./Main.style";
+import RoomPlanList from "../roomPlan/roomPlanList/RoomPlanList";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { Params, useParams } from "react-router-dom";
-import { Node, Project } from "../../types";
-import { MenuItem, MenuList, Popover } from "@mui/material";
-import { useState } from "react";
+import { Project, RoomPlan } from "../../types";
+import { Breadcrumbs } from "@mui/material";
 
 interface MainTypeBProps {
-  projects: Project[];
-  pathname: string;
-  anchors: Node[];
-  tags: Node[];
-  setAddType: (addType: string) => void;
-  setOpenDialog: (openDialog: boolean) => void;
+  projectId: string,
+  roomPlans: RoomPlan[];
+  currentProject: Project;
+  setCurrentRoomPlan: (currentRoomPlan: RoomPlan) => void;
+  setOpenCreate: (openCreate: boolean) => void;
+  setOpenUpdate: (openUpdate: boolean) => void;
+  setOpenDelete: (openDelete: boolean) => void;
 }
 
-export const MainTypeB = (props: MainTypeBProps) => {
-  const { projects, pathname, anchors, tags, setOpenDialog, setAddType } = props;
+function MainTypeB(props: MainTypeBProps) {
+  const {
+    projectId,
+    roomPlans,
+    currentProject,
+    setCurrentRoomPlan,
+    setOpenCreate,
+    setOpenUpdate,
+    setOpenDelete
+  } = props;
 
-  const [anchorElMenu, setAnchorElMenu] = useState(null);
-
-  const openMenu = Boolean(anchorElMenu);
-
-  const params: Readonly<Params<string>> = useParams();
-  const project: Project = projects.length === 0 ?
-    {
-      id: params.projectId ? params.projectId : "",
-      projectName: "",
-      imgUrl: "",
-      l: 0,
-      w: 0,
-    } :
-    projects[projects.findIndex((element) => element.id === params.projectId)];
-
-
-  function handleClickOpenMenu(event: any): void {
-    setAnchorElMenu(event.currentTarget);
-  };
-
-  function handleCloseMenu(): void {
-    setAnchorElMenu(null);
-  };
-
-  function handleClickOpenDialog(type: string): void {
-    setAddType(type);
-    setOpenDialog(true);
-  };
+  function handleClickOpen(): void {
+    setOpenCreate(true);
+  }
 
   return (
     <MainArea>
-      <ProjectName>
-        {projects.length === 0 ? "" : project.projectName}
-      </ProjectName>
-      {pathname === 'planner' ?
-        <>
-          <Canvas
-            project={project}
-            anchors={anchors}
-            tags={tags}
-          />
-          <AddElementButton onClick={handleClickOpenMenu}>
-            <FontAwesomeIcon icon={faPlus} />
-          </AddElementButton>
-          <Popover
-            open={openMenu}
-            anchorEl={anchorElMenu}
-            onClose={handleCloseMenu}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'left',
-            }}
-            transformOrigin={{
-              vertical: 'bottom',
-              horizontal: 'right',
-            }}
-          >
-            <MenuList>
-              <MenuItem onClick={() => { handleClickOpenDialog("Anchor"); handleCloseMenu() }}>Add anchor</MenuItem>
-              <MenuItem onClick={() => { handleClickOpenDialog("Tag"); handleCloseMenu() }}>Add tag</MenuItem>
-            </MenuList>
-          </Popover>
-        </>
-        :
-        pathname === 'realtime' ?
-          <></>
-          :
-          pathname === 'history' ?
-            <></>
-            :
-            <></>
-      }
-    </MainArea >
+      <BreadcrumbsArea>
+        <Breadcrumbs aria-label="breadcrumb">
+          <BreadcrumbLink to="/projects">
+            Projects
+          </BreadcrumbLink>
+          <BreadcrumbText>{currentProject.name}</BreadcrumbText>
+        </Breadcrumbs>
+      </BreadcrumbsArea>
+      <RoomPlanList
+        projectId={projectId}
+        roomPlans={roomPlans}
+        setCurrentRoomPlan={setCurrentRoomPlan}
+        setOpenUpdate={setOpenUpdate}
+        setOpenDelete={setOpenDelete}
+      />
+      <AddElementButton onClick={handleClickOpen}>
+        <FontAwesomeIcon icon={faPlus} />
+      </AddElementButton>
+    </MainArea>
   );
-};
+}
+
+export default MainTypeB;

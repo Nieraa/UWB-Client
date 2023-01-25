@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import '../../theme/Theme.css';
 
@@ -10,16 +11,31 @@ export const MainArea = styled.div`
   background-color: var(--grey);
 `;
 
-export const ProjectName = styled.div`
-  width: 100%;
-  height: 28px;
-  padding: 16px;
+export const BreadcrumbText = styled.span`
   font-size: var(--subheading-text);
   font-weight: bold;
-  line-height: 28px;
-  text-align: center;
-  background-color: var(--light-primary);
   color: var(--primary);
+`;
+
+export const BreadcrumbLink = styled(Link)`
+  font-size: var(--subheading-text);
+  color: var(--primary);
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+export const BreadcrumbsArea = styled.div`
+  width: 100%;
+  height: 27px;
+  padding: 16px;
+  border-bottom: 1px solid var(--grey100);
+  font-size: var(--subheading-text);
+  font-weight: bold;
+  text-align: center;
+  color: var(--primary);
+  background-color: var(--white);
 `;
 
 export const AddElementButton = styled.button`

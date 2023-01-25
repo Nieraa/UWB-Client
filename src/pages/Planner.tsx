@@ -1,94 +1,92 @@
 import AppBar from '../components/appBar/AppBar';
 import SideNavbarTypeB from '../components/sideNavbar/SideNavbarTypeB';
-import { MainTypeB } from '../components/main/MainTypeB';
-import { useEffect, useState } from 'react';
-import { Node, PassAndUpdateProjects, Project } from '../types';
-import NodeCreateForm from '../components/nodeCreateForm/NodeCreateForm';
+import MainTypeC from '../components/main/MainTypeC';
+import AnchorCreateForm from '../components/anchor/anchorCreateForm/AnchorCreateForm';
+import AnchorUpdateForm from '../components/anchor/anchorUpdateForm/AnchorUpdateForm';
+import DeleteDialogTypeC from '../components/deleteDialog/DeleteDialogTypeC';
+import { useCallback, useEffect, useState } from 'react';
 import { Params, useParams } from 'react-router-dom';
-import { getNodes, getColors, getNetworkSsids } from '../services/ProjectsService';
-import DeleteDialogTypeB from '../components/deleteDialog/DeleteDialogTypeB';
+import { Project, RoomPlan, Node, PassAndUpdateAnchors } from '../types';
 
-function Planner(props: PassAndUpdateProjects) {
-  const { projects } = props;
-  const [addType, setAddType] = useState("");
-  const [anchors, setAnchors] = useState<Node[]>([]);
-  const [tags, setTags] = useState<Node[]>([]);
-  const [colors, setColors] = useState<string[]>([]);
-  const [group, setGroup] = useState(1);
-  const [networkSsids, setNetworkSsids] = useState<string[]>([]);
-  const [openDialog, setOpenDialog] = useState(false);
-  const [nodeId, setNodeId] = useState("");
-  const [nodeType, setNodeType] = useState("");
-  const [nodeName, setNodeName] = useState("");
+interface PlannerProps extends PassAndUpdateAnchors {
+  projectId: string;
+  roomPlanId: string;
+  projects: Project[];
+  currentProject: Project;
+  currentRoomPlan: RoomPlan;
+  currentAnchor: Node;
+  setCurrentAnchor: (currentAnchor: Node) => void;
+  setParams: (params: Readonly<Params<string>>) => void;
+}
+
+function Planner(props: PlannerProps) {
+  const {
+    projectId,
+    roomPlanId,
+    projects,
+    anchors,
+    currentProject,
+    currentRoomPlan,
+    currentAnchor,
+    setAnchors,
+    setCurrentAnchor,
+    setParams
+  } = props;
+
+  const [openCreate, setOpenCreate] = useState<boolean>(false);
+  const [openUpdate, setOpenUpdate] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
-  const [hasColorDelete, setHasColorDelete] = useState<boolean>(false);
 
   const params: Readonly<Params<string>> = useParams();
-  const project: Project = projects.length === 0 ?
-    {
-      id: params.projectId ? params.projectId : "",
-      projectName: "",
-      imgUrl: "",
-      l: 0,
-      w: 0,
-    } :
-    projects[projects.findIndex((element) => element.id === params.projectId)];
+
+  const SetNewParams = useCallback(() => {
+    setParams(params);
+  }, [params, setParams])
 
   useEffect(() => {
-    getNodes(project.id, "anchor", setAnchors, false);
-    getNodes(project.id, "tag", setTags, false);
-    getColors(project.id, setColors, setGroup);
-    getNetworkSsids(project.id, setNetworkSsids);
-  }, [project.id])
+    SetNewParams();
+  }, [params.roomPlanId, SetNewParams])
 
   return (
     <div>
       <AppBar />
       <SideNavbarTypeB
+        projectId={projectId}
+        roomPlanId={roomPlanId}
         projects={projects}
-        setAddType={setAddType}
         anchors={anchors}
-        tags={tags}
-        setNodeId={setNodeId}
-        setNodeType={setNodeType}
-        setNodeName={setNodeName}
-        setHasColorDelete={setHasColorDelete}
-        setOpenDialog={setOpenDialog}
+        setCurrentAnchor={setCurrentAnchor}
+        setOpenCreate={setOpenCreate}
+        setOpenUpdate={setOpenUpdate}
         setOpenDelete={setOpenDelete}
       />
-      <MainTypeB
-        projects={projects}
-        pathname={"planner"}
+      <MainTypeC
         anchors={anchors}
-        tags={tags}
-        setAddType={setAddType}
-        setOpenDialog={setOpenDialog}
+        currentProject={currentProject}
+        currentRoomPlan={currentRoomPlan}
+        setOpenCreate={setOpenCreate}
       />
-      <NodeCreateForm
-        projectId={project.id}
-        addType={addType}
-        colors={colors}
-        group={group}
-        networkSsids={networkSsids}
-        openDialog={openDialog}
+      <AnchorCreateForm
+        projectId={projectId}
+        roomPlanId={roomPlanId}
+        openCreate={openCreate}
         setAnchors={setAnchors}
-        setTags={setTags}
-        setColors={setColors}
-        setGroup={setGroup}
-        setNetworkSsids={setNetworkSsids}
-        setOpenDialog={setOpenDialog}
+        setOpenCreate={setOpenCreate}
       />
-      <DeleteDialogTypeB
-        projectId={project.id}
-        nodeId={nodeId}
-        nodeType={nodeType}
-        nodeName={nodeName}
+      <AnchorUpdateForm
+        projectId={projectId}
+        roomPlanId={roomPlanId}
+        currentAnchor={currentAnchor}
+        openUpdate={openUpdate}
+        setAnchors={setAnchors}
+        setOpenUpdate={setOpenUpdate}
+      />
+      <DeleteDialogTypeC
+        projectId={projectId}
+        roomPlanId={roomPlanId}
+        currentAnchor={currentAnchor}
         openDelete={openDelete}
-        setNodes={nodeType === "anchor" ? setAnchors : setTags}
-        hasColorDelete={hasColorDelete}
-        setColors={setColors}
-        setGroup={setGroup}
-        setNetworkSsids={setNetworkSsids}
+        setAnchors={setAnchors}
         setOpenDelete={setOpenDelete}
       />
     </div>

@@ -3,7 +3,7 @@ import {
   ProjectLink,
   ProjectName,
   ProjectNameWrapper
-} from "./ProjectList.style";
+} from "./RoomPlanList.style";
 import {
   Grid,
   Card,
@@ -14,49 +14,50 @@ import {
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { Project } from "../../types";
+import { RoomPlan } from "../../../types";
 
 
-interface ProjectListProps {
-  projects: Project[];
-  setProject: (project: Project) => void;
+interface RoomPlanListProps {
+  projectId: string,
+  roomPlans: RoomPlan[];
+  setCurrentRoomPlan: (currentRoomPlan: RoomPlan) => void;
   setOpenUpdate: (openUpdate: boolean) => void;
   setOpenDelete: (openDelete: boolean) => void;
 }
 
-function ProjectList(props: ProjectListProps) {
+function RoomPlanList(props: RoomPlanListProps) {
   const {
-    projects,
-    setProject,
+    projectId,
+    roomPlans,
+    setCurrentRoomPlan,
     setOpenUpdate,
     setOpenDelete
   } = props;
-
-
-  function handleDelete(
-    e: {
-      preventDefault: () => void;
-      stopPropagation: () => void;
-    },
-    project: Project
-  ): void {
-    e.preventDefault();
-    e.stopPropagation();
-    setProject(project)
-    setOpenDelete(true);
-  }
 
   function handleUpdate(
     e: {
       preventDefault: () => void;
       stopPropagation: () => void;
     },
-    project: Project
+    roomPlan: RoomPlan
   ) {
     e.preventDefault();
     e.stopPropagation();
-    setProject(project);
+    setCurrentRoomPlan(roomPlan);
     setOpenUpdate(true);
+  }
+
+  function handleDelete(
+    e: {
+      preventDefault: () => void;
+      stopPropagation: () => void;
+    },
+    roomPlan: RoomPlan
+  ): void {
+    e.preventDefault();
+    e.stopPropagation();
+    setCurrentRoomPlan(roomPlan);
+    setOpenDelete(true);
   }
 
   return (
@@ -67,43 +68,49 @@ function ProjectList(props: ProjectListProps) {
         px={5}
         py={3}
       >
-        {projects.map((project) =>
+        {roomPlans.map((roomPlan) =>
           <Grid item
             xs={12}
             md={6}
             lg={4}
             xl={3}
-            key={project.id}
+            key={roomPlan.id}
           >
             <Card>
               <CardActionArea>
-                <ProjectLink to={`/${project.id}/planner`}>
+                <ProjectLink
+                  to={`/projects/${projectId}/room-plans/${roomPlan.id}/planner`}
+                >
                   <CardMedia
                     component="img"
                     height="160"
-                    image={project.imgUrl}
-                    alt={project.projectName + " plan"}
-                  />
+                    image={roomPlan.image ?
+                      roomPlan.image
+                      :
+                      process.env.PUBLIC_URL + "/static/images/no_image.png"
+                    }
+                  alt={roomPlan.name + " plan"}
+                    />
                   <Divider />
                   <CardContent>
                     <ProjectNameWrapper>
                       <ProjectName>
-                        {project.projectName.length > 18 ?
-                          project.projectName.slice(0, 18) + "..."
+                        {roomPlan.name.length > 18 ?
+                          roomPlan.name.slice(0, 18) + "..."
                           :
-                          project.projectName
+                          roomPlan.name
                         }
                       </ProjectName>
                       <FontAwesomeIcon
                         icon={faPen}
                         onClick={(e) => {
-                          handleUpdate(e, project);
+                          handleUpdate(e, roomPlan);
                         }}
                       />
                       <FontAwesomeIcon
                         icon={faTrashCan}
                         onClick={(e) => {
-                          handleDelete(e, project);
+                          handleDelete(e, roomPlan);
                         }}
                       />
                     </ProjectNameWrapper>
@@ -116,6 +123,6 @@ function ProjectList(props: ProjectListProps) {
       </Grid>
     </ProjectWrapper >
   );
-};
+}
 
-export default ProjectList;
+export default RoomPlanList;

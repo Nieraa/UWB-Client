@@ -1,24 +1,31 @@
-import Anchor from '../anchor/Anchor';
-import { Tag } from '../tag/Tag';
+import { CenterPoint } from './Canvas.style';
+import AnchorNode from '../anchor/anchorNode/AnchorNode';
 import {
   TransformComponent,
   TransformWrapper
 } from "@pronestor/react-zoom-pan-pinch";
-import { useState } from 'react';
-import { Node, Project } from '../../types';
+import Draggable from 'react-draggable';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { useRef, useState } from 'react';
+import { RoomPlan, Node } from '../../types';
 
 interface CanvasProps {
-  project: Project;
+  currentRoomPlan: RoomPlan;
   anchors: Node[];
-  tags: Node[];
 }
 
 function Canvas(props: CanvasProps) {
-  const { project, anchors, tags } = props;
+  const {
+    currentRoomPlan,
+    anchors
+  } = props;
 
   const [pannable, setPannable] = useState<boolean>(false);
   const [cursor, setCursor] = useState<string>("default");
   const [scale, setScale] = useState<number>(1);
+
+  const nodeRef = useRef(null);
 
   onkeydown = function (ke) {
     if (ke.key === " ") {
@@ -61,30 +68,35 @@ function Canvas(props: CanvasProps) {
           cursor: cursor,
         }}>
           <img
-            width={project.l * 100}
-            height={project.w * 100}
+            width={currentRoomPlan.xRatio * 100}
+            height={currentRoomPlan.yRatio * 100}
             style={{
               position: "absolute",
-              top: `calc(50vh - 60px - ${project.w * 50}px)`,
-              left: `calc(50vw - 150px - ${project.l * 50}px)`,
+              top: `calc(50vh - 60px - ${currentRoomPlan.yRatio * 50}px)`,
+              left: `calc(50vw - 150px - ${currentRoomPlan.xRatio * 50}px)`,
               zIndex: 0,
             }}
-            src={project.imgUrl}
+            src={currentRoomPlan.image}
             alt="" />
 
-          {anchors.map((anchor) =>
-            <Anchor
-              key={anchor.id}
-              anchor={anchor}
-              disabled={pannable}
-              scale={scale}
-            />
-          )}
+          <Draggable
+            nodeRef={nodeRef}
+            defaultPosition={{ x: 0, y: 0 }}
+            positionOffset={{ x: `calc(50vw - 170px + ${currentRoomPlan.xOrigin * 100}px)`, y: `calc(50vh - 80px - ${currentRoomPlan.yOrigin * 100}px)` }}
+            disabled={true}
+            scale={scale}
+          >
+            <CenterPoint ref={nodeRef}>
+              <FontAwesomeIcon icon={faPlus} />
+            </CenterPoint>
+          </Draggable>
 
-          {tags.map((tag) =>
-            <Tag
-              key={tag.id}
-              tag={tag}
+          {anchors.map((anchor) =>
+            <AnchorNode
+              key={anchor.id}
+              xOrigin={currentRoomPlan.xOrigin}
+              yOrigin={currentRoomPlan.yOrigin}
+              anchor={anchor}
               disabled={pannable}
               scale={scale}
             />
@@ -93,6 +105,6 @@ function Canvas(props: CanvasProps) {
       </TransformComponent>
     </TransformWrapper>
   );
-};
+}
 
 export default Canvas;

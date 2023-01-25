@@ -1,15 +1,18 @@
-import ProjectList from "../projectList/ProjectList";
 import {
   MainArea,
-  AddElementButton
+  AddElementButton,
+  BreadcrumbText,
+  BreadcrumbsArea
 } from "./Main.style";
+import ProjectList from "../project/projectList/ProjectList";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Project } from "../../types";
+import { Breadcrumbs } from "@mui/material";
 
 interface MainTypeAProps {
   projects: Project[];
-  setProject: (project: Project) => void;
+  setCurrentProject: (currentProject: Project) => void;
   setOpenCreate: (openCreate: boolean) => void;
   setOpenUpdate: (openUpdate: boolean) => void;
   setOpenDelete: (openDelete: boolean) => void;
@@ -18,7 +21,7 @@ interface MainTypeAProps {
 function MainTypeA(props: MainTypeAProps) {
   const {
     projects,
-    setProject,
+    setCurrentProject,
     setOpenCreate,
     setOpenUpdate,
     setOpenDelete
@@ -26,13 +29,18 @@ function MainTypeA(props: MainTypeAProps) {
 
   function handleClickOpen(): void {
     setOpenCreate(true);
-  };
+  }
 
   return (
     <MainArea>
+      <BreadcrumbsArea>
+        <Breadcrumbs aria-label="breadcrumb">
+          <BreadcrumbText>Projects</BreadcrumbText>
+        </Breadcrumbs>
+      </BreadcrumbsArea>
       <ProjectList
         projects={projects}
-        setProject={setProject}
+        setCurrentProject={setCurrentProject}
         setOpenUpdate={setOpenUpdate}
         setOpenDelete={setOpenDelete}
       />

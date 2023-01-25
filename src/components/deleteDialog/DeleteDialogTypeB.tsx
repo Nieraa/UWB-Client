@@ -14,41 +14,29 @@ import {
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { deleteNode } from "../../services/ProjectsService";
-import { Node } from "../../types";
+import { RoomPlan } from "../../types";
+import { deleteRoomPlan } from "../../services/RoomPlansService";
 
-interface DeleteDialogTypeAProps {
+interface DeleteDialogTypeBProps {
   projectId: string;
-  nodeId: string;
-  nodeType: string;
-  nodeName: string;
+  currentRoomPlan: RoomPlan;
   openDelete: boolean;
-  setNodes: (projects: Node[]) => void;
-  hasColorDelete: boolean;
-  setColors?: (colors: string[]) => void;
-  setGroup?: (group: number) => void;
-  setNetworkSsids?: (networkSsids: string[]) => void;
+  setRoomPlans: (roomPlans: RoomPlan[]) => void;
   setOpenDelete: (openDelete: boolean) => void;
 }
 
-function DeleteDialogTypeA(props: DeleteDialogTypeAProps) {
+function DeleteDialogTypeB(props: DeleteDialogTypeBProps) {
   const {
     projectId,
-    nodeId,
-    nodeType,
-    nodeName,
+    currentRoomPlan,
     openDelete,
-    setNodes,
-    hasColorDelete,
-    setColors,
-    setGroup,
-    setNetworkSsids,
+    setRoomPlans,
     setOpenDelete
   } = props;
 
   function handleClose(): void {
     setOpenDelete(false);
-  };
+  }
 
   return (
     <Dialog
@@ -73,7 +61,7 @@ function DeleteDialogTypeA(props: DeleteDialogTypeAProps) {
           </Title>
           <Detail>
             Do you really want to delete&nbsp;
-            <Name>"{nodeName}"</Name>
+            <Name>"{currentRoomPlan.name}"</Name>
             ? This process cannot be undone.
           </Detail>
         </ContentWrapper>
@@ -88,37 +76,20 @@ function DeleteDialogTypeA(props: DeleteDialogTypeAProps) {
         <Button
           color="error"
           variant="contained"
-          onClick={() => {
-            if (hasColorDelete && setColors && setGroup && setNetworkSsids) {
-              deleteNode(
-                projectId,
-                nodeId,
-                nodeType,
-                setNodes,
-                setOpenDelete,
-                hasColorDelete,
-                setColors,
-                setGroup,
-                setNetworkSsids,
-              )
-            }
-            else {
-              deleteNode(
-                projectId,
-                nodeId,
-                nodeType,
-                setNodes,
-                setOpenDelete,
-                hasColorDelete
-              )
-            }
-          }}
+          onClick={() =>
+            deleteRoomPlan(
+              projectId,
+              currentRoomPlan.id,
+              setRoomPlans,
+              setOpenDelete
+            )
+          }
         >
           Delete
         </Button>
       </DialogActions>
-    </Dialog >
+    </Dialog>
   );
 }
 
-export default DeleteDialogTypeA;
+export default DeleteDialogTypeB;

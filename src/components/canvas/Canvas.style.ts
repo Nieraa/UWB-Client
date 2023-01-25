@@ -23,6 +23,17 @@ export const AddElementButton = styled.button`
   }
 `;
 
+export const CenterPoint = styled.div`
+  width: 40px;
+  height: 40px;
+  color: var(--black);
+  line-height: 40px;
+  font-size: var(--heading-text);
+  text-align: center;
+  position: absolute;
+  border-radius: 50%;
+`;
+
 export const ColorWrapper = styled.div`
   margin-top: 15px;
   display: flex;

@@ -1,80 +1,89 @@
-import { NavigateFunction } from "react-router-dom";
 import axios from "../axios";
-import { Node, Project } from "../types";
+import { NavigateFunction } from "react-router-dom";
+import { Project, Node } from "../types";
 
-export function getProjects(
+export async function getProjects(
   setProjects: (projects: Project[]) => void,
   createId?: string,
   navigate?: NavigateFunction
-): void {
-  axios
+): Promise<void> {
+  await axios
     .get("/projects")
     .then((response) => {
       setProjects(response.data);
       if (createId && navigate) {
-        navigate(`/${createId}/planner`);
+        navigate(`/projects/${createId}/room-plans`);
       }
     })
     .catch(() => {
+      alert("Get Projects failed");
     });
 }
 
-export function createProject(
+export async function createProject(
   projectData: {
-    projectName: string,
-    imgUrl: string,
-    l: number,
-    w: number,
+    name: string
   },
   setProjects: (projects: Project[]) => void,
   navigate: NavigateFunction
-): void {
-  axios
+): Promise<void> {
+  await axios
     .post("/projects", projectData)
     .then((response) => {
-      getProjects(setProjects, response.data.id, navigate);
+      getProjects(setProjects, response.data, navigate);
     })
     .catch(() => {
-      alert("Create failed");
-    })
+      alert("Create Project failed");
+    });
 }
 
-export function updateProject(
+export async function updateProject(
   projectId: string,
   projectData: {
-    projectName: string,
-    imgUrl: string,
-    l: number,
-    w: number,
+    name: string
   },
   setProjects: (projects: Project[]) => void,
-  handleClose: () => void
-): void {
-  axios
+  setOpenUpdate: (openUpdate: boolean) => void
+): Promise<void> {
+  await axios
     .patch(`/projects/${projectId}`, projectData)
     .then(() => {
       getProjects(setProjects);
-      handleClose();
+      setOpenUpdate(false);
     })
     .catch(() => {
-      alert("Update failed");
-    })
+      alert("Update Project failed");
+    });
 }
 
-export function deleteProject(
+export async function deleteProject(
   projectId: string,
   setProjects: (projects: Project[]) => void,
   setOpenDelete: (openDelete: boolean) => void
-): void {
-  axios
+): Promise<void> {
+  await axios
     .delete(`/projects/${projectId}`)
     .then(() => {
       getProjects(setProjects);
       setOpenDelete(false);
     })
     .catch(() => {
-      alert("Delete failed");
+      alert("Delete Project failed");
+    });
+}
+
+export async function getProjectbyId(
+  projectId: string,
+  setCurrentProject: (currentProject: Project) => void
+): Promise<void> {
+  await axios
+    .get(`/projects/${projectId}`)
+    .then((response) => {
+      setCurrentProject(response.data);
     })
+    .catch(() => {
+      alert("Get Project failed");
+    });
 }
 
 export function getNodes(
