@@ -12,7 +12,8 @@ import { Project, RoomPlan } from "../../types";
 import { Breadcrumbs } from "@mui/material";
 
 interface MainTypeBProps {
-  projectId: string,
+  isLoading: boolean;
+  projectId: string;
   roomPlans: RoomPlan[];
   currentProject: Project;
   setCurrentRoomPlan: (currentRoomPlan: RoomPlan) => void;
@@ -23,6 +24,7 @@ interface MainTypeBProps {
 
 function MainTypeB(props: MainTypeBProps) {
   const {
+    isLoading,
     projectId,
     roomPlans,
     currentProject,
@@ -47,6 +49,7 @@ function MainTypeB(props: MainTypeBProps) {
         </Breadcrumbs>
       </BreadcrumbsArea>
       <RoomPlanList
+        isLoading={isLoading}
         projectId={projectId}
         roomPlans={roomPlans}
         setCurrentRoomPlan={setCurrentRoomPlan}

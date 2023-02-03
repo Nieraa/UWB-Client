@@ -11,6 +11,7 @@ import { Project } from "../../types";
 import { Breadcrumbs } from "@mui/material";
 
 interface MainTypeAProps {
+  isLoading: boolean;
   projects: Project[];
   setCurrentProject: (currentProject: Project) => void;
   setOpenCreate: (openCreate: boolean) => void;
@@ -20,6 +21,7 @@ interface MainTypeAProps {
 
 function MainTypeA(props: MainTypeAProps) {
   const {
+    isLoading,
     projects,
     setCurrentProject,
     setOpenCreate,
@@ -39,6 +41,7 @@ function MainTypeA(props: MainTypeAProps) {
         </Breadcrumbs>
       </BreadcrumbsArea>
       <ProjectList
+        isLoading={isLoading}
         projects={projects}
         setCurrentProject={setCurrentProject}
         setOpenUpdate={setOpenUpdate}

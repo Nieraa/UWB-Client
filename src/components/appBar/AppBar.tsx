@@ -8,7 +8,7 @@ function AppBar() {
   return (
     <TopNavbar>
       <NavBrand>
-        <LogoWrapper to="/">
+        <LogoWrapper to="/projects">
           <img
             src={process.env.PUBLIC_URL + "/static/images/RTLS_UWB.png"}
             alt="ILS"

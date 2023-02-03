@@ -4,11 +4,11 @@ import MainTypeC from '../components/main/MainTypeC';
 import AnchorCreateForm from '../components/anchor/anchorCreateForm/AnchorCreateForm';
 import AnchorUpdateForm from '../components/anchor/anchorUpdateForm/AnchorUpdateForm';
 import DeleteDialogTypeC from '../components/deleteDialog/DeleteDialogTypeC';
-import { useCallback, useEffect, useState } from 'react';
-import { Params, useParams } from 'react-router-dom';
+import { useState } from 'react';
 import { Project, RoomPlan, Node, PassAndUpdateAnchors } from '../types';
 
 interface PlannerProps extends PassAndUpdateAnchors {
+  isLoading: boolean;
   projectId: string;
   roomPlanId: string;
   projects: Project[];
@@ -16,11 +16,11 @@ interface PlannerProps extends PassAndUpdateAnchors {
   currentRoomPlan: RoomPlan;
   currentAnchor: Node;
   setCurrentAnchor: (currentAnchor: Node) => void;
-  setParams: (params: Readonly<Params<string>>) => void;
 }
 
 function Planner(props: PlannerProps) {
   const {
+    isLoading,
     projectId,
     roomPlanId,
     projects,
@@ -29,23 +29,12 @@ function Planner(props: PlannerProps) {
     currentRoomPlan,
     currentAnchor,
     setAnchors,
-    setCurrentAnchor,
-    setParams
+    setCurrentAnchor
   } = props;
 
   const [openCreate, setOpenCreate] = useState<boolean>(false);
   const [openUpdate, setOpenUpdate] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
-
-  const params: Readonly<Params<string>> = useParams();
-
-  const SetNewParams = useCallback(() => {
-    setParams(params);
-  }, [params, setParams])
-
-  useEffect(() => {
-    SetNewParams();
-  }, [params.roomPlanId, SetNewParams])
 
   return (
     <div>
@@ -61,6 +50,7 @@ function Planner(props: PlannerProps) {
         setOpenDelete={setOpenDelete}
       />
       <MainTypeC
+        isLoading={isLoading}
         anchors={anchors}
         currentProject={currentProject}
         currentRoomPlan={currentRoomPlan}

@@ -8,12 +8,14 @@ import { useState } from 'react';
 import { Project, PassAndUpdateProjects } from '../types';
 
 interface ProjectsProps extends PassAndUpdateProjects {
+  isLoading: boolean;
   currentProject: Project;
   setCurrentProject: (currentProject: Project) => void;
 }
 
 function Projects(props: ProjectsProps) {
   const {
+    isLoading,
     projects,
     currentProject,
     setProjects,
@@ -32,6 +34,7 @@ function Projects(props: ProjectsProps) {
         projects={projects}
       />
       <MainTypeA
+        isLoading={isLoading}
         projects={projects}
         setCurrentProject={setCurrentProject}
         setOpenCreate={setOpenCreate}

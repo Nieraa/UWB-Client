@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import '../../../theme/Theme.css';
 
-export const ProjectWrapper = styled.div`
+export const RoomPlanWrapper = styled.div`
   width: 100%;
   height: 100%;
   overflow-y: auto;
@@ -27,16 +27,16 @@ export const ProjectWrapper = styled.div`
   }
 `;
 
-export const ProjectLink = styled(Link)`
+export const RoomPlanLink = styled(Link)`
   text-decoration: none;
 `;
 
-export const ProjectName = styled.span`
+export const RoomPlanName = styled.span`
   font-size: var(--text);
   color: var(--black);
 `;
 
-export const ProjectNameWrapper = styled.div`
+export const RoomPlanNameWrapper = styled.div`
   color: var(--black);
   font-size: var(--text);
   text-decoration: none;

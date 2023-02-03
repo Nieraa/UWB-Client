@@ -4,40 +4,33 @@ import MainTypeB from "../components/main/MainTypeB";
 import RoomPlanCreateForm from "../components/roomPlan/roomPlanCreateForm/RoomPlanCreateForm";
 import RoomPlanUpdateForm from "../components/roomPlan/roomPlanUpdateForm/RoomPlanUpdateForm";
 import DeleteDialogTypeB from "../components/deleteDialog/DeleteDialogTypeB";
-import { useEffect, useState } from "react";
-import { Params, useParams } from "react-router-dom";
+import { useState } from "react";
 import { RoomPlan, Project, PassAndUpdateRoomPlans } from "../types";
 
 interface RoomPlanProps extends PassAndUpdateRoomPlans {
+  isLoading: boolean;
   projectId: string;
   projects: Project[];
   currentProject: Project;
   currentRoomPlan: RoomPlan;
   setCurrentRoomPlan: (currentRoomPlan: RoomPlan) => void;
-  setParams: (params: Readonly<Params<string>>) => void;
 }
 
 function RoomPlans(props: RoomPlanProps) {
   const {
+    isLoading,
     projectId,
     projects,
     roomPlans,
     currentProject,
     currentRoomPlan,
     setRoomPlans,
-    setCurrentRoomPlan,
-    setParams
+    setCurrentRoomPlan
   } = props;
 
   const [openCreate, setOpenCreate] = useState<boolean>(false);
   const [openUpdate, setOpenUpdate] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
-
-  const params: Readonly<Params<string>> = useParams()
-
-  useEffect(() => {
-    setParams(params);
-  }, [params.projectId]);
 
   return (
     <div>
@@ -47,6 +40,7 @@ function RoomPlans(props: RoomPlanProps) {
         projectId={projectId}
       />
       <MainTypeB
+        isLoading={isLoading}
         projectId={projectId}
         roomPlans={roomPlans}
         currentProject={currentProject}

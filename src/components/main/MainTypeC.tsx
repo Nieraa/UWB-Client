@@ -6,12 +6,13 @@ import {
   BreadcrumbText
 } from "./Main.style";
 import Canvas from "../canvas/Canvas";
-import { Breadcrumbs } from "@mui/material";
+import { Breadcrumbs, Skeleton } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Node, Project, RoomPlan } from "../../types";
 
 interface MainTypeCProps {
+  isLoading: boolean;
   anchors: Node[];
   currentProject: Project;
   currentRoomPlan: RoomPlan;
@@ -20,6 +21,7 @@ interface MainTypeCProps {
 
 function MainTypeC(props: MainTypeCProps) {
   const {
+    isLoading,
     anchors,
     currentProject,
     currentRoomPlan,
@@ -43,10 +45,14 @@ function MainTypeC(props: MainTypeCProps) {
           <BreadcrumbText>{currentRoomPlan.name}</BreadcrumbText>
         </Breadcrumbs>
       </BreadcrumbsArea>
-      <Canvas
-        currentRoomPlan={currentRoomPlan}
-        anchors={anchors}
-      />
+      {isLoading ?
+        <Skeleton variant="rectangular" height={"calc(100% - 60px)"} width={"100%"} />
+        :
+        <Canvas
+          currentRoomPlan={currentRoomPlan}
+          anchors={anchors}
+        />
+      }
       <AddElementButton onClick={handleClickOpen}>
         <FontAwesomeIcon icon={faPlus} />
       </AddElementButton>

@@ -1,14 +1,12 @@
 import Projects from './pages/Projects';
 import Planner from './pages/Planner';
-import Realtime from './pages/Realtime';
-import History from './pages/History';
 import {
   Routes,
   Route,
   Navigate,
-  Params,
+  useLocation,
 } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Node, Project, RoomPlan } from "./types";
 import { getProjectbyId, getProjects } from "./services/ProjectsService";
 import RoomPlans from './pages/RoomPlans';
@@ -40,17 +38,18 @@ function App() {
     z: 0
   });
 
-  const [params, setParams] = useState<Readonly<Params<string>>>({});
+  const location = useLocation();
+  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    if (params.projectId && params.roomPlanId) {
-      getAnchors(params.projectId, params.roomPlanId, setAnchors);
-      getProjectbyId(params.projectId, setCurrentProject);
-      getRoomPlanbyId(params.projectId, params.roomPlanId, setCurrentRoomPlan);
+  const fetchData = useCallback(async (pathname: string) => {
+    const projectId = pathname.slice(10, 30);
+    const roomPlanId = pathname.slice(42, 62);
+    if (Boolean(projectId) && Boolean(roomPlanId)) {
+      getAnchors(projectId, roomPlanId, setAnchors);
+      getProjectbyId(projectId, setCurrentProject);
+      getRoomPlanbyId(projectId, roomPlanId, setCurrentRoomPlan);
     }
-    else if (params.projectId) {
-      getRoomPlans(params.projectId, setRoomPlans);
-      getProjectbyId(params.projectId, setCurrentProject);
+    else if (Boolean(projectId)) {
       setCurrentRoomPlan({
         id: "",
         name: "",
@@ -60,15 +59,24 @@ function App() {
         xOrigin: 0,
         yOrigin: 0
       });
+      setAnchors([]);
+      getRoomPlans(projectId, setRoomPlans);
+      getProjectbyId(projectId, setCurrentProject);
     }
     else {
-      getProjects(setProjects);
-      setCurrentProject({ 
-        id: "", 
-        name: "" 
+      setCurrentProject({
+        id: "",
+        name: ""
       });
+      setRoomPlans([]);
+      getProjects(setProjects);
     }
-  }, [params.projectId, params.roomPlanId]);
+  }, []);
+
+  useEffect(() => {
+    setIsLoading(true);
+    fetchData(location.pathname).then(() => setIsLoading(false));
+  }, [fetchData, location]);
 
   return (
     <Routes>
@@ -78,6 +86,7 @@ function App() {
         path="/projects"
         element={
           <Projects
+            isLoading={isLoading}
             projects={projects}
             currentProject={currentProject}
             setProjects={setProjects}
@@ -89,6 +98,7 @@ function App() {
         path="/projects/:projectId/room-plans"
         element={
           <RoomPlans
+            isLoading={isLoading}
             projectId={currentProject.id}
             projects={projects}
             roomPlans={roomPlans}
@@ -96,7 +106,6 @@ function App() {
             currentRoomPlan={currentRoomPlan}
             setRoomPlans={setRoomPlans}
             setCurrentRoomPlan={setCurrentRoomPlan}
-            setParams={setParams}
           />
         }
       />
@@ -104,6 +113,7 @@ function App() {
         path="/projects/:projectId/room-plans/:roomPlanId/planner"
         element={
           <Planner
+            isLoading={isLoading}
             projectId={currentProject.id}
             roomPlanId={currentRoomPlan.id}
             projects={projects}
@@ -113,7 +123,6 @@ function App() {
             currentAnchor={currentAnchor}
             setAnchors={setAnchors}
             setCurrentAnchor={setCurrentAnchor}
-            setParams={setParams}
           />
         }
       />
