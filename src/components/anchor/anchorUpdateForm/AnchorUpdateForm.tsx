@@ -80,7 +80,7 @@ function AnchorUpdateForm(props: AnchorUpdateFormProps) {
       onClose={handleClose}
       fullWidth
     >
-      <DialogTitle>Edit Project</DialogTitle>
+      <DialogTitle>Edit Anchor</DialogTitle>
       <form onSubmit={formik.handleSubmit}>
         <DialogContent dividers>
           <TextField
@@ -155,7 +155,7 @@ function AnchorUpdateForm(props: AnchorUpdateFormProps) {
             variant="contained"
             type="submit"
           >
-            Save Change
+            Save Changes
           </Button>
         </DialogActions>
       </form>

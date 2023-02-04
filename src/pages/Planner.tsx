@@ -51,6 +51,8 @@ function Planner(props: PlannerProps) {
       />
       <MainTypeC
         isLoading={isLoading}
+        projectId={projectId}
+        roomPlanId={roomPlanId}
         anchors={anchors}
         currentProject={currentProject}
         currentRoomPlan={currentRoomPlan}

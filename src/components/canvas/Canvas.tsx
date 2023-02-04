@@ -11,12 +11,16 @@ import { useRef, useState } from 'react';
 import { RoomPlan, Node } from '../../types';
 
 interface CanvasProps {
+  projectId: string;
+  roomPlanId: string;
   currentRoomPlan: RoomPlan;
   anchors: Node[];
 }
 
 function Canvas(props: CanvasProps) {
   const {
+    projectId,
+    roomPlanId,
     currentRoomPlan,
     anchors
   } = props;
@@ -94,6 +98,8 @@ function Canvas(props: CanvasProps) {
           {anchors.map((anchor) =>
             <AnchorNode
               key={anchor.id}
+              projectId={projectId}
+              roomPlanId={roomPlanId}
               xOrigin={currentRoomPlan.xOrigin}
               yOrigin={currentRoomPlan.yOrigin}
               anchor={anchor}

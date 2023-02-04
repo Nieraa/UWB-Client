@@ -49,14 +49,18 @@ export async function updateAnchor(
     y?: number,
     z?: number
   },
-  setAnchors: (anchors: Node[]) => void,
-  setOpenUpdate: (openUpdate: boolean) => void
+  setAnchors?: (anchors: Node[]) => void,
+  setOpenUpdate?: (openUpdate: boolean) => void
 ): Promise<void> {
   await axios
     .patch(`/projects/${projectId}/roomPlans/${roomPlanId}/anchors/${anchorId}`, anchorData)
     .then(() => {
-      getAnchors(projectId, roomPlanId, setAnchors);
-      setOpenUpdate(false);
+      if (setAnchors) {
+        getAnchors(projectId, roomPlanId, setAnchors);
+      }
+      if (setOpenUpdate) {
+        setOpenUpdate(false);
+      }
     })
     .catch(() => {
       alert("Update Anchor failed");

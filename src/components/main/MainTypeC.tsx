@@ -13,6 +13,8 @@ import { Node, Project, RoomPlan } from "../../types";
 
 interface MainTypeCProps {
   isLoading: boolean;
+  projectId: string;
+  roomPlanId: string;
   anchors: Node[];
   currentProject: Project;
   currentRoomPlan: RoomPlan;
@@ -22,6 +24,8 @@ interface MainTypeCProps {
 function MainTypeC(props: MainTypeCProps) {
   const {
     isLoading,
+    projectId,
+    roomPlanId,
     anchors,
     currentProject,
     currentRoomPlan,
@@ -49,6 +53,8 @@ function MainTypeC(props: MainTypeCProps) {
         <Skeleton variant="rectangular" height={"calc(100% - 60px)"} width={"100%"} />
         :
         <Canvas
+          projectId={projectId}
+          roomPlanId={roomPlanId}
           currentRoomPlan={currentRoomPlan}
           anchors={anchors}
         />
