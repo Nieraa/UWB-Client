@@ -60,9 +60,11 @@ function MainTypeB(props: MainTypeBProps) {
         setOpenUpdate={setOpenUpdate}
         setOpenDelete={setOpenDelete}
       />
-      <AddElementButton onClick={handleClickOpen}>
-        <FontAwesomeIcon icon={faPlus} />
-      </AddElementButton>
+      <Tooltip title="Create Room plan" placement="left">
+        <AddElementButton onClick={handleClickOpen}>
+          <FontAwesomeIcon icon={faPlus} />
+        </AddElementButton>
+      </Tooltip>
     </MainArea>
   );
 }

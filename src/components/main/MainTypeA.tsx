@@ -49,9 +49,11 @@ function MainTypeA(props: MainTypeAProps) {
         setOpenUpdate={setOpenUpdate}
         setOpenDelete={setOpenDelete}
       />
-      <AddElementButton onClick={handleClickOpen}>
-        <FontAwesomeIcon icon={faPlus} />
-      </AddElementButton>
+      <Tooltip title="Create Project" placement="left">
+        <AddElementButton onClick={handleClickOpen}>
+          <FontAwesomeIcon icon={faPlus} />
+        </AddElementButton>
+      </Tooltip>
     </MainArea>
   );
 };

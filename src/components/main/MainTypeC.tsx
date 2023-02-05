@@ -66,9 +66,11 @@ function MainTypeC(props: MainTypeCProps) {
             anchors={anchors}
           />
       }
-      <AddElementButton onClick={handleClickOpen}>
-        <FontAwesomeIcon icon={faPlus} />
-      </AddElementButton>
+      <Tooltip title="Create Anchor" placement="left">
+        <AddElementButton onClick={handleClickOpen}>
+          <FontAwesomeIcon icon={faPlus} />
+        </AddElementButton>
+      </Tooltip>
     </MainArea >
   );
 }
