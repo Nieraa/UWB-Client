@@ -25,49 +25,26 @@ function Canvas(props: CanvasProps) {
     anchors
   } = props;
 
-  const [pannable, setPannable] = useState<boolean>(false);
+  const [pannable, setPannable] = useState<boolean>(true);
   const [cursor, setCursor] = useState<string>("default");
   const [scale, setScale] = useState<number>(1);
 
   const nodeRef = useRef(null);
-
-  onkeydown = function (ke) {
-    if (ke.key === " ") {
-      setPannable(true)
-      if (ke.repeat === true) {
-        return
-      }
-      else {
-        setCursor("grab")
-      }
-      onmousedown = function () {
-        setCursor("grabbing")
-      }
-      onmouseup = function () {
-        setCursor("grab")
-      }
-    }
-  }
-
-  onkeyup = function (e) {
-    if (e.key === " ") {
-      setPannable(false)
-      setCursor("default")
-    }
-  }
 
   return (
     <TransformWrapper
       initialScale={scale}
       panning={{ disabled: !pannable }}
       doubleClick={{ disabled: true }}
+      onPanningStart={() => setCursor("grabbing")}
+      onPanningStop={() => setCursor("default")}
       onZoom={(e) => setScale(e.state.scale)}
       limitToBounds={false}
       centerOnInit
     >
       <TransformComponent>
         <div style={{
-          width: "calc(100vw - 300px)",
+          width: "100vw",
           height: "calc(100vh - 120px)",
           cursor: cursor,
         }}>
@@ -103,8 +80,9 @@ function Canvas(props: CanvasProps) {
               xOrigin={currentRoomPlan.xOrigin}
               yOrigin={currentRoomPlan.yOrigin}
               anchor={anchor}
-              disabled={pannable}
               scale={scale}
+              setPannable={setPannable}
+              setCursor={setCursor}
             />
           )}
         </div>
