@@ -9,7 +9,7 @@ import RoomPlanList from "../roomPlan/roomPlanList/RoomPlanList";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Project, RoomPlan } from "../../types";
-import { Breadcrumbs } from "@mui/material";
+import { Breadcrumbs, Tooltip } from "@mui/material";
 
 interface MainTypeBProps {
   isLoading: boolean;
@@ -42,10 +42,14 @@ function MainTypeB(props: MainTypeBProps) {
     <MainArea>
       <BreadcrumbsArea>
         <Breadcrumbs aria-label="breadcrumb">
-          <BreadcrumbLink to="/projects">
-            Projects
-          </BreadcrumbLink>
-          <BreadcrumbText>{currentProject.name}</BreadcrumbText>
+          <Tooltip title="Projects">
+            <BreadcrumbLink to="/projects">
+              Projects
+            </BreadcrumbLink>
+          </Tooltip>
+          <Tooltip title={currentProject.name}>
+            <BreadcrumbText>{currentProject.name.length > 25 ? currentProject.name.slice(0, 25) + "..." : currentProject.name}</BreadcrumbText>
+          </Tooltip>
         </Breadcrumbs>
       </BreadcrumbsArea>
       <RoomPlanList

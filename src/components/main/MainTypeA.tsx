@@ -8,7 +8,7 @@ import ProjectList from "../project/projectList/ProjectList";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Project } from "../../types";
-import { Breadcrumbs } from "@mui/material";
+import { Breadcrumbs, Tooltip } from "@mui/material";
 
 interface MainTypeAProps {
   isLoading: boolean;
@@ -37,7 +37,9 @@ function MainTypeA(props: MainTypeAProps) {
     <MainArea>
       <BreadcrumbsArea>
         <Breadcrumbs aria-label="breadcrumb">
-          <BreadcrumbText>Projects</BreadcrumbText>
+          <Tooltip title="Projects">
+            <BreadcrumbText>Projects</BreadcrumbText>
+          </Tooltip>
         </Breadcrumbs>
       </BreadcrumbsArea>
       <ProjectList

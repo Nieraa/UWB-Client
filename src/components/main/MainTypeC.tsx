@@ -6,7 +6,7 @@ import {
   BreadcrumbText
 } from "./Main.style";
 import Canvas from "../canvas/Canvas";
-import { Breadcrumbs, Skeleton } from "@mui/material";
+import { Breadcrumbs, Skeleton, Tooltip } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Node, Project, RoomPlan } from "../../types";
@@ -40,13 +40,19 @@ function MainTypeC(props: MainTypeCProps) {
     <MainArea>
       <BreadcrumbsArea>
         <Breadcrumbs aria-label="breadcrumb">
-          <BreadcrumbLink to="/projects">
-            Projects
-          </BreadcrumbLink>
-          <BreadcrumbLink to={`/projects/${currentProject.id}/room-plans`}>
-            {currentProject.name}
-          </BreadcrumbLink>
-          <BreadcrumbText>{currentRoomPlan.name}</BreadcrumbText>
+          <Tooltip title="Projects">
+            <BreadcrumbLink to="/projects">
+              Projects
+            </BreadcrumbLink>
+          </Tooltip>
+          <Tooltip title={currentProject.name}>
+            <BreadcrumbLink to={`/projects/${currentProject.id}/room-plans`}>
+              {currentProject.name.length > 11 ? currentProject.name.slice(0, 11) + "..." : currentProject.name}
+            </BreadcrumbLink>
+          </Tooltip>
+          <Tooltip title={currentRoomPlan.name}>
+            <BreadcrumbText>{currentRoomPlan.name.length > 11 ? currentRoomPlan.name.slice(0, 11) + "..." : currentRoomPlan.name}</BreadcrumbText>
+          </Tooltip>
         </Breadcrumbs>
       </BreadcrumbsArea>
       {

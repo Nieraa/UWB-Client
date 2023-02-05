@@ -17,8 +17,12 @@ export const BreadcrumbText = styled.span`
   font-weight: bold;
   color: var(--primary);
 
-  @media ${maxLayout.xxs} {
+  @media ${maxLayout.sm} {
     font-size: var(--text);
+  }
+
+  @media ${maxLayout.xxs} {
+    font-size: var(--small-text);
   }
 `;
 
@@ -30,8 +34,12 @@ export const BreadcrumbLink = styled(Link)`
     text-decoration: underline;
   }
 
-  @media ${maxLayout.xxs} {
+  @media ${maxLayout.sm} {
     font-size: var(--text);
+  }
+
+  @media ${maxLayout.xxs} {
+    font-size: var(--small-text);
   }
 `;
 
