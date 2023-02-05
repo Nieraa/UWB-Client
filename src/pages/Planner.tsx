@@ -42,7 +42,7 @@ function Planner(props: PlannerProps) {
   }
 
   function handleCloseNavbar() {
-    setCollapseNavbar(false);
+    setCollapseNavbar(true);
   }
 
   return (
