@@ -49,7 +49,7 @@ function RoomPlanUpdateForm(props: RoomPlanUpdateFormProps) {
   useEffect(() => {
     _setImage(currentRoomPlan.image);
     setImageName("");
-  }, [openUpdate]);
+  }, [openUpdate, currentRoomPlan.image]);
 
   const inputFileRef = createRef();
 
