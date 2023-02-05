@@ -2,8 +2,7 @@ import { Element, Text } from './AnchorNode.style';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Draggable from 'react-draggable';
-import { useEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useRef, useState } from 'react';
 import { Node } from '../../../types';
 import { updateAnchor } from '../../../services/AnchorsService';
 
@@ -33,28 +32,6 @@ function AnchorNode(props: AnchorNodeProps) {
   const [x, setX] = useState<number>(anchor.x * 100);
   const [y, setY] = useState<number>(anchor.y * 100);
   const z = anchor.z * 100
-
-  useEffect(() => {
-    function handleTabClose(e: { preventDefault: () => void; returnValue: string; }) {
-      e.preventDefault();
-
-      const anchorData = {
-        x: x / 100,
-        y: y / 100,
-        z: z / 100
-      };
-
-      updateAnchor(projectId, roomPlanId, anchor.id, anchorData);
-
-      return (e.returnValue = 'Are you sure you want to exit?');
-    }
-
-    window.addEventListener('beforeunload', handleTabClose);
-
-    return () => {
-      window.removeEventListener('beforeunload', handleTabClose);
-    };
-  }, [projectId, roomPlanId, anchor.id, x, y, z])
 
   const nodeRef = useRef(null);
 
@@ -91,6 +68,12 @@ function AnchorNode(props: AnchorNodeProps) {
       onStop={() => {
         setPannable(true);
         setCursor("default");
+        const anchorData = {
+          x: x / 100,
+          y: y / 100,
+          z: z / 100
+        };
+        updateAnchor(projectId, roomPlanId, anchor.id, anchorData);
       }}
       scale={scale}
     >
