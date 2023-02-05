@@ -1,15 +1,16 @@
+import Login from './pages/login/Login';
 import Projects from './pages/Projects';
+import RoomPlans from './pages/RoomPlans';
 import Planner from './pages/Planner';
+import { useCallback, useEffect, useState } from "react";
 import {
   Routes,
   Route,
   Navigate,
   useLocation,
 } from "react-router-dom";
-import { useCallback, useEffect, useState } from "react";
 import { Node, Project, RoomPlan } from "./types";
 import { getProjectbyId, getProjects } from "./services/ProjectsService";
-import RoomPlans from './pages/RoomPlans';
 import { getRoomPlanbyId, getRoomPlans } from './services/RoomPlansService';
 import { getAnchors } from './services/AnchorsService';
 
@@ -82,6 +83,12 @@ function App() {
     <Routes>
       <Route path="/" element={<Navigate to="/projects" />}>
       </Route>
+      <Route
+        path="/login"
+        element={
+          <Login />
+        }
+      />
       <Route
         path="/projects"
         element={
