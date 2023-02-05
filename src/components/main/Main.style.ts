@@ -20,10 +20,6 @@ export const BreadcrumbText = styled.span`
   @media ${maxLayout.sm} {
     font-size: var(--text);
   }
-
-  @media ${maxLayout.xxs} {
-    font-size: var(--small-text);
-  }
 `;
 
 export const BreadcrumbLink = styled(Link)`
@@ -36,10 +32,6 @@ export const BreadcrumbLink = styled(Link)`
 
   @media ${maxLayout.sm} {
     font-size: var(--text);
-  }
-
-  @media ${maxLayout.xxs} {
-    font-size: var(--small-text);
   }
 `;
 
