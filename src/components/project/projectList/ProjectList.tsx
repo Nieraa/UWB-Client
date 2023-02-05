@@ -10,6 +10,7 @@ import {
   CardActionArea,
   CardContent,
   Skeleton,
+  Tooltip,
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
@@ -107,18 +108,22 @@ function ProjectList(props: ProjectListProps) {
                               project.name
                             }
                           </ProjectName>
-                          <FontAwesomeIcon
-                            icon={faPen}
-                            onClick={(e) => {
-                              handleUpdate(e, project);
-                            }}
-                          />
-                          <FontAwesomeIcon
-                            icon={faTrashCan}
-                            onClick={(e) => {
-                              handleDelete(e, project);
-                            }}
-                          />
+                          <Tooltip title="Edit Project">
+                            <FontAwesomeIcon
+                              icon={faPen}
+                              onClick={(e) => {
+                                handleUpdate(e, project);
+                              }}
+                            />
+                          </Tooltip>
+                          <Tooltip title="Delete Project">
+                            <FontAwesomeIcon
+                              icon={faTrashCan}
+                              onClick={(e) => {
+                                handleDelete(e, project);
+                              }}
+                            />
+                          </Tooltip>
                         </ProjectNameWrapper>
                       </CardContent>
                     </ProjectLink>
