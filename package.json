@@ -22,6 +22,7 @@
     "@types/react-dom": "^18.0.6",
     "axios": "^1.2.1",
     "formik": "^2.2.9",
+    "js-sha512": "^0.8.0",
     "react": "^18.2.0",
     "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
