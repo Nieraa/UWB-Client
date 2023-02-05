@@ -11,7 +11,8 @@ import {
   CardContent,
   CardMedia,
   Divider,
-  Skeleton
+  Skeleton,
+  Tooltip
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
@@ -124,18 +125,22 @@ function RoomPlanList(props: RoomPlanListProps) {
                           roomPlan.name
                         }
                       </RoomPlanName>
-                      <FontAwesomeIcon
-                        icon={faPen}
-                        onClick={(e) => {
-                          handleUpdate(e, roomPlan);
-                        }}
-                      />
-                      <FontAwesomeIcon
-                        icon={faTrashCan}
-                        onClick={(e) => {
-                          handleDelete(e, roomPlan);
-                        }}
-                      />
+                      <Tooltip title="Edit Room plan">
+                        <FontAwesomeIcon
+                          icon={faPen}
+                          onClick={(e) => {
+                            handleUpdate(e, roomPlan);
+                          }}
+                        />
+                      </Tooltip>
+                      <Tooltip title="Delete Room plan">
+                        <FontAwesomeIcon
+                          icon={faTrashCan}
+                          onClick={(e) => {
+                            handleDelete(e, roomPlan);
+                          }}
+                        />
+                      </Tooltip>
                     </RoomPlanNameWrapper>
                   </CardContent>
                 </RoomPlanLink>
