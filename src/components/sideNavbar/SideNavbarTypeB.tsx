@@ -25,6 +25,7 @@ import {
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Project, Node } from "../../types";
+import { Tooltip } from "@mui/material";
 
 interface SideNavbarTypeBProps {
   collapseNavbar: boolean;
@@ -194,10 +195,12 @@ function SideNavbarTypeB(props: SideNavbarTypeBProps) {
               />
             }
             Anchors
-            <FontAwesomeIcon
-              icon={faPlus}
-              onClick={handleAdd}
-            />
+            <Tooltip title="Create Anchor">
+              <FontAwesomeIcon
+                icon={faPlus}
+                onClick={handleAdd}
+              />
+            </Tooltip>
           </NodeListToggle>
           {hasAnchorsSubMenu &&
             <NodeSubMenu
@@ -212,18 +215,22 @@ function SideNavbarTypeB(props: SideNavbarTypeBProps) {
                       :
                       anchor.name
                     }
-                    <FontAwesomeIcon
-                      icon={faPen}
-                      onClick={(e) => {
-                        handleUpdate(e, anchor);
-                      }}
-                    />
-                    <FontAwesomeIcon
-                      icon={faTrashCan}
-                      onClick={(e) => {
-                        handleDelete(e, anchor);
-                      }}
-                    />
+                    <Tooltip title="Edit Anchor">
+                      <FontAwesomeIcon
+                        icon={faPen}
+                        onClick={(e) => {
+                          handleUpdate(e, anchor);
+                        }}
+                      />
+                    </Tooltip>
+                    <Tooltip title="Delete Anchor">
+                      <FontAwesomeIcon
+                        icon={faTrashCan}
+                        onClick={(e) => {
+                          handleDelete(e, anchor);
+                        }}
+                      />
+                    </Tooltip>
                   </NodeList>
                 </li>
               )}
