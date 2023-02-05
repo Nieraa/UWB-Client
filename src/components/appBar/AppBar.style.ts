@@ -9,6 +9,7 @@ export const TopNavbar = styled.div`
   padding: 12px 19px;
   background-color: var(--white);
   border-bottom: 1px solid var(--grey100);
+  display: flex;
 `;
 
 export const LogoWrapper = styled(Link)`

@@ -32,14 +32,24 @@ function Planner(props: PlannerProps) {
     setCurrentAnchor
   } = props;
 
+  const [collapseNavbar, setCollapseNavbar] = useState<boolean>(true);
   const [openCreate, setOpenCreate] = useState<boolean>(false);
   const [openUpdate, setOpenUpdate] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
 
+  function handleCollapseNavbar() {
+    setCollapseNavbar(!collapseNavbar);
+  }
+
+  function handleCloseNavbar() {
+    setCollapseNavbar(false);
+  }
+
   return (
     <div>
-      <AppBar />
+      <AppBar handleCollapseNavbar={handleCollapseNavbar}/>
       <SideNavbarTypeB
+        collapseNavbar={collapseNavbar}
         projectId={projectId}
         roomPlanId={roomPlanId}
         projects={projects}

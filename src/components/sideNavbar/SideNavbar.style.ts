@@ -1,8 +1,20 @@
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
+import { maxLayout } from "../../utils/breakpoint";
 import '../../theme/Theme.css';
 
-export const Navbar = styled.ul`
+export const Tint = styled.div<{ collapseNavbar: boolean }>`
+  visibility: ${({ collapseNavbar }) => (collapseNavbar ? "hidden" : "visible")};
+  position: absolute;
+  height: calc(100vh - 60px);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 11;
+  background-color: rgba(85, 78, 64, 0.4);
+`;
+
+export const Navbar = styled.ul<{ collapseNavbar: boolean }>`
   width: 300px;
   height: calc(100vh - 60px);
   position: fixed;
@@ -10,8 +22,11 @@ export const Navbar = styled.ul`
   margin: 0;
   padding: 0;
   border-bottom: 1px solid var(--grey100);
-  background-color: white;
+  background-color: var(--white);
   overflow-x: hidden;
+  transform: ${({ collapseNavbar }) => (collapseNavbar ? "translateX(-100%)" : "translateX(0)")};
+  transition: all 0.2s ease-out;
+
   ::-webkit-scrollbar {
     width: 15px;
   }

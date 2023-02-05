@@ -26,6 +26,7 @@ import { useLocation } from "react-router-dom";
 import { Project, Node } from "../../types";
 
 interface SideNavbarTypeBProps {
+  collapseNavbar: boolean;
   projectId: string;
   roomPlanId: string;
   projects: Project[];
@@ -38,6 +39,7 @@ interface SideNavbarTypeBProps {
 
 function SideNavbarTypeB(props: SideNavbarTypeBProps) {
   const {
+    collapseNavbar,
     projectId,
     roomPlanId,
     projects,
@@ -106,7 +108,7 @@ function SideNavbarTypeB(props: SideNavbarTypeBProps) {
   }
 
   return (
-    <Navbar>
+    <Navbar collapseNavbar={collapseNavbar}>
       <NavItem>
         <NavLink
           to="/projects"

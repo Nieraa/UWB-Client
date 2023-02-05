@@ -1,12 +1,20 @@
+import HamburgerButton from "../hamburgerButton/HamburgerButton";
 import {
   TopNavbar,
   LogoWrapper,
   NavBrand
 } from "./AppBar.style";
 
-function AppBar() {
+interface AppBarProps {
+  handleCollapseNavbar: () => void;
+}
+
+function AppBar(props: AppBarProps) {
+  const { handleCollapseNavbar } = props;
+
   return (
     <TopNavbar>
+      <HamburgerButton handleCollapseNavbar={handleCollapseNavbar} />
       <NavBrand>
         <LogoWrapper to="/projects">
           <img

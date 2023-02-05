@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { maxLayout, minLayout } from "../../../src/utils/breakpoint";
 import '../../theme/Theme.css';
 
 export const MainArea = styled.div`
-  width: calc(100vw - 300px);
+  width: 100vw;
   height: calc(100vh - 60px);
   position: fixed;
   bottom: 0;
@@ -15,6 +16,10 @@ export const BreadcrumbText = styled.span`
   font-size: var(--subheading-text);
   font-weight: bold;
   color: var(--primary);
+
+  @media ${maxLayout.xxs} {
+    font-size: var(--text);
+  }
 `;
 
 export const BreadcrumbLink = styled(Link)`
@@ -23,6 +28,10 @@ export const BreadcrumbLink = styled(Link)`
   text-decoration: none;
   &:hover {
     text-decoration: underline;
+  }
+
+  @media ${maxLayout.xxs} {
+    font-size: var(--text);
   }
 `;
 

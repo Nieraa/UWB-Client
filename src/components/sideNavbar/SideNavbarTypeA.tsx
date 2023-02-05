@@ -1,4 +1,5 @@
 import {
+  Tint,
   Navbar,
   NavItem,
   NavLink,
@@ -16,14 +17,18 @@ import { useState } from "react";
 import { Project } from "../../types";
 
 interface SideNavbarTypeAProps {
+  collapseNavbar: boolean;
   projectId: string;
   projects: Project[];
+  handleCloseNavbar: () => void;
 }
 
 function SideNavbarTypeA(props: SideNavbarTypeAProps) {
   const {
+    collapseNavbar,
     projectId,
-    projects
+    projects,
+    handleCloseNavbar
   } = props;
 
   const [collapse, setCollapse] = useState<boolean>(true);
@@ -41,49 +46,51 @@ function SideNavbarTypeA(props: SideNavbarTypeAProps) {
   }
 
   return (
-    <Navbar>
-      <NavItem>
-        <NavLink
-          to="/projects"
-          $focusMenu={projectId === ""}
-          $hasSubMenu={hasSubMenu}
-        >
-          {hasSubMenu &&
-            <FontAwesomeIcon
-              icon={collapse ? faCaretRight : faCaretDown}
-              onClick={handleCollapse}
-            />
-          }
-          <FontAwesomeIcon icon={faFolderOpen} />
-          Projects
-        </NavLink>
-        {hasSubMenu &&
-          <SubMenu
-            collapse={collapse}
-            length={projects.length}
+    <Tint onClick={handleCloseNavbar} collapseNavbar={collapseNavbar}>
+      <Navbar collapseNavbar={collapseNavbar}>
+        <NavItem>
+          <NavLink
+            to="/projects"
+            $focusMenu={projectId === ""}
+            $hasSubMenu={hasSubMenu}
           >
-            {projects.map((project) =>
-              <li key={project.id}>
-                <SubMenuLink
-                  to={`/projects/${project.id}/room-plans`}
-                  $focusMenu={project.id === projectId}
-                  onClick={() => {
-                    setCollapse(true);
-                  }}
-                >
-                  <FontAwesomeIcon icon={faFileLines} />
-                  {project.name.length > 14 ?
-                    project.name.slice(0, 14) + "..."
-                    :
-                    project.name
-                  }
-                </SubMenuLink>
-              </li>
-            )}
-          </SubMenu>
-        }
-      </NavItem>
-    </Navbar>
+            {hasSubMenu &&
+              <FontAwesomeIcon
+                icon={collapse ? faCaretRight : faCaretDown}
+                onClick={handleCollapse}
+              />
+            }
+            <FontAwesomeIcon icon={faFolderOpen} />
+            Projects
+          </NavLink>
+          {hasSubMenu &&
+            <SubMenu
+              collapse={collapse}
+              length={projects.length}
+            >
+              {projects.map((project) =>
+                <li key={project.id}>
+                  <SubMenuLink
+                    to={`/projects/${project.id}/room-plans`}
+                    $focusMenu={project.id === projectId}
+                    onClick={() => {
+                      setCollapse(true);
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faFileLines} />
+                    {project.name.length > 14 ?
+                      project.name.slice(0, 14) + "..."
+                      :
+                      project.name
+                    }
+                  </SubMenuLink>
+                </li>
+              )}
+            </SubMenu>
+          }
+        </NavItem>
+      </Navbar>
+    </Tint>
   );
 }
 

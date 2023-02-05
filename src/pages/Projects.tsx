@@ -22,16 +22,27 @@ function Projects(props: ProjectsProps) {
     setCurrentProject
   } = props;
 
+  const [collapseNavbar, setCollapseNavbar] = useState<boolean>(true);
   const [openCreate, setOpenCreate] = useState<boolean>(false);
   const [openUpdate, setOpenUpdate] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
 
+  function handleCollapseNavbar() {
+    setCollapseNavbar(!collapseNavbar);
+  }
+
+  function handleCloseNavbar() {
+    setCollapseNavbar(true);
+  }
+
   return (
     <div>
-      <AppBar />
+      <AppBar handleCollapseNavbar={handleCollapseNavbar} />
       <SideNavbarTypeA
+        collapseNavbar={collapseNavbar}
         projectId={currentProject.id}
         projects={projects}
+        handleCloseNavbar={handleCloseNavbar}
       />
       <MainTypeA
         isLoading={isLoading}

@@ -49,15 +49,16 @@ function MainTypeC(props: MainTypeCProps) {
           <BreadcrumbText>{currentRoomPlan.name}</BreadcrumbText>
         </Breadcrumbs>
       </BreadcrumbsArea>
-      {isLoading ?
-        <Skeleton variant="rectangular" height={"calc(100% - 60px)"} width={"100%"} />
-        :
-        <Canvas
-          projectId={projectId}
-          roomPlanId={roomPlanId}
-          currentRoomPlan={currentRoomPlan}
-          anchors={anchors}
-        />
+      {
+        isLoading ?
+          <Skeleton variant="rectangular" height={"calc(100% - 60px)"} width={"100%"} />
+          :
+          <Canvas
+            projectId={projectId}
+            roomPlanId={roomPlanId}
+            currentRoomPlan={currentRoomPlan}
+            anchors={anchors}
+          />
       }
       <AddElementButton onClick={handleClickOpen}>
         <FontAwesomeIcon icon={faPlus} />

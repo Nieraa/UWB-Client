@@ -28,16 +28,27 @@ function RoomPlans(props: RoomPlanProps) {
     setCurrentRoomPlan
   } = props;
 
+  const [collapseNavbar, setCollapseNavbar] = useState<boolean>(true);
   const [openCreate, setOpenCreate] = useState<boolean>(false);
   const [openUpdate, setOpenUpdate] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
 
+  function handleCollapseNavbar() {
+    setCollapseNavbar(!collapseNavbar);
+  }
+
+  function handleCloseNavbar() {
+    setCollapseNavbar(true);
+  }
+
   return (
     <div>
-      <AppBar />
+      <AppBar handleCollapseNavbar={handleCollapseNavbar}/>
       <SideNavbarTypeA
+        collapseNavbar={collapseNavbar}
         projects={projects}
         projectId={projectId}
+        handleCloseNavbar={handleCloseNavbar}
       />
       <MainTypeB
         isLoading={isLoading}
