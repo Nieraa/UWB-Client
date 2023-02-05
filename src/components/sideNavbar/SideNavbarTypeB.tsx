@@ -7,6 +7,7 @@ import {
   NodeListToggle,
   NodeSubMenu,
   NodeList,
+  Tint,
 } from "./SideNavbar.style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -35,6 +36,7 @@ interface SideNavbarTypeBProps {
   setOpenCreate: (openCreate: boolean) => void;
   setOpenUpdate: (openUpdate: boolean) => void;
   setOpenDelete: (openDelete: boolean) => void;
+  handleCloseNavbar: () => void;
 }
 
 function SideNavbarTypeB(props: SideNavbarTypeBProps) {
@@ -47,7 +49,8 @@ function SideNavbarTypeB(props: SideNavbarTypeBProps) {
     setCurrentAnchor,
     setOpenCreate,
     setOpenUpdate,
-    setOpenDelete
+    setOpenDelete,
+    handleCloseNavbar
   } = props;
 
   const [collapseProjects, setCollapseProjects] = useState<boolean>(true);
@@ -108,125 +111,127 @@ function SideNavbarTypeB(props: SideNavbarTypeBProps) {
   }
 
   return (
-    <Navbar collapseNavbar={collapseNavbar}>
-      <NavItem>
-        <NavLink
-          to="/projects"
-          $focusMenu={projectId === ""}
-          $hasSubMenu={hasProjectsSubMenu}
-        >
+    <Tint onClick={handleCloseNavbar} collapseNavbar={collapseNavbar}>
+      <Navbar collapseNavbar={collapseNavbar}>
+        <NavItem>
+          <NavLink
+            to="/projects"
+            $focusMenu={projectId === ""}
+            $hasSubMenu={hasProjectsSubMenu}
+          >
+            {hasProjectsSubMenu &&
+              <FontAwesomeIcon
+                icon={collapseProjects ? faCaretRight : faCaretDown}
+                onClick={(e) => handleCollapse(e, collapseProjects, setCollapseProjects)}
+              />
+            }
+            <FontAwesomeIcon icon={faFolderOpen} />
+            Projects
+          </NavLink>
           {hasProjectsSubMenu &&
-            <FontAwesomeIcon
-              icon={collapseProjects ? faCaretRight : faCaretDown}
-              onClick={(e) => handleCollapse(e, collapseProjects, setCollapseProjects)}
-            />
+            <SubMenu
+              collapse={collapseProjects}
+              length={projects.length}
+            >
+              {projects.map((project) =>
+                <li key={project.id}>
+                  <SubMenuLink
+                    to={`/projects/${project.id}/room-plans`}
+                    $focusMenu={project.id === projectId}
+                    onClick={() => {
+                      setCollapseProjects(true);
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faFileLines} />
+                    {project.name.length > 14 ?
+                      project.name.slice(0, 14) + "..."
+                      :
+                      project.name
+                    }
+                  </SubMenuLink>
+                </li>
+              )}
+            </SubMenu>
           }
-          <FontAwesomeIcon icon={faFolderOpen} />
-          Projects
-        </NavLink>
-        {hasProjectsSubMenu &&
-          <SubMenu
-            collapse={collapseProjects}
-            length={projects.length}
-          >
-            {projects.map((project) =>
-              <li key={project.id}>
-                <SubMenuLink
-                  to={`/projects/${project.id}/room-plans`}
-                  $focusMenu={project.id === projectId}
-                  onClick={() => {
-                    setCollapseProjects(true);
-                  }}
-                >
-                  <FontAwesomeIcon icon={faFileLines} />
-                  {project.name.length > 14 ?
-                    project.name.slice(0, 14) + "..."
-                    :
-                    project.name
-                  }
-                </SubMenuLink>
-              </li>
-            )}
-          </SubMenu>
-        }
-      </NavItem>
+        </NavItem>
 
-      <NavItem>
-        <NavLink
-          to={`/projects/${projectId}/room-plans/${roomPlanId}/planner`}
-          $focusMenu={location.pathname.slice(projectId.length + 43) === 'planner'}
-          $hasSubMenu={false}
-        >
-          <FontAwesomeIcon icon={faPenToSquare} />
-          Planner
-        </NavLink>
-      </NavItem>
-      <NavItem>
-        <NavLink
-          to={`/projects/${projectId}/room-plans/${roomPlanId}/realtime`}
-          $focusMenu={location.pathname.slice(projectId.length + 43) === 'realtime'}
-          $hasSubMenu={false}
-        >
-          <FontAwesomeIcon icon={faMapLocationDot} />
-          Real-time Tracking
-        </NavLink>
-      </NavItem>
-      <NavItem>
-        <NavLink
-          to={`/projects/${projectId}/room-plans/${roomPlanId}/history`}
-          $focusMenu={location.pathname.slice(projectId.length + 43) === 'history'}
-          $hasSubMenu={false}
-        >
-          <FontAwesomeIcon icon={faTable} />
-          Location Log
-        </NavLink>
-      </NavItem>
-      <NavItem>
-        <NodeListToggle hasSubMenu={hasAnchorsSubMenu}>
-          {hasAnchorsSubMenu &&
-            <FontAwesomeIcon
-              icon={collapseAnchors ? faCaretRight : faCaretDown}
-              onClick={(e) => handleCollapse(e, collapseAnchors, setCollapseAnchors)}
-            />
-          }
-          Anchors
-          <FontAwesomeIcon
-            icon={faPlus}
-            onClick={handleAdd}
-          />
-        </NodeListToggle>
-        {hasAnchorsSubMenu &&
-          <NodeSubMenu
-            collapse={collapseAnchors}
-            length={anchors.length}
+        <NavItem>
+          <NavLink
+            to={`/projects/${projectId}/room-plans/${roomPlanId}/planner`}
+            $focusMenu={location.pathname.slice(projectId.length + 43) === 'planner'}
+            $hasSubMenu={false}
           >
-            {anchors.map((anchor) =>
-              <li key={anchor.id}>
-                <NodeList>
-                  {anchor.name.length > 14 ?
-                    anchor.name.slice(0, 14) + "..."
-                    :
-                    anchor.name
-                  }
-                  <FontAwesomeIcon
-                    icon={faPen}
-                    onClick={(e) => {
-                      handleUpdate(e,anchor);
-                    }}
-                  />
-                  <FontAwesomeIcon
-                    icon={faTrashCan}
-                    onClick={(e) => {
-                      handleDelete(e,anchor);
-                    }}
-                  />
-                </NodeList>
-              </li>
-            )}
-          </NodeSubMenu>
-        }
-      </NavItem>
-    </Navbar >
+            <FontAwesomeIcon icon={faPenToSquare} />
+            Planner
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink
+            to={`/projects/${projectId}/room-plans/${roomPlanId}/realtime`}
+            $focusMenu={location.pathname.slice(projectId.length + 43) === 'realtime'}
+            $hasSubMenu={false}
+          >
+            <FontAwesomeIcon icon={faMapLocationDot} />
+            Real-time Tracking
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink
+            to={`/projects/${projectId}/room-plans/${roomPlanId}/history`}
+            $focusMenu={location.pathname.slice(projectId.length + 43) === 'history'}
+            $hasSubMenu={false}
+          >
+            <FontAwesomeIcon icon={faTable} />
+            Location Log
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NodeListToggle hasSubMenu={hasAnchorsSubMenu}>
+            {hasAnchorsSubMenu &&
+              <FontAwesomeIcon
+                icon={collapseAnchors ? faCaretRight : faCaretDown}
+                onClick={(e) => handleCollapse(e, collapseAnchors, setCollapseAnchors)}
+              />
+            }
+            Anchors
+            <FontAwesomeIcon
+              icon={faPlus}
+              onClick={handleAdd}
+            />
+          </NodeListToggle>
+          {hasAnchorsSubMenu &&
+            <NodeSubMenu
+              collapse={collapseAnchors}
+              length={anchors.length}
+            >
+              {anchors.map((anchor) =>
+                <li key={anchor.id}>
+                  <NodeList>
+                    {anchor.name.length > 14 ?
+                      anchor.name.slice(0, 14) + "..."
+                      :
+                      anchor.name
+                    }
+                    <FontAwesomeIcon
+                      icon={faPen}
+                      onClick={(e) => {
+                        handleUpdate(e, anchor);
+                      }}
+                    />
+                    <FontAwesomeIcon
+                      icon={faTrashCan}
+                      onClick={(e) => {
+                        handleDelete(e, anchor);
+                      }}
+                    />
+                  </NodeList>
+                </li>
+              )}
+            </NodeSubMenu>
+          }
+        </NavItem>
+      </Navbar>
+    </Tint>
   );
 }
 

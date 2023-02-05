@@ -58,6 +58,7 @@ function Planner(props: PlannerProps) {
         setOpenCreate={setOpenCreate}
         setOpenUpdate={setOpenUpdate}
         setOpenDelete={setOpenDelete}
+        handleCloseNavbar={handleCloseNavbar}
       />
       <MainTypeC
         isLoading={isLoading}
