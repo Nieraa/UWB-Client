@@ -74,7 +74,7 @@ function ProjectList(props: ProjectListProps) {
             {skeletonArr.map((element) =>
               <Grid item
                 xs={12}
-                md={6}
+                sm={6}
                 lg={4}
                 xl={3}
                 key={element}
@@ -88,7 +88,7 @@ function ProjectList(props: ProjectListProps) {
             {projects.map((project) =>
               <Grid item
                 xs={12}
-                md={6}
+                sm={6}
                 lg={4}
                 xl={3}
                 key={project.id}

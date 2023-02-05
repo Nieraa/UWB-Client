@@ -78,7 +78,7 @@ function RoomPlanList(props: RoomPlanListProps) {
             {skeletonArr.map((element) =>
               <Grid item
                 xs={12}
-                md={6}
+                sm={6}
                 lg={4}
                 xl={3}
                 key={element}
@@ -94,7 +94,7 @@ function RoomPlanList(props: RoomPlanListProps) {
         {roomPlans.map((roomPlan) =>
           <Grid item
             xs={12}
-            md={6}
+            sm={6}
             lg={4}
             xl={3}
             key={roomPlan.id}
