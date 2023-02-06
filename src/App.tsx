@@ -1,4 +1,5 @@
 import Login from './pages/login/Login';
+import Register from './pages/register/Register';
 import Projects from './pages/Projects';
 import RoomPlans from './pages/RoomPlans';
 import Planner from './pages/Planner';
@@ -87,6 +88,12 @@ function App() {
         path="/login"
         element={
           <Login />
+        }
+      />
+      <Route
+        path="/register"
+        element={
+          <Register />
         }
       />
       <Route

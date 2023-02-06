@@ -1,38 +1,37 @@
-import { AuthLink, ForgotPassword, SignUp } from "./LoginForm.style";
 import { Button, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { sha512 } from "js-sha512";
 
-function LoginForm() {
+function UserCreateForm() {
   const validationSchema = yup.object({
     userName: yup
       .string()
-      .required("Please enter user name."),
+      .required("Please enter username."),
     password: yup
       .string()
       .min(8, "Password must be at least 8 characters.")
       .required("Please enter password."),
-    // confirmPassword: yup
-    //   .string()
-    //   .oneOf([yup.ref("password"), "Password not match"])
-    //   .required("Password not match"),
+    confirmPassword: yup
+      .string()
+      .oneOf([yup.ref("password"), "Password not match"])
+      .required("Password not match.")
   });
 
   const formik = useFormik({
     initialValues: {
       userName: "",
       password: "",
-      // confirmPassword: ""
+      confirmPassword: ""
     },
     validationSchema,
     onSubmit: (values) => {
       const userData = {
         userName: values.userName,
-        password: sha512(values.password),
+        password: sha512(values.password)
       }
     }
-  })
+  });
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -63,15 +62,11 @@ function LoginForm() {
         fullWidth
         autoFocus
       />
-      <ForgotPassword>
-        <AuthLink to="/change-password">
-          Forgot Password?
-        </AuthLink>
-      </ForgotPassword>
-      {/* <TextField
+      <TextField
         margin="dense"
-        id="comfirm-password"
-        label="Comfirm password"
+        id="confirm-password"
+        type="password"
+        label="Confirm Password"
         name="confirmPassword"
         variant="outlined"
         value={formik.values.confirmPassword}
@@ -80,22 +75,17 @@ function LoginForm() {
         helperText={formik.errors.confirmPassword}
         fullWidth
         autoFocus
-      /> */}
+      />
       <Button
+        sx={{ marginTop: "10px" }}
         variant="contained"
         type="submit"
         fullWidth
       >
-        Login
+        Sign up
       </Button>
-      <SignUp>
-        Don't have an account?&nbsp;
-        <AuthLink to="/register">
-          Sign Up
-        </AuthLink>
-      </SignUp>
     </form>
   );
 }
 
-export default LoginForm;
+export default UserCreateForm;
