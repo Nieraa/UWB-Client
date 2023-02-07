@@ -11,19 +11,13 @@ function LoginForm() {
       .required("Please enter user name."),
     password: yup
       .string()
-      .min(8, "Password must be at least 8 characters.")
       .required("Please enter password."),
-    // confirmPassword: yup
-    //   .string()
-    //   .oneOf([yup.ref("password"), "Password not match"])
-    //   .required("Password not match"),
   });
 
   const formik = useFormik({
     initialValues: {
       userName: "",
       password: "",
-      // confirmPassword: ""
     },
     validationSchema,
     onSubmit: (values) => {
@@ -68,19 +62,6 @@ function LoginForm() {
           Forgot Password?
         </AuthLink>
       </ForgotPassword>
-      {/* <TextField
-        margin="dense"
-        id="comfirm-password"
-        label="Comfirm password"
-        name="confirmPassword"
-        variant="outlined"
-        value={formik.values.confirmPassword}
-        onChange={formik.handleChange}
-        error={Boolean(formik.errors.confirmPassword)}
-        helperText={formik.errors.confirmPassword}
-        fullWidth
-        autoFocus
-      /> */}
       <Button
         variant="contained"
         type="submit"
