@@ -41,7 +41,6 @@ function LoginForm() {
         error={Boolean(formik.errors.userName)}
         helperText={formik.errors.userName}
         fullWidth
-        autoFocus
       />
       <TextField
         margin="dense"
@@ -55,7 +54,6 @@ function LoginForm() {
         error={Boolean(formik.errors.password)}
         helperText={formik.errors.password}
         fullWidth
-        autoFocus
       />
       <ForgotPassword>
         <LinkComponent to="/change-password">

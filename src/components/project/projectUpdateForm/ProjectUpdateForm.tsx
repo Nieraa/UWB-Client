@@ -73,7 +73,6 @@ function ProjectUpdateForm(props: ProjectUpdateFormProps) {
             error={Boolean(formik.errors.name)}
             helperText={formik.errors.name}
             fullWidth
-            autoFocus
           />
         </DialogContent>
         <DialogActions>

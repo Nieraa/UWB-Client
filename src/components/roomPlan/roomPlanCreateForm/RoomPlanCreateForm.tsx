@@ -158,7 +158,6 @@ function RoomPlanCreateForm(props: RoomPlanCreateFormProps) {
             error={Boolean(formik.errors.name)}
             helperText={formik.errors.name}
             fullWidth
-            autoFocus
           />
           <Grid container spacing={2}>
             <Grid item xs={6}>
@@ -172,7 +171,6 @@ function RoomPlanCreateForm(props: RoomPlanCreateFormProps) {
                 onChange={formik.handleChange}
                 error={Boolean(formik.errors.xRatio)}
                 helperText={formik.errors.xRatio}
-                autoFocus
                 fullWidth
               />
             </Grid>
@@ -187,7 +185,6 @@ function RoomPlanCreateForm(props: RoomPlanCreateFormProps) {
                 onChange={formik.handleChange}
                 error={Boolean(formik.errors.yRatio)}
                 helperText={formik.errors.yRatio}
-                autoFocus
                 fullWidth
               />
             </Grid>
@@ -204,7 +201,6 @@ function RoomPlanCreateForm(props: RoomPlanCreateFormProps) {
                 onChange={formik.handleChange}
                 error={Boolean(formik.errors.xOrigin)}
                 helperText={formik.errors.xOrigin}
-                autoFocus
                 fullWidth
               />
             </Grid>
@@ -219,7 +215,6 @@ function RoomPlanCreateForm(props: RoomPlanCreateFormProps) {
                 onChange={formik.handleChange}
                 error={Boolean(formik.errors.yOrigin)}
                 helperText={formik.errors.yOrigin}
-                autoFocus
                 fullWidth
               />
             </Grid>

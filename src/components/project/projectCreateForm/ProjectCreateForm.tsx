@@ -72,7 +72,6 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
             error={Boolean(formik.errors.name)}
             helperText={formik.errors.name}
             fullWidth
-            autoFocus
           />
         </DialogContent>
         <DialogActions>

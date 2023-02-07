@@ -92,7 +92,6 @@ function AnchorUpdateForm(props: AnchorUpdateFormProps) {
             error={Boolean(formik.errors.name)}
             helperText={formik.errors.name}
             fullWidth
-            autoFocus
           />
           <Grid container spacing={2}>
             <Grid item xs={4}>
@@ -106,7 +105,6 @@ function AnchorUpdateForm(props: AnchorUpdateFormProps) {
                 onChange={formik.handleChange}
                 error={Boolean(formik.errors.x)}
                 helperText={formik.errors.x}
-                autoFocus
                 fullWidth
               />
             </Grid>
@@ -121,7 +119,6 @@ function AnchorUpdateForm(props: AnchorUpdateFormProps) {
                 onChange={formik.handleChange}
                 error={Boolean(formik.errors.y)}
                 helperText={formik.errors.y}
-                autoFocus
                 fullWidth
               />
             </Grid>
@@ -136,7 +133,6 @@ function AnchorUpdateForm(props: AnchorUpdateFormProps) {
                 onChange={formik.handleChange}
                 error={Boolean(formik.errors.z)}
                 helperText={formik.errors.z}
-                autoFocus
                 fullWidth
               />
             </Grid>

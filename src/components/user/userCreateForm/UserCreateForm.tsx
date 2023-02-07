@@ -46,7 +46,6 @@ function UserCreateForm() {
         error={Boolean(formik.errors.userName)}
         helperText={formik.errors.userName}
         fullWidth
-        autoFocus
       />
       <TextField
         margin="dense"
@@ -60,7 +59,6 @@ function UserCreateForm() {
         error={Boolean(formik.errors.password)}
         helperText={formik.errors.password}
         fullWidth
-        autoFocus
       />
       <TextField
         margin="dense"
@@ -74,7 +72,6 @@ function UserCreateForm() {
         error={Boolean(formik.errors.confirmPassword)}
         helperText={formik.errors.confirmPassword}
         fullWidth
-        autoFocus
       />
       <Button
         sx={{ marginTop: "10px" }}
