@@ -14,6 +14,7 @@ import {
   faCaretDown,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Project } from "../../types";
 
 interface SideNavbarTypeAProps {
@@ -32,6 +33,7 @@ function SideNavbarTypeA(props: SideNavbarTypeAProps) {
   } = props;
 
   const [collapse, setCollapse] = useState<boolean>(true);
+  const location = useLocation();
 
   const hasSubMenu: boolean = projects.length !== 0 ? true : false;
 
@@ -46,12 +48,13 @@ function SideNavbarTypeA(props: SideNavbarTypeAProps) {
   }
 
   return (
-    <Tint onClick={handleCloseNavbar} collapseNavbar={collapseNavbar}>
+    <>
+      <Tint onClick={handleCloseNavbar} collapseNavbar={collapseNavbar} />
       <Navbar collapseNavbar={collapseNavbar}>
         <NavItem>
           <NavLink
             to="/projects"
-            $focusMenu={projectId === ""}
+            $focusMenu={location.pathname === "/projects"}
             $hasSubMenu={hasSubMenu}
           >
             {hasSubMenu &&
@@ -72,7 +75,7 @@ function SideNavbarTypeA(props: SideNavbarTypeAProps) {
                 <li key={project.id}>
                   <SubMenuLink
                     to={`/projects/${project.id}/room-plans`}
-                    $focusMenu={project.id === projectId}
+                    $focusMenu={project.id === projectId && location.pathname !== "/projects"}
                     onClick={() => {
                       setCollapse(true);
                     }}
@@ -90,7 +93,7 @@ function SideNavbarTypeA(props: SideNavbarTypeAProps) {
           }
         </NavItem>
       </Navbar>
-    </Tint>
+    </>
   );
 }
 

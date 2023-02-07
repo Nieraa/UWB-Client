@@ -112,7 +112,8 @@ function SideNavbarTypeB(props: SideNavbarTypeBProps) {
   }
 
   return (
-    <Tint onClick={handleCloseNavbar} collapseNavbar={collapseNavbar}>
+    <>
+      <Tint onClick={handleCloseNavbar} collapseNavbar={collapseNavbar} />
       <Navbar collapseNavbar={collapseNavbar}>
         <NavItem>
           <NavLink
@@ -238,7 +239,7 @@ function SideNavbarTypeB(props: SideNavbarTypeBProps) {
           }
         </NavItem>
       </Navbar>
-    </Tint>
+    </>
   );
 }
 
