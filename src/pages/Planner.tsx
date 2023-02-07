@@ -46,7 +46,7 @@ function Planner(props: PlannerProps) {
   }
 
   return (
-    <div>
+    <>
       <AppBar handleCollapseNavbar={handleCollapseNavbar}/>
       <SideNavbarTypeB
         collapseNavbar={collapseNavbar}
@@ -92,7 +92,7 @@ function Planner(props: PlannerProps) {
         setAnchors={setAnchors}
         setOpenDelete={setOpenDelete}
       />
-    </div>
+    </>
   );
 }
 

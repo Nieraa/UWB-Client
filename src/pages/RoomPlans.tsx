@@ -42,7 +42,7 @@ function RoomPlans(props: RoomPlanProps) {
   }
 
   return (
-    <div>
+    <>
       <AppBar handleCollapseNavbar={handleCollapseNavbar}/>
       <SideNavbarTypeA
         collapseNavbar={collapseNavbar}
@@ -80,7 +80,7 @@ function RoomPlans(props: RoomPlanProps) {
         setRoomPlans={setRoomPlans}
         setOpenDelete={setOpenDelete}
       />
-    </div>
+    </>
   );
 }
 

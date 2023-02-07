@@ -36,7 +36,7 @@ function Projects(props: ProjectsProps) {
   }
 
   return (
-    <div>
+    <>
       <AppBar handleCollapseNavbar={handleCollapseNavbar} />
       <SideNavbarTypeA
         collapseNavbar={collapseNavbar}
@@ -69,7 +69,7 @@ function Projects(props: ProjectsProps) {
         setProjects={setProjects}
         setOpenDelete={setOpenDelete}
       />
-    </div>
+    </>
   );
 }
 
