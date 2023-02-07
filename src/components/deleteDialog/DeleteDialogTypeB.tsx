@@ -2,10 +2,12 @@ import {
   ContentWrapper,
   Title,
   Detail,
-  CancelButton,
   IconWrapper,
   Name
 } from "./DeleteDialog.style";
+import {
+  CancelButton,
+} from "../cancelButton/CancelButton.style";
 import {
   Dialog,
   DialogContent,

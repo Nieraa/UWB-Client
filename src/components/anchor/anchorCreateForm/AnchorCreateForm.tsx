@@ -1,6 +1,6 @@
 import {
   CancelButton,
-} from "./AnchorCreateForm.style";
+} from "../../cancelButton/CancelButton.style";
 import {
   Dialog,
   DialogTitle,

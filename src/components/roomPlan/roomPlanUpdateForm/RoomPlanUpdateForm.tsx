@@ -1,7 +1,9 @@
 import {
-  CancelButton,
   ImageErrorHelperText,
 } from "./RoomPlanUpdateForm.style";
+import {
+  CancelButton,
+} from "../../cancelButton/CancelButton.style";
 import {
   Dialog,
   DialogTitle,

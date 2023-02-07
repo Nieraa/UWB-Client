@@ -22,13 +22,6 @@ export const Name = styled.span`
   font-weight: 700;
 `;
 
-export const CancelButton = styled(Button)`
-  background-color: var(--grey200) !important;
-  &:hover {
-    background-color: var(--grey300) !important;
-  }
-`;
-
 export const IconWrapper = styled.div`
   width: 110px;
   height: 110px;
