@@ -1,7 +1,7 @@
 import {
   MainArea,
   BreadcrumbsArea,
-  AddElementButton,
+  AddButton,
   BreadcrumbLink,
   BreadcrumbText
 } from "./Main.style";
@@ -67,9 +67,9 @@ function MainTypeC(props: MainTypeCProps) {
           />
       }
       <Tooltip title="Create Anchor" placement="left">
-        <AddElementButton onClick={handleClickOpen}>
+        <AddButton onClick={handleClickOpen}>
           <FontAwesomeIcon icon={faPlus} />
-        </AddElementButton>
+        </AddButton>
       </Tooltip>
     </MainArea >
   );

@@ -5,9 +5,7 @@ import {
   IconWrapper,
   Name
 } from "./DeleteDialog.style";
-import {
-  CancelButton,
-} from "../cancelButton/CancelButton.style";
+import { CancelButton } from "../../Styles/Styles.style";
 import {
   Dialog,
   DialogContent,

@@ -1,4 +1,4 @@
-import { AuthLink, ForgotPassword, SignUp } from "./LoginForm.style";
+import { ForgotPassword, ToSignInAndUpWrapper, LinkComponent } from "../../../Styles/Styles.style";
 import { Button, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -58,9 +58,9 @@ function LoginForm() {
         autoFocus
       />
       <ForgotPassword>
-        <AuthLink to="/change-password">
+        <LinkComponent to="/change-password">
           Forgot Password?
-        </AuthLink>
+        </LinkComponent>
       </ForgotPassword>
       <Button
         variant="contained"
@@ -69,12 +69,12 @@ function LoginForm() {
       >
         Login
       </Button>
-      <SignUp>
+      <ToSignInAndUpWrapper>
         Don't have an account?&nbsp;
-        <AuthLink to="/register">
+        <LinkComponent to="/register">
           Sign Up
-        </AuthLink>
-      </SignUp>
+        </LinkComponent>
+      </ToSignInAndUpWrapper>
     </form>
   );
 }

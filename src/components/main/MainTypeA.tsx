@@ -1,6 +1,6 @@
 import {
   MainArea,
-  AddElementButton,
+  AddButton,
   BreadcrumbText,
   BreadcrumbsArea
 } from "./Main.style";
@@ -50,9 +50,9 @@ function MainTypeA(props: MainTypeAProps) {
         setOpenDelete={setOpenDelete}
       />
       <Tooltip title="Create Project" placement="left">
-        <AddElementButton onClick={handleClickOpen}>
+        <AddButton onClick={handleClickOpen}>
           <FontAwesomeIcon icon={faPlus} />
-        </AddElementButton>
+        </AddButton>
       </Tooltip>
     </MainArea>
   );

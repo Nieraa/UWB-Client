@@ -1,64 +1,43 @@
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
-import '../../theme/Theme.css';
 
 export const Tint = styled.div<{ collapseNavbar: boolean }>`
-  visibility: ${({ collapseNavbar }) => (collapseNavbar ? "hidden" : "visible")};
-  position: absolute;
   height: calc(100vh - 60px);
+  background-color: rgba(85, 78, 64, 0.4);
+  position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
+  visibility: ${({ collapseNavbar }) => (collapseNavbar ? "hidden" : "visible")};
   z-index: 11;
-  background-color: rgba(85, 78, 64, 0.4);
 `;
 
 export const Navbar = styled.ul<{ collapseNavbar: boolean }>`
   width: 300px;
   height: calc(100vh - 60px);
-  position: fixed;
-  top: 60px;
+  background-color: var(--white);
   margin: 0;
   padding: 0;
-  border-bottom: 1px solid var(--grey100);
-  background-color: var(--white);
+  position: fixed;
+  top: 60px;
   overflow-x: hidden;
+  border-bottom: 1px solid var(--grey100);
   transform: ${({ collapseNavbar }) => (collapseNavbar ? "translateX(-100%)" : "translateX(0)")};
   transition: all 0.2s ease-out;
-
-  ::-webkit-scrollbar {
-    width: 15px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: var(--grey200);
-    border-radius: 15px;
-    border: 4px solid transparent;
-    background-clip: content-box;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--grey300);
-  }
 `;
 
 export const NavItem = styled.li`
 `;
 
 export const NavLink = styled(Link) <{ $focusMenu: boolean, $hasSubMenu: boolean }>`
-  color: ${(props) => (props.$focusMenu ? "var(--blue)" : "var(--black)")};
-  background-color: ${(props) => (props.$focusMenu ? "var(--grey50)" : "var(--white)")};
-  text-decoration: none;
   height: 18px;
+  background-color: ${(props) => (props.$focusMenu ? "var(--grey50)" : "var(--white)")};
+  color: ${(props) => (props.$focusMenu ? "var(--blue)" : "var(--black)")};
+  text-decoration: none;
+  line-height: var(--sm-heading);
   padding: ${(props) => (props.$hasSubMenu ? "16px 30px 16px 3px" : "16px 30px")};
   display: flex;
   align-items: center;
-  font-weight: 400;
-  line-height: 24px;
 
   &:hover {
     background-color: var(--grey50);
@@ -66,32 +45,31 @@ export const NavLink = styled(Link) <{ $focusMenu: boolean, $hasSubMenu: boolean
   }
 
   svg {
-    margin-right: 16px;
     width: 24px;
     color: var(--primary);
+    margin-right: 16px;
   }
 
   ${({ $hasSubMenu }) =>
     $hasSubMenu &&
     css`
-        svg:first-child {
-          margin-right: 0;
-          width: 27px;
-        }
-      `}
+      svg:first-child {
+        width: 27px;
+        margin-right: 0;
+      }
+    `}
 `;
 
 export const SubMenuLink = styled(Link) <{ $focusMenu: boolean }>`
-  color: ${(props) => (props.$focusMenu ? "var(--blue)" : "var(--black)")};
-  background-color: ${(props) => (props.$focusMenu ? "var(--grey50)" : "var(--white)")};
-  text-decoration: none;
   height: 18px;
+  background-color: ${(props) => (props.$focusMenu ? "var(--grey50)" : "var(--white)")};
+  color: ${(props) => (props.$focusMenu ? "var(--blue)" : "var(--black)")};
+  font-size: var(--md-text);
+  text-decoration: none;
+  line-height: var(--sm-heading);
   padding: 16px 16px 16px 45px;
   display: flex;
   align-items: center;
-  font-size: var(--text);
-  font-weight: 400;
-  line-height: 24px;
 
   &:hover {
     background-color: var(--grey50);
@@ -118,46 +96,25 @@ export const SubMenuLink = styled(Link) <{ $focusMenu: boolean }>`
 `;
 
 export const SubMenu = styled.ul<{ collapse: boolean, length: number }>`
-  display: ${(props) => (props.collapse ? "none" : "block")};
-  list-style: none;
   height: ${(props) => (props.length > 6 ? "300px" : "auto")};
+  font-size: var(--md-text);
   margin: 0;
   padding: 0;
-  border-bottom: 1px solid var(--grey100);
-  font-size: var(--text);
-  font-weight: 400;
+  display: ${(props) => (props.collapse ? "none" : "block")};
   overflow-y: auto;
-
-  ::-webkit-scrollbar {
-    width: 15px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: var(--grey200);
-    border-radius: 15px;
-    border: 4px solid transparent;
-    background-clip: content-box;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--grey300);
-  }
+  border-bottom: 1px solid var(--grey100);
+  list-style: none;
 `;
 
 export const NodeListToggle = styled.div<{ hasSubMenu: boolean }>`
-  color: var(--black);
-  background-color: var(--white);
-  text-decoration: none;
   height: 18px;
+  background-color: var(--white);
+  color: var(--black);
+  text-decoration: none;
+  line-height: var(--sm-heading);
   padding: ${(props) => (props.hasSubMenu ? "16px 30px 16px 3px" : "16px 30px")};
   display: flex;
   align-items: center;
-  font-weight: 400;
-  line-height: 24px;
   border-top: 1px solid var(--grey100);
 
   &:hover {
@@ -166,37 +123,36 @@ export const NodeListToggle = styled.div<{ hasSubMenu: boolean }>`
   }
 
   svg {
-    margin-right: 16px;
     width: 24px;
     color: var(--primary);
+    margin-right: 16px;
   }
 
   ${({ hasSubMenu }) =>
     hasSubMenu &&
     css`
         svg:first-child {
-          margin-right: 5px;
           width: 27px;
+          margin-right: 5px;
         }
       `}
   
   svg:last-child {
+    width: 13px;
     margin-left: auto;
     margin-right: 0;
-    width: 13px;
   }
 `;
 
 export const NodeList = styled.div`
-  color: var(--black);
-  background-color: var(--white);
   height: 18px;
+  background-color: var(--white);
+  color: var(--black);
+  font-size: var(--md-text);
+  line-height: var(--sm-heading);
   padding: 16px 16px 16px 45px;
   display: flex;
   align-items: center;
-  font-size: var(--text);
-  font-weight: 400;
-  line-height: 24px;
 
   &:hover {
     background-color: var(--grey50);
@@ -204,9 +160,9 @@ export const NodeList = styled.div`
   }
 
   svg {
-    margin-right: 16px;
     width: 24px;
     color: var(--primary);
+    margin-right: 16px;
   }
 
   svg:first-child {
@@ -220,31 +176,11 @@ export const NodeList = styled.div`
 `;
 
 export const NodeSubMenu = styled.ul<{ collapse: boolean, length: number }>`
-  display: ${(props) => (props.collapse ? "none" : "block")};
-  list-style: none;
   height: ${(props) => (props.length > 6 ? "300px" : "auto")};
+  font-size: var(--md-text);
   margin: 0;
   padding: 0;
-  font-size: var(--text);
-  font-weight: 400;
+  display: ${(props) => (props.collapse ? "none" : "block")};
   overflow-y: auto;
-
-  ::-webkit-scrollbar {
-    width: 15px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: var(--grey200);
-    border-radius: 15px;
-    border: 4px solid transparent;
-    background-clip: content-box;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--grey300);
-  }
+  list-style: none;
 `;

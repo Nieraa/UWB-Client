@@ -1,4 +1,4 @@
-import { Element, Text } from './AnchorNode.style';
+import { NodeElement, NodeText } from '../../../Styles/Styles.style';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Draggable from 'react-draggable';
@@ -78,13 +78,13 @@ function AnchorNode(props: AnchorNodeProps) {
       scale={scale}
     >
       <div ref={nodeRef}>
-        <Text textWidth={getTextWidth(anchor.name, "regular 16pt Prompt")}>
+        <NodeText textWidth={getTextWidth(anchor.name, "regular 16pt Prompt")}>
           {anchor.name}<br />
           {`(${x / 100}, ${y / 100}, ${z / 100})`}
-        </Text>
-        <Element>
+        </NodeText>
+        <NodeElement nodeType="anchor">
           <FontAwesomeIcon icon={faPlus} />
-        </Element>
+        </NodeElement>
       </div>
     </Draggable>
   );

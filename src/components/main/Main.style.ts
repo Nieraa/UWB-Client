@@ -1,70 +1,69 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { maxLayout, minLayout } from "../../../src/utils/breakpoint";
-import '../../theme/Theme.css';
+import { maxLayout } from "../../../src/utils/breakpoint";
 
 export const MainArea = styled.div`
   width: 100vw;
   height: calc(100vh - 60px);
+  background-color: var(--grey);
   position: fixed;
   bottom: 0;
   right: 0;
-  background-color: var(--grey);
 `;
 
 export const BreadcrumbText = styled.span`
-  font-size: var(--subheading-text);
-  font-weight: bold;
   color: var(--primary);
+  font-size: var(--sm-heading);
+  font-weight: bold;
 
   @media ${maxLayout.sm} {
-    font-size: var(--text);
+    font-size: var(--md-text);
   }
 `;
 
 export const BreadcrumbLink = styled(Link)`
-  font-size: var(--subheading-text);
   color: var(--primary);
+  font-size: var(--sm-heading);
   text-decoration: none;
+
   &:hover {
     text-decoration: underline;
   }
 
   @media ${maxLayout.sm} {
-    font-size: var(--text);
+    font-size: var(--md-text);
   }
 `;
 
 export const BreadcrumbsArea = styled.div`
   width: 100%;
   height: 27px;
-  padding: 16px;
-  border-bottom: 1px solid var(--grey100);
-  font-size: var(--subheading-text);
+  background-color: var(--white);
+  color: var(--primary);
+  font-size: var(--sm-heading);
   font-weight: bold;
   text-align: center;
-  color: var(--primary);
-  background-color: var(--white);
+  padding: 16px;
+  border-bottom: 1px solid var(--grey100);
 `;
 
-export const AddElementButton = styled.button`
+export const AddButton = styled.button`
   width: 50px;
   height: 50px;
-  z-index: 100;
+  background-color: var(--green);
   color: var(--white);
-  line-height: 50px;
-  font-size: var(--subheading-text);
+  font-size: var(--sm-heading);
+  line-height: var(--lg-heading);
   text-align: center;
-  position: absolute;
-  border: 0px;
-  border-radius: 50%;
-  background-color: var(--light-green);
   position: absolute;
   bottom: 30px;
   right: 30px;
+  border: 0px;
+  border-radius: 50%;
+  z-index: 100;
 
   &:hover {
-    background-color: var(--light-green-hover);
+    background-color: var(--green100);
     transition: 0.2s;
   }
 `;

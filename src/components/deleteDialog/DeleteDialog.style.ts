@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Button } from "@mui/material";
 
 export const ContentWrapper = styled.div`
   text-align: center;
@@ -7,19 +6,19 @@ export const ContentWrapper = styled.div`
 
 export const Title = styled.div`
   color: var(--error);
-  font-size: var(--heading-text);
-  font-weight: 700;
+  font-size: var(--sm-heading);
+  font-weight: bold;
   margin-top: 20px;
 `;
 
 export const Detail = styled.div`
+  font-size: var(--md-text);
   margin-top: 20px;
-  font-size: var(--text);
 `;
 
 export const Name = styled.span`
   color: var(--primary);
-  font-weight: 700;
+  font-weight: bold;
 `;
 
 export const IconWrapper = styled.div`

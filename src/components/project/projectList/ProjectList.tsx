@@ -1,16 +1,16 @@
 import {
-  ProjectWrapper,
-  ProjectLink,
-  ProjectName,
-  ProjectNameWrapper
-} from "./ProjectList.style";
+  ListWrapper,
+  ListElementLink,
+  ListElementNameWrapper,
+  ListElementName
+} from "../../../Styles/Styles.style";
 import {
   Grid,
   Card,
   CardActionArea,
   CardContent,
   Skeleton,
-  Tooltip,
+  Tooltip
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
@@ -63,7 +63,7 @@ function ProjectList(props: ProjectListProps) {
   }
 
   return (
-    <ProjectWrapper>
+    <ListWrapper>
       <Grid
         container
         spacing={3}
@@ -96,18 +96,18 @@ function ProjectList(props: ProjectListProps) {
               >
                 <Card>
                   <CardActionArea>
-                    <ProjectLink
+                    <ListElementLink
                       to={`/projects/${project.id}/room-plans`}
                     >
                       <CardContent>
-                        <ProjectNameWrapper>
-                          <ProjectName>
+                        <ListElementNameWrapper>
+                          <ListElementName>
                             {project.name.length > 18 ?
                               project.name.slice(0, 18) + "..."
                               :
                               project.name
                             }
-                          </ProjectName>
+                          </ListElementName>
                           <Tooltip title="Edit Project">
                             <FontAwesomeIcon
                               icon={faPen}
@@ -124,9 +124,9 @@ function ProjectList(props: ProjectListProps) {
                               }}
                             />
                           </Tooltip>
-                        </ProjectNameWrapper>
+                        </ListElementNameWrapper>
                       </CardContent>
-                    </ProjectLink>
+                    </ListElementLink>
                   </CardActionArea>
                 </Card>
               </Grid>
@@ -135,7 +135,7 @@ function ProjectList(props: ProjectListProps) {
           </>
         }
       </Grid>
-    </ProjectWrapper >
+    </ListWrapper>
   );
 }
 

@@ -1,4 +1,4 @@
-import { Element, Text } from './Tag.style';
+import { NodeElement, NodeText } from '../../Styles/Styles.style';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Draggable from 'react-draggable';
@@ -57,13 +57,13 @@ export const Tag = (props: TagProps) => {
       scale={scale}
     >
       <div ref={nodeRef}>
-        <Text textWidth={getTextWidth(tag.name, "regular 16pt Prompt")}>
+        <NodeText textWidth={getTextWidth(tag.name, "regular 16pt Prompt")}>
           {tag.name}<br />
           {`(${x / 100}, ${y / 100}, ${z / 100})`}
-        </Text>
-        <Element>
+        </NodeText>
+        <NodeElement nodeType="tag">
           <FontAwesomeIcon icon={faPlus} />
-        </Element>
+        </NodeElement>
       </div>
     </Draggable>
   );

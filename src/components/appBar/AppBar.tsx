@@ -1,8 +1,8 @@
-import HamburgerButton from "../hamburgerButton/HamburgerButton";
-import Logo from "../logo/Logo";
 import {
   TopNavbar,
 } from "./AppBar.style";
+import HamburgerButton from "../hamburgerButton/HamburgerButton";
+import Logo from "../logo/Logo";
 
 interface AppBarProps {
   handleCollapseNavbar: () => void;

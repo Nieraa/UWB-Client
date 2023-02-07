@@ -1,9 +1,9 @@
 import {
-  RoomPlanWrapper,
-  RoomPlanLink,
-  RoomPlanName,
-  RoomPlanNameWrapper
-} from "./RoomPlanList.style";
+  ListWrapper,
+  ListElementLink,
+  ListElementNameWrapper,
+  ListElementName
+} from "../../../Styles/Styles.style";
 import {
   Grid,
   Card,
@@ -67,7 +67,7 @@ function RoomPlanList(props: RoomPlanListProps) {
   }
 
   return (
-    <RoomPlanWrapper>
+    <ListWrapper>
       <Grid
         container
         spacing={3}
@@ -102,7 +102,7 @@ function RoomPlanList(props: RoomPlanListProps) {
           >
             <Card>
               <CardActionArea>
-                <RoomPlanLink
+                <ListElementLink
                   to={`/projects/${projectId}/room-plans/${roomPlan.id}/planner`}
                 >
                   <CardMedia
@@ -117,14 +117,14 @@ function RoomPlanList(props: RoomPlanListProps) {
                   />
                   <Divider />
                   <CardContent>
-                    <RoomPlanNameWrapper>
-                      <RoomPlanName>
+                    <ListElementNameWrapper>
+                      <ListElementName>
                         {roomPlan.name.length > 18 ?
                           roomPlan.name.slice(0, 18) + "..."
                           :
                           roomPlan.name
                         }
-                      </RoomPlanName>
+                      </ListElementName>
                       <Tooltip title="Edit Room plan">
                         <FontAwesomeIcon
                           icon={faPen}
@@ -141,15 +141,15 @@ function RoomPlanList(props: RoomPlanListProps) {
                           }}
                         />
                       </Tooltip>
-                    </RoomPlanNameWrapper>
+                    </ListElementNameWrapper>
                   </CardContent>
-                </RoomPlanLink>
+                </ListElementLink>
               </CardActionArea>
             </Card>
           </Grid>
         )}
       </Grid>
-    </RoomPlanWrapper >
+    </ListWrapper>
   );
 }
 

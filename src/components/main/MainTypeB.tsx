@@ -1,6 +1,6 @@
 import {
   MainArea,
-  AddElementButton,
+  AddButton,
   BreadcrumbsArea,
   BreadcrumbLink,
   BreadcrumbText
@@ -61,9 +61,9 @@ function MainTypeB(props: MainTypeBProps) {
         setOpenDelete={setOpenDelete}
       />
       <Tooltip title="Create Room plan" placement="left">
-        <AddElementButton onClick={handleClickOpen}>
+        <AddButton onClick={handleClickOpen}>
           <FontAwesomeIcon icon={faPlus} />
-        </AddElementButton>
+        </AddButton>
       </Tooltip>
     </MainArea>
   );
