@@ -60,7 +60,7 @@ export const AddButton = styled.button`
   right: 30px;
   border: 0px;
   border-radius: 50%;
-  z-index: 100;
+  z-index: 1;
 
   &:hover {
     background-color: var(--green100);

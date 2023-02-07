@@ -9,7 +9,7 @@ export const Tint = styled.div<{ collapseNavbar: boolean }>`
   right: 0;
   bottom: 0;
   visibility: ${({ collapseNavbar }) => (collapseNavbar ? "hidden" : "visible")};
-  z-index: 11;
+  z-index: 2;
 `;
 
 export const Navbar = styled.ul<{ collapseNavbar: boolean }>`
@@ -22,6 +22,7 @@ export const Navbar = styled.ul<{ collapseNavbar: boolean }>`
   top: 60px;
   overflow-x: hidden;
   border-bottom: 1px solid var(--grey100);
+  z-index: 3;
   transform: ${({ collapseNavbar }) => (collapseNavbar ? "translateX(-100%)" : "translateX(0)")};
   transition: all 0.2s ease-out;
 `;

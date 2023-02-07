@@ -166,7 +166,7 @@ export const NodeText = styled.span<{ textWidth: number }>`
   position: absolute;
   left: ${(props) => (props.textWidth ? `calc(${-0.5 * props.textWidth + 20}px)` : "-50px")};
   top: -32px; 
-  z-index: 100;
+  z-index: 1;
 `;
 
 export default GlobalStyle;
