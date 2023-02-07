@@ -1,5 +1,6 @@
-import Login from './pages/login/Login';
-import Register from './pages/register/Register';
+import Styles from './Styles/Styles';
+import Login from './pages/Login';
+import Register from './pages/Register';
 import Projects from './pages/Projects';
 import RoomPlans from './pages/RoomPlans';
 import Planner from './pages/Planner';
@@ -81,66 +82,67 @@ function App() {
   }, [fetchData, location]);
 
   return (
-    <Routes>
-      <Route path="/" element={<Navigate to="/projects" />}>
-      </Route>
-      <Route
-        path="/login"
-        element={
-          <Login />
-        }
-      />
-      <Route
-        path="/register"
-        element={
-          <Register />
-        }
-      />
-      <Route
-        path="/projects"
-        element={
-          <Projects
-            isLoading={isLoading}
-            projects={projects}
-            currentProject={currentProject}
-            setProjects={setProjects}
-            setCurrentProject={setCurrentProject}
-          />
-        }
-      />
-      <Route
-        path="/projects/:projectId/room-plans"
-        element={
-          <RoomPlans
-            isLoading={isLoading}
-            projectId={currentProject.id}
-            projects={projects}
-            roomPlans={roomPlans}
-            currentProject={currentProject}
-            currentRoomPlan={currentRoomPlan}
-            setRoomPlans={setRoomPlans}
-            setCurrentRoomPlan={setCurrentRoomPlan}
-          />
-        }
-      />
-      <Route
-        path="/projects/:projectId/room-plans/:roomPlanId/planner"
-        element={
-          <Planner
-            isLoading={isLoading}
-            projectId={currentProject.id}
-            roomPlanId={currentRoomPlan.id}
-            projects={projects}
-            anchors={anchors}
-            currentProject={currentProject}
-            currentRoomPlan={currentRoomPlan}
-            currentAnchor={currentAnchor}
-            setAnchors={setAnchors}
-            setCurrentAnchor={setCurrentAnchor}
-          />
-        }
-      />
-      {/* <Route
+    <Styles>
+      <Routes>
+        <Route path="/" element={<Navigate to="/projects" />}>
+        </Route>
+        <Route
+          path="/login"
+          element={
+            <Login />
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <Register />
+          }
+        />
+        <Route
+          path="/projects"
+          element={
+            <Projects
+              isLoading={isLoading}
+              projects={projects}
+              currentProject={currentProject}
+              setProjects={setProjects}
+              setCurrentProject={setCurrentProject}
+            />
+          }
+        />
+        <Route
+          path="/projects/:projectId/room-plans"
+          element={
+            <RoomPlans
+              isLoading={isLoading}
+              projectId={currentProject.id}
+              projects={projects}
+              roomPlans={roomPlans}
+              currentProject={currentProject}
+              currentRoomPlan={currentRoomPlan}
+              setRoomPlans={setRoomPlans}
+              setCurrentRoomPlan={setCurrentRoomPlan}
+            />
+          }
+        />
+        <Route
+          path="/projects/:projectId/room-plans/:roomPlanId/planner"
+          element={
+            <Planner
+              isLoading={isLoading}
+              projectId={currentProject.id}
+              roomPlanId={currentRoomPlan.id}
+              projects={projects}
+              anchors={anchors}
+              currentProject={currentProject}
+              currentRoomPlan={currentRoomPlan}
+              currentAnchor={currentAnchor}
+              setAnchors={setAnchors}
+              setCurrentAnchor={setCurrentAnchor}
+            />
+          }
+        />
+        {/* <Route
         path="/projects/:projectId/realtime"
         element={<Realtime projects={projects} setProjects={setProjects} />}
       />
@@ -148,7 +150,8 @@ function App() {
         path="/projects/:projectId/history"
         element={<History projects={projects} setProjects={setProjects} />}
       /> */}
-    </Routes>
+      </Routes>
+    </Styles>
   );
 }
 
