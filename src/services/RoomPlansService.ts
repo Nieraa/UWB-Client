@@ -1,5 +1,4 @@
 import axios from "../axios";
-import { NavigateFunction } from "react-router-dom";
 import { RoomPlan } from "../types";
 
 export async function getRoomPlans(
@@ -103,14 +102,24 @@ export async function deleteRoomPlan(
 export async function getRoomPlanbyId(
   projectId: string,
   roomPlanId: string,
-  setCurrentRoomPlan: (currentRoomPlan: RoomPlan) => void
+  setCurrentRoomPlan: (currentRoomPlan: RoomPlan) => void,
+  handleGetRoomPlanbyId: (success: boolean) => void,
 ): Promise<void> {
+  const userId: string = localStorage.userId;
+  const config = {
+    headers: { Authorization: `Bearer ${localStorage.accessToken}` }
+  }
   await axios
-    .get(`/projects/${projectId}/roomPlans/${roomPlanId}`)
+    .get(`${userId}/projects/${projectId}/roomPlans/${roomPlanId}`, config)
     .then((response) => {
       setCurrentRoomPlan(response.data);
+      if (handleGetRoomPlanbyId) {
+        handleGetRoomPlanbyId(true);
+      }
     })
     .catch(() => {
-      alert("Get Room plan failed");
+      if (handleGetRoomPlanbyId) {
+        handleGetRoomPlanbyId(false);
+      }
     });
 }
