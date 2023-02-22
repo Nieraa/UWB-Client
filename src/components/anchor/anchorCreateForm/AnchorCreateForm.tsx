@@ -10,15 +10,14 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { Node } from "../../../types";
 import { createAnchor } from "../../../services/AnchorsService";
 
 interface AnchorCreateFormProps {
   projectId: string;
   roomPlanId: string;
   openCreate: boolean;
-  setAnchors: (anchors: Node[]) => void;
   setOpenCreate: (openCreate: boolean) => void;
+  handleCreateAnchor: (success: boolean) => void;
 }
 
 function AnchorCreateForm(props: AnchorCreateFormProps) {
@@ -26,8 +25,8 @@ function AnchorCreateForm(props: AnchorCreateFormProps) {
     projectId,
     roomPlanId,
     openCreate,
-    setAnchors,
-    setOpenCreate
+    setOpenCreate,
+    handleCreateAnchor
   } = props;
 
   const validationSchema = yup.object({
@@ -60,7 +59,7 @@ function AnchorCreateForm(props: AnchorCreateFormProps) {
         y: values.y,
         z: values.z
       };
-      createAnchor(projectId, roomPlanId, anchorData, setAnchors, setOpenCreate);
+      createAnchor(projectId, roomPlanId, anchorData, handleCreateAnchor);
     }
   });
 
