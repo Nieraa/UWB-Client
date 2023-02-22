@@ -52,7 +52,7 @@ function App() {
 
   const navigate = useNavigate();
 
-  function handleGetProject(success: boolean): void {
+  function handleGetProjects(success: boolean): void {
     if (!success) {
       setOpen(true);
       setSucccess(false);
@@ -73,6 +73,21 @@ function App() {
       setSucccess(false);
       setTitle("Get project failed");
       setDetail("Some error has ocrured while get project data.");
+    }
+    else {
+      setOpen(false);
+      setSucccess(true);
+      setTitle("");
+      setDetail("");
+    }
+  }
+
+  function handleGetRoomPlans(success: boolean): void {
+    if (!success) {
+      setOpen(true);
+      setSucccess(false);
+      setTitle("Get room plans failed");
+      setDetail("Some error has ocrured while get room plan datas.");
     }
     else {
       setOpen(false);
@@ -110,7 +125,7 @@ function App() {
           yOrigin: 0
         });
         setAnchors([]);
-        getRoomPlans(projectId, setRoomPlans);
+        getRoomPlans(projectId, setRoomPlans, handleGetRoomPlans);
         getProjectbyId(projectId, setCurrentProject, handleGetProjectbyId);
       }
       else {
@@ -120,7 +135,7 @@ function App() {
             name: ""
           });
           setRoomPlans([]);
-          getProjects(setProjects, handleGetProject);
+          getProjects(setProjects, handleGetProjects);
         }
       }
     }
