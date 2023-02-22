@@ -61,21 +61,25 @@ export async function updateAnchor(
     y?: number,
     z?: number
   },
-  setAnchors?: (anchors: Node[]) => void,
-  setOpenUpdate?: (openUpdate: boolean) => void
+  handleUpdateAnchor?: (success: boolean) => void
 ): Promise<void> {
+  const userId: string = localStorage.userId;
+  const config = {
+    headers: { Authorization: `Bearer ${localStorage.accessToken}` }
+  }
   await axios
-    .patch(`/projects/${projectId}/roomPlans/${roomPlanId}/anchors/${anchorId}`, anchorData)
+    .patch(`${userId}/projects/${projectId}/roomPlans/${roomPlanId}/anchors/${anchorId}`, anchorData, config)
     .then(() => {
-      if (setAnchors) {
-        getAnchors(projectId, roomPlanId, setAnchors);
+      if (handleUpdateAnchor) {
+        handleUpdateAnchor(true);
       }
-      if (setOpenUpdate) {
-        setOpenUpdate(false);
-      }
+      
     })
     .catch(() => {
-      alert("Update Anchor failed");
+      if (handleUpdateAnchor) {
+        handleUpdateAnchor(false);
+      }
+      
     });
 }
 
