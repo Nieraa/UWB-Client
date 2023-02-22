@@ -53,16 +53,19 @@ export async function updateProject(
   projectData: {
     name: string
   },
-  setProjects: (projects: Project[]) => void,
-  setOpenUpdate: (openUpdate: boolean) => void
+  handleUpdateProject: (success: boolean) => void
 ): Promise<void> {
+  const userId: string = localStorage.userId;
+  const config = {
+    headers: { Authorization: `Bearer ${localStorage.accessToken}` }
+  }
   await axios
-    .patch(`/projects/${projectId}`, projectData)
+    .patch(`${userId}/projects/${projectId}`, projectData, config)
     .then(() => {
-      setOpenUpdate(false);
+      handleUpdateProject(true);
     })
     .catch(() => {
-      alert("Update Project failed");
+      handleUpdateProject(true);
     });
 }
 
