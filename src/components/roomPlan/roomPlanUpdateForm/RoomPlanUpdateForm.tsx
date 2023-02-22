@@ -26,8 +26,8 @@ interface RoomPlanUpdateFormProps {
   projectId: string;
   currentRoomPlan: RoomPlan;
   openUpdate: boolean;
-  setRoomPlans: (roomPlans: RoomPlan[]) => void;
   setOpenUpdate: (openUpdate: boolean) => void;
+  handleUpdateRoomPlan: (success: boolean) => void;
 }
 
 function RoomPlanUpdateForm(props: RoomPlanUpdateFormProps) {
@@ -35,8 +35,8 @@ function RoomPlanUpdateForm(props: RoomPlanUpdateFormProps) {
     projectId,
     currentRoomPlan,
     openUpdate,
-    setRoomPlans,
-    setOpenUpdate
+    setOpenUpdate,
+    handleUpdateRoomPlan
   } = props;
 
   const [image, _setImage] = useState<any>("");
@@ -92,7 +92,7 @@ function RoomPlanUpdateForm(props: RoomPlanUpdateFormProps) {
         yOrigin: Number(values.yOrigin)
       };
       if (image) {
-        updateRoomPlan(projectId, currentRoomPlan.id, roomPlanData, setRoomPlans, setOpenUpdate);
+        updateRoomPlan(projectId, currentRoomPlan.id, roomPlanData, handleUpdateRoomPlan);
       }
       else {
         setImageValidation(true);
