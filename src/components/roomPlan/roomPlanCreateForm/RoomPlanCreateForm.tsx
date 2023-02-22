@@ -15,10 +15,6 @@ import {
   useState,
   createRef
 } from "react";
-import {
-  NavigateFunction,
-  useNavigate
-} from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Compress from "react-image-file-resizer";
@@ -28,22 +24,24 @@ import { createRoomPlan } from "../../../services/RoomPlansService";
 interface RoomPlanCreateFormProps {
   projectId: string;
   openCreate: boolean;
+  setNavigateUrl: (navigateUrl: string) => void;
   setRoomPlans: (roomPlans: RoomPlan[]) => void;
   setOpenCreate: (openCreate: boolean) => void;
+  handleCreateRoomPlan: (succcess: boolean) => void;
 }
 
 function RoomPlanCreateForm(props: RoomPlanCreateFormProps) {
   const {
     projectId,
     openCreate,
-    setRoomPlans,
-    setOpenCreate
+    setNavigateUrl,
+    setOpenCreate,
+    handleCreateRoomPlan
   } = props;
 
   const [image, _setImage] = useState<any>("");
   const [imageName, setImageName] = useState<string>("No file chosen");
   const [imageValidation, setImageValidation] = useState<boolean>(false);
-  const navigate: NavigateFunction = useNavigate();
 
   const inputFileRef = createRef();
 
@@ -78,7 +76,7 @@ function RoomPlanCreateForm(props: RoomPlanCreateFormProps) {
       yOrigin: 0
     },
     validationSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       const roomPlanData = {
         name: values.name,
         image: image,
@@ -88,7 +86,7 @@ function RoomPlanCreateForm(props: RoomPlanCreateFormProps) {
         yOrigin: Number(values.yOrigin)
       };
       if (image) {
-        createRoomPlan(projectId, roomPlanData, setRoomPlans, navigate);
+        setNavigateUrl(await createRoomPlan(projectId, roomPlanData, handleCreateRoomPlan));
       }
       else {
         setImageValidation(true);
