@@ -97,6 +97,21 @@ function App() {
     }
   }
 
+  function handleGetRoomPlanbyId(success: boolean): void {
+    if (!success) {
+      setOpen(true);
+      setSucccess(false);
+      setTitle("Get room plan failed");
+      setDetail("Some error has ocrured while get room plan data.");
+    }
+    else {
+      setOpen(false);
+      setSucccess(true);
+      setTitle("");
+      setDetail("");
+    }
+  }
+
   function handleClose(): void {
     setOpen(false);
     navigate("/signin");
@@ -112,7 +127,7 @@ function App() {
       if (Boolean(projectId) && Boolean(roomPlanId)) {
         getAnchors(projectId, roomPlanId, setAnchors);
         getProjectbyId(projectId, setCurrentProject, handleGetProjectbyId);
-        getRoomPlanbyId(projectId, roomPlanId, setCurrentRoomPlan);
+        getRoomPlanbyId(projectId, roomPlanId, setCurrentRoomPlan, handleGetRoomPlanbyId);
       }
       else if (Boolean(projectId)) {
         setCurrentRoomPlan({
