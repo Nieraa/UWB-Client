@@ -67,9 +67,27 @@ function App() {
     }
   }
 
+  function handleGetProjectbyId(success: boolean): void {
+    if (!success) {
+      setOpen(true);
+      setSucccess(false);
+      setTitle("Get project failed");
+      setDetail("Some error has ocrured while get project data.");
+    }
+    else {
+      setOpen(false);
+      setSucccess(true);
+      setTitle("");
+      setDetail("");
+    }
+  }
+
   function handleClose(): void {
     setOpen(false);
     navigate("/signin");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("username");
+    localStorage.removeItem("userId");
   }
 
   const fetchData = useCallback(async (pathname: string) => {
@@ -78,7 +96,7 @@ function App() {
     if (localStorage.accessToken) {
       if (Boolean(projectId) && Boolean(roomPlanId)) {
         getAnchors(projectId, roomPlanId, setAnchors);
-        getProjectbyId(projectId, setCurrentProject);
+        getProjectbyId(projectId, setCurrentProject, handleGetProjectbyId);
         getRoomPlanbyId(projectId, roomPlanId, setCurrentRoomPlan);
       }
       else if (Boolean(projectId)) {
@@ -93,7 +111,7 @@ function App() {
         });
         setAnchors([]);
         getRoomPlans(projectId, setRoomPlans);
-        getProjectbyId(projectId, setCurrentProject);
+        getProjectbyId(projectId, setCurrentProject, handleGetProjectbyId);
       }
       else {
         if (pathname === "/projects") {
