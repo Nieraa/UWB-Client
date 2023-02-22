@@ -7,28 +7,24 @@ import {
   Button,
   TextField
 } from "@mui/material";
-import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { Project } from "../../../types";
-import { createProject, getProjects } from "../../../services/ProjectsService";
+import { createProject } from "../../../services/ProjectsService";
 
 interface ProjectCreateFormProps {
   openCreate: boolean;
-  setProjects: (projects: Project[]) => void;
   setOpenCreate: (openCreate: boolean) => void;
+  setNavigateUrl: (navigateUrl: string) => void;
   handleCreateProject: (success: boolean) => void;
 }
 
 function ProjectCreateForm(props: ProjectCreateFormProps) {
   const {
     openCreate,
-    setProjects,
     setOpenCreate,
+    setNavigateUrl,
     handleCreateProject
   } = props;
-
-  const navigate: NavigateFunction = useNavigate();
 
   const validationSchema = yup.object({
     name: yup
@@ -45,11 +41,7 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
       const projectData = {
         name: values.name
       };
-      const createId: string = await createProject(projectData, handleCreateProject);
-      if (createId) {
-        getProjects(setProjects);
-        navigate(`/projects/${createId}/room-plans`)
-      }
+      setNavigateUrl(await createProject(projectData, handleCreateProject));
     }
   });
 
