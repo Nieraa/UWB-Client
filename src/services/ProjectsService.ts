@@ -103,7 +103,6 @@ export async function getProjectbyId(
       }
     })
     .catch(() => {
-      alert("Get Project failed");
       if (handleGetProjectbyId) {
         handleGetProjectbyId(false);
       }
