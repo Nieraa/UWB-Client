@@ -146,7 +146,7 @@ function App() {
         />
         <Route
           path="/projects/:projectId/room-plans"
-          element={
+          element={localStorage.accessToken ?
             <RoomPlans
               isLoading={isLoading}
               projectId={currentProject.id}
@@ -157,6 +157,8 @@ function App() {
               setRoomPlans={setRoomPlans}
               setCurrentRoomPlan={setCurrentRoomPlan}
             />
+            :
+            <Navigate to="/signin" />
           }
         />
         <Route
