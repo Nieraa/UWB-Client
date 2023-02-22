@@ -7,18 +7,12 @@ import { getUsernames, SignUp } from "../../../services/UsersService";
 import { useEffect, useState } from "react";
 
 interface SignUpFormProps {
-  setOpenSignUpDialog: (openSignUpDialog: boolean) => void;
+  handleSignUp: (success: boolean) => void;
 }
 
 function SignUpForm(props: SignUpFormProps) {
-  const { setOpenSignUpDialog } = props;
+  const { handleSignUp } = props;
   const [errorMessage, setErrorMessage] = useState<string>("");
-
-  function handleSignUp(success: boolean) {
-    if (success) {
-      setOpenSignUpDialog(true);
-    }
-  }
 
   const validationSchema = yup.object({
     username: yup

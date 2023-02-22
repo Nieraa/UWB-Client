@@ -11,16 +11,34 @@ import {
   Card,
   CardContent
 } from "@mui/material";
-import SignUpDialog from "../components/user/SIgnUpDialog/SignUpDialog";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import ResponseDialog from "../components/responseDialog/ResponseDialog";
 
 function SignUp() {
-  const [openSignUpDialog, setOpenSignUpDialog] = useState<boolean>(false);
+  const [openResponse, setOpenResponse] = useState<boolean>(false);
+  const [success, setSucccess] = useState<boolean>(false);
+  const [title, setTitle] = useState<string>("");
+  const [detail, setDetail] = useState<string>("");
+
   const navigate: NavigateFunction = useNavigate();
 
+  function handleSignUp(success: boolean): void {
+    if (!success) {
+      setSucccess(false);
+      setTitle("Sign up failed");
+      setDetail("Some error has ocrured while Sign up.");
+    }
+    else {
+      setSucccess(true);
+      setTitle("User created!!");
+      setDetail("Congratulations, your account has been successfully created.");
+    }
+    setOpenResponse(true);
+  }
+
   function handleClose(): void {
-    setOpenSignUpDialog(false);
+    setOpenResponse(false);
     navigate("/signin")
   }
 
@@ -35,7 +53,7 @@ function SignUp() {
             <SignInAndUpTitle>
               Sign up
             </SignInAndUpTitle>
-            <SignUpForm setOpenSignUpDialog={setOpenSignUpDialog}/>
+            <SignUpForm handleSignUp={handleSignUp} />
             <ToSignInAndUpWrapper>
               Already have an account?&nbsp;
               <LinkComponent to="/signin">
@@ -45,7 +63,13 @@ function SignUp() {
           </CardContent>
         </Card>
       </SignInAndUpBackground>
-      <SignUpDialog openSignUpDialog={openSignUpDialog} handleClose={handleClose}/>
+      <ResponseDialog
+        open={openResponse}
+        success={success}
+        title={title}
+        detail={detail}
+        handleClose={handleClose}
+      />
     </>
   );
 }
