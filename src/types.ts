@@ -37,3 +37,17 @@ export interface PassAndUpdateProjects {
   projects: Project[];
   setProjects: (projects: Project[]) => void;
 }
+
+export interface SignInData {
+  username: string;
+  password: string;
+}
+
+export interface SignUpData {
+  username: string;
+  hashedPassword: string;
+}
+
+export interface Username {
+  username: string
+}
