@@ -5,19 +5,24 @@ import { RoomPlan } from "../types";
 export async function getRoomPlans(
   projectId: string,
   setRoomPlans: (roomPlans: RoomPlan[]) => void,
-  createId?: string,
-  navigate?: NavigateFunction
+  handleGetRoomPlans?: (success: boolean) => void
 ): Promise<void> {
+  const userId: string = localStorage.userId;
+  const config = {
+    headers: { Authorization: `Bearer ${localStorage.accessToken}` }
+  }
   await axios
-    .get(`/projects/${projectId}/roomPlans`)
+    .get(`${userId}/projects/${projectId}/roomPlans`, config)
     .then((response) => {
       setRoomPlans(response.data);
-      if (createId && navigate) {
-        navigate(`/projects/${projectId}/room-plans/${createId}/planner`);
+      if (handleGetRoomPlans) {
+        handleGetRoomPlans(true);
       }
     })
     .catch(() => {
-      alert("Get Room plans failed");
+      if (handleGetRoomPlans) {
+        handleGetRoomPlans(false);
+      }
     });
 }
 
@@ -37,7 +42,6 @@ export async function createRoomPlan(
   await axios
     .post(`/projects/${projectId}/roomPlans`, roomPlanData)
     .then((response) => {
-      getRoomPlans(projectId, setRoomPlans, response.data, navigate);
     })
     .catch(() => {
       alert("Create Room plan failed");
