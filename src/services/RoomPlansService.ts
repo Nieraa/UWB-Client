@@ -59,23 +59,25 @@ export async function updateRoomPlan(
   roomPlanId: string,
   roomPlanData: {
     name?: string,
-    image?: File,
+    image?: string,
     xRatio?: number,
     yRatio?: number,
     xOrigin?: number,
     yOrigin?: number
   },
-  setRoomPlans: (roomPlans: RoomPlan[]) => void,
-  setOpenUpdate: (openUpdate: boolean) => void
+  handleUpdateRoomPlan: (success: boolean) => void
 ): Promise<void> {
+  const userId: string = localStorage.userId;
+  const config = {
+    headers: { Authorization: `Bearer ${localStorage.accessToken}` }
+  }
   await axios
-    .patch(`/projects/${projectId}/roomPlans/${roomPlanId}`, roomPlanData)
+    .patch(`${userId}/projects/${projectId}/roomPlans/${roomPlanId}`, roomPlanData, config)
     .then(() => {
-      getRoomPlans(projectId, setRoomPlans);
-      setOpenUpdate(false);
+      handleUpdateRoomPlan(true);
     })
     .catch(() => {
-      alert("Update Room plan failed");
+      handleUpdateRoomPlan(false);
     });
 }
 
