@@ -4,7 +4,7 @@ import { Project, Node } from "../types";
 
 export async function getProjects(
   setProjects: (projects: Project[]) => void,
-  handleGetProjects: (success: boolean) => void
+  handleGetProjects?: (success: boolean) => void
 ): Promise<void> {
   const userId: string = localStorage.userId;
   const config = {
@@ -14,10 +14,14 @@ export async function getProjects(
     .get(`${userId}/projects`, config)
     .then((response) => {
       setProjects(response.data);
-      handleGetProjects(true);
+      if (handleGetProjects) {
+        handleGetProjects(true);
+      }
     })
     .catch(() => {
-      handleGetProjects(false);
+      if (handleGetProjects) {
+        handleGetProjects(false);
+      }
     });
 }
 
@@ -25,16 +29,22 @@ export async function createProject(
   projectData: {
     name: string
   },
-  setProjects: (projects: Project[]) => void,
-  navigate: NavigateFunction
-): Promise<void> {
-  await axios
-    .post("/projects", projectData)
+  handleCreateProject: (success: boolean) => void
+): Promise<string> {
+  const userId: string = localStorage.userId;
+  const config = {
+    headers: { Authorization: `Bearer ${localStorage.accessToken}` }
+
+  }
+  return await axios
+    .post(`${userId}/projects`, projectData, config)
     .then((response) => {
-      getProjects(setProjects, response.data, navigate);
+      handleCreateProject(true);
+      return response.data;
     })
     .catch(() => {
-      alert("Create Project failed");
+      handleCreateProject(false);
+      return "";
     });
 }
 
@@ -49,7 +59,6 @@ export async function updateProject(
   await axios
     .patch(`/projects/${projectId}`, projectData)
     .then(() => {
-      getProjects(setProjects);
       setOpenUpdate(false);
     })
     .catch(() => {
@@ -65,7 +74,6 @@ export async function deleteProject(
   await axios
     .delete(`/projects/${projectId}`)
     .then(() => {
-      getProjects(setProjects);
       setOpenDelete(false);
     })
     .catch(() => {
