@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 function SignInForm() {
   const [errorMessage, setErrormessage] = useState<string>("");
   const navigate = useNavigate();
-  function handleSignIn(success: boolean) {
+  function handleSignIn(success: boolean): void {
     if (success) {
       setErrormessage("");
       navigate("/projects");
