@@ -1,31 +1,39 @@
 import {
+  LinkComponent,
   SignInAndUpBackground,
   SignInAndUpLogoWrapper,
   SignInAndUpTitle,
+  ToSignInAndUpWrapper,
 } from "../Styles/Styles.style";
 import Logo from "../components/logo/Logo";
-import LoginForm from "../components/user/loginForm/LoginForm";
+import SignInForm from "../components/user/SignInForm/SignInForm";
 import {
-  Card, 
+  Card,
   CardContent
 } from "@mui/material";
 
-function Login() {
+function SignIn() {
   return (
     <SignInAndUpBackground>
       <SignInAndUpLogoWrapper>
-        <Logo theme="dark" size="large"/>
+        <Logo theme="dark" size="large" />
       </SignInAndUpLogoWrapper>
       <Card sx={{ maxWidth: 480, maxHeight: "calc(100vh - 120px)" }}>
         <CardContent>
           <SignInAndUpTitle>
             Sign in
           </SignInAndUpTitle>
-          <LoginForm />
+          <SignInForm />
+          <ToSignInAndUpWrapper>
+            Don't have an account?&nbsp;
+            <LinkComponent to="/signup">
+              Sign Up
+            </LinkComponent>
+          </ToSignInAndUpWrapper>
         </CardContent>
       </Card>
     </SignInAndUpBackground>
   );
 }
 
-export default Login;
+export default SignIn;

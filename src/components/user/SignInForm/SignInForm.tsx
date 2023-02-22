@@ -1,14 +1,29 @@
-import { ForgotPassword, ToSignInAndUpWrapper, LinkComponent } from "../../../Styles/Styles.style";
-import { Button, TextField } from "@mui/material";
+import { ForgotPassword, ImageErrorHelperText, LinkComponent } from "../../../Styles/Styles.style";
+import { Button, FormHelperText, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { sha512 } from "js-sha512";
+import { SignIn } from "../../../services/UsersService";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function LoginForm() {
+function SignInForm() {
+  const [errorMessage, setErrormessage] = useState<string>("");
+  const navigate = useNavigate();
+  function handleSignIn(success: boolean) {
+    if (success) {
+      setErrormessage("");
+      navigate("/projects");
+    }
+    else {
+      setErrormessage("Invalid username or password")
+    }
+  }
+
   const validationSchema = yup.object({
-    userName: yup
+    username: yup
       .string()
-      .required("Please enter user name."),
+      .required("Please enter username"),
     password: yup
       .string()
       .required("Please enter password."),
@@ -16,30 +31,36 @@ function LoginForm() {
 
   const formik = useFormik({
     initialValues: {
-      userName: "",
+      username: "",
       password: "",
     },
     validationSchema,
     onSubmit: (values) => {
       const userData = {
-        userName: values.userName,
+        username: values.username,
         password: sha512(values.password),
       }
+      SignIn(userData, handleSignIn);
     }
   })
 
   return (
     <form onSubmit={formik.handleSubmit}>
+      {errorMessage &&
+        <FormHelperText error={true}>
+          {errorMessage}
+        </FormHelperText>
+      }
       <TextField
         margin="dense"
         id="username"
         label="Username"
-        name="userName"
+        name="username"
         variant="outlined"
-        value={formik.values.userName}
+        value={formik.values.username}
         onChange={formik.handleChange}
-        error={Boolean(formik.errors.userName)}
-        helperText={formik.errors.userName}
+        error={formik.touched.username && Boolean(formik.errors.username)}
+        helperText={formik.errors.username}
         fullWidth
       />
       <TextField
@@ -51,7 +72,7 @@ function LoginForm() {
         variant="outlined"
         value={formik.values.password}
         onChange={formik.handleChange}
-        error={Boolean(formik.errors.password)}
+        error={formik.touched.password && Boolean(formik.errors.password)}
         helperText={formik.errors.password}
         fullWidth
       />
@@ -67,14 +88,8 @@ function LoginForm() {
       >
         Login
       </Button>
-      <ToSignInAndUpWrapper>
-        Don't have an account?&nbsp;
-        <LinkComponent to="/register">
-          Sign Up
-        </LinkComponent>
-      </ToSignInAndUpWrapper>
     </form>
   );
 }
 
-export default LoginForm;
+export default SignInForm;
