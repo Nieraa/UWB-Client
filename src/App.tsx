@@ -11,6 +11,7 @@ import {
   Route,
   Navigate,
   useLocation,
+  useNavigate,
 } from "react-router-dom";
 import { Node, Project, RoomPlan } from "./types";
 import { getProjectbyId, getProjects } from "./services/ProjectsService";
@@ -49,6 +50,8 @@ function App() {
   const [title, setTitle] = useState<string>("")
   const [detail, setDetail] = useState<string>("")
 
+  const navigate = useNavigate();
+
   function handleGetProject(success: boolean): void {
     if (!success) {
       setOpen(true);
@@ -66,6 +69,7 @@ function App() {
 
   function handleClose(): void {
     setOpen(false);
+    navigate("/signin");
   }
 
   const fetchData = useCallback(async (pathname: string) => {
