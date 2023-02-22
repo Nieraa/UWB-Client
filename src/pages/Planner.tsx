@@ -4,8 +4,10 @@ import MainTypeC from '../components/main/MainTypeC';
 import AnchorCreateForm from '../components/anchor/anchorCreateForm/AnchorCreateForm';
 import AnchorUpdateForm from '../components/anchor/anchorUpdateForm/AnchorUpdateForm';
 import DeleteDialogTypeC from '../components/deleteDialog/DeleteDialogTypeC';
+import ResponseDialog from '../components/responseDialog/ResponseDialog';
 import { useState } from 'react';
 import { Project, RoomPlan, Node, PassAndUpdateAnchors } from '../types';
+import { getAnchors } from '../services/AnchorsService';
 
 interface PlannerProps extends PassAndUpdateAnchors {
   isLoading: boolean;
@@ -36,6 +38,30 @@ function Planner(props: PlannerProps) {
   const [openCreate, setOpenCreate] = useState<boolean>(false);
   const [openUpdate, setOpenUpdate] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
+  const [openResponse, setOpenResponse] = useState<boolean>(false);
+  const [success, setSucccess] = useState<boolean>(false);
+  const [title, setTitle] = useState<string>("");
+  const [detail, setDetail] = useState<string>("");
+
+  function handleCreateAnchor(success: boolean): void {
+    if (!success) {
+      setSucccess(false);
+      setTitle("Create anchor failed");
+      setDetail("Some error has ocrured while anchor project.");
+    }
+    else {
+      getAnchors(projectId, roomPlanId, setAnchors);
+      setOpenCreate(false);
+      setSucccess(true);
+      setTitle("Anchor created!!");
+      setDetail("Congratulations, your anchor has been successfully created.");
+    }
+    setOpenResponse(true);
+  }
+
+  function handleClose(): void {
+    setOpenResponse(false);
+  }
 
   function handleCollapseNavbar() {
     setCollapseNavbar(!collapseNavbar);
@@ -47,7 +73,7 @@ function Planner(props: PlannerProps) {
 
   return (
     <>
-      <AppBar handleCollapseNavbar={handleCollapseNavbar}/>
+      <AppBar handleCollapseNavbar={handleCollapseNavbar} />
       <SideNavbarTypeB
         collapseNavbar={collapseNavbar}
         projectId={projectId}
@@ -73,8 +99,8 @@ function Planner(props: PlannerProps) {
         projectId={projectId}
         roomPlanId={roomPlanId}
         openCreate={openCreate}
-        setAnchors={setAnchors}
         setOpenCreate={setOpenCreate}
+        handleCreateAnchor={handleCreateAnchor}
       />
       <AnchorUpdateForm
         projectId={projectId}
@@ -91,6 +117,13 @@ function Planner(props: PlannerProps) {
         openDelete={openDelete}
         setAnchors={setAnchors}
         setOpenDelete={setOpenDelete}
+      />
+      <ResponseDialog
+        open={openResponse}
+        success={success}
+        title={title}
+        detail={detail}
+        handleClose={handleClose}
       />
     </>
   );
