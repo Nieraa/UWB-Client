@@ -36,15 +36,21 @@ export async function createRoomPlan(
     xOrigin: number,
     yOrigin: number
   },
-  setRoomPlans: (roomPlans: RoomPlan[]) => void,
-  navigate: NavigateFunction
-): Promise<void> {
-  await axios
-    .post(`/projects/${projectId}/roomPlans`, roomPlanData)
+  handleCreateRoomPlan: (success: boolean) => void
+): Promise<string> {
+  const userId: string = localStorage.userId;
+  const config = {
+    headers: { Authorization: `Bearer ${localStorage.accessToken}` }
+  }
+  return await axios
+    .post(`${userId}/projects/${projectId}/roomPlans`, roomPlanData, config)
     .then((response) => {
+      handleCreateRoomPlan(true);
+      return response.data;
     })
     .catch(() => {
-      alert("Create Room plan failed");
+      handleCreateRoomPlan(false);
+      return "";
     });
 }
 
