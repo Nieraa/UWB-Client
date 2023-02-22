@@ -112,6 +112,21 @@ function App() {
     }
   }
 
+  function handleGetAnchors(success: boolean): void {
+    if (!success) {
+      setOpen(true);
+      setSucccess(false);
+      setTitle("Get anhcors failed");
+      setDetail("Some error has ocrured while get anhcor datas.");
+    }
+    else {
+      setOpen(false);
+      setSucccess(true);
+      setTitle("");
+      setDetail("");
+    }
+  }
+
   function handleClose(): void {
     setOpen(false);
     navigate("/signin");
@@ -125,7 +140,7 @@ function App() {
     const roomPlanId = pathname.slice(42, 62);
     if (localStorage.accessToken) {
       if (Boolean(projectId) && Boolean(roomPlanId)) {
-        getAnchors(projectId, roomPlanId, setAnchors);
+        getAnchors(projectId, roomPlanId, setAnchors, handleGetAnchors);
         getProjectbyId(projectId, setCurrentProject, handleGetProjectbyId);
         getRoomPlanbyId(projectId, roomPlanId, setCurrentRoomPlan, handleGetRoomPlanbyId);
       }
