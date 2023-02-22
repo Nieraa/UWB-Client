@@ -40,7 +40,7 @@ function Projects(props: ProjectsProps) {
   function handleCreateProject(success: boolean): void {
     if (!success) {
       setSucccess(false);
-      setTitle("Create projects failed");
+      setTitle("Create project failed");
       setDetail("Some error has ocrured while create project.");
     }
     else {
@@ -57,7 +57,7 @@ function Projects(props: ProjectsProps) {
     setNavigateUrl("");
     if (!success) {
       setSucccess(false);
-      setTitle("Update projects failed");
+      setTitle("Update project failed");
       setDetail("Some error has ocrured while update project.");
     }
     else {
@@ -66,6 +66,23 @@ function Projects(props: ProjectsProps) {
       setSucccess(true);
       setTitle("Project updated!!");
       setDetail("Congratulations, your project has been successfully updated.");
+    }
+    setOpenResponse(true);
+  }
+
+  function handleDeleteProject(success: boolean): void {
+    setNavigateUrl("");
+    if (!success) {
+      setSucccess(false);
+      setTitle("Delete project failed");
+      setDetail("Some error has ocrured while delete project.");
+    }
+    else {
+      getProjects(setProjects);
+      setOpenDelete(false);
+      setSucccess(true);
+      setTitle("Project deleted!!");
+      setDetail("Congratulations, your project has been successfully deleted.");
     }
     setOpenResponse(true);
   }
@@ -118,8 +135,8 @@ function Projects(props: ProjectsProps) {
       <DeleteDialogTypeA
         currentProject={currentProject}
         openDelete={openDelete}
-        setProjects={setProjects}
         setOpenDelete={setOpenDelete}
+        handleDeleteProject={handleDeleteProject}
       />
       <ResponseDialog
         open={openResponse}

@@ -20,16 +20,16 @@ import { deleteProject } from "../../services/ProjectsService";
 interface DeleteDialogTypeAProps {
   currentProject: Project;
   openDelete: boolean;
-  setProjects: (projects: Project[]) => void;
   setOpenDelete: (openDelete: boolean) => void;
+  handleDeleteProject: (success: boolean) => void;
 }
 
 function DeleteDialogTypeA(props: DeleteDialogTypeAProps) {
   const {
     currentProject,
     openDelete,
-    setProjects,
-    setOpenDelete
+    setOpenDelete,
+    handleDeleteProject
   } = props;
 
   function handleClose(): void {
@@ -77,8 +77,7 @@ function DeleteDialogTypeA(props: DeleteDialogTypeAProps) {
           onClick={() =>
             deleteProject(
               currentProject.id,
-              setProjects,
-              setOpenDelete
+              handleDeleteProject
             )
           }
         >
