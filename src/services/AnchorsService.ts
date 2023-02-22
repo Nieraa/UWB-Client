@@ -87,16 +87,18 @@ export async function deleteAnchor(
   projectId: string,
   roomPlanId: string,
   anchorId: string,
-  setAnchors: (anchors: Node[]) => void,
-  setOpenDelete: (openDelete: boolean) => void
+  handleDeleteAnchor: (success: boolean) => void
 ): Promise<void> {
+  const userId: string = localStorage.userId;
+  const config = {
+    headers: { Authorization: `Bearer ${localStorage.accessToken}` }
+  }
   await axios
-    .delete(`/projects/${projectId}/roomPlans/${roomPlanId}/anchors/${anchorId}`)
+    .delete(`${userId}/projects/${projectId}/roomPlans/${roomPlanId}/anchors/${anchorId}`, config)
     .then(() => {
-      getAnchors(projectId, roomPlanId, setAnchors);
-      setOpenDelete(false);
+      handleDeleteAnchor(true);
     })
     .catch(() => {
-      alert("Delete Anchor failed");
+      handleDeleteAnchor(false);
     });
 }
