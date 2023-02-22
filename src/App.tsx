@@ -196,7 +196,7 @@ function App() {
         />
         <Route
           path="/projects/:projectId/room-plans/:roomPlanId/planner"
-          element={
+          element={localStorage.accessToken ?
             <Planner
               isLoading={isLoading}
               projectId={currentProject.id}
@@ -209,6 +209,8 @@ function App() {
               setAnchors={setAnchors}
               setCurrentAnchor={setCurrentAnchor}
             />
+            :
+            <Navigate to="/signin" />
           }
         />
         {/* <Route
