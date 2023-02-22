@@ -4,15 +4,25 @@ import { Node } from "../types";
 export async function getAnchors(
   projectId: string,
   roomPlanId: string,
-  setAnchors: (anchors: Node[]) => void
+  setAnchors: (anchors: Node[]) => void,
+  handleGetAnchors?: (success: boolean) => void
 ): Promise<void> {
+  const userId: string = localStorage.userId;
+  const config = {
+    headers: { Authorization: `Bearer ${localStorage.accessToken}` }
+  }
   await axios
-    .get(`/projects/${projectId}/roomPlans/${roomPlanId}/anchors`)
+    .get(`${userId}/projects/${projectId}/roomPlans/${roomPlanId}/anchors`, config)
     .then((response) => {
       setAnchors(response.data);
+      if (handleGetAnchors) {
+        handleGetAnchors(true);
+      }
     })
     .catch(() => {
-      alert("Get Anchors failed");
+      if (handleGetAnchors) {
+        handleGetAnchors(false);
+      }
     });
 }
 
