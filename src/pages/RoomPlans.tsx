@@ -4,8 +4,11 @@ import MainTypeB from "../components/main/MainTypeB";
 import RoomPlanCreateForm from "../components/roomPlan/roomPlanCreateForm/RoomPlanCreateForm";
 import RoomPlanUpdateForm from "../components/roomPlan/roomPlanUpdateForm/RoomPlanUpdateForm";
 import DeleteDialogTypeB from "../components/deleteDialog/DeleteDialogTypeB";
+import ResponseDialog from "../components/responseDialog/ResponseDialog";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { RoomPlan, Project, PassAndUpdateRoomPlans } from "../types";
+import { getRoomPlans } from "../services/RoomPlansService";
 
 interface RoomPlanProps extends PassAndUpdateRoomPlans {
   isLoading: boolean;
@@ -32,6 +35,36 @@ function RoomPlans(props: RoomPlanProps) {
   const [openCreate, setOpenCreate] = useState<boolean>(false);
   const [openUpdate, setOpenUpdate] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
+  const [openResponse, setOpenResponse] = useState<boolean>(false);
+  const [success, setSucccess] = useState<boolean>(false);
+  const [title, setTitle] = useState<string>("");
+  const [detail, setDetail] = useState<string>("");
+  const [navigateUrl, setNavigateUrl] = useState<string>("");
+
+  const navigate = useNavigate();
+
+  function handleCreateRoomPlan(success: boolean): void {
+    if (!success) {
+      setSucccess(false);
+      setTitle("Create room plan failed");
+      setDetail("Some error has ocrured while room plan project.");
+    }
+    else {
+      getRoomPlans(projectId, setRoomPlans);
+      setOpenCreate(false);
+      setSucccess(true);
+      setTitle("Room plan created!!");
+      setDetail("Congratulations, your room plan has been successfully created.");
+    }
+    setOpenResponse(true);
+  }
+
+  function handleClose(): void {
+    if (navigateUrl) {
+      navigate(`/projects/${projectId}/room-plans/${navigateUrl}/planner`)
+    }
+    setOpenResponse(false);
+  }
 
   function handleCollapseNavbar() {
     setCollapseNavbar(!collapseNavbar);
@@ -43,7 +76,7 @@ function RoomPlans(props: RoomPlanProps) {
 
   return (
     <>
-      <AppBar handleCollapseNavbar={handleCollapseNavbar}/>
+      <AppBar handleCollapseNavbar={handleCollapseNavbar} />
       <SideNavbarTypeA
         collapseNavbar={collapseNavbar}
         projects={projects}
@@ -63,8 +96,10 @@ function RoomPlans(props: RoomPlanProps) {
       <RoomPlanCreateForm
         projectId={projectId}
         openCreate={openCreate}
+        setNavigateUrl={setNavigateUrl}
         setRoomPlans={setRoomPlans}
         setOpenCreate={setOpenCreate}
+        handleCreateRoomPlan={handleCreateRoomPlan}
       />
       <RoomPlanUpdateForm
         projectId={projectId}
@@ -79,6 +114,13 @@ function RoomPlans(props: RoomPlanProps) {
         openDelete={openDelete}
         setRoomPlans={setRoomPlans}
         setOpenDelete={setOpenDelete}
+      />
+      <ResponseDialog
+        open={openResponse}
+        success={success}
+        title={title}
+        detail={detail}
+        handleClose={handleClose}
       />
     </>
   );
