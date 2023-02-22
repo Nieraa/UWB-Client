@@ -7,8 +7,11 @@ export async function getProjects(
   handleGetProjects: (success: boolean) => void
 ): Promise<void> {
   const userId: string = localStorage.userId;
+  const config = {
+    headers: { Authorization: `Bearer ${localStorage.accessToken}` }
+  }
   await axios
-    .get(`${userId}/projects`)
+    .get(`${userId}/projects`, config)
     .then((response) => {
       setProjects(response.data);
       handleGetProjects(true);
