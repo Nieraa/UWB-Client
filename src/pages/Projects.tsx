@@ -6,6 +6,7 @@ import ProjectUpdateForm from '../components/project/projectUpdateForm/ProjectUp
 import DeleteDialogTypeA from '../components/deleteDialog/DeleteDialogTypeA';
 import { useState } from 'react';
 import { Project, PassAndUpdateProjects } from '../types';
+import ResponseDialog from '../components/responseDialog/ResponseDialog';
 
 interface ProjectsProps extends PassAndUpdateProjects {
   isLoading: boolean;
@@ -26,6 +27,29 @@ function Projects(props: ProjectsProps) {
   const [openCreate, setOpenCreate] = useState<boolean>(false);
   const [openUpdate, setOpenUpdate] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
+  const [openResponse, setOpenResponse] = useState<boolean>(false);
+  const [success, setSucccess] = useState<boolean>(false);
+  const [title, setTitle] = useState<string>("")
+  const [detail, setDetail] = useState<string>("")
+
+  function handleCreateProject(success: boolean): void {
+    if (!success) {
+      setOpenResponse(true);
+      setSucccess(false);
+      setTitle("Create projects failed");
+      setDetail("Some error has ocrured while create project.");
+    }
+    else {
+      setOpenResponse(false);
+      setSucccess(true);
+      setTitle("");
+      setDetail("");
+    }
+  }
+
+  function handleClose(): void {
+    setOpenResponse(false);
+  }
 
   function handleCollapseNavbar() {
     setCollapseNavbar(!collapseNavbar);
@@ -56,6 +80,7 @@ function Projects(props: ProjectsProps) {
         openCreate={openCreate}
         setProjects={setProjects}
         setOpenCreate={setOpenCreate}
+        handleCreateProject={handleCreateProject}
       />
       <ProjectUpdateForm
         currentProject={currentProject}
@@ -68,6 +93,13 @@ function Projects(props: ProjectsProps) {
         openDelete={openDelete}
         setProjects={setProjects}
         setOpenDelete={setOpenDelete}
+      />
+      <ResponseDialog
+        open={openResponse}
+        success={success}
+        title={title}
+        detail={detail}
+        handleClose={handleClose}
       />
     </>
   );
