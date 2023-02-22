@@ -21,8 +21,8 @@ interface DeleteDialogTypeBProps {
   projectId: string;
   currentRoomPlan: RoomPlan;
   openDelete: boolean;
-  setRoomPlans: (roomPlans: RoomPlan[]) => void;
   setOpenDelete: (openDelete: boolean) => void;
+  handleDeleteRoomPlan: (success: boolean) => void;
 }
 
 function DeleteDialogTypeB(props: DeleteDialogTypeBProps) {
@@ -30,8 +30,8 @@ function DeleteDialogTypeB(props: DeleteDialogTypeBProps) {
     projectId,
     currentRoomPlan,
     openDelete,
-    setRoomPlans,
-    setOpenDelete
+    setOpenDelete,
+    handleDeleteRoomPlan
   } = props;
 
   function handleClose(): void {
@@ -80,8 +80,7 @@ function DeleteDialogTypeB(props: DeleteDialogTypeBProps) {
             deleteRoomPlan(
               projectId,
               currentRoomPlan.id,
-              setRoomPlans,
-              setOpenDelete
+              handleDeleteRoomPlan
             )
           }
         >
