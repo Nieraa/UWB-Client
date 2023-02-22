@@ -21,6 +21,7 @@ export async function SignIn(
     .then((response) => {
       localStorage.setItem("accessToken", response.data.accessToken);
       localStorage.setItem("username", response.data.username);
+      localStorage.setItem("userId", response.data.id);
       handleSignIn(true);
     })
     .catch(() => {
