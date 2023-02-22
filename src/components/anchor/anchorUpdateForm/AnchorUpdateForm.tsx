@@ -18,8 +18,8 @@ interface AnchorUpdateFormProps {
   roomPlanId: string,
   currentAnchor: Node;
   openUpdate: boolean;
-  setAnchors: (anchors: Node[]) => void;
   setOpenUpdate: (openUpdate: boolean) => void;
+  handleUpdateAnchor: (success: boolean) => void
 }
 
 function AnchorUpdateForm(props: AnchorUpdateFormProps) {
@@ -28,8 +28,8 @@ function AnchorUpdateForm(props: AnchorUpdateFormProps) {
     roomPlanId,
     currentAnchor,
     openUpdate,
-    setAnchors,
     setOpenUpdate,
+    handleUpdateAnchor
   } = props;
 
   const validationSchema = yup.object({
@@ -63,7 +63,7 @@ function AnchorUpdateForm(props: AnchorUpdateFormProps) {
         y: values.y,
         z: values.z
       };
-      updateAnchor(projectId, roomPlanId, currentAnchor.id, anchorData, setAnchors, setOpenUpdate);
+      updateAnchor(projectId, roomPlanId, currentAnchor.id, anchorData, handleUpdateAnchor);
     }
   });
 
