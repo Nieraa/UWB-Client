@@ -71,16 +71,19 @@ export async function updateProject(
 
 export async function deleteProject(
   projectId: string,
-  setProjects: (projects: Project[]) => void,
-  setOpenDelete: (openDelete: boolean) => void
+  handleDeleteProject: (success: boolean) => void
 ): Promise<void> {
+  const userId: string = localStorage.userId;
+  const config = {
+    headers: { Authorization: `Bearer ${localStorage.accessToken}` }
+  }
   await axios
-    .delete(`/projects/${projectId}`)
+    .delete(`${userId}/projects/${projectId}`, config)
     .then(() => {
-      setOpenDelete(false);
+      handleDeleteProject(true);
     })
     .catch(() => {
-      alert("Delete Project failed");
+      handleDeleteProject(false);
     });
 }
 
