@@ -17,6 +17,7 @@ interface ProjectUpdateFormProps {
   openUpdate: boolean;
   setProjects: (projects: Project[]) => void;
   setOpenUpdate: (openUpdate: boolean) => void;
+  handleUpdateProject: (success: boolean) => void;
 }
 
 function ProjectUpdateForm(props: ProjectUpdateFormProps) {
@@ -24,7 +25,8 @@ function ProjectUpdateForm(props: ProjectUpdateFormProps) {
     currentProject,
     openUpdate,
     setProjects,
-    setOpenUpdate
+    setOpenUpdate,
+    handleUpdateProject
   } = props;
 
   const validationSchema = yup.object({
@@ -44,7 +46,7 @@ function ProjectUpdateForm(props: ProjectUpdateFormProps) {
       const projectData = {
         name: values.name
       };
-      updateProject(currentProject.id, projectData, setProjects, setOpenUpdate);
+      updateProject(currentProject.id, projectData, handleUpdateProject);
     }
   });
 
