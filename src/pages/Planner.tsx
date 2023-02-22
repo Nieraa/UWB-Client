@@ -75,6 +75,22 @@ function Planner(props: PlannerProps) {
     setOpenResponse(true);
   }
 
+  function handleDeleteAnchor(success: boolean): void {
+    if (!success) {
+      setSucccess(false);
+      setTitle("Delete anchor failed");
+      setDetail("Some error has ocrured while delete anchor.");
+    }
+    else {
+      getAnchors(projectId, roomPlanId, setAnchors);
+      setOpenDelete(false);
+      setSucccess(true);
+      setTitle("Anchor deleted!!");
+      setDetail("Congratulations, your anchor has been successfully deleted.");
+    }
+    setOpenResponse(true);
+  }
+
   function handleClose(): void {
     setOpenResponse(false);
   }
@@ -131,8 +147,8 @@ function Planner(props: PlannerProps) {
         roomPlanId={roomPlanId}
         currentAnchor={currentAnchor}
         openDelete={openDelete}
-        setAnchors={setAnchors}
         setOpenDelete={setOpenDelete}
+        handleDeleteAnchor={handleDeleteAnchor}
       />
       <ResponseDialog
         open={openResponse}
