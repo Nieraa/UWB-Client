@@ -84,17 +84,19 @@ export async function updateRoomPlan(
 export async function deleteRoomPlan(
   projectId: string,
   roomPlanId: string,
-  setRoomPlans: (roomPlans: RoomPlan[]) => void,
-  setOpenDelete: (openDelete: boolean) => void
+  handleDeleteRoomPlan: (success: boolean) => void
 ): Promise<void> {
+  const userId: string = localStorage.userId;
+  const config = {
+    headers: { Authorization: `Bearer ${localStorage.accessToken}` }
+  }
   await axios
-    .delete(`/projects/${projectId}/roomPlans/${roomPlanId}`)
+    .delete(`${userId}/projects/${projectId}/roomPlans/${roomPlanId}`, config)
     .then(() => {
-      getRoomPlans(projectId, setRoomPlans);
-      setOpenDelete(false);
+      handleDeleteRoomPlan(true);
     })
     .catch(() => {
-      alert("Delete Room plan failed");
+      handleDeleteRoomPlan(false);
     });
 }
 
