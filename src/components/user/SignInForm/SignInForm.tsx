@@ -1,4 +1,4 @@
-import { ForgotPassword, ImageErrorHelperText, LinkComponent } from "../../../Styles/Styles.style";
+import { ForgotPassword, LinkComponent } from "../../../Styles/Styles.style";
 import { Button, FormHelperText, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";

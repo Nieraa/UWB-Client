@@ -128,7 +128,6 @@ function Projects(props: ProjectsProps) {
       <ProjectUpdateForm
         currentProject={currentProject}
         openUpdate={openUpdate}
-        setProjects={setProjects}
         setOpenUpdate={setOpenUpdate}
         handleUpdateProject={handleUpdateProject}
       />

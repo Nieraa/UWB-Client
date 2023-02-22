@@ -15,7 +15,6 @@ import { updateProject } from "../../../services/ProjectsService";
 interface ProjectUpdateFormProps {
   currentProject: Project;
   openUpdate: boolean;
-  setProjects: (projects: Project[]) => void;
   setOpenUpdate: (openUpdate: boolean) => void;
   handleUpdateProject: (success: boolean) => void;
 }
@@ -24,7 +23,6 @@ function ProjectUpdateForm(props: ProjectUpdateFormProps) {
   const {
     currentProject,
     openUpdate,
-    setProjects,
     setOpenUpdate,
     handleUpdateProject
   } = props;
