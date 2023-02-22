@@ -76,6 +76,23 @@ function RoomPlans(props: RoomPlanProps) {
     setOpenResponse(true);
   }
 
+  function handleDeleteRoomPlan(success: boolean): void {
+    setNavigateUrl("");
+    if (!success) {
+      setSucccess(false);
+      setTitle("Delete room plan failed");
+      setDetail("Some error has ocrured while delete room plan.");
+    }
+    else {
+      getRoomPlans(projectId, setRoomPlans);
+      setOpenDelete(false);
+      setSucccess(true);
+      setTitle("Room plan deleted!!");
+      setDetail("Congratulations, your room plan has been successfully deleted.");
+    }
+    setOpenResponse(true);
+  }
+
   function handleClose(): void {
     if (navigateUrl) {
       navigate(`/projects/${projectId}/room-plans/${navigateUrl}/planner`)
@@ -129,8 +146,8 @@ function RoomPlans(props: RoomPlanProps) {
         projectId={projectId}
         currentRoomPlan={currentRoomPlan}
         openDelete={openDelete}
-        setRoomPlans={setRoomPlans}
         setOpenDelete={setOpenDelete}
+        handleDeleteRoomPlan={handleDeleteRoomPlan}
       />
       <ResponseDialog
         open={openResponse}
