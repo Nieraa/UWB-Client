@@ -86,7 +86,7 @@ function AnchorCreateForm(props: AnchorCreateFormProps) {
             variant="outlined"
             value={formik.values.name}
             onChange={formik.handleChange}
-            error={Boolean(formik.errors.name)}
+            error={formik.touched.name && Boolean(formik.errors.name)}
             helperText={formik.errors.name}
             fullWidth
           />
@@ -100,7 +100,7 @@ function AnchorCreateForm(props: AnchorCreateFormProps) {
                 variant="outlined"
                 value={formik.values.x}
                 onChange={formik.handleChange}
-                error={Boolean(formik.errors.x)}
+                error={formik.touched.x && Boolean(formik.errors.x)}
                 helperText={formik.errors.x}
                 fullWidth
               />
@@ -114,7 +114,7 @@ function AnchorCreateForm(props: AnchorCreateFormProps) {
                 variant="outlined"
                 value={formik.values.y}
                 onChange={formik.handleChange}
-                error={Boolean(formik.errors.y)}
+                error={formik.touched.y && Boolean(formik.errors.y)}
                 helperText={formik.errors.y}
                 fullWidth
               />
@@ -128,7 +128,7 @@ function AnchorCreateForm(props: AnchorCreateFormProps) {
                 variant="outlined"
                 value={formik.values.z}
                 onChange={formik.handleChange}
-                error={Boolean(formik.errors.z)}
+                error={formik.touched.z && Boolean(formik.errors.z)}
                 helperText={formik.errors.z}
                 fullWidth
               />

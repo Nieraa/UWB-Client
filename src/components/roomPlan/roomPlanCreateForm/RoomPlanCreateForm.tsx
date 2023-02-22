@@ -155,7 +155,7 @@ function RoomPlanCreateForm(props: RoomPlanCreateFormProps) {
             variant="outlined"
             value={formik.values.name}
             onChange={formik.handleChange}
-            error={Boolean(formik.errors.name)}
+            error={formik.touched.name && Boolean(formik.errors.name)}
             helperText={formik.errors.name}
             fullWidth
           />
@@ -169,7 +169,7 @@ function RoomPlanCreateForm(props: RoomPlanCreateFormProps) {
                 variant="outlined"
                 value={formik.values.xRatio}
                 onChange={formik.handleChange}
-                error={Boolean(formik.errors.xRatio)}
+                error={formik.touched.xRatio && Boolean(formik.errors.xRatio)}
                 helperText={formik.errors.xRatio}
                 fullWidth
               />
@@ -183,7 +183,7 @@ function RoomPlanCreateForm(props: RoomPlanCreateFormProps) {
                 variant="outlined"
                 value={formik.values.yRatio}
                 onChange={formik.handleChange}
-                error={Boolean(formik.errors.yRatio)}
+                error={formik.touched.yRatio && Boolean(formik.errors.yRatio)}
                 helperText={formik.errors.yRatio}
                 fullWidth
               />
@@ -199,7 +199,7 @@ function RoomPlanCreateForm(props: RoomPlanCreateFormProps) {
                 variant="outlined"
                 value={formik.values.xOrigin}
                 onChange={formik.handleChange}
-                error={Boolean(formik.errors.xOrigin)}
+                error={formik.touched.xOrigin && Boolean(formik.errors.xOrigin)}
                 helperText={formik.errors.xOrigin}
                 fullWidth
               />
@@ -213,7 +213,7 @@ function RoomPlanCreateForm(props: RoomPlanCreateFormProps) {
                 variant="outlined"
                 value={formik.values.yOrigin}
                 onChange={formik.handleChange}
-                error={Boolean(formik.errors.yOrigin)}
+                error={formik.touched.yOrigin && Boolean(formik.errors.yOrigin)}
                 helperText={formik.errors.yOrigin}
                 fullWidth
               />

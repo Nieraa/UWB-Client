@@ -69,7 +69,7 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
             variant="outlined"
             value={formik.values.name}
             onChange={formik.handleChange}
-            error={Boolean(formik.errors.name)}
+            error={formik.touched.name && Boolean(formik.errors.name)}
             helperText={formik.errors.name}
             fullWidth
           />
