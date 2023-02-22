@@ -1,9 +1,10 @@
 import Styles from './Styles/Styles';
-import Login from './pages/Login';
-import Register from './pages/Register';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 import Projects from './pages/Projects';
 import RoomPlans from './pages/RoomPlans';
 import Planner from './pages/Planner';
+import ResponseDialog from './components/responseDialog/ResponseDialog';
 import { useCallback, useEffect, useState } from "react";
 import {
   Routes,
@@ -42,37 +43,64 @@ function App() {
   });
 
   const location = useLocation();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [open, setOpen] = useState<boolean>(false);
+  const [success, setSucccess] = useState<boolean>(false);
+  const [title, setTitle] = useState<string>("")
+  const [detail, setDetail] = useState<string>("")
+
+  function handleGetProject(success: boolean): void {
+    if (!success) {
+      setOpen(true);
+      setSucccess(false);
+      setTitle("Get projects failed");
+      setDetail("Some error has ocrured while get project datas.");
+    }
+    else {
+      setOpen(false);
+      setSucccess(true);
+      setTitle("");
+      setDetail("");
+    }
+  }
+
+  function handleClose(): void {
+    setOpen(false);
+  }
 
   const fetchData = useCallback(async (pathname: string) => {
     const projectId = pathname.slice(10, 30);
     const roomPlanId = pathname.slice(42, 62);
-    if (Boolean(projectId) && Boolean(roomPlanId)) {
-      getAnchors(projectId, roomPlanId, setAnchors);
-      getProjectbyId(projectId, setCurrentProject);
-      getRoomPlanbyId(projectId, roomPlanId, setCurrentRoomPlan);
-    }
-    else if (Boolean(projectId)) {
-      setCurrentRoomPlan({
-        id: "",
-        name: "",
-        image: "",
-        xRatio: 0,
-        yRatio: 0,
-        xOrigin: 0,
-        yOrigin: 0
-      });
-      setAnchors([]);
-      getRoomPlans(projectId, setRoomPlans);
-      getProjectbyId(projectId, setCurrentProject);
-    }
-    else {
-      setCurrentProject({
-        id: "",
-        name: ""
-      });
-      setRoomPlans([]);
-      getProjects(setProjects);
+    if (localStorage.accessToken) {
+      if (Boolean(projectId) && Boolean(roomPlanId)) {
+        getAnchors(projectId, roomPlanId, setAnchors);
+        getProjectbyId(projectId, setCurrentProject);
+        getRoomPlanbyId(projectId, roomPlanId, setCurrentRoomPlan);
+      }
+      else if (Boolean(projectId)) {
+        setCurrentRoomPlan({
+          id: "",
+          name: "",
+          image: "",
+          xRatio: 0,
+          yRatio: 0,
+          xOrigin: 0,
+          yOrigin: 0
+        });
+        setAnchors([]);
+        getRoomPlans(projectId, setRoomPlans);
+        getProjectbyId(projectId, setCurrentProject);
+      }
+      else {
+        if (pathname === "/projects") {
+          setCurrentProject({
+            id: "",
+            name: ""
+          });
+          setRoomPlans([]);
+          getProjects(setProjects, handleGetProject);
+        }
+      }
     }
   }, []);
 
@@ -87,20 +115,20 @@ function App() {
         <Route path="/" element={<Navigate to="/projects" />}>
         </Route>
         <Route
-          path="/login"
+          path="/signin"
           element={
-            <Login />
+            <SignIn />
           }
         />
         <Route
-          path="/register"
+          path="/signup"
           element={
-            <Register />
+            <SignUp />
           }
         />
         <Route
           path="/projects"
-          element={
+          element={localStorage.accessToken ?
             <Projects
               isLoading={isLoading}
               projects={projects}
@@ -108,6 +136,8 @@ function App() {
               setProjects={setProjects}
               setCurrentProject={setCurrentProject}
             />
+            :
+            <Navigate to="/signin" />
           }
         />
         <Route
@@ -151,6 +181,13 @@ function App() {
         element={<History projects={projects} setProjects={setProjects} />}
       /> */}
       </Routes>
+      <ResponseDialog
+        open={open}
+        success={success}
+        title={title}
+        detail={detail}
+        handleClose={handleClose}
+      />
     </Styles>
   );
 }
