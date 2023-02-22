@@ -59,6 +59,23 @@ function RoomPlans(props: RoomPlanProps) {
     setOpenResponse(true);
   }
 
+  function handleUpdateRoomPlan(success: boolean): void {
+    setNavigateUrl("");
+    if (!success) {
+      setSucccess(false);
+      setTitle("Update room plan failed");
+      setDetail("Some error has ocrured while update room plan.");
+    }
+    else {
+      getRoomPlans(projectId, setRoomPlans);
+      setOpenUpdate(false);
+      setSucccess(true);
+      setTitle("Room plan updated!!");
+      setDetail("Congratulations, your room plan has been successfully updated.");
+    }
+    setOpenResponse(true);
+  }
+
   function handleClose(): void {
     if (navigateUrl) {
       navigate(`/projects/${projectId}/room-plans/${navigateUrl}/planner`)
@@ -105,8 +122,8 @@ function RoomPlans(props: RoomPlanProps) {
         projectId={projectId}
         currentRoomPlan={currentRoomPlan}
         openUpdate={openUpdate}
-        setRoomPlans={setRoomPlans}
         setOpenUpdate={setOpenUpdate}
+        handleUpdateRoomPlan={handleUpdateRoomPlan}
       />
       <DeleteDialogTypeB
         projectId={projectId}
