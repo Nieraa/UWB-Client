@@ -4,19 +4,17 @@ import { Project, Node } from "../types";
 
 export async function getProjects(
   setProjects: (projects: Project[]) => void,
-  createId?: string,
-  navigate?: NavigateFunction
+  handleGetProjects: (success: boolean) => void
 ): Promise<void> {
+  const userId: string = localStorage.userId;
   await axios
-    .get("/projects")
+    .get(`${userId}/projects`)
     .then((response) => {
       setProjects(response.data);
-      if (createId && navigate) {
-        navigate(`/projects/${createId}/room-plans`);
-      }
+      handleGetProjects(true);
     })
     .catch(() => {
-      alert("Get Projects failed");
+      handleGetProjects(false);
     });
 }
 
