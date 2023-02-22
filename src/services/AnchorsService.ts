@@ -35,17 +35,19 @@ export async function createAnchor(
     y: number,
     z: number
   },
-  setAnchors: (anchors: Node[]) => void,
-  setOpenCreate: (openCreate: boolean) => void
+  handleCreateAnchor: (success: boolean) => void
 ): Promise<void> {
+  const userId: string = localStorage.userId;
+  const config = {
+    headers: { Authorization: `Bearer ${localStorage.accessToken}` }
+  }
   await axios
-    .post(`/projects/${projectId}/roomPlans/${roomPlanId}/anchors`, anchorData)
+    .post(`${userId}/projects/${projectId}/roomPlans/${roomPlanId}/anchors`, anchorData, config)
     .then(() => {
-      getAnchors(projectId, roomPlanId, setAnchors);
-      setOpenCreate(false);
+      handleCreateAnchor(true);
     })
     .catch(() => {
-      alert("Create Anchor failed");
+      handleCreateAnchor(false);
     });
 }
 
