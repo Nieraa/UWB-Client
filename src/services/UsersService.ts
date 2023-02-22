@@ -20,6 +20,7 @@ export async function SignIn(
     .post("auth/signin", signInData)
     .then((response) => {
       localStorage.setItem("accessToken", response.data.accessToken);
+      localStorage.setItem("username", response.data.username);
       handleSignIn(true);
     })
     .catch(() => {
