@@ -1,5 +1,4 @@
 import axios from "../axios";
-import { NavigateFunction } from "react-router-dom";
 import { Project, Node } from "../types";
 
 export async function getProjects(
