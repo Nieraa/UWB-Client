@@ -89,15 +89,26 @@ export async function deleteProject(
 
 export async function getProjectbyId(
   projectId: string,
-  setCurrentProject: (currentProject: Project) => void
+  setCurrentProject: (currentProject: Project) => void,
+  handleGetProjectbyId: (success: boolean) => void,
 ): Promise<void> {
+  const userId: string = localStorage.userId;
+  const config = {
+    headers: { Authorization: `Bearer ${localStorage.accessToken}` }
+  }
   await axios
-    .get(`/projects/${projectId}`)
+    .get(`${userId}/projects/${projectId}`, config)
     .then((response) => {
       setCurrentProject(response.data);
+      if (handleGetProjectbyId) {
+        handleGetProjectbyId(true);
+      }
     })
     .catch(() => {
       alert("Get Project failed");
+      if (handleGetProjectbyId) {
+        handleGetProjectbyId(true);
+      }
     });
 }
 
