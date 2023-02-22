@@ -63,7 +63,7 @@ export async function updateProject(
       handleUpdateProject(true);
     })
     .catch(() => {
-      handleUpdateProject(true);
+      handleUpdateProject(false);
     });
 }
 
@@ -105,7 +105,7 @@ export async function getProjectbyId(
     .catch(() => {
       alert("Get Project failed");
       if (handleGetProjectbyId) {
-        handleGetProjectbyId(true);
+        handleGetProjectbyId(false);
       }
     });
 }
