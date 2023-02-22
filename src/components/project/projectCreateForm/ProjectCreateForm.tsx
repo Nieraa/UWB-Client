@@ -11,19 +11,21 @@ import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { Project } from "../../../types";
-import { createProject } from "../../../services/ProjectsService";
+import { createProject, getProjects } from "../../../services/ProjectsService";
 
 interface ProjectCreateFormProps {
   openCreate: boolean;
   setProjects: (projects: Project[]) => void;
   setOpenCreate: (openCreate: boolean) => void;
+  handleCreateProject: (success: boolean) => void;
 }
 
 function ProjectCreateForm(props: ProjectCreateFormProps) {
   const {
     openCreate,
     setProjects,
-    setOpenCreate
+    setOpenCreate,
+    handleCreateProject
   } = props;
 
   const navigate: NavigateFunction = useNavigate();
@@ -39,11 +41,15 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
       name: "Untitled"
     },
     validationSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       const projectData = {
         name: values.name
       };
-      createProject(projectData, setProjects, navigate);
+      const createId: string = await createProject(projectData, handleCreateProject);
+      if (createId) {
+        getProjects(setProjects);
+        navigate(`/projects/${createId}/room-plans`)
+      }
     }
   });
 
