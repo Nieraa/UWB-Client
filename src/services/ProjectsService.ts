@@ -33,7 +33,6 @@ export async function createProject(
   const userId: string = localStorage.userId;
   const config = {
     headers: { Authorization: `Bearer ${localStorage.accessToken}` }
-
   }
   return await axios
     .post(`${userId}/projects`, projectData, config)
