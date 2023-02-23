@@ -50,9 +50,9 @@ function AnchorUpdateForm(props: AnchorUpdateFormProps) {
     onSubmit: (values) => {
       const anchorData = {
         name: values.name,
-        x: values.x,
-        y: values.y,
-        z: values.z
+        x: Number(values.x),
+        y: Number(values.y),
+        z: Number(values.z)
       };
       updateAnchor(projectId, roomPlanId, currentAnchor.id, anchorData, handleUpdateAnchor);
     }

@@ -48,9 +48,9 @@ function AnchorCreateForm(props: AnchorCreateFormProps) {
     onSubmit: (values) => {
       const anchorData = {
         name: values.name,
-        x: values.x,
-        y: values.y,
-        z: values.z
+        x: Number(values.x),
+        y: Number(values.y),
+        z: Number(values.z)
       };
       createAnchor(projectId, roomPlanId, anchorData, handleCreateAnchor);
     }
