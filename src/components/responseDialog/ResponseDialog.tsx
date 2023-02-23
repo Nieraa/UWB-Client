@@ -1,7 +1,19 @@
-import { ContentWrapper, Detail, Title } from "./ResponseDialog.style";
-import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
+import {
+  ContentWrapper,
+  Detail,
+  Title
+} from "./ResponseDialog.style";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent
+} from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleCheck, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleCheck,
+  faCircleXmark
+} from "@fortawesome/free-solid-svg-icons";
 
 interface ResponseDialogProps {
   open: boolean;

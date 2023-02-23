@@ -1,8 +1,8 @@
-import { Button } from "@mui/material";
 import { UserAvatar, RightContent } from "./UserAction.style";
+import { Button } from "@mui/material";
+import InteractiveDialog from "../../interactiveDialog/InteractiveDialog";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import InteractiveDialog from "../../interactiveDialog/InteractiveDialog";
 
 export function UserAction() {
   const [username, setUsername] = useState<string>("");

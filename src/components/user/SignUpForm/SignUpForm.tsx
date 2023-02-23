@@ -1,10 +1,10 @@
 import { Button, FormHelperText, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { useEffect, useState } from "react";
 import { sha512 } from "js-sha512";
 import { SignUpData } from "../../../types";
 import { getUsernames, SignUp } from "../../../services/UsersService";
-import { useEffect, useState } from "react";
 
 interface SignUpFormProps {
   handleSignUp: (success: boolean) => void;

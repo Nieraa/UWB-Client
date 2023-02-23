@@ -43,6 +43,14 @@ function RoomPlans(props: RoomPlanProps) {
 
   const navigate = useNavigate();
 
+  function handleCollapseNavbar() {
+    setCollapseNavbar(!collapseNavbar);
+  }
+
+  function handleCloseNavbar() {
+    setCollapseNavbar(true);
+  }
+
   function handleCreateRoomPlan(success: boolean): void {
     if (!success) {
       setSucccess(false);
@@ -98,14 +106,6 @@ function RoomPlans(props: RoomPlanProps) {
       navigate(`/projects/${projectId}/room-plans/${navigateUrl}/planner`)
     }
     setOpenResponse(false);
-  }
-
-  function handleCollapseNavbar() {
-    setCollapseNavbar(!collapseNavbar);
-  }
-
-  function handleCloseNavbar() {
-    setCollapseNavbar(true);
   }
 
   return (

@@ -37,6 +37,14 @@ function Projects(props: ProjectsProps) {
 
   const navigate = useNavigate();
 
+  function handleCollapseNavbar() {
+    setCollapseNavbar(!collapseNavbar);
+  }
+
+  function handleCloseNavbar() {
+    setCollapseNavbar(true);
+  }
+
   function handleCreateProject(success: boolean): void {
     if (!success) {
       setSucccess(false);
@@ -92,14 +100,6 @@ function Projects(props: ProjectsProps) {
       navigate(`/projects/${navigateUrl}/room-plans`)
     }
     setOpenResponse(false);
-  }
-
-  function handleCollapseNavbar() {
-    setCollapseNavbar(!collapseNavbar);
-  }
-
-  function handleCloseNavbar() {
-    setCollapseNavbar(true);
   }
 
   return (

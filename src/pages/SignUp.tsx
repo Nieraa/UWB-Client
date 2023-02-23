@@ -7,13 +7,13 @@ import {
 } from "../Styles/Styles.style";
 import Logo from "../components/logo/Logo";
 import SignUpForm from "../components/user/signUpForm/SignUpForm";
+import ResponseDialog from "../components/responseDialog/ResponseDialog";
 import {
   Card,
   CardContent
 } from "@mui/material";
-import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import ResponseDialog from "../components/responseDialog/ResponseDialog";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 function SignUp() {
   const [openResponse, setOpenResponse] = useState<boolean>(false);

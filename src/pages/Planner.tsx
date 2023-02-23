@@ -43,6 +43,14 @@ function Planner(props: PlannerProps) {
   const [title, setTitle] = useState<string>("");
   const [detail, setDetail] = useState<string>("");
 
+  function handleCollapseNavbar() {
+    setCollapseNavbar(!collapseNavbar);
+  }
+
+  function handleCloseNavbar() {
+    setCollapseNavbar(true);
+  }
+
   function handleCreateAnchor(success: boolean): void {
     if (!success) {
       setSucccess(false);
@@ -93,14 +101,6 @@ function Planner(props: PlannerProps) {
 
   function handleClose(): void {
     setOpenResponse(false);
-  }
-
-  function handleCollapseNavbar() {
-    setCollapseNavbar(!collapseNavbar);
-  }
-
-  function handleCloseNavbar() {
-    setCollapseNavbar(true);
   }
 
   return (
