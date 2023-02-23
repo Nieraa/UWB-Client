@@ -6,7 +6,7 @@ import {
   ToSignInAndUpWrapper,
 } from "../Styles/Styles.style";
 import Logo from "../components/logo/Logo";
-import SignInForm from "../components/user/SignInForm/SignInForm";
+import SignInForm from "../components/user/signInForm/SignInForm";
 import {
   Card,
   CardContent

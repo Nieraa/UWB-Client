@@ -6,7 +6,7 @@ import {
   LinkComponent
 } from "../Styles/Styles.style";
 import Logo from "../components/logo/Logo";
-import SignUpForm from "../components/user/SignUpForm/SignUpForm";
+import SignUpForm from "../components/user/signUpForm/SignUpForm";
 import {
   Card,
   CardContent
