@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { maxLayout } from "../../utils/breakpoint";
 
 export const OpenButton = styled.button`
   width: 36px;
@@ -14,5 +15,9 @@ export const OpenButton = styled.button`
 
   &:hover {
     background-color: var(--grey50);
+  }
+
+  @media ${maxLayout.sm} {
+    margin-right: 5px;
   }
 `;
