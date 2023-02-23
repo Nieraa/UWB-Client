@@ -10,7 +10,7 @@ function HamburgerButton(props: HamburgerButtonProps) {
   const { handleCollapseNavbar } = props;
 
   return (
-    <OpenButton onClick={handleCollapseNavbar} type="button">
+    <OpenButton onClick={handleCollapseNavbar} type="button" aria-label="open-button">
       <FontAwesomeIcon icon={faBars}/>
     </OpenButton>
   );
