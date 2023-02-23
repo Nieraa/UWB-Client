@@ -36,7 +36,7 @@ export const BreadcrumbLink = styled(Link)`
 `;
 
 export const BreadcrumbsArea = styled.div`
-  width: 100%;
+  width: calc(100vw - 32px);
   height: 27px;
   background-color: var(--white);
   color: var(--primary);
