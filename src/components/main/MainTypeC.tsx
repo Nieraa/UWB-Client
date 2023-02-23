@@ -13,6 +13,7 @@ import { MainTypeCProps } from "../../types";
 
 function MainTypeC(props: MainTypeCProps) {
   const {
+    isPlanner,
     isLoading,
     projectId,
     roomPlanId,
@@ -23,7 +24,9 @@ function MainTypeC(props: MainTypeCProps) {
   } = props;
 
   function handleClickOpen(): void {
-    setOpenCreate(true);
+    if (setOpenCreate) {
+      setOpenCreate(true);
+    }
   }
 
   return (
@@ -50,17 +53,20 @@ function MainTypeC(props: MainTypeCProps) {
           <Skeleton variant="rectangular" height={"calc(100% - 60px)"} width={"100%"} />
           :
           <Canvas
+            isPlanner={isPlanner}
             projectId={projectId}
             roomPlanId={roomPlanId}
             currentRoomPlan={currentRoomPlan}
             anchors={anchors}
           />
       }
-      <Tooltip title="Create Anchor" placement="left">
-        <AddButton onClick={handleClickOpen}>
-          <FontAwesomeIcon icon={faPlus} />
-        </AddButton>
-      </Tooltip>
+      {setOpenCreate &&
+        <Tooltip title="Create Anchor" placement="left">
+          <AddButton onClick={handleClickOpen}>
+            <FontAwesomeIcon icon={faPlus} />
+          </AddButton>
+        </Tooltip>
+      }
     </MainArea >
   );
 }

@@ -4,6 +4,7 @@ import SignUp from './pages/SignUp';
 import Projects from './pages/Projects';
 import RoomPlans from './pages/RoomPlans';
 import Planner from './pages/Planner';
+import Realtime from './pages/Realtime';
 import ResponseDialog from './components/responseDialog/ResponseDialog';
 import { useCallback, useEffect, useState } from "react";
 import {
@@ -243,10 +244,23 @@ function App() {
             <Navigate to="/signin" />
           }
         />
-        {/* <Route
-        path="/projects/:projectId/realtime"
-        element={<Realtime projects={projects} setProjects={setProjects} />}
-      />
+        <Route
+          path="/projects/:projectId/room-plans/:roomPlanId/realtime"
+          element={localStorage.accessToken ?
+            <Realtime
+              isLoading={isLoading}
+              projectId={currentProject.id}
+              roomPlanId={currentRoomPlan.id}
+              projects={projects}
+              anchors={anchors}
+              currentProject={currentProject}
+              currentRoomPlan={currentRoomPlan}
+            />
+            :
+            <Navigate to="/signin" />
+          }
+        />
+        {/* 
       <Route
         path="/projects/:projectId/history"
         element={<History projects={projects} setProjects={setProjects} />}

@@ -17,37 +17,29 @@ import {
   faFileLines,
   faCaretRight,
   faCaretDown,
-  faPlus,
-  faPenToSquare,
-  faPen,
-  faTrashCan
+  faPenToSquare
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Node, SideNavbarTypeBProps } from "../../types";
-import { Tooltip } from "@mui/material";
+import { SideNavbarTypeCProps } from "../../types";
 
-function SideNavbarTypeB(props: SideNavbarTypeBProps) {
+function SideNavbarTypeB(props: SideNavbarTypeCProps) {
   const {
     collapseNavbar,
     projectId,
     roomPlanId,
     projects,
-    anchors,
-    setCurrentAnchor,
-    setOpenCreate,
-    setOpenUpdate,
-    setOpenDelete,
+    tags,
     handleCloseNavbar
   } = props;
 
   const [collapseProjects, setCollapseProjects] = useState<boolean>(true);
-  const [collapseAnchors, setCollapseAnchors] = useState<boolean>(true);
+  const [collapseTags, setCollapseTags] = useState<boolean>(true);
 
   const location = useLocation();
 
   const hasProjectsSubMenu: boolean = projects.length !== 0 ? true : false;
-  const hasAnchorsSubMenu: boolean = anchors.length !== 0 ? true : false;
+  const hasTagsSubMenu: boolean = tags.length !== 0 ? true : false;
 
   function handleCollapse(
     e: {
@@ -60,42 +52,6 @@ function SideNavbarTypeB(props: SideNavbarTypeBProps) {
     setCollapse(!collapse);
     e.preventDefault();
     e.stopPropagation();
-  }
-
-  function handleAdd(
-    e: {
-      preventDefault: () => void;
-      stopPropagation: () => void;
-    }): void {
-    e.preventDefault();
-    e.stopPropagation();
-    setOpenCreate(true);
-  }
-
-  function handleUpdate(
-    e: {
-      preventDefault: () => void;
-      stopPropagation: () => void;
-    },
-    anchor: Node
-  ) {
-    e.preventDefault();
-    e.stopPropagation();
-    setCurrentAnchor(anchor);
-    setOpenUpdate(true);
-  }
-
-  function handleDelete(
-    e: {
-      preventDefault: () => void;
-      stopPropagation: () => void;
-    },
-    anchor: Node
-  ): void {
-    e.preventDefault();
-    e.stopPropagation();
-    setCurrentAnchor(anchor);
-    setOpenDelete(true);
   }
 
   return (
@@ -143,7 +99,6 @@ function SideNavbarTypeB(props: SideNavbarTypeBProps) {
             </SubMenu>
           }
         </NavItem>
-
         <NavItem>
           <NavLink
             to={`/projects/${projectId}/room-plans/${roomPlanId}/planner`}
@@ -175,50 +130,28 @@ function SideNavbarTypeB(props: SideNavbarTypeBProps) {
           </NavLink>
         </NavItem>
         <NavItem>
-          <NodeListToggle hasSubMenu={hasAnchorsSubMenu}>
-            {hasAnchorsSubMenu &&
+          <NodeListToggle hasSubMenu={hasTagsSubMenu}>
+            {hasTagsSubMenu &&
               <FontAwesomeIcon
-                icon={collapseAnchors ? faCaretRight : faCaretDown}
-                onClick={(e) => handleCollapse(e, collapseAnchors, setCollapseAnchors)}
+                icon={collapseTags ? faCaretRight : faCaretDown}
+                onClick={(e) => handleCollapse(e, collapseTags, setCollapseTags)}
               />
             }
-            Anchors
-            <Tooltip title="Create Anchor">
-              <FontAwesomeIcon
-                icon={faPlus}
-                onClick={handleAdd}
-              />
-            </Tooltip>
+            Tags
           </NodeListToggle>
-          {hasAnchorsSubMenu &&
+          {hasTagsSubMenu &&
             <NodeSubMenu
-              collapse={collapseAnchors}
-              length={anchors.length}
+              collapse={collapseTags}
+              length={tags.length}
             >
-              {anchors.map((anchor) =>
-                <li key={anchor.id}>
+              {tags.map((tag) =>
+                <li key={tag.id}>
                   <NodeList>
-                    {anchor.name.length > 14 ?
-                      anchor.name.slice(0, 14) + "..."
+                    {tag.name.length > 14 ?
+                      tag.name.slice(0, 14) + "..."
                       :
-                      anchor.name
+                      tag.name
                     }
-                    <Tooltip title="Edit Anchor">
-                      <FontAwesomeIcon
-                        icon={faPen}
-                        onClick={(e) => {
-                          handleUpdate(e, anchor);
-                        }}
-                      />
-                    </Tooltip>
-                    <Tooltip title="Delete Anchor">
-                      <FontAwesomeIcon
-                        icon={faTrashCan}
-                        onClick={(e) => {
-                          handleDelete(e, anchor);
-                        }}
-                      />
-                    </Tooltip>
                   </NodeList>
                 </li>
               )}

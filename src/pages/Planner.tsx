@@ -108,6 +108,7 @@ function Planner(props: PlannerProps) {
         handleCloseNavbar={handleCloseNavbar}
       />
       <MainTypeC
+        isPlanner={true}
         isLoading={isLoading}
         projectId={projectId}
         roomPlanId={roomPlanId}

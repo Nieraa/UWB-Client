@@ -129,20 +129,21 @@ export const NodeListToggle = styled.div<{ hasSubMenu: boolean }>`
     margin-right: 16px;
   }
 
+  svg:last-child {
+    width: 13px;
+    margin-left: auto;
+    margin-right: 0;
+  }
+
   ${({ hasSubMenu }) =>
     hasSubMenu &&
     css`
         svg:first-child {
           width: 27px;
           margin-right: 5px;
+          margin-left: 0;
         }
       `}
-  
-  svg:last-child {
-    width: 13px;
-    margin-left: auto;
-    margin-right: 0;
-  }
 `;
 
 export const NodeList = styled.div`

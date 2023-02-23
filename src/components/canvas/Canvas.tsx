@@ -12,6 +12,7 @@ import { CanvasProps } from '../../types';
 
 function Canvas(props: CanvasProps) {
   const {
+    isPlanner,
     projectId,
     roomPlanId,
     currentRoomPlan,
@@ -68,6 +69,7 @@ function Canvas(props: CanvasProps) {
           {anchors.map((anchor) =>
             <AnchorNode
               key={anchor.id}
+              isPlanner={isPlanner}
               projectId={projectId}
               roomPlanId={roomPlanId}
               xOrigin={currentRoomPlan.xOrigin}

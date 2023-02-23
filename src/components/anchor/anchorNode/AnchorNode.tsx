@@ -8,6 +8,7 @@ import { updateAnchor } from '../../../services/AnchorsService';
 
 function AnchorNode(props: AnchorNodeProps) {
   const {
+    isPlanner,
     projectId,
     roomPlanId,
     xOrigin,
@@ -44,6 +45,7 @@ function AnchorNode(props: AnchorNodeProps) {
   return (
     <Draggable
       nodeRef={nodeRef}
+      disabled={!isPlanner}
       defaultPosition={{ x: anchor.x * 100, y: -anchor.y * 100 }}
       positionOffset={{ x: `calc(50vw - 170px + ${xOrigin * 100}px)`, y: `calc(50vh - 80px - ${yOrigin * 100}px)` }}
       onStart={() => {
