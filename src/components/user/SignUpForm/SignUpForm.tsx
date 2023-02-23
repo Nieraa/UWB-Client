@@ -17,7 +17,8 @@ function SignUpForm(props: SignUpFormProps) {
   const validationSchema = yup.object({
     username: yup
       .string()
-      .min(6, "Username must be at least 6 characters.")
+      .min(6, "Username must be 6-10 characters.")
+      .max(10, "Username must be 6-10 characters.")
       .required("Please enter username."),
     password: yup
       .string()
