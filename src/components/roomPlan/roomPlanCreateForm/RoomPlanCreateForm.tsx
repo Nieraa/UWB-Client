@@ -50,11 +50,9 @@ function RoomPlanCreateForm(props: RoomPlanCreateFormProps) {
       .required("Please enter Y Ratio"),
     xOrigin: yup
       .number().typeError("X Origin must be number")
-      .min(0, "X Origin must be positive")
       .required("Please enter X Origin"),
     yOrigin: yup
       .number().typeError("Y Origin must be number")
-      .min(0, "Y Origin must be positive")
       .required("Please enter Y Origin")
   });
 
