@@ -1,14 +1,13 @@
 import {
-  ContentWrapper,
   Title,
-  Detail,
+  Detail
 } from "./InteractiveDialog.style";
 import { CancelButton } from "../../Styles/Styles.style";
 import {
   Dialog,
   DialogContent,
   DialogActions,
-  Button,
+  Button
 } from "@mui/material";
 
 interface InteractiveDialogProps {
