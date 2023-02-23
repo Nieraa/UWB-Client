@@ -19,14 +19,19 @@ function SignUpForm(props: SignUpFormProps) {
       .string()
       .min(6, "Username must be 6-10 characters.")
       .max(10, "Username must be 6-10 characters.")
+      .matches(/^[a-z0-9]+$/, 'Username must be lowercases.')
       .required("Please enter username."),
     password: yup
       .string()
       .min(8, "Password must be at least 8 characters.")
+      .matches(/[0-9]/, 'Password requires a number.')
+      .matches(/[a-z]/, 'Password requires a lowercase letter.')
+      .matches(/[A-Z]/, 'Password requires an uppercase letter.')
+      .matches(/[^\w]/, 'Password requires a special character.')
       .required("Please enter password."),
     confirmPassword: yup
       .string()
-      .oneOf([yup.ref("password")], "Password not match")
+      .oneOf([yup.ref("password"), null], "Password not match.")
       .required("Password not match.")
   });
 
