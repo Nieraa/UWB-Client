@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { sha512 } from "js-sha512";
 import { SignIn } from "../../../services/UsersService";
+import { salt } from "../../../salt"
 
 function SignInForm() {
   const [errorMessage, setErrormessage] = useState<string>("");
@@ -40,7 +41,7 @@ function SignInForm() {
     onSubmit: (values) => {
       const userData = {
         username: values.username,
-        password: sha512(values.password),
+        password: sha512(values.password + salt.value),
       }
       SignIn(userData, handleSignIn);
     }

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { sha512 } from "js-sha512";
 import { SignUpData, SignUpFormProps } from "../../../types";
 import { getUsernames, SignUp } from "../../../services/UsersService";
+import { salt } from "../../../salt";
 
 function SignUpForm(props: SignUpFormProps) {
   const { handleSignUp } = props;
@@ -41,7 +42,7 @@ function SignUpForm(props: SignUpFormProps) {
     onSubmit: async (values) => {
       const signUpData: SignUpData = {
         username: values.username,
-        hashedPassword: sha512(values.password)
+        hashedPassword: sha512(values.password + salt.value)
       };
       const existUsernames = await getUsernames();
       if (existUsernames.find((element) =>
