@@ -184,13 +184,17 @@ function App() {
         </Route>
         <Route
           path="/signin"
-          element={
+          element={localStorage.accessToken ?
+            <Navigate to="/projects" />
+            :
             <SignIn />
           }
         />
         <Route
           path="/signup"
-          element={
+          element={localStorage.accessToken ?
+            <Navigate to="/projects" />
+            :
             <SignUp />
           }
         />
