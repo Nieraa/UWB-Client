@@ -1,12 +1,9 @@
 import { OpenButton } from "./HamburgerButton.style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { CollapseNavbarProps } from "../../types";
 
-interface HamburgerButtonProps {
-  handleCollapseNavbar: () => void;
-}
-
-function HamburgerButton(props: HamburgerButtonProps) {
+function HamburgerButton(props: CollapseNavbarProps) {
   const { handleCollapseNavbar } = props;
 
   return (

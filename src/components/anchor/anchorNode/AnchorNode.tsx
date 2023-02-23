@@ -3,19 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Draggable from 'react-draggable';
 import { useRef, useState } from 'react';
-import { Node } from '../../../types';
+import { AnchorNodeProps } from '../../../types';
 import { updateAnchor } from '../../../services/AnchorsService';
-
-interface AnchorNodeProps {
-  projectId: string;
-  roomPlanId: string;
-  xOrigin: number;
-  yOrigin: number;
-  anchor: Node;
-  scale: number;
-  setPannable: (pannable: boolean) => void;
-  setCursor: (cursor: string) => void;
-}
 
 function AnchorNode(props: AnchorNodeProps) {
   const {

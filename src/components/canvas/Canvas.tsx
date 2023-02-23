@@ -8,14 +8,7 @@ import Draggable from 'react-draggable';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useRef, useState } from 'react';
-import { RoomPlan, Node } from '../../types';
-
-interface CanvasProps {
-  projectId: string;
-  roomPlanId: string;
-  currentRoomPlan: RoomPlan;
-  anchors: Node[];
-}
+import { CanvasProps } from '../../types';
 
 function Canvas(props: CanvasProps) {
   const {

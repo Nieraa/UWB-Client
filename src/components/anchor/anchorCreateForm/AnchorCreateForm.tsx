@@ -11,14 +11,7 @@ import {
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { createAnchor } from "../../../services/AnchorsService";
-
-interface AnchorCreateFormProps {
-  projectId: string;
-  roomPlanId: string;
-  openCreate: boolean;
-  setOpenCreate: (openCreate: boolean) => void;
-  handleCreateAnchor: (success: boolean) => void;
-}
+import { AnchorCreateFormProps } from "../../../types";
 
 function AnchorCreateForm(props: AnchorCreateFormProps) {
   const {

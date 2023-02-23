@@ -5,12 +5,9 @@ import {
 import HamburgerButton from "../hamburgerButton/HamburgerButton";
 import Logo from "../logo/Logo";
 import { UserAction } from "../user/userAction/UserAction";
+import { CollapseNavbarProps } from "../../types";
 
-interface AppBarProps {
-  handleCollapseNavbar: () => void;
-}
-
-function AppBar(props: AppBarProps) {
+function AppBar(props: CollapseNavbarProps) {
   const { handleCollapseNavbar } = props;
 
   return (

@@ -19,16 +19,8 @@ import {
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Compress from "react-image-file-resizer";
-import { RoomPlan } from "../../../types";
+import { RoomPlanUpdateFormProps } from "../../../types";
 import { updateRoomPlan } from "../../../services/RoomPlansService";
-
-interface RoomPlanUpdateFormProps {
-  projectId: string;
-  currentRoomPlan: RoomPlan;
-  openUpdate: boolean;
-  setOpenUpdate: (openUpdate: boolean) => void;
-  handleUpdateRoomPlan: (success: boolean) => void;
-}
 
 function RoomPlanUpdateForm(props: RoomPlanUpdateFormProps) {
   const {

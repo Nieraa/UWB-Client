@@ -14,16 +14,8 @@ import {
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { RoomPlan } from "../../types";
+import { DeleteDialogTypeBProps } from "../../types";
 import { deleteRoomPlan } from "../../services/RoomPlansService";
-
-interface DeleteDialogTypeBProps {
-  projectId: string;
-  currentRoomPlan: RoomPlan;
-  openDelete: boolean;
-  setOpenDelete: (openDelete: boolean) => void;
-  handleDeleteRoomPlan: (success: boolean) => void;
-}
 
 function DeleteDialogTypeB(props: DeleteDialogTypeBProps) {
   const {

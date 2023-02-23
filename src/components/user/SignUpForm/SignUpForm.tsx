@@ -3,12 +3,8 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { useEffect, useState } from "react";
 import { sha512 } from "js-sha512";
-import { SignUpData } from "../../../types";
+import { SignUpData, SignUpFormProps } from "../../../types";
 import { getUsernames, SignUp } from "../../../services/UsersService";
-
-interface SignUpFormProps {
-  handleSignUp: (success: boolean) => void;
-}
 
 function SignUpForm(props: SignUpFormProps) {
   const { handleSignUp } = props;

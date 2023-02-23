@@ -7,14 +7,8 @@ import DeleteDialogTypeA from '../components/deleteDialog/DeleteDialogTypeA';
 import ResponseDialog from '../components/responseDialog/ResponseDialog';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Project, PassAndUpdateProjects } from '../types';
+import { ProjectsProps } from '../types';
 import { getProjects } from '../services/ProjectsService';
-
-interface ProjectsProps extends PassAndUpdateProjects {
-  isLoading: boolean;
-  currentProject: Project;
-  setCurrentProject: (currentProject: Project) => void;
-}
 
 function Projects(props: ProjectsProps) {
   const {

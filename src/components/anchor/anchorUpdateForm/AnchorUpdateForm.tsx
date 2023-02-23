@@ -10,17 +10,8 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { Node } from "../../../types";
+import { AnchorUpdateFormProps } from "../../../types";
 import { updateAnchor } from "../../../services/AnchorsService";
-
-interface AnchorUpdateFormProps {
-  projectId: string,
-  roomPlanId: string,
-  currentAnchor: Node;
-  openUpdate: boolean;
-  setOpenUpdate: (openUpdate: boolean) => void;
-  handleUpdateAnchor: (success: boolean) => void
-}
 
 function AnchorUpdateForm(props: AnchorUpdateFormProps) {
   const {

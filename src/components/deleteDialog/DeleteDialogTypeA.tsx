@@ -14,15 +14,8 @@ import {
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { Project } from "../../types";
+import { DeleteDialogTypeAProps } from "../../types";
 import { deleteProject } from "../../services/ProjectsService";
-
-interface DeleteDialogTypeAProps {
-  currentProject: Project;
-  openDelete: boolean;
-  setOpenDelete: (openDelete: boolean) => void;
-  handleDeleteProject: (success: boolean) => void;
-}
 
 function DeleteDialogTypeA(props: DeleteDialogTypeAProps) {
   const {

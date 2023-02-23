@@ -24,21 +24,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Project, Node } from "../../types";
+import { Node, SideNavbarTypeBProps } from "../../types";
 import { Tooltip } from "@mui/material";
-
-interface SideNavbarTypeBProps {
-  collapseNavbar: boolean;
-  projectId: string;
-  roomPlanId: string;
-  projects: Project[];
-  anchors: Node[];
-  setCurrentAnchor: (anchor: Node) => void;
-  setOpenCreate: (openCreate: boolean) => void;
-  setOpenUpdate: (openUpdate: boolean) => void;
-  setOpenDelete: (openDelete: boolean) => void;
-  handleCloseNavbar: () => void;
-}
 
 function SideNavbarTypeB(props: SideNavbarTypeBProps) {
   const {

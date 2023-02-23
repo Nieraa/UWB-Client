@@ -9,15 +9,8 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { Project } from "../../../types";
+import { ProjectUpdateFormProps } from "../../../types";
 import { updateProject } from "../../../services/ProjectsService";
-
-interface ProjectUpdateFormProps {
-  currentProject: Project;
-  openUpdate: boolean;
-  setOpenUpdate: (openUpdate: boolean) => void;
-  handleUpdateProject: (success: boolean) => void;
-}
 
 function ProjectUpdateForm(props: ProjectUpdateFormProps) {
   const {

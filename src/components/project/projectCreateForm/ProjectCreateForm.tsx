@@ -9,14 +9,8 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { ProjectCreateFormProps } from "../../../types";
 import { createProject } from "../../../services/ProjectsService";
-
-interface ProjectCreateFormProps {
-  openCreate: boolean;
-  setOpenCreate: (openCreate: boolean) => void;
-  setNavigateUrl: (navigateUrl: string) => void;
-  handleCreateProject: (success: boolean) => void;
-}
 
 function ProjectCreateForm(props: ProjectCreateFormProps) {
   const {

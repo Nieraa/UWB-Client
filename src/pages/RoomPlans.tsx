@@ -7,17 +7,8 @@ import DeleteDialogTypeB from "../components/deleteDialog/DeleteDialogTypeB";
 import ResponseDialog from "../components/responseDialog/ResponseDialog";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { RoomPlan, Project, PassAndUpdateRoomPlans } from "../types";
+import { RoomPlanProps } from "../types";
 import { getRoomPlans } from "../services/RoomPlansService";
-
-interface RoomPlanProps extends PassAndUpdateRoomPlans {
-  isLoading: boolean;
-  projectId: string;
-  projects: Project[];
-  currentProject: Project;
-  currentRoomPlan: RoomPlan;
-  setCurrentRoomPlan: (currentRoomPlan: RoomPlan) => void;
-}
 
 function RoomPlans(props: RoomPlanProps) {
   const {

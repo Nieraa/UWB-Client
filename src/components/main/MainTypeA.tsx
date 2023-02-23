@@ -5,19 +5,10 @@ import {
   BreadcrumbsArea
 } from "./Main.style";
 import ProjectList from "../project/projectList/ProjectList";
+import { Breadcrumbs, Tooltip } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { Project } from "../../types";
-import { Breadcrumbs, Tooltip } from "@mui/material";
-
-interface MainTypeAProps {
-  isLoading: boolean;
-  projects: Project[];
-  setCurrentProject: (currentProject: Project) => void;
-  setOpenCreate: (openCreate: boolean) => void;
-  setOpenUpdate: (openUpdate: boolean) => void;
-  setOpenDelete: (openDelete: boolean) => void;
-}
+import { MainTypeAProps } from "../../types";
 
 function MainTypeA(props: MainTypeAProps) {
   const {

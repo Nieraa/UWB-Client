@@ -16,17 +16,7 @@ import {
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { RoomPlan } from "../../../types";
-
-
-interface RoomPlanListProps {
-  isLoading: boolean;
-  projectId: string;
-  roomPlans: RoomPlan[];
-  setCurrentRoomPlan: (currentRoomPlan: RoomPlan) => void;
-  setOpenUpdate: (openUpdate: boolean) => void;
-  setOpenDelete: (openDelete: boolean) => void;
-}
+import { RoomPlan, RoomPlanListProps } from "../../../types";
 
 function RoomPlanList(props: RoomPlanListProps) {
   const {

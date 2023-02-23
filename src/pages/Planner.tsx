@@ -6,19 +6,8 @@ import AnchorUpdateForm from '../components/anchor/anchorUpdateForm/AnchorUpdate
 import DeleteDialogTypeC from '../components/deleteDialog/DeleteDialogTypeC';
 import ResponseDialog from '../components/responseDialog/ResponseDialog';
 import { useState } from 'react';
-import { Project, RoomPlan, Node, PassAndUpdateAnchors } from '../types';
+import { PlannerProps } from '../types';
 import { getAnchors } from '../services/AnchorsService';
-
-interface PlannerProps extends PassAndUpdateAnchors {
-  isLoading: boolean;
-  projectId: string;
-  roomPlanId: string;
-  projects: Project[];
-  currentProject: Project;
-  currentRoomPlan: RoomPlan;
-  currentAnchor: Node;
-  setCurrentAnchor: (currentAnchor: Node) => void;
-}
 
 function Planner(props: PlannerProps) {
   const {

@@ -14,16 +14,7 @@ import {
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { Project } from "../../../types";
-
-
-interface ProjectListProps {
-  isLoading: boolean;
-  projects: Project[];
-  setCurrentProject: (currentProject: Project) => void;
-  setOpenUpdate: (openUpdate: boolean) => void;
-  setOpenDelete: (openDelete: boolean) => void;
-}
+import { Project, ProjectListProps } from "../../../types";
 
 function ProjectList(props: ProjectListProps) {
   const {

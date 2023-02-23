@@ -2,11 +2,7 @@ import {
   ImageAndTextWrapper,
   NavBrand
 } from "./Logo.style";
-
-interface LogoProps {
-  theme: string;
-  size: string;
-}
+import { LogoProps } from "../../types";
 
 function Logo(props: LogoProps) {
   const { theme, size } = props;

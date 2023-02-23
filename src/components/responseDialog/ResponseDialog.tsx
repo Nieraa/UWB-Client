@@ -14,14 +14,7 @@ import {
   faCircleCheck,
   faCircleXmark
 } from "@fortawesome/free-solid-svg-icons";
-
-interface ResponseDialogProps {
-  open: boolean;
-  success: boolean;
-  title: string;
-  detail: string;
-  handleClose: () => void;
-}
+import { ResponseDialogProps } from "../../types";
 
 function SignUpDialog(props: ResponseDialogProps) {
   const {

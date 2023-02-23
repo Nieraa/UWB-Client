@@ -9,17 +9,7 @@ import Canvas from "../canvas/Canvas";
 import { Breadcrumbs, Skeleton, Tooltip } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { Node, Project, RoomPlan } from "../../types";
-
-interface MainTypeCProps {
-  isLoading: boolean;
-  projectId: string;
-  roomPlanId: string;
-  anchors: Node[];
-  currentProject: Project;
-  currentRoomPlan: RoomPlan;
-  setOpenCreate: (openCreate: boolean) => void;
-}
+import { MainTypeCProps } from "../../types";
 
 function MainTypeC(props: MainTypeCProps) {
   const {

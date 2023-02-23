@@ -9,12 +9,7 @@ import {
   DialogActions,
   Button
 } from "@mui/material";
-
-interface InteractiveDialogProps {
-  open: boolean;
-  setOpen: (open: boolean) => void;
-  signOut: () => void;
-}
+import { InteractiveDialogProps } from "../../types";
 
 function InteractiveDialog(props: InteractiveDialogProps) {
   const {

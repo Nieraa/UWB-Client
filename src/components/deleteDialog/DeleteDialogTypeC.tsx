@@ -14,17 +14,8 @@ import {
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { Node } from "../../types";
+import { DeleteDialogTypeCProps } from "../../types";
 import { deleteAnchor } from "../../services/AnchorsService";
-
-interface DeleteDialogTypeCProps {
-  projectId: string;
-  roomPlanId: string;
-  currentAnchor: Node;
-  openDelete: boolean;
-  setOpenDelete: (openDelete: boolean) => void;
-  handleDeleteAnchor: (success: boolean) => void;
-}
 
 function DeleteDialogTypeC(props: DeleteDialogTypeCProps) {
   const {

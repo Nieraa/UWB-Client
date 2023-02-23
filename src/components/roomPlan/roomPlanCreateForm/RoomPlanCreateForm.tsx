@@ -18,17 +18,8 @@ import {
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Compress from "react-image-file-resizer";
-import { RoomPlan } from "../../../types";
+import { RoomPlanCreateFormProps } from "../../../types";
 import { createRoomPlan } from "../../../services/RoomPlansService";
-
-interface RoomPlanCreateFormProps {
-  projectId: string;
-  openCreate: boolean;
-  setNavigateUrl: (navigateUrl: string) => void;
-  setRoomPlans: (roomPlans: RoomPlan[]) => void;
-  setOpenCreate: (openCreate: boolean) => void;
-  handleCreateRoomPlan: (succcess: boolean) => void;
-}
 
 function RoomPlanCreateForm(props: RoomPlanCreateFormProps) {
   const {

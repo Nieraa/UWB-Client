@@ -15,14 +15,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Project } from "../../types";
-
-interface SideNavbarTypeAProps {
-  collapseNavbar: boolean;
-  projectId: string;
-  projects: Project[];
-  handleCloseNavbar: () => void;
-}
+import { SideNavbarTypeAProps } from "../../types";
 
 function SideNavbarTypeA(props: SideNavbarTypeAProps) {
   const {
