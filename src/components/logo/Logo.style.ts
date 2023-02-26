@@ -8,6 +8,7 @@ export const ImageAndTextWrapper = styled(Link)<{ theme: string, size: string }>
   text-decoration: none;
   display: flex;
   align-items: center;
+  cursor: ${({theme}) => (theme === "light" ? "pointer" : "default")};
 
   img {
     margin-right: 22px;

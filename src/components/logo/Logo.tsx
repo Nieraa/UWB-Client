@@ -10,7 +10,7 @@ function Logo(props: LogoProps) {
   return (
     <NavBrand>
       <ImageAndTextWrapper
-        to="/projects"
+        to={theme === "light" ? "/projects" : "#"}
         theme={theme}
         size={size}
       >
