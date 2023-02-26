@@ -12,6 +12,7 @@ import {
   faFileLines,
   faCaretRight,
   faCaretDown,
+  faFolder,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -56,7 +57,7 @@ function SideNavbarTypeA(props: SideNavbarTypeAProps) {
                 onClick={handleCollapse}
               />
             }
-            <FontAwesomeIcon icon={faFolderOpen} />
+            <FontAwesomeIcon icon={collapse || !hasSubMenu ? faFolder : faFolderOpen} />
             Projects
           </NavLink>
           {hasSubMenu &&
