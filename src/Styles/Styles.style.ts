@@ -38,8 +38,10 @@ export const DisplayFlexCenter = css`
 export const SignInAndUpBackground = styled.div`
   width: 100vw;
   height: 100vh;
+  min-height: 700px;
   background-color: var(--grey400);
   ${DisplayFlexCenter}
+  overflow-y: auto;
   
   @media ${maxLayout.xs} {
     height: calc(100vh - 120px);

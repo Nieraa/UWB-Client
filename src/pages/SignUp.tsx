@@ -48,7 +48,7 @@ function SignUp() {
         <SignInAndUpLogoWrapper>
           <Logo theme="dark" size="large" />
         </SignInAndUpLogoWrapper>
-        <Card sx={{ maxWidth: 480, maxHeight: "calc(100vh - 120px)" }}>
+        <Card sx={{ maxWidth: 480 }}>
           <CardContent>
             <SignInAndUpTitle>
               Sign up
