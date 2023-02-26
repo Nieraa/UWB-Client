@@ -142,6 +142,7 @@ function App() {
     const roomPlanId = pathname.slice(42, 62);
     if (localStorage.accessToken) {
       if (Boolean(projectId) && Boolean(roomPlanId)) {
+        await getProjects(setProjects, handleGetProjects);
         await getAnchors(projectId, roomPlanId, setAnchors, handleGetAnchors);
         await getProjectbyId(projectId, setCurrentProject, handleGetProjectbyId);
         await getRoomPlanbyId(projectId, roomPlanId, setCurrentRoomPlan, handleGetRoomPlanbyId);
@@ -157,6 +158,7 @@ function App() {
           yOrigin: 0
         });
         setAnchors([]);
+        await getProjects(setProjects, handleGetProjects);
         await getRoomPlans(projectId, setRoomPlans, handleGetRoomPlans);
         await getProjectbyId(projectId, setCurrentProject, handleGetProjectbyId);
       }
