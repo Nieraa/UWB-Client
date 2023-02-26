@@ -137,13 +137,14 @@ function App() {
   }
 
   const fetchData = useCallback(async (pathname: string) => {
+    setIsLoading(true);
     const projectId = pathname.slice(10, 30);
     const roomPlanId = pathname.slice(42, 62);
     if (localStorage.accessToken) {
       if (Boolean(projectId) && Boolean(roomPlanId)) {
-        getAnchors(projectId, roomPlanId, setAnchors, handleGetAnchors);
-        getProjectbyId(projectId, setCurrentProject, handleGetProjectbyId);
-        getRoomPlanbyId(projectId, roomPlanId, setCurrentRoomPlan, handleGetRoomPlanbyId);
+        await getAnchors(projectId, roomPlanId, setAnchors, handleGetAnchors);
+        await getProjectbyId(projectId, setCurrentProject, handleGetProjectbyId);
+        await getRoomPlanbyId(projectId, roomPlanId, setCurrentRoomPlan, handleGetRoomPlanbyId);
       }
       else if (Boolean(projectId)) {
         setCurrentRoomPlan({
@@ -156,8 +157,8 @@ function App() {
           yOrigin: 0
         });
         setAnchors([]);
-        getRoomPlans(projectId, setRoomPlans, handleGetRoomPlans);
-        getProjectbyId(projectId, setCurrentProject, handleGetProjectbyId);
+        await getRoomPlans(projectId, setRoomPlans, handleGetRoomPlans);
+        await getProjectbyId(projectId, setCurrentProject, handleGetProjectbyId);
       }
       else {
         if (pathname === "/projects") {
@@ -166,15 +167,15 @@ function App() {
             name: ""
           });
           setRoomPlans([]);
-          getProjects(setProjects, handleGetProjects);
+          await getProjects(setProjects, handleGetProjects);
         }
       }
+      setIsLoading(false)
     }
   }, []);
 
   useEffect(() => {
-    setIsLoading(true);
-    fetchData(location.pathname).then(() => setIsLoading(false));
+    fetchData(location.pathname);
   }, [fetchData, location]);
 
   return (

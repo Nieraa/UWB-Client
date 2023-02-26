@@ -6,7 +6,7 @@ import {
   BreadcrumbText
 } from "./Main.style";
 import RoomPlanList from "../roomPlan/roomPlanList/RoomPlanList";
-import { Breadcrumbs, Tooltip } from "@mui/material";
+import { Breadcrumbs, Skeleton, Tooltip } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { MainTypeBProps } from "../../types";
@@ -37,7 +37,13 @@ function MainTypeB(props: MainTypeBProps) {
             </BreadcrumbLink>
           </Tooltip>
           <Tooltip title={currentProject.name}>
-            <BreadcrumbText>{currentProject.name.length > 25 ? currentProject.name.slice(0, 25) + "..." : currentProject.name}</BreadcrumbText>
+            <BreadcrumbText>
+              {isLoading ?
+                <Skeleton width={150} />
+                :
+                currentProject.name.length > 25 ? currentProject.name.slice(0, 25) + "..." : currentProject.name
+              }
+            </BreadcrumbText>
           </Tooltip>
         </Breadcrumbs>
       </BreadcrumbsArea>

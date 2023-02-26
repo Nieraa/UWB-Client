@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { maxLayout } from "../../../src/utils/breakpoint";
+import { DisplayFlexCenter } from "../../Styles/Styles.style";
 
 export const MainArea = styled.div`
   width: 100vw;
@@ -45,6 +46,12 @@ export const BreadcrumbsArea = styled.div`
   text-align: center;
   padding: 16px;
   border-bottom: 1px solid var(--grey100);
+`;
+
+export const SkeletonCanvas = styled.div`
+  height: calc(100% - 60px);
+  width: 100%;
+  ${DisplayFlexCenter}
 `;
 
 export const AddButton = styled.button`

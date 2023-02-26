@@ -74,70 +74,70 @@ function RoomPlanList(props: RoomPlanListProps) {
                 xl={3}
                 key={element}
               >
-                <Skeleton variant="rounded" height={218} />
+                <Skeleton variant="rounded" height={218} animation="wave" />
               </Grid>
             )}
           </>
           :
           <>
+            {roomPlans.map((roomPlan) =>
+              <Grid item
+                xs={12}
+                sm={6}
+                lg={4}
+                xl={3}
+                key={roomPlan.id}
+              >
+                <Card>
+                  <CardActionArea>
+                    <ListElementLink
+                      to={`/projects/${projectId}/room-plans/${roomPlan.id}/planner`}
+                    >
+                      <CardMedia
+                        component="img"
+                        height="160"
+                        image={roomPlan.image ?
+                          roomPlan.image
+                          :
+                          process.env.PUBLIC_URL + "/static/images/no_image.png"
+                        }
+                        alt={roomPlan.name + " plan"}
+                      />
+                      <Divider />
+                      <CardContent>
+                        <ListElementNameWrapper>
+                          <ListElementName>
+                            {roomPlan.name.length > 18 ?
+                              roomPlan.name.slice(0, 18) + "..."
+                              :
+                              roomPlan.name
+                            }
+                          </ListElementName>
+                          <Tooltip title="Edit Room plan">
+                            <FontAwesomeIcon
+                              icon={faPen}
+                              onClick={(e) => {
+                                handleUpdate(e, roomPlan);
+                              }}
+                            />
+                          </Tooltip>
+                          <Tooltip title="Delete Room plan">
+                            <FontAwesomeIcon
+                              icon={faTrashCan}
+                              onClick={(e) => {
+                                handleDelete(e, roomPlan);
+                              }}
+                            />
+                          </Tooltip>
+                        </ListElementNameWrapper>
+                      </CardContent>
+                    </ListElementLink>
+                  </CardActionArea>
+                </Card>
+              </Grid>
+            )}
           </>
         }
-        {roomPlans.map((roomPlan) =>
-          <Grid item
-            xs={12}
-            sm={6}
-            lg={4}
-            xl={3}
-            key={roomPlan.id}
-          >
-            <Card>
-              <CardActionArea>
-                <ListElementLink
-                  to={`/projects/${projectId}/room-plans/${roomPlan.id}/planner`}
-                >
-                  <CardMedia
-                    component="img"
-                    height="160"
-                    image={roomPlan.image ?
-                      roomPlan.image
-                      :
-                      process.env.PUBLIC_URL + "/static/images/no_image.png"
-                    }
-                    alt={roomPlan.name + " plan"}
-                  />
-                  <Divider />
-                  <CardContent>
-                    <ListElementNameWrapper>
-                      <ListElementName>
-                        {roomPlan.name.length > 18 ?
-                          roomPlan.name.slice(0, 18) + "..."
-                          :
-                          roomPlan.name
-                        }
-                      </ListElementName>
-                      <Tooltip title="Edit Room plan">
-                        <FontAwesomeIcon
-                          icon={faPen}
-                          onClick={(e) => {
-                            handleUpdate(e, roomPlan);
-                          }}
-                        />
-                      </Tooltip>
-                      <Tooltip title="Delete Room plan">
-                        <FontAwesomeIcon
-                          icon={faTrashCan}
-                          onClick={(e) => {
-                            handleDelete(e, roomPlan);
-                          }}
-                        />
-                      </Tooltip>
-                    </ListElementNameWrapper>
-                  </CardContent>
-                </ListElementLink>
-              </CardActionArea>
-            </Card>
-          </Grid>
-        )}
       </Grid>
     </ListWrapper>
   );

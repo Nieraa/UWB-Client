@@ -3,7 +3,8 @@ import {
   BreadcrumbsArea,
   AddButton,
   BreadcrumbLink,
-  BreadcrumbText
+  BreadcrumbText,
+  SkeletonCanvas
 } from "./Main.style";
 import Canvas from "../canvas/Canvas";
 import { Breadcrumbs, Skeleton, Tooltip } from "@mui/material";
@@ -40,17 +41,29 @@ function MainTypeC(props: MainTypeCProps) {
           </Tooltip>
           <Tooltip title={currentProject.name}>
             <BreadcrumbLink to={`/projects/${currentProject.id}/room-plans`}>
-              {currentProject.name.length > 11 ? currentProject.name.slice(0, 11) + "..." : currentProject.name}
+              {isLoading ?
+                <Skeleton width={90} animation="wave" />
+                :
+                currentProject.name.length > 11 ? currentProject.name.slice(0, 11) + "..." : currentProject.name
+              }
             </BreadcrumbLink>
           </Tooltip>
           <Tooltip title={currentRoomPlan.name}>
-            <BreadcrumbText>{currentRoomPlan.name.length > 11 ? currentRoomPlan.name.slice(0, 11) + "..." : currentRoomPlan.name}</BreadcrumbText>
+            <BreadcrumbText>
+              {isLoading ?
+                <Skeleton width={90} animation="wave" />
+                :
+                currentRoomPlan.name.length > 11 ? currentRoomPlan.name.slice(0, 11) + "..." : currentRoomPlan.name
+              }
+            </BreadcrumbText>
           </Tooltip>
         </Breadcrumbs>
       </BreadcrumbsArea>
       {
         isLoading ?
-          <Skeleton variant="rectangular" height={"calc(100% - 60px)"} width={"100%"} />
+          <SkeletonCanvas>
+            <Skeleton variant="rectangular" height={"calc(100% - 120px)"} width={"80%"} animation="wave" />
+          </SkeletonCanvas>
           :
           <Canvas
             isPlanner={isPlanner}

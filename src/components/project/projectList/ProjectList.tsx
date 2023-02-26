@@ -71,7 +71,7 @@ function ProjectList(props: ProjectListProps) {
                 xl={3}
                 key={element}
               >
-                <Skeleton variant="rounded" height={58} />
+                <Skeleton variant="rounded" height={58} animation="wave" />
               </Grid>
             )}
           </>
