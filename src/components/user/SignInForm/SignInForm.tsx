@@ -79,14 +79,10 @@ function SignInForm() {
         helperText={formik.errors.password}
         fullWidth
       />
-      <ForgotPassword>
-        <LinkComponent to="/change-password">
-          Forgot Password?
-        </LinkComponent>
-      </ForgotPassword>
       <Button
         variant="contained"
         type="submit"
+        sx={{ marginTop: "10px" }}
         fullWidth
       >
         Login
