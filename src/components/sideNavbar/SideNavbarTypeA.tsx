@@ -64,6 +64,11 @@ function SideNavbarTypeA(props: SideNavbarTypeAProps) {
             <SubMenu
               collapse={collapse}
               length={projects.length}
+              hasBorder={
+                location.pathname.slice(projectId.length + 43) === "planner" ||
+                location.pathname.slice(projectId.length + 43) === "realtime" ||
+                location.pathname.slice(projectId.length + 43) === "location-log"
+              }
             >
               {projects.map((project) =>
                 <li key={project.id}>

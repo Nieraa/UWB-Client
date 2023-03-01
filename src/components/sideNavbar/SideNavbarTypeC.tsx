@@ -78,6 +78,11 @@ function SideNavbarTypeB(props: SideNavbarTypeCProps) {
             <SubMenu
               collapse={collapseProjects}
               length={projects.length}
+              hasBorder={
+                location.pathname.slice(projectId.length + 43) === "planner" ||
+                location.pathname.slice(projectId.length + 43) === "realtime" ||
+                location.pathname.slice(projectId.length + 43) === "location-log"
+              }
             >
               {projects.map((project) =>
                 <li key={project.id}>
@@ -103,7 +108,7 @@ function SideNavbarTypeB(props: SideNavbarTypeCProps) {
         <NavItem>
           <NavLink
             to={`/projects/${projectId}/room-plans/${roomPlanId}/planner`}
-            $focusMenu={location.pathname.slice(projectId.length + 43) === 'planner'}
+            $focusMenu={location.pathname.slice(projectId.length + 43) === "planner"}
             $hasSubMenu={false}
           >
             <FontAwesomeIcon icon={faPenToSquare} />
@@ -113,7 +118,7 @@ function SideNavbarTypeB(props: SideNavbarTypeCProps) {
         <NavItem>
           <NavLink
             to={`/projects/${projectId}/room-plans/${roomPlanId}/realtime`}
-            $focusMenu={location.pathname.slice(projectId.length + 43) === 'realtime'}
+            $focusMenu={location.pathname.slice(projectId.length + 43) === "realtime"}
             $hasSubMenu={false}
           >
             <FontAwesomeIcon icon={faMapLocationDot} />
@@ -123,7 +128,7 @@ function SideNavbarTypeB(props: SideNavbarTypeCProps) {
         <NavItem>
           <NavLink
             to={`/projects/${projectId}/room-plans/${roomPlanId}/location-log`}
-            $focusMenu={location.pathname.slice(projectId.length + 43) === 'location-log'}
+            $focusMenu={location.pathname.slice(projectId.length + 43) === "location-log"}
             $hasSubMenu={false}
           >
             <FontAwesomeIcon icon={faTable} />
