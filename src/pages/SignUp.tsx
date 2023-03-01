@@ -27,7 +27,7 @@ function SignUp() {
     if (!success) {
       setSucccess(false);
       setTitle("Sign up failed");
-      setDetail("Some error has ocrured while Sign up.");
+      setDetail("Some error has occrured while Sign up.");
     }
     else {
       setSucccess(true);

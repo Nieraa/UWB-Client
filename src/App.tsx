@@ -58,7 +58,7 @@ function App() {
       setOpen(true);
       setSucccess(false);
       setTitle("Get projects failed");
-      setDetail("Some error has ocrured while get project datas.");
+      setDetail("Some error has occrured while get project datas.");
     }
     else {
       setOpen(false);
@@ -73,7 +73,7 @@ function App() {
       setOpen(true);
       setSucccess(false);
       setTitle("Get project failed");
-      setDetail("Some error has ocrured while get project data.");
+      setDetail("Some error has occrured while get project data.");
     }
     else {
       setOpen(false);
@@ -88,7 +88,7 @@ function App() {
       setOpen(true);
       setSucccess(false);
       setTitle("Get room plans failed");
-      setDetail("Some error has ocrured while get room plan datas.");
+      setDetail("Some error has occrured while get room plan datas.");
     }
     else {
       setOpen(false);
@@ -103,7 +103,7 @@ function App() {
       setOpen(true);
       setSucccess(false);
       setTitle("Get room plan failed");
-      setDetail("Some error has ocrured while get room plan data.");
+      setDetail("Some error has occrured while get room plan data.");
     }
     else {
       setOpen(false);
@@ -118,7 +118,7 @@ function App() {
       setOpen(true);
       setSucccess(false);
       setTitle("Get anhcors failed");
-      setDetail("Some error has ocrured while get anhcor datas.");
+      setDetail("Some error has occrured while get anhcor datas.");
     }
     else {
       setOpen(false);

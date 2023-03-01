@@ -84,7 +84,7 @@ function SignInForm() {
         sx={{ marginTop: "10px" }}
         fullWidth
       >
-        Login
+        Sign in
       </Button>
     </form>
   );

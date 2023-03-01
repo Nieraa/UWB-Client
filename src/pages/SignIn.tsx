@@ -27,7 +27,7 @@ function SignIn() {
           <ToSignInAndUpWrapper>
             Don't have an account?&nbsp;
             <LinkComponent to="/signup">
-              Sign Up
+              Sign up
             </LinkComponent>
           </ToSignInAndUpWrapper>
         </CardContent>

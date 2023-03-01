@@ -43,7 +43,7 @@ function Projects(props: ProjectsProps) {
     if (!success) {
       setSucccess(false);
       setTitle("Create project failed");
-      setDetail("Some error has ocrured while create project.");
+      setDetail("Some error has occrured while create project.");
     }
     else {
       getProjects(setProjects);
@@ -60,7 +60,7 @@ function Projects(props: ProjectsProps) {
     if (!success) {
       setSucccess(false);
       setTitle("Update project failed");
-      setDetail("Some error has ocrured while update project.");
+      setDetail("Some error has occrured while update project.");
     }
     else {
       getProjects(setProjects);
@@ -77,7 +77,7 @@ function Projects(props: ProjectsProps) {
     if (!success) {
       setSucccess(false);
       setTitle("Delete project failed");
-      setDetail("Some error has ocrured while delete project.");
+      setDetail("Some error has occrured while delete project.");
     }
     else {
       getProjects(setProjects);

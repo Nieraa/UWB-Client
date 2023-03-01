@@ -44,11 +44,11 @@ function Planner(props: PlannerProps) {
     if (!success) {
       setSucccess(false);
       setTitle("Create anchor failed");
-      setDetail("Some error has ocrured while anchor project.");
+      setDetail("Some error has occrured while create anchor.");
     }
     else {
       getAnchors(projectId, roomPlanId, setAnchors);
-      setOpenCreate(false);
+      setOpenCreate(false); 
       setSucccess(true);
       setTitle("Anchor created!!");
       setDetail("Congratulations, your anchor has been successfully created.");
@@ -60,7 +60,7 @@ function Planner(props: PlannerProps) {
     if (!success) {
       setSucccess(false);
       setTitle("Update anchor failed");
-      setDetail("Some error has ocrured while update anchor.");
+      setDetail("Some error has occrured while update anchor.");
     }
     else {
       getAnchors(projectId, roomPlanId, setAnchors);
@@ -76,7 +76,7 @@ function Planner(props: PlannerProps) {
     if (!success) {
       setSucccess(false);
       setTitle("Delete anchor failed");
-      setDetail("Some error has ocrured while delete anchor.");
+      setDetail("Some error has occrured while delete anchor.");
     }
     else {
       getAnchors(projectId, roomPlanId, setAnchors);
