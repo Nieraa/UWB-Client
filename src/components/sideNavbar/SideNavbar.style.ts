@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const Tint = styled.div<{ collapseNavbar: boolean }>`
   height: calc(100vh - 60px);
-  background-color: rgba(85, 78, 64, 0.4);
+  background-color: rgba(0, 0, 0, 0.2);
   position: absolute;
   left: 0;
   right: 0;
@@ -96,14 +96,14 @@ export const SubMenuLink = styled(Link) <{ $focusMenu: boolean }>`
   }
 `;
 
-export const SubMenu = styled.ul<{ collapse: boolean, length: number }>`
+export const SubMenu = styled.ul<{ collapse: boolean, length: number, hasBorder: boolean }>`
   height: ${(props) => (props.length > 6 ? "300px" : "auto")};
   font-size: var(--md-text);
   margin: 0;
   padding: 0;
   display: ${(props) => (props.collapse ? "none" : "block")};
   overflow-y: auto;
-  border-bottom: 1px solid var(--grey100);
+  border-bottom: ${(props) => (props.hasBorder ? "1px solid var(--grey100)" : "")};
   list-style: none;
 `;
 
