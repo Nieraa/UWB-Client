@@ -35,8 +35,9 @@ function Canvas(props: CanvasProps) {
       onPanningStart={() => setCursor("grabbing")}
       onPanningStop={() => setCursor("default")}
       onZoom={(e) => setScale(e.state.scale)}
+      minScale={0}
       limitToBounds={false}
-      centerOnInit
+      initialPositionX={(window.innerWidth / 2) - (currentRoomPlan.xRatio * 50)}
     >
       <TransformComponent>
         <div style={{
