@@ -99,7 +99,7 @@ function ProjectList(props: ProjectListProps) {
                               project.name
                             }
                           </ListElementName>
-                          <Tooltip title="Edit Project">
+                          <Tooltip title="Edit Project" arrow>
                             <FontAwesomeIcon
                               icon={faPen}
                               onClick={(e) => {
@@ -107,7 +107,7 @@ function ProjectList(props: ProjectListProps) {
                               }}
                             />
                           </Tooltip>
-                          <Tooltip title="Delete Project">
+                          <Tooltip title="Delete Project" arrow>
                             <FontAwesomeIcon
                               icon={faTrashCan}
                               onClick={(e) => {

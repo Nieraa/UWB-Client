@@ -31,12 +31,12 @@ function MainTypeB(props: MainTypeBProps) {
     <MainArea>
       <BreadcrumbsArea>
         <Breadcrumbs aria-label="breadcrumb">
-          <Tooltip title="Projects">
+          <Tooltip title="Projects" arrow>
             <BreadcrumbLink to="/projects">
               Projects
             </BreadcrumbLink>
           </Tooltip>
-          <Tooltip title={currentProject.name}>
+          <Tooltip title={currentProject.name} arrow>
             <BreadcrumbText>
               {isLoading ?
                 <Skeleton width={150} />
@@ -55,7 +55,7 @@ function MainTypeB(props: MainTypeBProps) {
         setOpenUpdate={setOpenUpdate}
         setOpenDelete={setOpenDelete}
       />
-      <Tooltip title="Create Room plan" placement="left">
+      <Tooltip title="Create Room plan" placement="left" arrow>
         <AddButton onClick={handleClickOpen}>
           <FontAwesomeIcon icon={faPlus} />
         </AddButton>

@@ -28,7 +28,7 @@ function MainTypeA(props: MainTypeAProps) {
     <MainArea>
       <BreadcrumbsArea>
         <Breadcrumbs aria-label="breadcrumb">
-          <Tooltip title="Projects">
+          <Tooltip title="Projects" arrow>
             <BreadcrumbText>Projects</BreadcrumbText>
           </Tooltip>
         </Breadcrumbs>
@@ -40,7 +40,7 @@ function MainTypeA(props: MainTypeAProps) {
         setOpenUpdate={setOpenUpdate}
         setOpenDelete={setOpenDelete}
       />
-      <Tooltip title="Create Project" placement="left">
+      <Tooltip title="Create Project" placement="left" arrow>
         <AddButton onClick={handleClickOpen}>
           <FontAwesomeIcon icon={faPlus} />
         </AddButton>

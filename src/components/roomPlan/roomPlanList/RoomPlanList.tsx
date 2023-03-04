@@ -113,7 +113,7 @@ function RoomPlanList(props: RoomPlanListProps) {
                               roomPlan.name
                             }
                           </ListElementName>
-                          <Tooltip title="Edit Room plan">
+                          <Tooltip title="Edit Room plan" arrow>
                             <FontAwesomeIcon
                               icon={faPen}
                               onClick={(e) => {
@@ -121,7 +121,7 @@ function RoomPlanList(props: RoomPlanListProps) {
                               }}
                             />
                           </Tooltip>
-                          <Tooltip title="Delete Room plan">
+                          <Tooltip title="Delete Room plan" arrow>
                             <FontAwesomeIcon
                               icon={faTrashCan}
                               onClick={(e) => {
