@@ -14,6 +14,9 @@ function TagNode(props: TagNodeProps) {
   } = props;
 
   const nodeRef = useRef(null);
+  const x = tag.x.toFixed(3);
+  const y = tag.y.toFixed(3);
+  const z = tag.z.toFixed(3);
 
 
   function getTextWidth(text: string, font: string): number {
@@ -22,11 +25,11 @@ function TagNode(props: TagNodeProps) {
 
     if (context) {
       context.font = font || getComputedStyle(document.body).font;
-      if (context.measureText(text).width > context.measureText(`(${tag.x}, ${tag.y}, ${tag.z})`).width) {
+      if (context.measureText(text).width > context.measureText(`(${x}, ${y}, ${z})`).width) {
         return context.measureText(text).width / 0.5779
       }
       else {
-        return context.measureText(`(${tag.x}, ${tag.y}, ${tag.z})`).width / 0.5779
+        return context.measureText(`(${x}, ${y}, ${z})`).width / 0.5779
       }
     }
     return 0;
@@ -43,7 +46,7 @@ function TagNode(props: TagNodeProps) {
       <div ref={nodeRef}>
         <NodeText textWidth={getTextWidth(tag.name, "regular 16pt Prompt")}>
           {tag.name}<br />
-          {`(${tag.x}, ${tag.y}, ${tag.z})`}
+          {`(${x}, ${y}, ${z})`}
         </NodeText>
         <NodeElement nodeType="tag">
           <FontAwesomeIcon icon={faPlus} />
