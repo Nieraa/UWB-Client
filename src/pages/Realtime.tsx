@@ -24,7 +24,8 @@ function Realtime(props: RealtimeProps) {
       const socket = io.connect("http://localhost:3001");
       socket.on("event", (value: any) => {
         console.log("This is recieve value", value);
-        setTags(value.tags);
+        const parse_value = JSON.parse(value);
+        setTags(parse_value.tags);
       });
     }
 
