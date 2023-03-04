@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useRef, useState } from 'react';
 import { CanvasProps } from '../../types';
+import TagNode from '../tag/tagNode/TagNode';
 
 function Canvas(props: CanvasProps) {
   const {
@@ -16,7 +17,8 @@ function Canvas(props: CanvasProps) {
     projectId,
     roomPlanId,
     currentRoomPlan,
-    anchors
+    anchors,
+    tags
   } = props;
 
   const [pannable, setPannable] = useState<boolean>(true);
@@ -78,6 +80,15 @@ function Canvas(props: CanvasProps) {
               scale={scale}
               setPannable={setPannable}
               setCursor={setCursor}
+            />
+          )}
+          {tags && tags.map((tag) =>
+            <TagNode
+              key={tag.name}
+              xOrigin={currentRoomPlan.xOrigin}
+              yOrigin={currentRoomPlan.yOrigin}
+              tag={tag}
+              scale={scale}
             />
           )}
         </div>

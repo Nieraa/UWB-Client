@@ -195,6 +195,7 @@ export interface MainTypeCProps {
   projectId: string;
   roomPlanId: string;
   anchors: Node[];
+  tags?: Tag[];
   currentProject: Project;
   currentRoomPlan: RoomPlan;
   setOpenCreate?: (openCreate: boolean) => void;
@@ -268,6 +269,13 @@ export interface AnchorNodeProps {
   setCursor: (cursor: string) => void;
 }
 
+export interface TagNodeProps {
+  xOrigin: number;
+  yOrigin: number;
+  tag: Tag;
+  scale: number;
+}
+
 export interface AnchorUpdateFormProps {
   projectId: string,
   roomPlanId: string,
@@ -283,6 +291,7 @@ export interface CanvasProps {
   roomPlanId: string;
   currentRoomPlan: RoomPlan;
   anchors: Node[];
+  tags?: Tag[];
 }
 
 export interface SignUpFormProps {

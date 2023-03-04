@@ -19,6 +19,7 @@ function MainTypeC(props: MainTypeCProps) {
     projectId,
     roomPlanId,
     anchors,
+    tags,
     currentProject,
     currentRoomPlan,
     setOpenCreate
@@ -71,6 +72,7 @@ function MainTypeC(props: MainTypeCProps) {
             roomPlanId={roomPlanId}
             currentRoomPlan={currentRoomPlan}
             anchors={anchors}
+            tags={tags}
           />
       }
       {setOpenCreate &&
