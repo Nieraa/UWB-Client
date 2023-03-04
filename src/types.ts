@@ -6,6 +6,13 @@ export interface Node {
   z: number;
 }
 
+export interface Tag {
+  name: string;
+  x: number;
+  y: number;
+  z: number;
+}
+
 export interface PassAndUpdateAnchors {
   anchors: Node[];
   setAnchors: (anchors: Node[]) => void;
