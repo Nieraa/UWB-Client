@@ -48,7 +48,8 @@ function Realtime(props: RealtimeProps) {
         projectId={projectId}
         roomPlanId={roomPlanId}
         projects={projects}
-        tags={anchors}
+        anchors={anchors}
+        tags={tags}
         handleCloseNavbar={handleCloseNavbar}
       />
       <MainTypeC

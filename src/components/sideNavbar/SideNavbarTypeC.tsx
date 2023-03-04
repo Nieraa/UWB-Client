@@ -24,22 +24,25 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { SideNavbarTypeCProps } from "../../types";
 
-function SideNavbarTypeB(props: SideNavbarTypeCProps) {
+function SideNavbarTypeC(props: SideNavbarTypeCProps) {
   const {
     collapseNavbar,
     projectId,
     roomPlanId,
     projects,
+    anchors,
     tags,
     handleCloseNavbar
   } = props;
 
   const [collapseProjects, setCollapseProjects] = useState<boolean>(true);
+  const [collapseAnchors, setCollapseAnchors] = useState<boolean>(true);
   const [collapseTags, setCollapseTags] = useState<boolean>(true);
 
   const location = useLocation();
 
   const hasProjectsSubMenu: boolean = projects.length !== 0 ? true : false;
+  const hasAnchorsSubMenu: boolean = anchors.length !== 0 ? true : false;
   const hasTagsSubMenu: boolean = tags.length !== 0 ? true : false;
 
   function handleCollapse(
@@ -136,6 +139,35 @@ function SideNavbarTypeB(props: SideNavbarTypeCProps) {
           </NavLink>
         </NavItem>
         <NavItem>
+          <NodeListToggle hasSubMenu={hasAnchorsSubMenu}>
+            {hasAnchorsSubMenu &&
+              <FontAwesomeIcon
+                icon={collapseAnchors ? faCaretRight : faCaretDown}
+                onClick={(e) => handleCollapse(e, collapseAnchors, setCollapseAnchors)}
+              />
+            }
+            Anchors ({anchors.length})
+          </NodeListToggle>
+          {hasAnchorsSubMenu &&
+            <NodeSubMenu
+              collapse={collapseAnchors}
+              length={anchors.length}
+            >
+              {anchors.map((anchor) =>
+                <li key={anchor.id}>
+                  <NodeList>
+                    {anchor.name.length > 14 ?
+                      anchor.name.slice(0, 14) + "..."
+                      :
+                      anchor.name
+                    }
+                  </NodeList>
+                </li>
+              )}
+            </NodeSubMenu>
+          }
+        </NavItem>
+        <NavItem>
           <NodeListToggle hasSubMenu={hasTagsSubMenu}>
             {hasTagsSubMenu &&
               <FontAwesomeIcon
@@ -143,7 +175,7 @@ function SideNavbarTypeB(props: SideNavbarTypeCProps) {
                 onClick={(e) => handleCollapse(e, collapseTags, setCollapseTags)}
               />
             }
-            Tags
+            Tags ({tags.length})
           </NodeListToggle>
           {hasTagsSubMenu &&
             <NodeSubMenu
@@ -151,7 +183,7 @@ function SideNavbarTypeB(props: SideNavbarTypeCProps) {
               length={tags.length}
             >
               {tags.map((tag) =>
-                <li key={tag.id}>
+                <li key={tag.name}>
                   <NodeList>
                     {tag.name.length > 14 ?
                       tag.name.slice(0, 14) + "..."
@@ -169,4 +201,4 @@ function SideNavbarTypeB(props: SideNavbarTypeCProps) {
   );
 }
 
-export default SideNavbarTypeB;
+export default SideNavbarTypeC;
