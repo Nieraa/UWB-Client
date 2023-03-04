@@ -46,7 +46,7 @@ function RoomPlans(props: RoomPlanProps) {
     if (!success) {
       setSucccess(false);
       setTitle("Create room plan failed");
-      setDetail("Some error has occrured while create room plan.");
+      setDetail("Some error has occurred while create room plan.");
     }
     else {
       getRoomPlans(projectId, setRoomPlans);
@@ -63,7 +63,7 @@ function RoomPlans(props: RoomPlanProps) {
     if (!success) {
       setSucccess(false);
       setTitle("Update room plan failed");
-      setDetail("Some error has occrured while update room plan.");
+      setDetail("Some error has occurred while update room plan.");
     }
     else {
       getRoomPlans(projectId, setRoomPlans);
@@ -80,7 +80,7 @@ function RoomPlans(props: RoomPlanProps) {
     if (!success) {
       setSucccess(false);
       setTitle("Delete room plan failed");
-      setDetail("Some error has occrured while delete room plan.");
+      setDetail("Some error has occurred while delete room plan.");
     }
     else {
       getRoomPlans(projectId, setRoomPlans);

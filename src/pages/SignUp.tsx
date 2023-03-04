@@ -27,11 +27,11 @@ function SignUp() {
     if (!success) {
       setSucccess(false);
       setTitle("Sign up failed");
-      setDetail("Some error has occrured while Sign up.");
+      setDetail("Some error has occurred while sign up.");
     }
     else {
       setSucccess(true);
-      setTitle("User created!!");
+      setTitle("Account created!!");
       setDetail("Congratulations, your account has been successfully created.");
     }
     setOpenResponse(true);
