@@ -1,8 +1,9 @@
 import AppBar from '../components/appBar/AppBar';
 import SideNavbarTypeC from '../components/sideNavbar/SideNavbarTypeC';
 import MainTypeC from '../components/main/MainTypeC';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RealtimeProps } from '../types';
+import * as io from "socket.io-client";
 
 function Realtime(props: RealtimeProps) {
   const {
@@ -16,6 +17,17 @@ function Realtime(props: RealtimeProps) {
   } = props;
 
   const [collapseNavbar, setCollapseNavbar] = useState<boolean>(true);
+
+  useEffect(() => {
+    function webSocketInvoke() {
+      const socket = io.connect("http://localhost:3001");
+      socket.on("event", (value: any) => {
+        console.log("This is recieve value", value);
+      });
+    }
+
+    webSocketInvoke();
+  }, [])
 
   function handleCollapseNavbar() {
     setCollapseNavbar(!collapseNavbar);
