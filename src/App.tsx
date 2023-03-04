@@ -14,7 +14,7 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
-import { Node, Project, RoomPlan } from "./types";
+import { Anchor, Project, RoomPlan } from "./types";
 import { getProjectbyId, getProjects } from "./services/ProjectsService";
 import { getRoomPlanbyId, getRoomPlans } from './services/RoomPlansService';
 import { getAnchors } from './services/AnchorsService';
@@ -35,8 +35,8 @@ function App() {
     xOrigin: 0,
     yOrigin: 0
   });
-  const [anchors, setAnchors] = useState<Node[]>([]);
-  const [currentAnchor, setCurrentAnchor] = useState<Node>({
+  const [anchors, setAnchors] = useState<Anchor[]>([]);
+  const [currentAnchor, setCurrentAnchor] = useState<Anchor>({
     id: "",
     name: "",
     x: 0,

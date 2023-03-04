@@ -25,7 +25,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Node, SideNavbarTypeBProps } from "../../types";
+import { Anchor, SideNavbarTypeBProps } from "../../types";
 import { Tooltip } from "@mui/material";
 
 function SideNavbarTypeB(props: SideNavbarTypeBProps) {
@@ -78,7 +78,7 @@ function SideNavbarTypeB(props: SideNavbarTypeBProps) {
       preventDefault: () => void;
       stopPropagation: () => void;
     },
-    anchor: Node
+    anchor: Anchor
   ) {
     e.preventDefault();
     e.stopPropagation();
@@ -91,7 +91,7 @@ function SideNavbarTypeB(props: SideNavbarTypeBProps) {
       preventDefault: () => void;
       stopPropagation: () => void;
     },
-    anchor: Node
+    anchor: Anchor
   ): void {
     e.preventDefault();
     e.stopPropagation();
@@ -188,8 +188,8 @@ function SideNavbarTypeB(props: SideNavbarTypeBProps) {
                 onClick={(e) => handleCollapse(e, collapseAnchors, setCollapseAnchors)}
               />
             }
-            Anchors
-            <Tooltip title="Create Anchor">
+            Anchors ({anchors.length})
+            <Tooltip title="Create Anchor" arrow>
               <FontAwesomeIcon
                 icon={faPlus}
                 onClick={handleAdd}
@@ -209,7 +209,7 @@ function SideNavbarTypeB(props: SideNavbarTypeBProps) {
                       :
                       anchor.name
                     }
-                    <Tooltip title="Edit Anchor">
+                    <Tooltip title="Edit Anchor" arrow>
                       <FontAwesomeIcon
                         icon={faPen}
                         onClick={(e) => {
@@ -217,7 +217,7 @@ function SideNavbarTypeB(props: SideNavbarTypeBProps) {
                         }}
                       />
                     </Tooltip>
-                    <Tooltip title="Delete Anchor">
+                    <Tooltip title="Delete Anchor" arrow>
                       <FontAwesomeIcon
                         icon={faTrashCan}
                         onClick={(e) => {

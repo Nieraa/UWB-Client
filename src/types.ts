@@ -1,4 +1,4 @@
-export interface Node {
+export interface Anchor {
   id: string;
   name: string;
   x: number;
@@ -14,8 +14,8 @@ export interface Tag {
 }
 
 export interface PassAndUpdateAnchors {
-  anchors: Node[];
-  setAnchors: (anchors: Node[]) => void;
+  anchors: Anchor[];
+  setAnchors: (anchors: Anchor[]) => void;
 }
 
 export interface RoomPlan {
@@ -26,7 +26,7 @@ export interface RoomPlan {
   yRatio: number;
   xOrigin: number;
   yOrigin: number;
-  anchors?: Node[];
+  anchors?: Anchor[];
 }
 
 export interface PassAndUpdateRoomPlans {
@@ -81,8 +81,8 @@ export interface PlannerProps extends PassAndUpdateAnchors {
   projects: Project[];
   currentProject: Project;
   currentRoomPlan: RoomPlan;
-  currentAnchor: Node;
-  setCurrentAnchor: (currentAnchor: Node) => void;
+  currentAnchor: Anchor;
+  setCurrentAnchor: (currentAnchor: Anchor) => void;
 }
 
 export interface RealtimeProps {
@@ -90,7 +90,7 @@ export interface RealtimeProps {
   projectId: string;
   roomPlanId: string;
   projects: Project[];
-  anchors: Node[];
+  anchors: Anchor[];
   currentProject: Project;
   currentRoomPlan: RoomPlan;
 }
@@ -111,8 +111,8 @@ export interface SideNavbarTypeBProps {
   projectId: string;
   roomPlanId: string;
   projects: Project[];
-  anchors: Node[];
-  setCurrentAnchor: (anchor: Node) => void;
+  anchors: Anchor[];
+  setCurrentAnchor: (anchor: Anchor) => void;
   setOpenCreate: (openCreate: boolean) => void;
   setOpenUpdate: (openUpdate: boolean) => void;
   setOpenDelete: (openDelete: boolean) => void;
@@ -124,7 +124,8 @@ export interface SideNavbarTypeCProps {
   projectId: string;
   roomPlanId: string;
   projects: Project[];
-  tags: Node[];
+  anchors: Anchor[];
+  tags: Tag[];
   handleCloseNavbar: () => void;
 }
 
@@ -166,7 +167,7 @@ export interface DeleteDialogTypeBProps extends DeleteDialog {
 export interface DeleteDialogTypeCProps extends DeleteDialog {
   projectId: string;
   roomPlanId: string;
-  currentAnchor: Node;
+  currentAnchor: Anchor;
   handleDeleteAnchor: (success: boolean) => void;
 }
 
@@ -194,7 +195,7 @@ export interface MainTypeCProps {
   isLoading: boolean;
   projectId: string;
   roomPlanId: string;
-  anchors: Node[];
+  anchors: Anchor[];
   tags?: Tag[];
   currentProject: Project;
   currentRoomPlan: RoomPlan;
@@ -263,7 +264,7 @@ export interface AnchorNodeProps {
   roomPlanId: string;
   xOrigin: number;
   yOrigin: number;
-  anchor: Node;
+  anchor: Anchor;
   scale: number;
   setPannable: (pannable: boolean) => void;
   setCursor: (cursor: string) => void;
@@ -279,7 +280,7 @@ export interface TagNodeProps {
 export interface AnchorUpdateFormProps {
   projectId: string,
   roomPlanId: string,
-  currentAnchor: Node;
+  currentAnchor: Anchor;
   openUpdate: boolean;
   setOpenUpdate: (openUpdate: boolean) => void;
   handleUpdateAnchor: (success: boolean) => void
@@ -290,7 +291,7 @@ export interface CanvasProps {
   projectId: string;
   roomPlanId: string;
   currentRoomPlan: RoomPlan;
-  anchors: Node[];
+  anchors: Anchor[];
   tags?: Tag[];
 }
 

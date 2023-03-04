@@ -1,10 +1,10 @@
 import axios from "../axios";
-import { Node } from "../types";
+import { Anchor } from "../types";
 
 export async function getAnchors(
   projectId: string,
   roomPlanId: string,
-  setAnchors: (anchors: Node[]) => void,
+  setAnchors: (anchors: Anchor[]) => void,
   handleGetAnchors?: (success: boolean) => void
 ): Promise<void> {
   const userId: string = localStorage.userId;
