@@ -4,7 +4,8 @@ import {
   AddButton,
   BreadcrumbLink,
   BreadcrumbText,
-  SkeletonCanvas
+  SkeletonCanvas,
+  PageName
 } from "./Main.style";
 import Canvas from "../canvas/Canvas";
 import { Breadcrumbs, Skeleton, Tooltip } from "@mui/material";
@@ -35,12 +36,12 @@ function MainTypeC(props: MainTypeCProps) {
     <MainArea>
       <BreadcrumbsArea>
         <Breadcrumbs aria-label="breadcrumb">
-          <Tooltip title="Projects">
+          <Tooltip title="Projects" arrow>
             <BreadcrumbLink to="/projects">
               Projects
             </BreadcrumbLink>
           </Tooltip>
-          <Tooltip title={currentProject.name}>
+          <Tooltip title={currentProject.name} arrow>
             <BreadcrumbLink to={`/projects/${currentProject.id}/room-plans`}>
               {isLoading ?
                 <Skeleton width={90} animation="wave" />
@@ -49,7 +50,7 @@ function MainTypeC(props: MainTypeCProps) {
               }
             </BreadcrumbLink>
           </Tooltip>
-          <Tooltip title={currentRoomPlan.name}>
+          <Tooltip title={currentRoomPlan.name} arrow>
             <BreadcrumbText>
               {isLoading ?
                 <Skeleton width={90} animation="wave" />
@@ -60,6 +61,9 @@ function MainTypeC(props: MainTypeCProps) {
           </Tooltip>
         </Breadcrumbs>
       </BreadcrumbsArea>
+      <PageName>
+        {isPlanner ? "Planner page" : "Real-time Tracking page"}
+      </PageName>
       {
         isLoading ?
           <SkeletonCanvas>
@@ -76,7 +80,7 @@ function MainTypeC(props: MainTypeCProps) {
           />
       }
       {setOpenCreate &&
-        <Tooltip title="Create Anchor" placement="left">
+        <Tooltip title="Create Anchor" placement="left" arrow>
           <AddButton onClick={handleClickOpen}>
             <FontAwesomeIcon icon={faPlus} />
           </AddButton>
