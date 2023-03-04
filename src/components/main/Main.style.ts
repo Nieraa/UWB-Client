@@ -74,3 +74,19 @@ export const AddButton = styled.button`
     transition: 0.2s;
   }
 `;
+
+export const PageName = styled.div`
+  width: 250px;
+  height: 60px;
+  background-color: var(--link-visited);
+  color: var(--white);
+  font-size: var(--md-text);
+  font-weight: bold;
+  line-height: 60px;
+  text-align: center;
+  position: absolute;
+  top: 70px;
+  left: calc(50% - 125px);
+  z-index: 1;
+  border-radius: 10px;
+`;
