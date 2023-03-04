@@ -39,7 +39,7 @@ function TagNode(props: TagNodeProps) {
     <Draggable
       nodeRef={nodeRef}
       disabled={true}
-      defaultPosition={{ x: tag.x * 100, y: -tag.y * 100 }}
+      position={{ x: tag.x * 100, y: -tag.y * 100 }}
       positionOffset={{ x: `calc(50vw - 170px + ${xOrigin * 100}px)`, y: `calc(50vh - 80px - ${yOrigin * 100}px)` }}
       scale={scale}
     >
