@@ -192,7 +192,7 @@ function App() {
           element={localStorage.accessToken ?
             <Navigate to="/projects" />
             :
-            <SignIn />
+            <SignIn setOpenBackdrop={setOpenBackdrop}/>
           }
         />
         <Route

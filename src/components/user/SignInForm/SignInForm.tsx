@@ -1,4 +1,4 @@
-import { Backdrop, Button, CircularProgress, FormHelperText, TextField } from "@mui/material";
+import { Button, FormHelperText, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useState } from "react";
@@ -6,9 +6,11 @@ import { useNavigate } from "react-router-dom";
 import { sha512 } from "js-sha512";
 import { SignIn } from "../../../services/UsersService";
 import { salt } from "../../../salt"
+import { SetOpenBackdropProps } from "../../../types";
 
-function SignInForm() {
-  const [openBackdrop, setOpenBackdrop] = useState<boolean>(false);
+function SignInForm(props: SetOpenBackdropProps) {
+  const { setOpenBackdrop } = props;
+
   const [errorMessage, setErrormessage] = useState<string>("");
 
   const navigate = useNavigate();
@@ -89,12 +91,6 @@ function SignInForm() {
       >
         Sign in
       </Button>
-      <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={openBackdrop}
-      >
-        <CircularProgress />
-      </Backdrop>
     </form>
   );
 }

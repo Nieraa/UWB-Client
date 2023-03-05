@@ -11,8 +11,11 @@ import {
   Card,
   CardContent
 } from "@mui/material";
+import { SetOpenBackdropProps } from "../types";
 
-function SignIn() {
+function SignIn(props: SetOpenBackdropProps) {
+  const { setOpenBackdrop } = props;
+
   return (
     <SignInAndUpBackground>
       <SignInAndUpLogoWrapper>
@@ -23,7 +26,7 @@ function SignIn() {
           <SignInAndUpTitle>
             Sign in
           </SignInAndUpTitle>
-          <SignInForm />
+          <SignInForm setOpenBackdrop={setOpenBackdrop}/>
           <ToSignInAndUpWrapper>
             Don't have an account?&nbsp;
             <LinkComponent to="/signup">
