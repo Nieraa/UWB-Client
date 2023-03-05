@@ -1,4 +1,4 @@
-import { Button, FormHelperText, TextField } from "@mui/material";
+import { Backdrop, Button, CircularProgress, FormHelperText, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useState } from "react";
@@ -8,10 +8,11 @@ import { SignIn } from "../../../services/UsersService";
 import { salt } from "../../../salt"
 
 function SignInForm() {
+  const [openBackdrop, setOpenBackdrop] = useState<boolean>(false);
   const [errorMessage, setErrormessage] = useState<string>("");
 
   const navigate = useNavigate();
-  
+
   function handleSignIn(success: boolean): void {
     if (success) {
       setErrormessage("");
@@ -20,6 +21,7 @@ function SignInForm() {
     else {
       setErrormessage("Invalid username or password")
     }
+    setOpenBackdrop(false);
   }
 
   const validationSchema = yup.object({
@@ -38,6 +40,7 @@ function SignInForm() {
     },
     validationSchema,
     onSubmit: (values) => {
+      setOpenBackdrop(true);
       const userData = {
         username: values.username,
         password: sha512(values.password + salt.value),
@@ -86,6 +89,12 @@ function SignInForm() {
       >
         Sign in
       </Button>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={openBackdrop}
+      >
+        <CircularProgress />
+      </Backdrop>
     </form>
   );
 }
