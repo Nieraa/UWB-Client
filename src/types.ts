@@ -156,6 +156,7 @@ interface DeleteDialog {
 export interface DeleteDialogTypeAProps extends DeleteDialog {
   currentProject: Project;
   handleDeleteProject: (success: boolean) => void;
+  setOpenBackdrop: (openBackdrop: boolean) => void;
 }
 
 export interface DeleteDialogTypeBProps extends DeleteDialog {
@@ -207,6 +208,7 @@ export interface ProjectCreateFormProps {
   setOpenCreate: (openCreate: boolean) => void;
   setNavigateUrl: (navigateUrl: string) => void;
   handleCreateProject: (success: boolean) => void;
+  setOpenBackdrop: (openBackdrop: boolean) => void;
 }
 
 export interface ProjectListProps {
@@ -222,6 +224,7 @@ export interface ProjectUpdateFormProps {
   openUpdate: boolean;
   setOpenUpdate: (openUpdate: boolean) => void;
   handleUpdateProject: (success: boolean) => void;
+  setOpenBackdrop: (openBackdrop: boolean) => void;
 }
 
 export interface RoomPlanCreateFormProps {
@@ -295,7 +298,10 @@ export interface CanvasProps {
   tags?: Tag[];
 }
 
-export interface SignUpFormProps {
-  handleSignUp: (success: boolean) => void;
+export interface SetOpenBackdropProps {
   setOpenBackdrop: (openBackdrop: boolean) => void;
+}
+
+export interface SignUpFormProps extends SetOpenBackdropProps {
+  handleSignUp: (success: boolean) => void;
 }
