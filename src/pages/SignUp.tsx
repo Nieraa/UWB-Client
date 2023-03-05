@@ -9,13 +9,16 @@ import Logo from "../components/logo/Logo";
 import SignUpForm from "../components/user/signUpForm/SignUpForm";
 import ResponseDialog from "../components/responseDialog/ResponseDialog";
 import {
+  Backdrop,
   Card,
-  CardContent
+  CardContent,
+  CircularProgress
 } from "@mui/material";
 import { useState } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 
 function SignUp() {
+  const [openBackdrop, setOpenBackdrop] = useState<boolean>(false);
   const [openResponse, setOpenResponse] = useState<boolean>(false);
   const [success, setSucccess] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("");
@@ -34,6 +37,7 @@ function SignUp() {
       setTitle("Account created!!");
       setDetail("Congratulations, your account has been successfully created.");
     }
+    setOpenBackdrop(false);
     setOpenResponse(true);
   }
 
@@ -53,7 +57,10 @@ function SignUp() {
             <SignInAndUpTitle>
               Sign up
             </SignInAndUpTitle>
-            <SignUpForm handleSignUp={handleSignUp} />
+            <SignUpForm
+              setOpenBackdrop={setOpenBackdrop}
+              handleSignUp={handleSignUp}
+              />
             <ToSignInAndUpWrapper>
               Already have an account?&nbsp;
               <LinkComponent to="/signin">
@@ -63,6 +70,12 @@ function SignUp() {
           </CardContent>
         </Card>
       </SignInAndUpBackground>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={openBackdrop}
+      >
+        <CircularProgress />
+      </Backdrop>
       <ResponseDialog
         open={openResponse}
         success={success}

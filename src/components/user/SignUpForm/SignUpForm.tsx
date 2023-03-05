@@ -8,7 +8,7 @@ import { getUsernames, SignUp } from "../../../services/UsersService";
 import { salt } from "../../../salt";
 
 function SignUpForm(props: SignUpFormProps) {
-  const { handleSignUp } = props;
+  const { handleSignUp, setOpenBackdrop } = props;
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   const validationSchema = yup.object({
@@ -40,6 +40,7 @@ function SignUpForm(props: SignUpFormProps) {
     },
     validationSchema,
     onSubmit: async (values) => {
+      setOpenBackdrop(true);
       const signUpData: SignUpData = {
         username: values.username,
         hashedPassword: sha512(values.password + salt.value)
@@ -48,10 +49,11 @@ function SignUpForm(props: SignUpFormProps) {
       if (existUsernames.find((element) =>
         element.username === values.username
       )) {
-        setErrorMessage("This username is taken. Please try another.")
+        setErrorMessage("This username is taken. Please try another.");
+        setOpenBackdrop(false);
       }
       else {
-        setErrorMessage("")
+        setErrorMessage("");
         SignUp(signUpData, handleSignUp);
       }
     }

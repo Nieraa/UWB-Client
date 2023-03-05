@@ -297,4 +297,5 @@ export interface CanvasProps {
 
 export interface SignUpFormProps {
   handleSignUp: (success: boolean) => void;
+  setOpenBackdrop: (openBackdrop: boolean) => void;
 }
