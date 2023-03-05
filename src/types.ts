@@ -74,7 +74,7 @@ export interface RoomPlansProps extends PassAndUpdateRoomPlans, SetOpenBackdropP
   setCurrentRoomPlan: (currentRoomPlan: RoomPlan) => void;
 }
 
-export interface PlannerProps extends PassAndUpdateAnchors {
+export interface PlannerProps extends PassAndUpdateAnchors, SetOpenBackdropProps {
   isLoading: boolean;
   projectId: string;
   roomPlanId: string;
@@ -164,7 +164,7 @@ export interface DeleteDialogTypeBProps extends DeleteDialog, SetOpenBackdropPro
   handleDeleteRoomPlan: (success: boolean) => void;
 }
 
-export interface DeleteDialogTypeCProps extends DeleteDialog {
+export interface DeleteDialogTypeCProps extends DeleteDialog, SetOpenBackdropProps {
   projectId: string;
   roomPlanId: string;
   currentAnchor: Anchor;
@@ -250,7 +250,7 @@ export interface RoomPlanUpdateFormProps extends SetOpenBackdropProps {
   handleUpdateRoomPlan: (success: boolean) => void;
 }
 
-export interface AnchorCreateFormProps {
+export interface AnchorCreateFormProps extends SetOpenBackdropProps {
   projectId: string;
   roomPlanId: string;
   openCreate: boolean;
@@ -277,7 +277,7 @@ export interface TagNodeProps {
   scale: number;
 }
 
-export interface AnchorUpdateFormProps {
+export interface AnchorUpdateFormProps extends SetOpenBackdropProps {
   projectId: string,
   roomPlanId: string,
   currentAnchor: Anchor;

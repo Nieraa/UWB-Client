@@ -24,7 +24,8 @@ function DeleteDialogTypeC(props: DeleteDialogTypeCProps) {
     currentAnchor,
     openDelete,
     setOpenDelete,
-    handleDeleteAnchor
+    handleDeleteAnchor,
+    setOpenBackdrop
   } = props;
 
   function handleClose(): void {
@@ -69,14 +70,15 @@ function DeleteDialogTypeC(props: DeleteDialogTypeCProps) {
         <Button
           color="error"
           variant="contained"
-          onClick={() =>
+          onClick={() => {
+            setOpenBackdrop(true);
             deleteAnchor(
               projectId,
               roomPlanId,
               currentAnchor.id,
               handleDeleteAnchor
-            )
-          }
+            );
+          }}
         >
           Delete
         </Button>

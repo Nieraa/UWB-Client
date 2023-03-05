@@ -19,7 +19,8 @@ function AnchorCreateForm(props: AnchorCreateFormProps) {
     roomPlanId,
     openCreate,
     setOpenCreate,
-    handleCreateAnchor
+    handleCreateAnchor,
+    setOpenBackdrop
   } = props;
 
   const validationSchema = yup.object({
@@ -46,6 +47,7 @@ function AnchorCreateForm(props: AnchorCreateFormProps) {
     },
     validationSchema,
     onSubmit: (values) => {
+      setOpenBackdrop(true);
       const anchorData = {
         name: values.name,
         x: Number(values.x),

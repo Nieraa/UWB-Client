@@ -250,6 +250,7 @@ function App() {
               currentAnchor={currentAnchor}
               setAnchors={setAnchors}
               setCurrentAnchor={setCurrentAnchor}
+              setOpenBackdrop={setOpenBackdrop}
             />
             :
             <Navigate to="/signin" />

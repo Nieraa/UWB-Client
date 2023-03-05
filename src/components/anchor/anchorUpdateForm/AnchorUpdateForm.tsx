@@ -20,7 +20,8 @@ function AnchorUpdateForm(props: AnchorUpdateFormProps) {
     currentAnchor,
     openUpdate,
     setOpenUpdate,
-    handleUpdateAnchor
+    handleUpdateAnchor,
+    setOpenBackdrop
   } = props;
 
   const validationSchema = yup.object({
@@ -48,6 +49,7 @@ function AnchorUpdateForm(props: AnchorUpdateFormProps) {
     enableReinitialize: true,
     validationSchema,
     onSubmit: (values) => {
+      setOpenBackdrop(true);
       const anchorData = {
         name: values.name,
         x: Number(values.x),

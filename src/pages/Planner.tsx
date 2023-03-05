@@ -20,7 +20,8 @@ function Planner(props: PlannerProps) {
     currentRoomPlan,
     currentAnchor,
     setAnchors,
-    setCurrentAnchor
+    setCurrentAnchor,
+    setOpenBackdrop
   } = props;
 
   const [collapseNavbar, setCollapseNavbar] = useState<boolean>(true);
@@ -53,6 +54,7 @@ function Planner(props: PlannerProps) {
       setTitle("Anchor created!!");
       setDetail("Congratulations, your anchor has been successfully created.");
     }
+    setOpenBackdrop(false);
     setOpenResponse(true);
   }
 
@@ -69,6 +71,7 @@ function Planner(props: PlannerProps) {
       setTitle("Anchor updated!!");
       setDetail("Congratulations, your anchor has been successfully updated.");
     }
+    setOpenBackdrop(false);
     setOpenResponse(true);
   }
 
@@ -85,6 +88,7 @@ function Planner(props: PlannerProps) {
       setTitle("Anchor deleted!!");
       setDetail("Congratulations, your anchor has been successfully deleted.");
     }
+    setOpenBackdrop(false);
     setOpenResponse(true);
   }
 
@@ -123,6 +127,7 @@ function Planner(props: PlannerProps) {
         openCreate={openCreate}
         setOpenCreate={setOpenCreate}
         handleCreateAnchor={handleCreateAnchor}
+        setOpenBackdrop={setOpenBackdrop}
       />
       <AnchorUpdateForm
         projectId={projectId}
@@ -131,6 +136,7 @@ function Planner(props: PlannerProps) {
         openUpdate={openUpdate}
         setOpenUpdate={setOpenUpdate}
         handleUpdateAnchor={handleUpdateAnchor}
+        setOpenBackdrop={setOpenBackdrop}
       />
       <DeleteDialogTypeC
         projectId={projectId}
@@ -139,6 +145,7 @@ function Planner(props: PlannerProps) {
         openDelete={openDelete}
         setOpenDelete={setOpenDelete}
         handleDeleteAnchor={handleDeleteAnchor}
+        setOpenBackdrop={setOpenBackdrop}
       />
       <ResponseDialog
         open={openResponse}
