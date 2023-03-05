@@ -28,7 +28,8 @@ function RoomPlanUpdateForm(props: RoomPlanUpdateFormProps) {
     currentRoomPlan,
     openUpdate,
     setOpenUpdate,
-    handleUpdateRoomPlan
+    handleUpdateRoomPlan,
+    setOpenBackdrop
   } = props;
 
   const [image, _setImage] = useState<any>("");
@@ -73,6 +74,7 @@ function RoomPlanUpdateForm(props: RoomPlanUpdateFormProps) {
     enableReinitialize: true,
     validationSchema,
     onSubmit: (values) => {
+      setOpenBackdrop(true);
       const roomPlanData = {
         name: values.name,
         image: image,

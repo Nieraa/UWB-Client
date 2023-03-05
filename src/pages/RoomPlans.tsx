@@ -7,10 +7,10 @@ import DeleteDialogTypeB from "../components/deleteDialog/DeleteDialogTypeB";
 import ResponseDialog from "../components/responseDialog/ResponseDialog";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { RoomPlanProps } from "../types";
+import { RoomPlansProps } from "../types";
 import { getRoomPlans } from "../services/RoomPlansService";
 
-function RoomPlans(props: RoomPlanProps) {
+function RoomPlans(props: RoomPlansProps) {
   const {
     isLoading,
     projectId,
@@ -19,7 +19,8 @@ function RoomPlans(props: RoomPlanProps) {
     currentProject,
     currentRoomPlan,
     setRoomPlans,
-    setCurrentRoomPlan
+    setCurrentRoomPlan,
+    setOpenBackdrop
   } = props;
 
   const [collapseNavbar, setCollapseNavbar] = useState<boolean>(true);
@@ -55,6 +56,7 @@ function RoomPlans(props: RoomPlanProps) {
       setTitle("Room plan created!!");
       setDetail("Congratulations, your room plan has been successfully created.");
     }
+    setOpenBackdrop(false);
     setOpenResponse(true);
   }
 
@@ -72,6 +74,7 @@ function RoomPlans(props: RoomPlanProps) {
       setTitle("Room plan updated!!");
       setDetail("Congratulations, your room plan has been successfully updated.");
     }
+    setOpenBackdrop(false);
     setOpenResponse(true);
   }
 
@@ -89,6 +92,7 @@ function RoomPlans(props: RoomPlanProps) {
       setTitle("Room plan deleted!!");
       setDetail("Congratulations, your room plan has been successfully deleted.");
     }
+    setOpenBackdrop(false);
     setOpenResponse(true);
   }
 
@@ -125,6 +129,7 @@ function RoomPlans(props: RoomPlanProps) {
         setRoomPlans={setRoomPlans}
         setOpenCreate={setOpenCreate}
         handleCreateRoomPlan={handleCreateRoomPlan}
+        setOpenBackdrop={setOpenBackdrop}
       />
       <RoomPlanUpdateForm
         projectId={projectId}
@@ -132,6 +137,7 @@ function RoomPlans(props: RoomPlanProps) {
         openUpdate={openUpdate}
         setOpenUpdate={setOpenUpdate}
         handleUpdateRoomPlan={handleUpdateRoomPlan}
+        setOpenBackdrop={setOpenBackdrop}
       />
       <DeleteDialogTypeB
         projectId={projectId}
@@ -139,6 +145,7 @@ function RoomPlans(props: RoomPlanProps) {
         openDelete={openDelete}
         setOpenDelete={setOpenDelete}
         handleDeleteRoomPlan={handleDeleteRoomPlan}
+        setOpenBackdrop={setOpenBackdrop}
       />
       <ResponseDialog
         open={openResponse}

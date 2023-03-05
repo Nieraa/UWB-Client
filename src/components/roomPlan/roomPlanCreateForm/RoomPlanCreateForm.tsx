@@ -27,7 +27,8 @@ function RoomPlanCreateForm(props: RoomPlanCreateFormProps) {
     openCreate,
     setNavigateUrl,
     setOpenCreate,
-    handleCreateRoomPlan
+    handleCreateRoomPlan,
+    setOpenBackdrop
   } = props;
 
   const [image, _setImage] = useState<any>("");
@@ -66,6 +67,7 @@ function RoomPlanCreateForm(props: RoomPlanCreateFormProps) {
     },
     validationSchema,
     onSubmit: async (values) => {
+      setOpenBackdrop(true);
       const roomPlanData = {
         name: values.name,
         image: image,

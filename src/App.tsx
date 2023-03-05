@@ -230,6 +230,7 @@ function App() {
               currentRoomPlan={currentRoomPlan}
               setRoomPlans={setRoomPlans}
               setCurrentRoomPlan={setCurrentRoomPlan}
+              setOpenBackdrop={setOpenBackdrop}
             />
             :
             <Navigate to="/signin" />
