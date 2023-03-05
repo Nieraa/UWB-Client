@@ -20,8 +20,8 @@ function Realtime(props: RealtimeProps) {
   const [tags, setTags] = useState<Tag[]>([]);
 
   useEffect(() => {
-    function webSocketInvoke() {
-      const socket = io.connect("http://localhost:3001");
+    const socket = io.connect("http://localhost:3001");
+    function webSocketInvoke(socket: any) {
       socket.on("event", (value: any) => {
         console.log("This is recieve value", value);
         const parse_value = JSON.parse(value);
@@ -29,7 +29,11 @@ function Realtime(props: RealtimeProps) {
       });
     }
 
-    webSocketInvoke();
+    webSocketInvoke(socket);
+
+    return function cleanup() {
+      socket.disconnect();
+    };
   }, [])
 
   function handleCollapseNavbar() {
