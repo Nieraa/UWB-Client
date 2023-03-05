@@ -11,7 +11,6 @@ import {
 } from "./SideNavbar.style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faTable,
   faMapLocationDot,
   faFolderOpen,
   faFileLines,
@@ -168,16 +167,6 @@ function SideNavbarTypeB(props: SideNavbarTypeBProps) {
           >
             <FontAwesomeIcon icon={faMapLocationDot} />
             Real-time Tracking
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink
-            to={`/projects/${projectId}/room-plans/${roomPlanId}/location-log`}
-            $focusMenu={location.pathname.slice(projectId.length + 43) === "location-log"}
-            $hasSubMenu={false}
-          >
-            <FontAwesomeIcon icon={faTable} />
-            Location Log
           </NavLink>
         </NavItem>
         <NavItem>

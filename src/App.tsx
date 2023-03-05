@@ -192,7 +192,7 @@ function App() {
           element={localStorage.accessToken ?
             <Navigate to="/projects" />
             :
-            <SignIn setOpenBackdrop={setOpenBackdrop}/>
+            <SignIn setOpenBackdrop={setOpenBackdrop} />
           }
         />
         <Route
@@ -200,7 +200,7 @@ function App() {
           element={localStorage.accessToken ?
             <Navigate to="/projects" />
             :
-            <SignUp setOpenBackdrop={setOpenBackdrop}/>
+            <SignUp setOpenBackdrop={setOpenBackdrop} />
           }
         />
         <Route
@@ -272,11 +272,6 @@ function App() {
             <Navigate to="/signin" />
           }
         />
-        {/* 
-      <Route
-        path="/projects/:projectId/history"
-        element={<History projects={projects} setProjects={setProjects} />}
-      /> */}
       </Routes>
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
