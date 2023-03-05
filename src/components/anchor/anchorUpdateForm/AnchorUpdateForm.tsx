@@ -56,7 +56,7 @@ function AnchorUpdateForm(props: AnchorUpdateFormProps) {
         y: Number(values.y),
         z: Number(values.z)
       };
-      updateAnchor(projectId, roomPlanId, currentAnchor.id, anchorData, handleUpdateAnchor);
+      updateAnchor(projectId, roomPlanId, currentAnchor.id, anchorData, handleUpdateAnchor, handleClose);
     }
   });
 

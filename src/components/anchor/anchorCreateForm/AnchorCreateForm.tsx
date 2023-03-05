@@ -54,7 +54,7 @@ function AnchorCreateForm(props: AnchorCreateFormProps) {
         y: Number(values.y),
         z: Number(values.z)
       };
-      createAnchor(projectId, roomPlanId, anchorData, handleCreateAnchor);
+      createAnchor(projectId, roomPlanId, anchorData, handleCreateAnchor, handleClose);
     }
   });
 

@@ -35,7 +35,8 @@ export async function createAnchor(
     y: number,
     z: number
   },
-  handleCreateAnchor: (success: boolean) => void
+  handleCreateAnchor: (success: boolean) => void,
+  handleClose: () => void
 ): Promise<void> {
   const userId: string = localStorage.userId;
   const config = {
@@ -44,6 +45,7 @@ export async function createAnchor(
   await axios
     .post(`${userId}/projects/${projectId}/roomPlans/${roomPlanId}/anchors`, anchorData, config)
     .then(() => {
+      handleClose();
       handleCreateAnchor(true);
     })
     .catch(() => {
@@ -61,7 +63,8 @@ export async function updateAnchor(
     y?: number,
     z?: number
   },
-  handleUpdateAnchor?: (success: boolean) => void
+  handleUpdateAnchor?: (success: boolean) => void,
+  handleClose?: () => void
 ): Promise<void> {
   const userId: string = localStorage.userId;
   const config = {
@@ -70,7 +73,8 @@ export async function updateAnchor(
   await axios
     .patch(`${userId}/projects/${projectId}/roomPlans/${roomPlanId}/anchors/${anchorId}`, anchorData, config)
     .then(() => {
-      if (handleUpdateAnchor) {
+      if (handleUpdateAnchor && handleClose) {
+        handleClose();
         handleUpdateAnchor(true);
       }
       
