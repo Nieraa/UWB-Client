@@ -18,6 +18,7 @@ import { Anchor, Project, RoomPlan } from "./types";
 import { getProjectbyId, getProjects } from "./services/ProjectsService";
 import { getRoomPlanbyId, getRoomPlans } from './services/RoomPlansService';
 import { getAnchors } from './services/AnchorsService';
+import { Backdrop, CircularProgress } from '@mui/material';
 
 function App() {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -47,6 +48,7 @@ function App() {
   const location = useLocation();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [open, setOpen] = useState<boolean>(false);
+  const [openBackdrop, setOpenBackdrop] = useState<boolean>(false);
   const [success, setSucccess] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("")
   const [detail, setDetail] = useState<string>("")
@@ -198,7 +200,7 @@ function App() {
           element={localStorage.accessToken ?
             <Navigate to="/projects" />
             :
-            <SignUp />
+            <SignUp setOpenBackdrop={setOpenBackdrop}/>
           }
         />
         <Route
@@ -273,6 +275,12 @@ function App() {
         element={<History projects={projects} setProjects={setProjects} />}
       /> */}
       </Routes>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={openBackdrop}
+      >
+        <CircularProgress />
+      </Backdrop>
       <ResponseDialog
         open={open}
         success={success}

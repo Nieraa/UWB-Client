@@ -9,16 +9,15 @@ import Logo from "../components/logo/Logo";
 import SignUpForm from "../components/user/signUpForm/SignUpForm";
 import ResponseDialog from "../components/responseDialog/ResponseDialog";
 import {
-  Backdrop,
   Card,
   CardContent,
-  CircularProgress
 } from "@mui/material";
 import { useState } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
+import { SetOpenBackdropProps } from "../types";
 
-function SignUp() {
-  const [openBackdrop, setOpenBackdrop] = useState<boolean>(false);
+function SignUp(props: SetOpenBackdropProps) {
+  const { setOpenBackdrop } = props;
   const [openResponse, setOpenResponse] = useState<boolean>(false);
   const [success, setSucccess] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("");
@@ -70,12 +69,6 @@ function SignUp() {
           </CardContent>
         </Card>
       </SignInAndUpBackground>
-      <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={openBackdrop}
-      >
-        <CircularProgress />
-      </Backdrop>
       <ResponseDialog
         open={openResponse}
         success={success}
