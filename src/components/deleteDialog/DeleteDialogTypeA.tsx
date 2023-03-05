@@ -22,7 +22,8 @@ function DeleteDialogTypeA(props: DeleteDialogTypeAProps) {
     currentProject,
     openDelete,
     setOpenDelete,
-    handleDeleteProject
+    handleDeleteProject,
+    setOpenBackdrop
   } = props;
 
   function handleClose(): void {
@@ -67,12 +68,13 @@ function DeleteDialogTypeA(props: DeleteDialogTypeAProps) {
         <Button
           color="error"
           variant="contained"
-          onClick={() =>
+          onClick={() => {
+            setOpenBackdrop(true);
             deleteProject(
               currentProject.id,
               handleDeleteProject
-            )
-          }
+            );
+          }}
         >
           Delete
         </Button>

@@ -17,7 +17,8 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
     openCreate,
     setOpenCreate,
     setNavigateUrl,
-    handleCreateProject
+    handleCreateProject,
+    setOpenBackdrop
   } = props;
 
   const validationSchema = yup.object({
@@ -32,6 +33,7 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
     },
     validationSchema,
     onSubmit: async (values) => {
+      setOpenBackdrop(true);
       const projectData = {
         name: values.name
       };

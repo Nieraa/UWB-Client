@@ -212,6 +212,7 @@ function App() {
               currentProject={currentProject}
               setProjects={setProjects}
               setCurrentProject={setCurrentProject}
+              setOpenBackdrop={setOpenBackdrop}
             />
             :
             <Navigate to="/signin" />

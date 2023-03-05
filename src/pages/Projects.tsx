@@ -16,7 +16,8 @@ function Projects(props: ProjectsProps) {
     projects,
     currentProject,
     setProjects,
-    setCurrentProject
+    setCurrentProject,
+    setOpenBackdrop
   } = props;
 
   const [collapseNavbar, setCollapseNavbar] = useState<boolean>(true);
@@ -52,6 +53,7 @@ function Projects(props: ProjectsProps) {
       setTitle("Project created!!");
       setDetail("Congratulations, your project has been successfully created.");
     }
+    setOpenBackdrop(false);
     setOpenResponse(true);
   }
 
@@ -69,6 +71,7 @@ function Projects(props: ProjectsProps) {
       setTitle("Project updated!!");
       setDetail("Congratulations, your project has been successfully updated.");
     }
+    setOpenBackdrop(false);
     setOpenResponse(true);
   }
 
@@ -86,6 +89,7 @@ function Projects(props: ProjectsProps) {
       setTitle("Project deleted!!");
       setDetail("Congratulations, your project has been successfully deleted.");
     }
+    setOpenBackdrop(false);
     setOpenResponse(true);
   }
 
@@ -118,18 +122,21 @@ function Projects(props: ProjectsProps) {
         setOpenCreate={setOpenCreate}
         setNavigateUrl={setNavigateUrl}
         handleCreateProject={handleCreateProject}
+        setOpenBackdrop={setOpenBackdrop}
       />
       <ProjectUpdateForm
         currentProject={currentProject}
         openUpdate={openUpdate}
         setOpenUpdate={setOpenUpdate}
         handleUpdateProject={handleUpdateProject}
+        setOpenBackdrop={setOpenBackdrop}
       />
       <DeleteDialogTypeA
         currentProject={currentProject}
         openDelete={openDelete}
         setOpenDelete={setOpenDelete}
         handleDeleteProject={handleDeleteProject}
+        setOpenBackdrop={setOpenBackdrop}
       />
       <ResponseDialog
         open={openResponse}

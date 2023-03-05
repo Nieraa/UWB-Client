@@ -59,7 +59,7 @@ export interface Username {
   username: string
 }
 
-export interface ProjectsProps extends PassAndUpdateProjects {
+export interface ProjectsProps extends PassAndUpdateProjects, SetOpenBackdropProps {
   isLoading: boolean;
   currentProject: Project;
   setCurrentProject: (currentProject: Project) => void;
@@ -153,10 +153,9 @@ interface DeleteDialog {
   setOpenDelete: (openDelete: boolean) => void;
 }
 
-export interface DeleteDialogTypeAProps extends DeleteDialog {
+export interface DeleteDialogTypeAProps extends DeleteDialog, SetOpenBackdropProps {
   currentProject: Project;
   handleDeleteProject: (success: boolean) => void;
-  setOpenBackdrop: (openBackdrop: boolean) => void;
 }
 
 export interface DeleteDialogTypeBProps extends DeleteDialog {
@@ -203,12 +202,11 @@ export interface MainTypeCProps {
   setOpenCreate?: (openCreate: boolean) => void;
 }
 
-export interface ProjectCreateFormProps {
+export interface ProjectCreateFormProps extends SetOpenBackdropProps {
   openCreate: boolean;
   setOpenCreate: (openCreate: boolean) => void;
   setNavigateUrl: (navigateUrl: string) => void;
   handleCreateProject: (success: boolean) => void;
-  setOpenBackdrop: (openBackdrop: boolean) => void;
 }
 
 export interface ProjectListProps {
@@ -219,12 +217,11 @@ export interface ProjectListProps {
   setOpenDelete: (openDelete: boolean) => void;
 }
 
-export interface ProjectUpdateFormProps {
+export interface ProjectUpdateFormProps extends SetOpenBackdropProps {
   currentProject: Project;
   openUpdate: boolean;
   setOpenUpdate: (openUpdate: boolean) => void;
   handleUpdateProject: (success: boolean) => void;
-  setOpenBackdrop: (openBackdrop: boolean) => void;
 }
 
 export interface RoomPlanCreateFormProps {

@@ -17,7 +17,8 @@ function ProjectUpdateForm(props: ProjectUpdateFormProps) {
     currentProject,
     openUpdate,
     setOpenUpdate,
-    handleUpdateProject
+    handleUpdateProject,
+    setOpenBackdrop
   } = props;
 
   const validationSchema = yup.object({
@@ -34,6 +35,7 @@ function ProjectUpdateForm(props: ProjectUpdateFormProps) {
     enableReinitialize: true,
     validationSchema,
     onSubmit: (values) => {
+      setOpenBackdrop(true);
       const projectData = {
         name: values.name
       };
