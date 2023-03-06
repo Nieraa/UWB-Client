@@ -80,6 +80,7 @@ function RoomPlanCreateForm(props: RoomPlanCreateFormProps) {
         setNavigateUrl(await createRoomPlan(projectId, roomPlanData, handleCreateRoomPlan));
       }
       else {
+        setOpenBackdrop(false);
         setImageValidation(true);
       }
     }

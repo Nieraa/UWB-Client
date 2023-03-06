@@ -87,6 +87,7 @@ function RoomPlanUpdateForm(props: RoomPlanUpdateFormProps) {
         updateRoomPlan(projectId, currentRoomPlan.id, roomPlanData, handleUpdateRoomPlan);
       }
       else {
+        setOpenBackdrop(true);
         setImageValidation(true);
       }
     }
