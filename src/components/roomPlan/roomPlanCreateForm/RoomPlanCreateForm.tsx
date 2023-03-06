@@ -77,7 +77,7 @@ function RoomPlanCreateForm(props: RoomPlanCreateFormProps) {
         yOrigin: Number(values.yOrigin)
       };
       if (image) {
-        setNavigateUrl(await createRoomPlan(projectId, roomPlanData, handleCreateRoomPlan));
+        setNavigateUrl(await createRoomPlan(projectId, roomPlanData, handleCreateRoomPlan, handleClose));
       }
       else {
         setOpenBackdrop(false);

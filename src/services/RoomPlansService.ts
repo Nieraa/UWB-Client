@@ -35,7 +35,8 @@ export async function createRoomPlan(
     xOrigin: number,
     yOrigin: number
   },
-  handleCreateRoomPlan: (success: boolean) => void
+  handleCreateRoomPlan: (success: boolean) => void,
+  handleClose: () => void
 ): Promise<string> {
   const userId: string = localStorage.userId;
   const config = {
@@ -44,6 +45,7 @@ export async function createRoomPlan(
   return await axios
     .post(`${userId}/projects/${projectId}/roomPlans`, roomPlanData, config)
     .then((response) => {
+      handleClose();
       handleCreateRoomPlan(true);
       return response.data;
     })
@@ -64,7 +66,8 @@ export async function updateRoomPlan(
     xOrigin?: number,
     yOrigin?: number
   },
-  handleUpdateRoomPlan: (success: boolean) => void
+  handleUpdateRoomPlan: (success: boolean) => void,
+  handleClose: () => void
 ): Promise<void> {
   const userId: string = localStorage.userId;
   const config = {
@@ -73,6 +76,7 @@ export async function updateRoomPlan(
   await axios
     .patch(`${userId}/projects/${projectId}/roomPlans/${roomPlanId}`, roomPlanData, config)
     .then(() => {
+      handleClose();
       handleUpdateRoomPlan(true);
     })
     .catch(() => {
