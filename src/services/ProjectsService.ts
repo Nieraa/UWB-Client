@@ -28,7 +28,8 @@ export async function createProject(
   projectData: {
     name: string
   },
-  handleCreateProject: (success: boolean) => void
+  handleCreateProject: (success: boolean) => void,
+  handleClose: () => void
 ): Promise<string> {
   const userId: string = localStorage.userId;
   const config = {
@@ -37,6 +38,7 @@ export async function createProject(
   return await axios
     .post(`${userId}/projects`, projectData, config)
     .then((response) => {
+      handleClose();
       handleCreateProject(true);
       return response.data;
     })
@@ -51,7 +53,8 @@ export async function updateProject(
   projectData: {
     name: string
   },
-  handleUpdateProject: (success: boolean) => void
+  handleUpdateProject: (success: boolean) => void,
+  handleClose: () => void
 ): Promise<void> {
   const userId: string = localStorage.userId;
   const config = {
@@ -60,6 +63,7 @@ export async function updateProject(
   await axios
     .patch(`${userId}/projects/${projectId}`, projectData, config)
     .then(() => {
+      handleClose();
       handleUpdateProject(true);
     })
     .catch(() => {

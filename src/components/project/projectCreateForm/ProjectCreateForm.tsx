@@ -37,7 +37,7 @@ function ProjectCreateForm(props: ProjectCreateFormProps) {
       const projectData = {
         name: values.name
       };
-      setNavigateUrl(await createProject(projectData, handleCreateProject));
+      setNavigateUrl(await createProject(projectData, handleCreateProject, handleClose));
     }
   });
 

@@ -39,7 +39,7 @@ function ProjectUpdateForm(props: ProjectUpdateFormProps) {
       const projectData = {
         name: values.name
       };
-      updateProject(currentProject.id, projectData, handleUpdateProject);
+      updateProject(currentProject.id, projectData, handleUpdateProject, handleClose);
     }
   });
 
