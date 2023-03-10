@@ -1,4 +1,6 @@
 import { Button, FormHelperText, TextField } from "@mui/material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useEffect, useState } from "react";
@@ -7,8 +9,6 @@ import { SignUpData, SignUpFormProps } from "../../../types";
 import { getUsernames, SignUp } from "../../../services/UsersService";
 import { salt } from "../../../salt";
 import { PasswordHelperText } from "../../../Styles/Styles.style";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 function SignUpForm(props: SignUpFormProps) {
   const { handleSignUp, setOpenBackdrop } = props;
