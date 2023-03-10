@@ -136,6 +136,14 @@ export const ImageErrorHelperText = styled(FormHelperText)`
   margin: 3px 14px !important;
 `;
 
+export const PasswordHelperText = styled(FormHelperText)<{ $isNotError: boolean }>`
+  color: ${({$isNotError}) => $isNotError ? "var(--green)" : "var(--error)"} !important;
+  padding: 0 14px;
+  svg {
+    margin-right: 5px;
+  }
+`;
+
 export const NodeElement = styled.div<{ nodeType: string }>`
   width: 40px;
   height: 40px;

@@ -6,16 +6,24 @@ import { sha512 } from "js-sha512";
 import { SignUpData, SignUpFormProps } from "../../../types";
 import { getUsernames, SignUp } from "../../../services/UsersService";
 import { salt } from "../../../salt";
+import { PasswordHelperText } from "../../../Styles/Styles.style";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 function SignUpForm(props: SignUpFormProps) {
   const { handleSignUp, setOpenBackdrop } = props;
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [isMoreThan8, setIsMoreThan8] = useState<boolean>(false);
+  const [isHaveNumber, setIsHaveNumber] = useState<boolean>(false);
+  const [isHaveLowerCase, setIsHaveLowerCase] = useState<boolean>(false);
+  const [isHaveUpperCase, setIsHaveUpperCase] = useState<boolean>(false);
+  const [isHaveSpecial, setIsHaveSpecial] = useState<boolean>(false);
 
   const validationSchema = yup.object({
     username: yup
       .string()
-      .min(6, "Username must be 6-10 characters.")
-      .max(10, "Username must be 6-10 characters.")
+      .min(4, "Username must be 4-12 characters.")
+      .max(12, "Username must be 4-12 characters.")
       .matches(/^[a-z0-9]+$/, 'Username must be lowercases.')
       .required("Please enter username."),
     password: yup
@@ -61,7 +69,37 @@ function SignUpForm(props: SignUpFormProps) {
 
   useEffect(() => {
     setErrorMessage("");
-  }, [formik.values.username])
+    if (formik.values.password.length >= 8) {
+      setIsMoreThan8(true);
+    }
+    else {
+      setIsMoreThan8(false);
+    }
+    if (formik.values.password.match(/[0-9]/)) {
+      setIsHaveNumber(true);
+    }
+    else {
+      setIsHaveNumber(false);
+    }
+    if (formik.values.password.match(/[a-z]/)) {
+      setIsHaveLowerCase(true);
+    }
+    else {
+      setIsHaveLowerCase(false);
+    }
+    if (formik.values.password.match(/[A-Z]/)) {
+      setIsHaveUpperCase(true);
+    }
+    else {
+      setIsHaveUpperCase(false);
+    }
+    if (formik.values.password.match(/[^\w]/)) {
+      setIsHaveSpecial(true);
+    }
+    else {
+      setIsHaveSpecial(false);
+    }
+  }, [formik.values.username, formik.values.password])
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -92,9 +130,28 @@ function SignUpForm(props: SignUpFormProps) {
         value={formik.values.password}
         onChange={formik.handleChange}
         error={formik.touched.password && Boolean(formik.errors.password)}
-        helperText={formik.errors.password}
         fullWidth
       />
+      <PasswordHelperText $isNotError={isMoreThan8}>
+        <FontAwesomeIcon icon={isMoreThan8 ? faCheck : faTimes} />
+        Password must be at least 8 characters.
+      </PasswordHelperText>
+      <PasswordHelperText $isNotError={isHaveNumber}>
+        <FontAwesomeIcon icon={isHaveNumber ? faCheck : faTimes} />
+        Password requires a number.
+      </PasswordHelperText>
+      <PasswordHelperText $isNotError={isHaveLowerCase}>
+        <FontAwesomeIcon icon={isHaveLowerCase ? faCheck : faTimes} />
+        Password requires a lowercase letter.
+      </PasswordHelperText>
+      <PasswordHelperText $isNotError={isHaveUpperCase}>
+        <FontAwesomeIcon icon={isHaveUpperCase ? faCheck : faTimes} />
+        Password requires an uppercase letter.
+      </PasswordHelperText>
+      <PasswordHelperText $isNotError={isHaveSpecial}>
+        <FontAwesomeIcon icon={isHaveSpecial ? faCheck : faTimes} />
+        Password requires a special character.
+      </PasswordHelperText>
       <TextField
         margin="dense"
         id="confirm-password"
