@@ -160,9 +160,10 @@ export const NodeElement = styled.div<{ nodeType: string }>`
 `;
 
 export const NodeText = styled.span<{ textWidth: number }>`
-  color: var(--black);
+  color: var(--white);
   font-size: var(--md-text);
   font-weight: bold;
+  text-shadow: -1px -1px 0 var(--black), 1px -1px 0 var(--black), -1px 1px 0 var(--black), 1px 1px 0 var(--black);
   line-height: var(--md-text);
   text-align: center;
   position: absolute;
