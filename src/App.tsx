@@ -132,10 +132,7 @@ function App() {
 
   function handleClose(): void {
     setOpen(false);
-    navigate("/signin");
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("username");
-    localStorage.removeItem("userId");
+    window.location.reload();
   }
 
   const fetchData = useCallback(async (pathname: string) => {
