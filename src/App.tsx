@@ -12,7 +12,6 @@ import {
   Route,
   Navigate,
   useLocation,
-  useNavigate,
 } from "react-router-dom";
 import { Anchor, Project, RoomPlan } from "./types";
 import { getProjectbyId, getProjects } from "./services/ProjectsService";
@@ -52,8 +51,6 @@ function App() {
   const [success, setSucccess] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("")
   const [detail, setDetail] = useState<string>("")
-
-  const navigate = useNavigate();
 
   function handleGetProjects(success: boolean): void {
     if (!success) {
