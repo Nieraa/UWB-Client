@@ -94,6 +94,7 @@ function Planner(props: PlannerProps) {
 
   function handleClose(): void {
     setOpenResponse(false);
+    window.location.reload();
   }
 
   return (
