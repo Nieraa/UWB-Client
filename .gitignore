@@ -24,6 +24,6 @@ yarn-error.log*
 
 src/salt.ts
 
-.firebase
-.firebaserc
-firebase.json
+/.firebase
+/.firebaserc
+/firebase.json
