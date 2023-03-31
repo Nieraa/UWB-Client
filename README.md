@@ -1,9 +1,7 @@
 # คู่มือการติดตั้งเพื่อใช้งาน
 
 1. Clone หรือ Download Source code
-
 2. Run command `npm i` บน Terminal เพื่อ install package ที่เกี่ยวข้อง (จำเป็นต้อง install node js ก่อน)
-
 3. สร้าง file **salt.ts** ใน path **src** เพื่อใช้ในการเพื่ม salt ในการ hash รหัส โดยรูปแบบของ file มี Template ดังนี้:
 	```
 	export const salt = {
