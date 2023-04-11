@@ -1,13 +1,13 @@
-# คู่มือการติดตั้งเพื่อใช้งาน
+# Installation Guide
 
-1. Clone หรือ Download Source code
-2. Run command `npm i` บน Terminal เพื่อ install package ที่เกี่ยวข้อง (จำเป็นต้อง install node js ก่อน)
-3. สร้าง file **salt.ts** ใน path **src** เพื่อใช้ในการเพื่ม salt ในการ hash รหัส โดยรูปแบบของ file มี Template ดังนี้:
+1. Clone or download the source code.
+2. Run the command `npm i` on the terminal to install the relevant packages (you must install Node.js first).
+3. Create a file called **salt.ts** in the path **src** to add salt to the password hash. The file format should follow this template:
 	```
 	export const salt = {
       value: 'YOUR_SECRET_VALUE',
 	};
 	```
-	โดยที่ค่า value ที่อยู่ใน salt object เป็นค่าที่กำหนดขึ้นเอง และต้องเป็นความลับ
-4. Run command `npm start` เพื่อ run React app ใน Development mode
-เปิด [http://localhost:3000](http://localhost:3000) เพื่อดูผลลัพธ์บน Browser
+	The value in the salt object must be your own secret value and kept confidential.
+4. Run the command `npm start` to start the React app in development mode.
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the results.
